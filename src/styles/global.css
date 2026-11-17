@@ -3,6 +3,10 @@
    Tokens · type · layout · components · motion
    ========================================================================== */
 
+/* Metric-matched fallbacks: no layout shift when the web fonts swap in */
+@font-face { font-family: 'Jost Fallback'; src: local('Arial'), local('Helvetica Neue'), local('Liberation Sans'); size-adjust: 95.5%; ascent-override: 112%; descent-override: 39.3%; line-gap-override: 0%; }
+@font-face { font-family: 'Cormorant Fallback'; src: local('Georgia'), local('Times New Roman'), local('Liberation Serif'); size-adjust: 96.3%; ascent-override: 96%; descent-override: 29.8%; line-gap-override: 0%; }
+
 :root {
   /* Colour */
   --ivory: #FAF7F2;
@@ -15,8 +19,8 @@
   --ink-soft: #4A3F39;
 
   /* Type */
-  --serif: 'Cormorant Garamond', 'Cormorant', Georgia, 'Times New Roman', serif;
-  --sans: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+  --serif: 'Cormorant Garamond', 'Cormorant Fallback', Georgia, serif;
+  --sans: 'Jost', 'Jost Fallback', Arial, sans-serif;
   --fs-display: clamp(3.5rem, 2.2rem + 6.2vw, 7rem);
   --fs-h1: clamp(2.5rem, 1.85rem + 3.2vw, 4.5rem);
   --fs-h2: clamp(2rem, 1.6rem + 2vw, 3.25rem);

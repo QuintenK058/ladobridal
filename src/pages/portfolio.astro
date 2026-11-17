@@ -37,7 +37,7 @@ const filters = [['all', 'Alle'], ['kapsel', 'Bruidskapsel'], ['visagie', 'Bruid
       <div class="masonry" data-masonry>
         {items.map((it, i) => (
           <figure class="masonry__item" data-cat={it.cat} data-caption={it.caption} style={`margin-left:0;margin-right:0;view-transition-name:pf-${i}`}>
-            <button type="button" class="masonry__btn" aria-label={`Vergroot: ${it.caption}`}>
+            <button type="button" class="masonry__btn" aria-label={`${it.caption}, vergroten`}>
               <Img ratio={it.ratio as any} shot={it.shot} alt={it.alt} reveal={false} />
               <span class="masonry__cap">{it.caption}</span>
             </button>

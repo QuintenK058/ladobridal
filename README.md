@@ -47,3 +47,11 @@ Before switching DNS: export all indexed URLs from Search Console and check each
 ## Before launch
 - Work through `PLACEHOLDERS.md` and `QA-PLACEHOLDERS.tsv` (`npm run check`).
 - Remove or protect `/styleguide`.
+
+## Test status (17 nov 2026)
+- `npm run check`: 53 pages, only open issues are the home title/description length (taken verbatim from the brief).
+- All routes at 360/390/768/1024/1440 px: no horizontal overflow, no JS errors (Chromium).
+- Lighthouse mobile (local preview): performance 93–99, accessibility 100, best practices 100, SEO 100 on all 12 measured pages; CLS ≤ 0.08 after metric-matched fallback fonts.
+- Keyboard: skip link, mega menu, mobile menu, drawer focus trap, FAQ, carousel, lightbox.
+- Booking funnel tested end-to-end against a mocked Supabase (payload, consent update, redirect).
+- **Not tested here:** Safari / iOS (no WebKit in the build environment) and the real Supabase/Resend project — test both on a staging URL before launch.

@@ -101,6 +101,19 @@ if (megaBtn && mega) {
     });
   }
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && mega.classList.contains('is-open')) { set(false); megaBtn.focus(); } });
+  // Keyboard: Tab from the open toggle goes into the panel; Tab out of the panel continues with the next nav link.
+  const megaLinks = () => [...mega.querySelectorAll<HTMLElement>('a')];
+  megaBtn.addEventListener('keydown', (e) => {
+    if (e.key === 'Tab' && !e.shiftKey && megaBtn.getAttribute('aria-expanded') === 'true') { e.preventDefault(); megaLinks()[0]?.focus(); }
+  });
+  mega.addEventListener('keydown', (e) => {
+    const links = megaLinks();
+    if (e.key !== 'Tab') return;
+    if (!e.shiftKey && document.activeElement === links[links.length - 1]) {
+      e.preventDefault(); set(false);
+      (megaBtn.closest('li')?.nextElementSibling?.querySelector('a') as HTMLElement | null)?.focus();
+    } else if (e.shiftKey && document.activeElement === links[0]) { e.preventDefault(); megaBtn.focus(); }
+  });
   mega.addEventListener('focusout', (e) => { if (!mega.contains(e.relatedTarget as Node) && e.relatedTarget !== megaBtn) set(false); });
 }
 
