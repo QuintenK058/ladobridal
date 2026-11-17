@@ -1,0 +1,12 @@
+---
+interface Props { title?: string; links: { href: string; label: string; note?: string }[] }
+const { title = 'Ook interessant', links } = Astro.props;
+---
+<section class="section--tight">
+  <div class="container grid">
+    <div class="col-quarter"><h2 class="h3">{title}</h2></div>
+    <ul class="region-list col-rest" role="list">
+      {links.map((l) => <li><a href={l.href} style="font-size:clamp(1.4rem,1.1rem + 1.2vw,2.1rem)">{l.label}{l.note && <small>{l.note}</small>}</a></li>)}
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,14 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import ConsultForm from '../../components/ConsultForm.astro';
+const crumbs = [{ name: 'Home', href: '/en' }, { name: 'Consultation', href: '/en/consult' }];
+---
+<Base title="Book your hair extensions consultation | By Lado" description="Book your hair extensions consultation in Leeuwarden: hair analysis, colour matching, honest advice and a tailored price." breadcrumbs={crumbs}>
+  <section class="page-hero"><div class="container"><Breadcrumbs items={crumbs} lang="en" />
+    <div class="grid mt-3">
+      <div class="col-text"><p class="eyebrow">Consultation</p><h1 class="mt-1">Book your extensions <em>consultation</em></h1><p class="lead">We look at your hair and your wishes together. You leave with honest advice, your colour and a tailored price. Only then do you decide.</p></div>
+      <div class="col-media" style="background:var(--bone);padding:clamp(1.5rem,4vw,3rem)"><ConsultForm lang="en" /></div>
+    </div>
+  </div></section>
+</Base>

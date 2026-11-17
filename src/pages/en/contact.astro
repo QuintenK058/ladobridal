@@ -1,0 +1,12 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import { SITE, ph } from '../../data/site';
+const crumbs = [{ name: 'Home', href: '/en' }, { name: 'Contact', href: '/en/contact' }];
+---
+<Base title="Contact By Lado | Hair extensions in Leeuwarden" description="Contact By Lado hair extensions in Leeuwarden by phone, email, WhatsApp or Instagram — or book your consultation." breadcrumbs={crumbs}>
+  <PageHero lang="en" crumbs={crumbs} eyebrow="Contact" h1="Contact" lead="Studio in Leeuwarden, by appointment." />
+  <section class="section--tight" style="padding-top:0"><div class="container prose">
+    <p>Phone: <Fragment set:html={SITE.phone || ph('PHONE')} /> · Email: <Fragment set:html={SITE.email || ph('EMAIL')} /> · Instagram: <Fragment set:html={SITE.instagramHandle || ph('INSTAGRAM')} /></p>
+  </div></section>
+</Base>

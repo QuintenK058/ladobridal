@@ -1,0 +1,35 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { confirmed } from '../../data/methods';
+import { priceOr, ph } from '../../data/site';
+const faq = [
+  { q: 'Wat kosten hair extensions gemiddeld?', a: `<p>${ph('MARKTRANGE · alleen na eigen marktonderzoek, met methode erbij')} Bij By Lado zie je de prijzen per methode op <a href="/prijzen">prijzen</a>.</p>` },
+  { q: 'Waarom zijn extensions zo duur?', a: '<p>Je betaalt voor echt haar van goede kwaliteit, voor de tijd die plaatsen kost (soms uren), en voor de vakkennis om het onzichtbaar en veilig te doen.</p>' },
+  { q: 'Wat kost onderhoud van extensions?', a: '<p>Onderhoud komt elke paar weken terug, afhankelijk van de methode. Reken het altijd mee in je jaarbudget.</p>' },
+];
+---
+<ArticleLayout title="Wat kosten hair extensions? Prijzen per jaar | By Lado" description="Wat kosten hair extensions echt? De prijsfactoren, onderhoud en nieuw haar, kosten per jaar per methode, en waarom goedkoop vaak duurkoop is."
+  path="/gidsen/wat-kosten-hair-extensions" crumb="Wat kosten hair extensions?" h1="Wat kosten hair <em>extensions?</em>"
+  lead="Een eerlijke uitleg: waar de prijs van afhangt, wat onderhoud kost en wat je per jaar kwijt bent. Met mijn eigen prijzen erbij."
+  toc={[{ id: 'factoren', label: 'Waar de prijs van afhangt' }, { id: 'per-methode', label: 'Prijzen per methode' }, { id: 'per-jaar', label: 'Kosten per jaar' }, { id: 'goedkoop', label: 'Waarom goedkoop duur wordt' }, { id: 'vergelijken', label: 'Zo vergelijk je eerlijk' }]}
+  faq={faq}>
+  <h2 id="factoren">Waar de prijs van afhangt</h2>
+  <ul>
+    <li><strong>De kwaliteit van het haar.</strong> Echt haar met de schubjes in één richting blijft zachter en gaat langer mee dan goedkoop haar.</li>
+    <li><strong>Lengte en hoeveelheid.</strong> Langer haar en meer grammen kosten meer.</li>
+    <li><strong>De methode.</strong> Streng voor streng plaatsen kost meer tijd dan een rij of banen.</li>
+    <li><strong>Kleur.</strong> Een mix van tinten is natuurlijker, en vraagt meer haar en werk.</li>
+    <li><strong>Afwerking.</strong> Knippen en blenden maakt het verschil tussen opvallen en wegvallen.</li>
+  </ul>
+  <h2 id="per-methode">Prijzen per methode bij By Lado</h2>
+  <table><thead><tr><th scope="col">Methode</th><th scope="col">Vanaf</th></tr></thead><tbody>{confirmed().map((m) => <tr><td><a href={m.slug}>{m.name}</a></td><td set:html={priceOr(m.fromPrice)} /></tr>)}</tbody></table>
+  <p>Alle prijzen inclusief btw. Bereken je eigen indicatie in de <a href="/prijzen#calculator">prijscalculator</a>.</p>
+  <h2 id="per-jaar">Kosten per jaar</h2>
+  <p>De prijs van plaatsen is maar een deel van het verhaal. Daarna komt onderhoud, elke paar weken, en na verloop van tijd nieuw haar. Pas als je die bij elkaar optelt, kun je methodes echt vergelijken.</p>
+  <p set:html={ph('VOORBEELDBEREKENING PER JAAR PER METHODE — cijfers van Quinty')} />
+  <h2 id="goedkoop">Waarom goedkoop vaak duur wordt</h2>
+  <p>Goedkoop haar klit sneller, droogt uit en verliest glans. Dat betekent eerder vervangen. En een set die niet goed is geplaatst of de verkeerde kleur heeft, moet soms helemaal opnieuw. Daar betaal je dan twee keer voor, en soms met je eigen haar.</p>
+  <h2 id="vergelijken">Zo vergelijk je eerlijk</h2>
+  <ul><li>Vraag wat er in de prijs zit: haar, plaatsen, knippen en blenden, nazorg.</li><li>Vraag wat onderhoud kost en hoe vaak.</li><li>Vraag hoe lang het haar meegaat.</li><li>Vraag echte voor- en na-foto’s, in hetzelfde licht.</li></ul>
+  <p>Twijfel je welke methode bij je past? Lees <a href="/extensions">alle methodes vergeleken</a>.</p>
+</ArticleLayout>

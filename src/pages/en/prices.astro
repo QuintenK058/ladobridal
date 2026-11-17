@@ -1,0 +1,20 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Cta from '../../components/Cta.astro';
+import { confirmed } from '../../data/methods';
+import { PRICES, priceOr } from '../../data/site';
+const crumbs = [{ name: 'Home', href: '/en' }, { name: 'Prices', href: '/en/prices' }];
+---
+<Base title="Hair extension prices incl. maintenance | By Lado" description="Transparent hair extension prices in Leeuwarden: consultation, placement, maintenance and removal, plus what it costs per year." breadcrumbs={crumbs}>
+  <PageHero lang="en" crumbs={crumbs} eyebrow="Prices" h1="Hair extension <em>prices</em>" lead="Honest and upfront, VAT included. The price calculator is on the Dutch prices page." secondary={{ href: '/prijzen#calculator', label: 'Price calculator (Dutch)' }} />
+  <section class="section--tight" style="padding-top:0"><div class="container grid">
+    <table class="price-table col-half"><caption>Placement</caption><tbody>{confirmed().map((m) => <tr><th scope="row">{m.name}</th><td set:html={priceOr(m.fromPrice, 'PRICE')} /></tr>)}</tbody></table>
+    <table class="price-table col-half"><caption>Other</caption><tbody>
+      <tr><th scope="row">Consultation</th><td set:html={PRICES.consult === 0 ? 'free' : priceOr(PRICES.consult, 'PRICE')} /></tr>
+      <tr><th scope="row">Maintenance</th><td set:html={priceOr(PRICES.maintenance, 'PRICE')} /></tr>
+      <tr><th scope="row">Removal</th><td set:html={priceOr(PRICES.removal, 'PRICE')} /></tr>
+    </tbody></table>
+  </div></section>
+  <Cta lang="en" />
+</Base>

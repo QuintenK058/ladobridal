@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { SITE } from '../data/site';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Privacy', href: '/privacy' }];
+---
+<Base title="Privacyverklaring | By Lado" description="Hoe By Lado omgaat met je persoonsgegevens en haarfoto’s: wat, waarom, hoe lang en je rechten." breadcrumbs={crumbs}>
+  <PageHero crumbs={crumbs} eyebrow="Privacy" h1="Privacyverklaring" cta={false} />
+  <section class="section--tight" style="padding-top:0"><div class="container"><div class="prose">
+    <p class="ph-block">[CONCEPT — laten controleren. Bewaartermijnen en verwerkers aanvullen.]</p>
+    <h2>Wie</h2><p>By Lado, {SITE.owner}, Leeuwarden. KVK {SITE.kvk || '[KVK]'}.</p>
+    <h2>Welke gegevens</h2><p>Bij het consultformulier en de extension-check: naam, e-mail, telefoon, je antwoorden, eventuele haarfoto’s en de pagina en campagne waarlangs je kwam (UTM). Bij de gids: je e-mailadres.</p>
+    <h2>Waarvoor</h2><p>Om je te adviseren, een afspraak te plannen en, als je klant wordt, de behandeling uit te voeren. Haarfoto’s gebruik ik alleen voor advies, nooit publiek zonder jouw aparte toestemming.</p>
+    <h2>Hoe lang</h2><p>Aanvragen zonder afspraak verwijder ik na <span class="ph">[X maanden]</span>; haarfoto’s na <span class="ph">[X maanden]</span>.</p>
+    <h2>Verwerkers</h2><p>Supabase (opslag, EU <span class="ph">[CHECK]</span>), <span class="ph">[e-maildienst]</span>, <span class="ph">[boekingssysteem]</span>.</p>
+    <h2>Cookies</h2><p>Google Analytics, Meta Pixel en TikTok Pixel laden alleen na je toestemming. Wijzigen kan via <button type="button" data-cookie-settings class="link">cookie-instellingen</button>.</p>
+    <h2>Je rechten</h2><p>Inzien, corrigeren of verwijderen: mail {SITE.email || '[E-MAIL]'}. Klachten kun je indienen bij de Autoriteit Persoonsgegevens.</p>
+  </div></div></section>
+</Base>

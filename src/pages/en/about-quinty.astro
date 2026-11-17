@@ -1,0 +1,17 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Section from '../../components/Section.astro';
+import Cta from '../../components/Cta.astro';
+import { SITE } from '../../data/site';
+const crumbs = [{ name: 'Home', href: '/en' }, { name: 'About Quinty', href: '/en/about-quinty' }];
+---
+<Base title="About Quinty Kant, hair extensions specialist | By Lado" description="Meet Quinty Kant: hair extensions specialist in Leeuwarden and MUAH-certified bridal stylist. Honest advice, colour matching, your own hair first." breadcrumbs={crumbs}>
+  <PageHero lang="en" crumbs={crumbs} eyebrow="About" h1="About Quinty Kant, hair extensions specialist in <em>Leeuwarden</em>" shot="portrait Quinty, studio" lead="I’m Quinty. My favourite moment is when someone can no longer tell their own hair from the extensions." />
+  <Section eyebrow="Approach" title="Your own hair <em>first</em>">
+    <p>As a MUAH-certified bridal stylist I’ve spent four years working with hair that has to stay perfect all day. I bring that precision to extensions: small sections, colour that matches to the strand and a finish where you can’t see where your own hair ends.</p>
+    <p>Sometimes I say “no” or “not yet” — if your hair needs to recover first, or another method suits you better. With noticeable hair loss, please see your GP or a dermatologist first.</p>
+    <p>I’m also the bridal stylist behind <a href={SITE.ladoBridal}>Lado Bridal</a>.</p>
+  </Section>
+  <Cta lang="en" />
+</Base>

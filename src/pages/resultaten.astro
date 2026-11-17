@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Img from '../components/Img.astro';
+import HairVideo from '../components/HairVideo.astro';
+import Cta from '../components/Cta.astro';
+import { RESULTS, RESULT_SLOTS, METHOD_LABEL } from '../data/content';
+import { confirmed } from '../data/methods';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Resultaten', href: '/resultaten' }];
+const items = RESULTS.length ? RESULTS : [...RESULT_SLOTS, ...RESULT_SLOTS].map((r, i) => ({ ...r, id: `slot-${i}`, note: '' }));
+const groups = [
+  ['method', 'Methode', [['all', 'Alle'], ...confirmed().map((m) => [m.key, METHOD_LABEL[m.key]])]],
+  ['colour', 'Haarkleur', [['all', 'Alle'], ['blond', 'Blond'], ['bruin', 'Bruin'], ['donker', 'Donker'], ['rood', 'Rood']]],
+  ['goal', 'Doel', [['all', 'Alle'], ['lengte', 'Lengte'], ['volume', 'Volume'], ['beide', 'Beide']]],
+  ['hairType', 'Haartype', [['all', 'Alle'], ['fijn', 'Fijn'], ['normaal', 'Normaal'], ['dik', 'Dik']]],
+] as const;
+---
+<Base title="Resultaten hair extensions voor en na | Leeuwarden | By Lado" description="Echte resultaten van hair extensions voor en na: per methode, haarkleur, doel en haartype. In hetzelfde licht, zonder filter, met lengte en hoeveelheid haar." breadcrumbs={crumbs}>
+  <PageHero crumbs={crumbs} eyebrow="Resultaten" h1="Resultaten: hair extensions <em>voor en na</em>"
+    lead="Hetzelfde licht, dezelfde hoek, geen filter. Bij elk resultaat zie je de methode, de lengte, hoeveel haar er is gebruikt en wat voor eigen haar het was. Filter op haar zoals het jouwe." />
+  <section class="section--tight" style="padding-top:0">
+    <div class="container">
+      {!RESULTS.length && <p class="ph-block" style="margin-bottom:2rem">[VOORBEELDINDELING · hieronder staan lege plekken met een voorbeeldlabel. Vervang ze door echte voor/na-paren in src/data/content.ts (RESULTS). Nooit stockfoto’s.]</p>}
+      <div class="filter-groups">
+        {groups.map(([key, label, opts]) => (
+          <div class="filter-chips" role="group" aria-label={label} data-filter-group={key}><span class="filter-label">{label}</span>
+            {opts.map(([v, l], i) => <button type="button" class="chip" data-v={v} aria-pressed={i === 0 ? 'true' : 'false'}>{l}</button>)}
+          </div>
+        ))}
+        <p class="small muted" aria-live="polite"><span data-results-count>{items.length}</span> resultaten</p>
+      </div>
+      <div class="results-grid" data-results>
+        {items.map((r, i) => (
+          <figure class="result" data-method={r.method} data-colour={r.colour} data-goal={r.goal} data-hair-type={r.hairType} style={`margin:0;view-transition-name:res-${i}`}>
+            <div class="result__pair"><Img ratio="3x4" shot={`voor · ${r.colour}`} alt={`Voor ${METHOD_LABEL[r.method]} extensions, ${r.hairType} haar`} dark /><Img ratio="3x4" shot={`na · ${METHOD_LABEL[r.method]} ${r.length} cm`} alt={`Na ${METHOD_LABEL[r.method]} extensions, ${r.length} cm, ${r.colour}, ${r.hairType} haar`} /></div>
+            <figcaption class="result__cap"><strong>{METHOD_LABEL[r.method]} · {r.length} cm{'grams' in r && r.grams ? ` · ${r.grams} g` : ' · [gram]'}</strong>{r.hairType} haar · {r.goal}{r.note ? ` — ${r.note}` : ''}</figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+  <section class="section section--bone"><div class="container">
+    <div class="section-head"><p class="eyebrow">In beweging</p><h2>Zo <em>beweegt</em> het</h2></div>
+    <div class="look-grid look-grid--3">{[1, 2, 3].map((n) => <HairVideo ratio="9x16" shot={`resultaat ${n}, 9:16 loop`} />)}</div>
+  </div></section>
+  <section class="section--tight section--dark on-dark"><div class="container cluster" style="justify-content:space-between"><p class="h2" style="max-width:22ch">Wil je dit resultaat? <em>Plan je consult.</em></p><a class="btn btn--light" href="/consult" data-track="consult_cta">Plan je consult</a></div></section>
+  <Cta light />
+</Base>

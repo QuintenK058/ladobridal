@@ -1,0 +1,19 @@
+---
+import Img from './Img.astro';
+import type { Method } from '../data/methods';
+import { euro } from '../data/site';
+interface Props { m: Method; i?: number; href?: string }
+const { m, i = 0, href } = Astro.props;
+---
+<a class="method-card" href={href ?? m.slug}>
+  <Img ratio="3x4" shot={m.shot} delay={i * 0.06} />
+  <span class="eyebrow">{String(i + 1).padStart(2, '0')} — {m.name}</span>
+  <span class="method-card__title">{m.name}</span>
+  <p class="small">{m.short}</p>
+  <dl>
+    <dt>Ideaal voor</dt><dd>{m.idealFor.split(',')[0]}</dd>
+    <dt>Gaat mee</dt><dd set:html={m.lasts ?? '<span class="ph">[CHECK]</span>'} />
+    <dt>Vanaf</dt><dd set:html={m.fromPrice ? euro(m.fromPrice) : '<span class="ph">[PRIJS]</span>'} />
+  </dl>
+  <span class="text-link">{m.name} in Leeuwarden <span class="arrow" aria-hidden="true">→</span></span>
+</a>

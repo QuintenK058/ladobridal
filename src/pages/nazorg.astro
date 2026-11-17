@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Faq from '../components/Faq.astro';
+import Cta from '../components/Cta.astro';
+import { confirmed } from '../data/methods';
+import { articleSchema } from '../data/schema';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Nazorg', href: '/nazorg' }];
+const topics = [
+  ['wassen', 'Wassen', 'Was je haar met je hoofd rechtop of naar achteren (niet voorover), gebruik een milde shampoo en houd conditioner en olie weg van de aanzet.'],
+  ['fohnen', 'Föhnen', 'Föhn de aanzet altijd goed droog. Vocht dat bij de bevestigingspunten blijft zitten, zorgt sneller voor klitten.'],
+  ['borstelen', 'Borstelen', 'Borstel met een zachte extensionborstel, van de punten naar boven, en houd met je andere hand de aanzet vast.'],
+  ['slapen', 'Slapen', 'Slaap nooit met nat haar. Doe je haar in een losse vlecht of lage staart; een zijden kussensloop helpt tegen klitten.'],
+  ['sporten', 'Sporten & zwemmen', 'Draag je haar in een vlecht, spoel chloor en zout direct uit en verzorg daarna extra.'],
+  ['zon', 'Zon', 'Bescherm je lengtes tegen veel zon; uitgedroogd haar verliest sneller glans.'],
+  ['hitte', 'Stijltang & krultang', 'Gebruik altijd een hittebeschermer en houd hete tangen weg van de bevestigingspunten.'],
+  ['producten', 'Producten', 'Gebruik producten zonder zware oliën of siliconen bij de aanzet. ' ],
+];
+const faq = [
+  { q: 'Welke borstel moet ik gebruiken?', a: '<p><span class="ph">[CHECK: borstel die Quinty adviseert / verkoopt]</span></p>' },
+  { q: 'Hoe vaak mag ik mijn haar wassen met extensions?', a: '<p>Zo min als prettig voelt. Elke wasbeurt vraagt iets van de extensions, dus liever twee à drie keer per week dan elke dag. <span class="ph">[CHECK advies Quinty]</span></p>' },
+  { q: 'Mag ik mijn extensions verven?', a: '<p>Doe dat niet zelf. Extensions reageren anders op verf dan je eigen haar. Vraag het in de studio.</p>' },
+];
+---
+<Base title="Nazorg hair extensions | Zo blijven ze mooi | By Lado" description="Nazorg voor hair extensions per methode: wassen, föhnen, borstelen, slapen, sporten, zon en styling. Praktisch, met een printbare nazorgkaart." breadcrumbs={crumbs}
+  schema={[articleSchema({ headline: 'Nazorg voor hair extensions', path: '/nazorg', description: 'Praktische nazorg per methode.', dateModified: '2026-11-17' })]}>
+  <PageHero crumbs={crumbs} eyebrow="Nazorg" h1="Nazorg voor hair extensions: <em>zo blijven ze mooi</em>" cta={false}
+    lead="Hoe lang je extensions mooi blijven, ligt voor een groot deel bij jou. Met deze gewoontes blijven ze zacht, glanzend en onzichtbaar, en blijft je eigen haar gezond." />
+  <section class="section--tight" style="padding-top:0"><div class="container grid">
+    <nav class="col-quarter sticky-desk toc" aria-label="Inhoud"><strong>Inhoud</strong><ol>{topics.map(([id, t]) => <li><a href={`#${id}`}>{t}</a></li>)}<li><a href="#per-methode">Per methode</a></li></ol></nav>
+    <div class="col-rest prose">
+      <p class="ph-block">[CHECK · alle adviezen hieronder laten bevestigen door Quinty; aanvullen met haar eigen tips en productadvies]</p>
+      {topics.map(([id, t, d]) => <><h2 id={id}>{t}</h2><p>{d}</p></>)}
+      <h2 id="per-methode">Per methode</h2>
+      {confirmed().map((m) => <><h3>{m.name}</h3><p>Zie de nazorg op de pagina <a href={m.slug}>{m.name.toLowerCase()}</a>. <span class="ph">[PRINTBARE NAZORGKAART {m.name.toUpperCase()} (PDF)]</span></p></>)}
+    </div>
+  </div></section>
+  <section class="section section--dark on-dark"><div class="container grid align-center">
+    <div class="col-half"><p class="eyebrow">Nazorggids</p><h2 class="mt-1">De nazorggids <em>in je inbox</em></h2><p class="mt-2" style="color:#E6DACB">Nog geen klant? Ontvang de nazorg per methode als pdf, plus alles wat je wilt weten vóór je eerste set.</p></div>
+    <form class="col-half" data-guide-form novalidate>
+      <div class="field"><label for="ng-email">E-mailadres</label><input id="ng-email" type="email" name="email" autocomplete="email" required style="background:transparent;color:var(--cream);border-color:rgba(247,242,235,.5)" /><p class="field__error" hidden></p></div>
+      <div class="hp" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off" /></div>
+      <button type="submit" class="btn btn--light">Stuur me de gids</button>
+      <p class="small mt-1" data-guide-done hidden>Dank je! De gids komt naar je inbox. <span class="ph">[PDF NOG TE MAKEN]</span></p>
+    </form>
+  </div></section>
+  <section class="section section--bone"><div class="container grid"><div class="col-quarter"><h2>FAQ</h2></div><div class="col-rest"><Faq items={faq} /></div></div></section>
+  <section class="section--tight"><div class="container cluster" style="justify-content:space-between"><p class="h3">Tijd voor onderhoud?</p><a class="btn" href="/extensions-onderhoud">Onderhoud plannen</a></div></section>
+  <Cta light />
+</Base>

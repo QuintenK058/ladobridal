@@ -1,0 +1,95 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import Timeline from '../components/Timeline.astro';
+import Img from '../components/Img.astro';
+import Reviews from '../components/Reviews.astro';
+import Faq from '../components/Faq.astro';
+import Related from '../components/Related.astro';
+import Cta from '../components/Cta.astro';
+import { METHODS, val, type Method } from '../data/methods';
+import { COPY } from '../data/methodContent';
+import { RESULTS, RESULT_SLOTS, METHOD_LABEL } from '../data/content';
+import { PRICES, priceOr } from '../data/site';
+import { faqSchema, serviceSchema } from '../data/schema';
+
+export function getStaticPaths() { return METHODS.filter((m) => m.offered !== false).map((m) => ({ params: { method: m.slug.slice(1) }, props: { m } })); }
+const { m } = Astro.props as { m: Method };
+const c = COPY[m.key];
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Extensions', href: '/extensions' }, { name: m.name, href: m.slug }];
+const results = RESULTS.filter((r) => r.method === m.key);
+const slots = RESULT_SLOTS.filter((r) => r.method === m.key).concat(RESULT_SLOTS.filter((r) => r.method !== m.key)).slice(0, 3);
+const rel = c.related.map((k) => METHODS.find((x) => x.key === k)!).filter((x) => x.offered !== false);
+---
+<Base title={c.title} description={c.description} breadcrumbs={crumbs} noindex={m.offered !== true}
+  schema={[serviceSchema({ name: m.name, path: m.slug, description: c.description, price: m.fromPrice }), faqSchema(c.faq)]}>
+  {m.offered !== true && <div class="container" style="padding-top:calc(var(--header-h) + 8px)"><p class="ph-block">[CHECK · biedt Quinty {m.name} aan? Tot bevestiging staat deze pagina op noindex en buiten de sitemap. Zet <code>offered: true</code> (of <code>false</code> om hem te verwijderen) in src/data/methods.ts.]</p></div>}
+  <PageHero crumbs={crumbs} eyebrow={`Extensions · ${METHOD_LABEL[m.key]}`} h1={c.h1} lead={c.lead} ba={`${m.name} · [LENGTE] · [GRAM] · [HAARTYPE]`} vlabel={m.name}
+    secondary={{ href: '/prijzen#calculator', label: 'Bereken je prijs' }} />
+
+  <Section eyebrow={`Wat is ${m.name.toLowerCase()}`} title={`Zo werken <em>${m.name.toLowerCase()}</em>`}><Fragment set:html={c.what} /></Section>
+
+  <section class="section section--bone">
+    <div class="container grid">
+      <div class="col-half reveal"><p class="eyebrow">Wel geschikt</p><h2 class="h3 mt-1">Voor wie <em>wel</em></h2><ul class="checklist mt-2" role="list">{c.forWho.yes.map((x) => <li set:html={x} />)}</ul></div>
+      <div class="col-half reveal" style="--d:.1s"><p class="eyebrow">Eerlijk advies</p><h2 class="h3 mt-1">Voor wie <em>niet</em></h2><ul class="mt-2 stack" role="list" style="--stack:.9rem;list-style:none;padding:0">{c.forWho.no.map((x) => <li style="padding-left:1.6rem;position:relative"><span aria-hidden="true" style="position:absolute;left:0;color:var(--caramel)">—</span><span set:html={x} /></li>)}</ul>
+        <p class="small muted mt-2">Twijfel je? Doe de <a class="link" href="/extension-check" data-open-quiz>extension-check</a> of vraag het in het consult.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Plaatsen</p><h2>Zo gaat het <em>plaatsen</em></h2><p class="lead">Plaatsingstijd: <Fragment set:html={val(m.placingTime, 'X uur')} />.</p></div>
+      <Timeline horizontal steps={c.steps} />
+    </div>
+  </section>
+
+  <Section eyebrow="Gaat mee & onderhoud" title="Hoe lang het <em>meegaat</em>" bone><Fragment set:html={c.care} /><p><a href="/nazorg">Lees de volledige nazorg per methode</a> · <a href="/extensions-onderhoud">Onderhoud plannen</a></p></Section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Resultaten</p><h2>{m.name}: <em>voor en na</em></h2></div>
+      <div class="results-grid">
+        {results.length ? results.map((r) => <div class="result"><div class="result__pair"><Img ratio="3x4" shot="voor" src={r.before} /><Img ratio="3x4" shot="na" src={r.after} /></div><p class="result__cap"><strong>{METHOD_LABEL[r.method]} · {r.length} cm{r.grams && ` · ${r.grams} g`}</strong>{r.note}</p></div>)
+        : slots.map((r) => <div class="result"><div class="result__pair"><Img ratio="3x4" shot={`voor · ${r.colour}`} dark /><Img ratio="3x4" shot={`na · ${METHOD_LABEL[m.key]}`} /></div><p class="result__cap"><span class="ph">[ECHT VOOR/NA · {m.name} · lengte · gram · haartype · notitie Quinty]</span></p></div>)}
+      </div>
+      <a class="text-link mt-3" href="/resultaten">Alle resultaten bekijken <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="section section--bone">
+    <div class="container grid">
+      <div class="col-main">
+        <p class="eyebrow">Prijs</p><h2 class="mt-1">Wat kost <em>{m.name.toLowerCase()}?</em></h2>
+        <table class="price-table mt-3"><tbody>
+          <tr><th scope="row">{m.name}, vanaf</th><td set:html={priceOr(m.fromPrice)} /></tr>
+          <tr><th scope="row">Onderhoud</th><td set:html={priceOr(PRICES.maintenance)} /></tr>
+          <tr><th scope="row">Onderhoud nodig elke</th><td set:html={val(m.maintenanceEvery, 'X weken')} /></tr>
+          <tr><th scope="row">Verwijderen</th><td set:html={priceOr(PRICES.removal)} /></tr>
+        </tbody></table>
+        <p class="small muted mt-2">Inclusief: {c.included.join(' · ')}. Alle prijzen incl. btw. <a class="link" href="/prijzen">Wat kost het per jaar?</a></p>
+      </div>
+      <aside class="col-aside price-box reveal">
+        <p class="eyebrow eyebrow--plain">{m.name}</p>
+        <p class="package__price"><small>vanaf</small><Fragment set:html={priceOr(m.fromPrice)} /></p>
+        <a class="btn btn--block" href="/consult" data-track="consult_cta">Plan je consult</a>
+        <a class="text-link" href="/prijzen#calculator">Bereken je prijs <span class="arrow" aria-hidden="true">→</span></a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container"><div class="section-head"><p class="eyebrow">Reviews</p><h2>Ervaringen met <em>{m.name.toLowerCase()}</em></h2></div><Reviews variant="pair" method={m.key} /></div>
+  </section>
+
+  <section class="section section--bone">
+    <div class="container grid">
+      <div class="col-quarter"><p class="eyebrow">FAQ</p><h2 class="mt-1">Vragen over <em>{m.name.toLowerCase()}</em></h2></div>
+      <div class="col-rest"><Faq items={c.faq} /></div>
+    </div>
+  </section>
+
+  <Related title="Verder lezen" links={[...rel.map((r) => ({ href: r.slug, label: `${r.name} in Leeuwarden` })), ...c.guides, { href: '/extensions', label: 'Alle methodes vergeleken' }]} />
+  <Cta />
+</Base>

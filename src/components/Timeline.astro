@@ -1,0 +1,13 @@
+---
+interface Props { steps: { title: string; text: string }[]; horizontal?: boolean; headingLevel?: 'h3' | 'h4' }
+const { steps, horizontal = false } = Astro.props;
+---
+<ol class:list={['timeline', horizontal && 'timeline--h']} style={`--steps:${steps.length}`} data-timeline>
+  {steps.map((s, i) => (
+    <li class="reveal" style={`--d:${i * 0.08}s`}>
+      <span class="timeline__num">{String(i + 1).padStart(2, '0')}</span>
+      <h3>{s.title}</h3>
+      <p set:html={s.text} />
+    </li>
+  ))}
+</ol>

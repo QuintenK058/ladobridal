@@ -1,0 +1,43 @@
+---
+import Base from '../../layouts/Base.astro';
+import HairVideo from '../../components/HairVideo.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
+import Img from '../../components/Img.astro';
+import Timeline from '../../components/Timeline.astro';
+import Reviews from '../../components/Reviews.astro';
+import Faq from '../../components/Faq.astro';
+import Cta from '../../components/Cta.astro';
+import { confirmed } from '../../data/methods';
+import { faqSchema } from '../../data/schema';
+const faq = [
+  { q: 'Do extensions damage my own hair?', a: '<p>Well-placed and well-maintained extensions shouldn’t. The risks are too much weight on too little hair, placing too tightly and skipping maintenance. That’s why I always start with your own hair.</p>' },
+  { q: 'Can I exercise and swim with extensions?', a: '<p>Yes, with the right method and care. Tell me about your week in the consultation.</p>' },
+  { q: 'Is my hair suitable?', a: '<p>Usually, but not always straight away. With hair loss, please see your GP or a dermatologist first. Take the <a href="/en/extension-check">extension check</a> for a first impression.</p>' },
+];
+---
+<Base title="Hair extensions Leeuwarden, natural & bespoke | By Lado" description="Hair extensions in Leeuwarden by Quinty Kant: personal consultation, colour matched, extensions nobody notices. Book your consultation." schema={[faqSchema(faq)]}>
+  <section class="bl-hero" data-hero><div class="container bl-hero__grid">
+    <div>
+      <p class="eyebrow">By Lado · Leeuwarden</p>
+      <p class="display hero-words mt-2" data-split>More hair. <em>Your</em> hair.</p>
+      <h1>Hair extensions in Leeuwarden, natural and made to measure</h1>
+      <div class="hero__actions"><a class="btn" href="/en/consult" data-track="consult_cta">Book your consultation <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn--outline" href="/en/extension-check" data-open-quiz>Take the extension check</a></div>
+    </div>
+    <div class="bl-hero__media"><HairVideo shot="hair in motion, warm light" label="Extensions · no filter" /></div>
+  </div></section>
+  <section class="section"><div class="container promise">
+    {[['01', 'Nobody sees <em>the difference.</em>', 'Colour matched to the strand, often blending several shades, then cut and blended into your own hair.'], ['02', 'Your own hair <em>first.</em>', 'I look at what your hair can carry. Sometimes my advice is less weight, another method, or: not yet.'], ['03', 'Honest prices, <em>maintenance included.</em>', 'You see upfront what placement costs and what maintenance and new hair cost per year.']].map(([n, t, d]) => <div class="promise__item reveal"><div><span class="promise__num">{n}</span><p class="h2 mt-1" set:html={t} /><p class="muted">{d}</p></div></div>)}
+  </div></section>
+  <section class="section section--dark on-dark"><div class="container grid align-center">
+    <div class="col-media--left"><BeforeAfter caption="Tape extensions · 50 cm · [GRAMS] · fine hair" lang="en" /></div>
+    <div class="col-text--right"><p class="eyebrow">Results</p><h2 class="mt-1">Results that <em>speak for themselves</em></h2><a class="btn btn--light mt-3" href="/en/results">See all results</a></div>
+  </div></section>
+  <section class="section"><div class="container"><div class="section-head"><p class="eyebrow">Methods</p><h2>Which extensions <em>suit you?</em></h2></div>
+    <div class="look-grid look-grid--3">{confirmed().map((m) => <a class="card" href="/en/extensions"><Img ratio="3x4" shot={m.shot} /><span class="card__title">{m.name}</span></a>)}</div>
+    <a class="text-link mt-3" href="/en/extensions">All methods compared <span class="arrow" aria-hidden="true">→</span></a></div></section>
+  <section class="section section--bone"><div class="container"><div class="section-head"><h2>How it <em>works</em></h2></div>
+    <Timeline horizontal steps={[{ title: 'Consultation', text: 'Hair analysis, your wishes, honest advice, colour.' }, { title: 'Ordering hair', text: 'Your hair is ordered in your shade(s).' }, { title: 'Placement', text: 'Placed, then cut and blended into your own hair.' }, { title: 'Aftercare', text: 'Care advice and maintenance every <span class="ph">[X]</span> weeks.' }]} /></div></section>
+  <section class="section"><div class="container"><Reviews variant="carousel" lang="en" /></div></section>
+  <section class="section section--bone"><div class="container grid"><div class="col-quarter"><h2>FAQ</h2></div><div class="col-rest"><Faq items={faq} id="en-faq" /></div></div></section>
+  <Cta lang="en" />
+</Base>

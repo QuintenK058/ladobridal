@@ -1,0 +1,46 @@
+---
+import { REVIEWS, METHOD_LABEL, type MethodKey } from '../data/content';
+import Icon from './Icon.astro';
+interface Props { variant?: 'carousel' | 'pair' | 'snippet'; method?: MethodKey; lang?: 'nl' | 'en' }
+const { variant = 'pair', method, lang = 'nl' } = Astro.props;
+const nl = lang === 'nl';
+const fmt = (d: string) => new Intl.DateTimeFormat(nl ? 'nl-NL' : 'en-GB', { month: 'long', year: 'numeric' }).format(new Date(d));
+const n = variant === 'carousel' ? 6 : variant === 'pair' ? 2 : 1;
+const list = [...REVIEWS].sort((a, b) => Number(b.method === method) - Number(a.method === method) || b.date.localeCompare(a.date)).slice(0, n);
+const phCount = list.length ? 0 : n === 6 ? 3 : n;
+const hint = method ? `echte review over ${METHOD_LABEL[method]} extensions` : 'echte review over extensions';
+---
+{variant === 'snippet' && (list.length
+  ? <p class="review-snippet">“{list[0].text.length > 140 ? list[0].text.slice(0, 137).trimEnd() + '…' : list[0].text}” — {list[0].name}</p>
+  : <p class="review-snippet"><span class="ph">[REVIEWFRAGMENT · exacte zin uit een echte extensions-review + voornaam]</span></p>)}
+
+{variant === 'pair' && (
+  <div class="grid">
+    {list.map((r) => (
+      <article class="review-card col-half reveal">
+        <span class="stars" aria-hidden="true">{[1,2,3,4,5].map(() => <Icon name="star" size={13} />)}</span>
+        <blockquote class="mt-1"><p>{r.text}</p></blockquote>
+        <footer><strong>{r.name}</strong>{r.method && ` · ${METHOD_LABEL[r.method]}`} · {fmt(r.date)}</footer>
+      </article>
+    ))}
+    {Array.from({ length: phCount }).map(() => <article class="review-card col-half"><div class="ph-block">[REVIEW · {hint} · naam · methode · maand jaar] {nl ? 'Alleen echte reviews, nooit verzonnen.' : 'Real reviews only.'}</div></article>)}
+  </div>
+)}
+
+{variant === 'carousel' && (
+  <div class="quote-carousel" data-carousel aria-roledescription="carousel" aria-label={nl ? 'Reviews' : 'Reviews'}>
+    <div aria-live="polite">
+      {list.map((r, i) => (
+        <figure class:list={['quote-slide', i === 0 && 'is-active']}><blockquote class="pull-quote"><p>{r.text}</p></blockquote><figcaption class="quote-meta"><strong>{r.name}</strong>{r.method && ` · ${METHOD_LABEL[r.method]}`} · {fmt(r.date)}</figcaption></figure>
+      ))}
+      {Array.from({ length: phCount }).map((_, i) => (
+        <figure class:list={['quote-slide', i === 0 && 'is-active']}><blockquote class="pull-quote"><p><span class="ph">[REVIEW {i + 1} · echte extensions-review]</span></p></blockquote><figcaption class="quote-meta"><strong>[Naam]</strong> · [methode] · [maand jaar]</figcaption></figure>
+      ))}
+    </div>
+    <div class="carousel-controls">
+      <button type="button" data-prev aria-label={nl ? 'Vorige review' : 'Previous review'}><Icon name="arrow-left" /></button>
+      <button type="button" data-next aria-label={nl ? 'Volgende review' : 'Next review'}><Icon name="arrow-right" /></button>
+      <span class="count" data-count>1 / {list.length || phCount}</span>
+    </div>
+  </div>
+)}

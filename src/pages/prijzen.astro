@@ -1,0 +1,87 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Faq from '../components/Faq.astro';
+import Cta from '../components/Cta.astro';
+import { PRICES, CALC, LENGTHS, priceOr, ph } from '../data/site';
+import { METHODS, confirmed, val } from '../data/methods';
+import { faqSchema } from '../data/schema';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Prijzen', href: '/prijzen' }];
+const ms = confirmed();
+const faq = [
+  { q: 'Is het haar bij de prijs inbegrepen?', a: `<p>${ph('CHECK: haar inbegrepen of apart · prijsmodel per gram/baan/lengte')}</p>` },
+  { q: 'Kost het consult geld?', a: `<p>${PRICES.consult === 0 ? 'Nee, het consult is gratis.' : PRICES.consult ? `Het consult kost €${PRICES.consult}${ph('CHECK: verrekend bij plaatsing?')}.` : ph('CHECK: consult gratis of betaald, verrekend bij plaatsing?')}</p>` },
+  { q: 'Waarom zijn goedkope extensions vaak duurder?', a: '<p>Haar van mindere kwaliteit klit sneller, verliest glans en moet eerder vervangen worden. Reken daarom altijd met de kosten per jaar, niet alleen met de prijs van de eerste set. Lees <a href="/gidsen/wat-kosten-hair-extensions">wat hair extensions echt kosten</a>.</p>' },
+  { q: 'Kan ik gespreid betalen?', a: `<p>${ph('CHECK: betaalmogelijkheden (pin, Tikkie, aanbetaling, gespreid)')}</p>` },
+  { q: 'Wat als ik een afspraak moet annuleren?', a: `<p>${ph('CHECK: annuleringsbeleid')}</p>` },
+  { q: 'Zijn de prijzen inclusief btw?', a: '<p>Ja. Elke prijs hier is inclusief btw, dus wat je ziet is wat je betaalt.</p>' },
+];
+const cfg = { ...CALC, maintenancePrice: PRICES.maintenance };
+---
+<Base title="Prijzen hair extensions Leeuwarden | Incl. onderhoud | By Lado" description="Transparante prijzen voor hair extensions in Leeuwarden: consult, plaatsen, onderhoud en verwijderen, plus wat het per jaar kost. Met prijscalculator." breadcrumbs={crumbs} schema={[faqSchema(faq)]}>
+  <PageHero crumbs={crumbs} eyebrow="Prijzen" h1="Prijzen hair <em>extensions</em>" secondary={{ href: '#calculator', label: 'Naar de calculator' }}
+    lead="Eerlijk vooraf: wat plaatsen kost, wat onderhoud kost, en wat je per jaar ongeveer kwijt bent. Alle prijzen inclusief btw." />
+  <section class="section--tight" style="padding-top:0">
+    <div class="container grid">
+      <div class="col-half">
+        <table class="price-table"><caption>Plaatsen per methode</caption><tbody>
+          {ms.map((m) => <tr><th scope="row"><a class="link" href={m.slug}>{m.name}</a><br /><span class="small muted">onderhoud elke <Fragment set:html={val(m.maintenanceEvery, 'X wkn')} /></span></th><td><small class="muted" style="font-family:var(--sans);font-size:.75rem">vanaf </small><Fragment set:html={priceOr(m.fromPrice)} /></td></tr>)}
+        </tbody></table>
+        <p class="small muted mt-1"><Fragment set:html={ph('CHECK: prijsmodel — per gram, per baan of per lengte?')} /></p>
+      </div>
+      <div class="col-half">
+        <table class="price-table"><caption>Overige behandelingen</caption><tbody>
+          <tr><th scope="row">Consult</th><td set:html={PRICES.consult === 0 ? 'gratis' : priceOr(PRICES.consult)} /></tr>
+          <tr><th scope="row">Onderhoud / verplaatsen</th><td set:html={priceOr(PRICES.maintenance)} /></tr>
+          <tr><th scope="row">Verwijderen</th><td set:html={priceOr(PRICES.removal)} /></tr>
+          <tr><th scope="row">Knippen &amp; blenden</th><td set:html={priceOr(PRICES.cutBlend, 'INBEGREPEN?')} /></tr>
+          <tr><th scope="row">Kleuren / tonen</th><td set:html={priceOr(PRICES.toning, 'CHECK')} /></tr>
+        </tbody></table>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--bone">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Eerlijk</p><h2>Wat kost het <em>per jaar?</em></h2><p class="lead">Plaatsen is één moment. Daarna komen onderhoud en, na verloop van tijd, nieuw haar. Zo ziet een jaar er per methode uit.</p></div>
+      <div class="compare-wrap"><table class="compare">
+        <caption class="sr-only">Kosten per jaar per methode</caption>
+        <thead><tr><th scope="col">Methode</th><th scope="col">Plaatsen</th><th scope="col">Onderhoud per jaar</th><th scope="col">Nieuw haar per jaar</th><th scope="col">Totaal per jaar</th></tr></thead>
+        <tbody>{ms.map((m) => <tr><th scope="row">{m.name}</th><td set:html={priceOr(m.fromPrice)} /><td set:html={ph('X× €…')} /><td set:html={priceOr(CALC.newHairPerYear[m.key])} /><td set:html={ph('TOTAAL')} /></tr>)}</tbody>
+      </table></div>
+      <p class="small muted mt-2">De bedragen per jaar komen uit mijn eigen praktijk, niet van internet. <Fragment set:html={ph('CIJFERS VAN QUINTY')} /></p>
+    </div>
+  </section>
+
+  <section class="section" id="calculator">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Prijscalculator</p><h2>Bereken je <em>indicatie</em></h2></div>
+      <form class="calc" data-calc={JSON.stringify(cfg)} onsubmit="return false">
+        <div>
+          <fieldset><legend>1 · Methode</legend><div class="choice-grid choice-grid--2">{ms.map((m, i) => <label class="choice"><input type="radio" name="method" value={m.key} data-label={m.name} checked={i === 0} /><span>{m.name}</span></label>)}</div></fieldset>
+          <fieldset><legend>2 · Gewenste lengte</legend><div class="choice-grid" style="grid-template-columns:repeat(4,1fr)">{LENGTHS.map((l, i) => <label class="choice"><input type="radio" name="length" value={l} checked={i === 1} /><span style="justify-content:center">{l} cm</span></label>)}</div></fieldset>
+          <fieldset><legend>3 · Gewenst resultaat</legend><div class="choice-grid" style="grid-template-columns:repeat(3,1fr)">{[['volume', 'Volume'], ['lengte', 'Lengte'], ['beide', 'Beide']].map(([v, l], i) => <label class="choice"><input type="radio" name="goal" value={v} checked={i === 2} /><span style="justify-content:center">{l}</span></label>)}</div></fieldset>
+          <fieldset><legend>4 · Kleur</legend><div class="choice-grid choice-grid--2">{[['een', '1 kleur'], ['mix', 'Mix van tinten']].map(([v, l], i) => <label class="choice"><input type="radio" name="colour" value={v} checked={i === 0} /><span>{l}</span></label>)}</div></fieldset>
+          <label class="row-between"><span>Onderhoud meenemen (jaarindicatie)</span><span class="toggle"><input type="checkbox" name="maint" checked /><span></span></span></label>
+        </div>
+        <div class="calc__out" aria-live="polite">
+          <p class="eyebrow">Indicatie</p>
+          <p class="calc__total" data-total>—</p>
+          <p class="small" style="color:#D9CBBB">Per jaar incl. onderhoud: <strong data-year>—</strong></p>
+          <ul class="calc__lines" data-lines></ul>
+          <p class="calc__note" data-missing>Een of meer prijzen staan nog niet online; die regels tonen “prijs volgt”. <span class="ph">[PRIJZEN VAN QUINTY]</span></p>
+          <p class="calc__note">Je definitieve prijs hoor je in het consult.</p>
+          <button type="button" class="btn btn--light btn--block mt-2" data-calc-cta>Plan je consult met deze keuze <span class="arrow" aria-hidden="true">→</span></button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="section section--bone">
+    <div class="container grid">
+      <div class="col-quarter"><p class="eyebrow">FAQ</p><h2 class="mt-1">Vragen over <em>prijzen</em></h2><p class="mt-2"><a class="link" href="/gidsen/wat-kosten-hair-extensions">Gids: wat kosten hair extensions echt?</a></p></div>
+      <div class="col-rest"><Faq items={faq} /></div>
+    </div>
+  </section>
+  <Cta />
+</Base>

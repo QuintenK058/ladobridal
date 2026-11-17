@@ -1,0 +1,19 @@
+---
+import Base from './Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Faq from '../components/Faq.astro';
+import Related from '../components/Related.astro';
+import Cta from '../components/Cta.astro';
+import { faqSchema, serviceSchema } from '../data/schema';
+interface Props { title: string; description: string; path: string; crumb: string; eyebrow: string; h1: string; lead: string; shot: string; faq: { q: string; a: string }[]; related: { href: string; label: string }[]; noindex?: boolean; notice?: string; price?: number | null }
+const p = Astro.props;
+const crumbs = [{ name: 'Home', href: '/' }, { name: p.crumb, href: p.path }];
+---
+<Base title={p.title} description={p.description} breadcrumbs={crumbs} noindex={p.noindex} schema={[serviceSchema({ name: p.crumb, path: p.path, description: p.description, price: p.price }), faqSchema(p.faq)]}>
+  {p.notice && <div class="container" style="padding-top:calc(var(--header-h) + 8px)"><p class="ph-block" set:html={p.notice} /></div>}
+  <PageHero crumbs={crumbs} eyebrow={p.eyebrow} h1={p.h1} lead={p.lead} shot={p.shot} />
+  <slot />
+  <section class="section section--bone"><div class="container grid"><div class="col-quarter"><p class="eyebrow">FAQ</p><h2 class="mt-1">Veelgestelde <em>vragen</em></h2></div><div class="col-rest"><Faq items={p.faq} /></div></div></section>
+  <Related title="Verder lezen" links={p.related} />
+  <Cta />
+</Base>

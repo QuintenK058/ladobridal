@@ -1,0 +1,10 @@
+---
+interface Props { id?: string; eyebrow?: string; title: string; bone?: boolean }
+const { id, eyebrow, title, bone } = Astro.props;
+---
+<section class:list={['section', bone && 'section--bone']} id={id}>
+  <div class="container grid">
+    <div class="col-quarter sticky-desk">{eyebrow && <p class="eyebrow">{eyebrow}</p>}<h2 class="mt-1" set:html={title} /></div>
+    <div class="col-rest"><div class="prose reveal"><slot /></div></div>
+  </div>
+</section>

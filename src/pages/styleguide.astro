@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import Img from '../components/Img.astro';
+import HairVideo from '../components/HairVideo.astro';
+import BeforeAfter from '../components/BeforeAfter.astro';
+import MethodCard from '../components/MethodCard.astro';
+import Timeline from '../components/Timeline.astro';
+import Faq from '../components/Faq.astro';
+import Reviews from '../components/Reviews.astro';
+import Strand from '../components/Strand.astro';
+import Cta from '../components/Cta.astro';
+import { METHODS } from '../data/methods';
+const colors = [['--cream', '#F7F2EB', 'Basis'], ['--bone', '#EDE5DA', 'Wisselsecties'], ['--honey', '#C9A27A', 'Licht accent · nooit kleine tekst'], ['--caramel', '#9C6B45', 'Lijnen, actief · 4,1:1 → alleen groot/UI'], ['--mocha', '#4A3328', 'Donkere secties'], ['--ink', '#1F1814', 'Tekst'], ['--stone', '#6B5F57', 'Secundair · 5,5:1 (brief #7A6E66 = 4,45:1, faalt AA)']];
+---
+<Base title="Styleguide | By Lado" description="Design system By Lado (intern)." noindex>
+  <section class="page-hero"><div class="container"><p class="eyebrow">Intern · noindex</p><h1 class="mt-1">Styleguide <em>By Lado</em></h1><p class="lead">Kleur, typografie, beeld, componenten en de drie signature motions.</p></div></section>
+  <section class="section--tight"><div class="container"><h2 class="h3">01 — Kleur</h2><div class="look-grid look-grid--4 mt-2">{colors.map(([v, h, u]) => <div><div style={`aspect-ratio:3/2;background:var(${v});border:1px solid var(--line)`}></div><p class="small mt-1"><strong>{v}</strong> {h}<br /><span class="muted">{u}</span></p></div>)}</div></div></section>
+  <section class="section--tight section--bone"><div class="container stack" style="--stack:1.25rem"><h2 class="h3">02 — Typografie</h2><p class="display">Meer haar. <em>Jouw</em> haar.</p><p class="h1">H1 · Fraunces, optical size</p><p class="h2">H2 · met <em>accentwoord</em></p><p class="h3">H3 · Fraunces 420</p><p class="lead">Lead · Manrope 400</p><p>Body · Manrope 400, 16–18px / 1.65</p><p class="eyebrow">02 — Tape extensions</p></div></section>
+  <section class="section--tight"><div class="container"><h2 class="h3">03 — Beeld &amp; video</h2><div class="look-grid look-grid--4 mt-2"><Img ratio="4x5" shot="4:5" caption="4:5" /><Img ratio="3x4" shot="3:4" caption="3:4" /><HairVideo ratio="9x16" shot="9:16 loop" /><Img ratio="4x5" arch shot="arch" caption="arch" /></div>
+    <p class="small muted mt-2">Bestandsnaam: <code>tape-extensions-voor-na-blond-leeuwarden</code> · varianten -800/-1600 .avif/.webp in public/img · video: mp4/webm + poster, muted, playsinline, pauzeert buiten beeld, uit bij reduced motion.</p></div></section>
+  <section class="section--tight section--bone"><div class="container grid"><div class="col-half"><h2 class="h3">04 — Voor/na</h2><div class="mt-2"><BeforeAfter caption="Tape extensions · 40 cm · 100 gram" /></div></div><div class="col-half"><h2 class="h3">05 — Methodekaart</h2><div class="mt-2" style="max-width:340px"><MethodCard m={METHODS[0]} /></div></div></div></section>
+  <section class="section strand-host"><Strand /><div class="container"><h2 class="h3">06 — Signature motions</h2><p class="mt-1 muted">Flowing line (deze sectie, desktop), length reveal en swatch ring: zie homepage.</p><div class="mt-3"><Timeline horizontal steps={[{ title: 'Consult', text: '…' }, { title: 'Kleur', text: '…' }, { title: 'Plaatsen', text: '…' }, { title: 'Onderhoud', text: '…' }]} /></div></div></section>
+  <section class="section--tight"><div class="container"><h2 class="h3">07 — Reviews &amp; FAQ</h2><div class="mt-2"><Reviews variant="carousel" /></div><div class="mt-3"><Faq id="sg" items={[{ q: 'Vraag als H3 in een button?', a: '<p>Ja.</p>' }]} /></div></div></section>
+  <section class="section--tight section--bone"><div class="container cluster"><button class="btn">Primair</button><button class="btn btn--outline">Secundair</button><button class="btn" disabled>Uit</button><a class="text-link" href="#">Tekstlink <span class="arrow">→</span></a></div></section>
+  <Cta />
+</Base>

@@ -1,0 +1,10 @@
+---
+/** Short muted loop. Without `src` renders a labelled poster placeholder. Never in the LCP path: poster first, video lazy-attached by JS. */
+import Img from './Img.astro';
+interface Props { src?: string; poster?: string; shot: string; ratio?: '4x5' | '9x16' | '3x4'; label?: string }
+const { src, poster, shot, ratio = '4x5', label } = Astro.props;
+---
+<div class:list={['hair-video', `ratio-${ratio}`]} data-hair-video={src || undefined}>
+  {poster ? <img src={poster} alt="" width="800" height="1000" loading="eager" fetchpriority="high" style="width:100%;height:100%;object-fit:cover" /> : <Img ratio={ratio} shot={`video loop · ${shot}`} priority reveal={false} />}
+  {label && <span class="v-label">{label}</span>}
+</div>

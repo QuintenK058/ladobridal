@@ -1,0 +1,19 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+import Section from '../components/Section.astro';
+import { PRICES, priceOr } from '../data/site';
+---
+<ServicePage title="Extensions verwijderen Leeuwarden | Gezond en zacht | By Lado" description="Hair extensions laten verwijderen in Leeuwarden: zacht, zonder trekken, met aandacht voor je eigen haar. Wat er gebeurt, hoe lang het duurt en wat het kost."
+  path="/extensions-verwijderen" crumb="Verwijderen" eyebrow="Verwijderen" h1="Extensions <em>gezond</em> laten verwijderen" shot="extensions verwijderen, detail" price={PRICES.removal}
+  lead="Of je nu een pauze wilt, overstapt naar een andere methode of klaar bent met extensions: verwijderen doe je niet met een trekje. Met de juiste remover en geduld blijft je eigen haar heel."
+  faq={[
+    { q: 'Verwijder je ook extensions die ergens anders zijn gezet?', a: '<p><span class="ph">[CHECK: verwijderen van extensions van elders ja/nee]</span></p>' },
+    { q: 'Hoe lang duurt het verwijderen?', a: '<p><span class="ph">[CHECK: duur per methode]</span></p>' },
+    { q: 'Is mijn haar dunner na het verwijderen?', a: '<p>Je verliest bij het verwijderen het haar dat in de afgelopen weken normaal is uitgevallen maar in de extensions bleef hangen. Dat ziet er vaak meer uit dan het is. Door goed uit te kammen voorkom je dat er klitten achterblijven.</p>' },
+  ]}
+  related={[{ href: '/extensions-onderhoud', label: 'Onderhoud van extensions' }, { href: '/extensions-herstellen', label: 'Extensions van elders laten herstellen' }, { href: '/gidsen/zijn-extensions-slecht-voor-je-haar', label: 'Zijn extensions slecht voor je haar?' }]}>
+  <Section eyebrow="Zo gaat het" title="Zacht en <em>zonder trekken</em>">
+    <p>Elke methode heeft zijn eigen manier van verwijderen: tape laat los met een speciale remover, bondings worden zacht gemaakt en uit elkaar gehaald, ringetjes worden geopend. Daarna kam ik je eigen haar bij de aanzet zorgvuldig uit, zodat er geen klitten achterblijven.</p>
+    <p>Daarna kijken we samen naar je eigen haar. Wil je een nieuwe set, dan kan dat vaak meteen, of adviseer ik eerst een pauze of een verzorgende behandeling. Verwijderen kost <Fragment set:html={priceOr(PRICES.removal)} />.</p>
+  </Section>
+</ServicePage>

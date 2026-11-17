@@ -1,0 +1,9 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+const crumbs = [{ name: 'Home', href: '/en' }, { name: 'Privacy', href: '/en/privacy' }];
+---
+<Base title="Privacy statement | By Lado" description="How By Lado handles your personal data and hair photos." breadcrumbs={crumbs}>
+  <PageHero lang="en" crumbs={crumbs} eyebrow="Privacy" h1="Privacy statement" cta={false} />
+  <section class="section--tight" style="padding-top:0"><div class="container prose"><p>By Lado only uses the details and hair photos you submit to advise you and plan your appointment. Analytics and marketing pixels load only with your consent. The <a href="/privacy" hreflang="nl">Dutch version</a> is leading.</p></div></section>
+</Base>

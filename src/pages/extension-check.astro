@@ -1,0 +1,15 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Quiz from '../components/Quiz.astro';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Extension-check', href: '/extension-check' }];
+---
+<Base title="Extension-check: welke extensions passen bij jou? | By Lado" description="Doe in één minuut de extension-check: zes vragen over je haar en wensen, en je krijgt een eerste advies voor de methode die bij jou past." breadcrumbs={crumbs} hasQuizPage>
+  <section class="page-hero" style="padding-bottom:0"><div class="container">
+    <Breadcrumbs items={crumbs} />
+    <p class="eyebrow mt-3">Extension-check</p>
+    <h1 class="mt-1">Welke extensions <em>passen bij jou?</em></h1>
+    <p class="lead">Zes vragen, één minuut. Je krijgt een eerste advies; Quinty bevestigt het in je consult.</p>
+  </div></section>
+  <Quiz mode="page" />
+</Base>

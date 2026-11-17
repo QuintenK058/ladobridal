@@ -1,0 +1,29 @@
+---
+import Breadcrumbs from './Breadcrumbs.astro';
+import Img from './Img.astro';
+import BeforeAfter from './BeforeAfter.astro';
+interface Props { crumbs: { name: string; href: string }[]; eyebrow: string; h1: string; lead?: string; shot?: string; ba?: string; cta?: boolean; secondary?: { href: string; label: string }; lang?: 'nl' | 'en'; vlabel?: string }
+const { crumbs, eyebrow, h1, lead, shot, ba, cta = true, secondary, lang = 'nl', vlabel } = Astro.props;
+const nl = lang === 'nl';
+---
+<section class="page-hero">
+  <div class="container">
+    <Breadcrumbs items={crumbs} lang={lang} />
+    <div class="grid mt-3" style="align-items:end">
+      <div class={shot || ba ? 'col-main' : ''} style={shot || ba ? undefined : 'grid-column:1/-1;max-width:62rem'}>
+        <p class="eyebrow">{eyebrow}</p>
+        <h1 class="mt-1" set:html={h1} />
+        {lead && <p class="lead" set:html={lead} />}
+        {(cta || secondary) && (
+          <div class="page-hero__actions">
+            {cta && <a class="btn" href={nl ? '/consult' : '/en/consult'} data-track="consult_cta">{nl ? 'Plan je consult' : 'Book your consultation'} <span class="arrow" aria-hidden="true">→</span></a>}
+            {secondary && <a class="btn btn--outline" href={secondary.href}>{secondary.label}</a>}
+          </div>
+        )}
+        {cta && <p class="reassure">{nl ? 'Vrijblijvend advies · Eerlijk over wat wel en niet kan' : 'No-obligation advice · Honest about what is and isn’t possible'}</p>}
+        <slot />
+      </div>
+      {(shot || ba) && <div class="col-aside rel">{vlabel && <span class="v-label">{vlabel}</span>}{ba ? <BeforeAfter caption={ba} lang={lang} /> : <Img ratio="4x5" shot={shot!} priority />}</div>}
+    </div>
+  </div>
+</section>

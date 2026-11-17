@@ -1,0 +1,32 @@
+---
+import Base from './Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Img from '../components/Img.astro';
+import Faq from '../components/Faq.astro';
+import Cta from '../components/Cta.astro';
+import { GUIDES } from '../data/guides';
+import { articleSchema, faqSchema } from '../data/schema';
+interface Props { title: string; description: string; path: string; h1: string; lead: string; toc: { id: string; label: string }[]; faq?: { q: string; a: string }[]; noindex?: boolean; crumb: string }
+const p = Astro.props;
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Gidsen', href: '/gidsen' }, { name: p.crumb, href: p.path }];
+const related = GUIDES.filter((g) => `/gidsen/${g.slug}` !== p.path && g.ready).slice(0, 3);
+---
+<Base title={p.title} description={p.description} ogType="article" breadcrumbs={crumbs} noindex={p.noindex}
+  schema={[articleSchema({ headline: p.h1.replace(/<[^>]+>/g, ''), path: p.path, description: p.description, dateModified: '2026-11-17' }), ...(p.faq ? [faqSchema(p.faq)] : [])]}>
+  <article>
+    <header class="page-hero"><div class="container">
+      <Breadcrumbs items={crumbs} />
+      <p class="eyebrow mt-3">Gids</p><h1 class="mt-1" set:html={p.h1} /><p class="lead" set:html={p.lead} />
+      <div class="author-box mt-3" style="max-width:540px"><Img ratio="1x1" shot="Quinty" reveal={false} /><div class="small"><strong>Quinty Kant</strong><br />Extensions specialist · MUAH-gecertificeerd bruidsstylist · <span class="muted">Laatst bijgewerkt: november 2026</span></div></div>
+    </div></header>
+    <div class="container grid" style="padding-bottom:var(--section)">
+      <aside class="col-quarter sticky-desk"><nav class="toc" aria-label="Inhoud"><strong>Inhoud</strong><ol>{p.toc.map((t) => <li><a href={`#${t.id}`}>{t.label}</a></li>)}</ol></nav></aside>
+      <div class="col-rest prose"><slot />
+        <div class="price-box mt-3"><p class="h3">Welke extensions passen bij jou?</p><p class="small muted">Zes vragen, één minuut.</p><a class="btn" href="/extension-check" data-open-quiz>Doe de extension-check</a></div>
+      </div>
+    </div>
+  </article>
+  {p.faq && <section class="section section--bone"><div class="container grid"><div class="col-quarter"><h2>FAQ</h2></div><div class="col-rest"><Faq items={p.faq} /></div></div></section>}
+  {related.length > 0 && <section class="section--tight"><div class="container"><h2 class="h3">Lees ook</h2><ul class="region-list mt-2" role="list">{related.map((g) => <li><a href={`/gidsen/${g.slug}`} style="font-size:clamp(1.4rem,1.1rem + 1.2vw,2.1rem)">{g.title}</a></li>)}</ul></div></section>}
+  <Cta />
+</Base>

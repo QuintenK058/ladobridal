@@ -1,0 +1,72 @@
+---
+import { counterpart } from '../data/i18n';
+import { METHODS } from '../data/methods';
+import { SITE, waLink, hasWa } from '../data/site';
+import Img from './Img.astro';
+import Icon from './Icon.astro';
+interface Props { lang: 'nl' | 'en'; path: string }
+const { lang, path } = Astro.props;
+const nl = lang === 'nl';
+const other = counterpart(path) ?? (nl ? '/en' : '/');
+const methods = METHODS.filter((m) => m.offered !== false);
+const links = nl
+  ? [['/prijzen', 'Prijzen'], ['/resultaten', 'Resultaten'], ['/extensions-onderhoud', 'Onderhoud'], ['/over-quinty', 'Over Quinty'], ['/contact', 'Contact']]
+  : [['/en/prices', 'Prices'], ['/en/results', 'Results'], ['/en/aftercare', 'Aftercare'], ['/en/about-quinty', 'About Quinty'], ['/en/contact', 'Contact']];
+const consult = nl ? '/consult' : '/en/consult';
+const home = nl ? '/' : '/en';
+---
+<header class="site-header" data-header>
+  <div class="container site-header__inner">
+    <a href={home} class="wordmark">BY LADO<small>hair extensions</small></a>
+    <nav class="nav" aria-label={nl ? 'Hoofdmenu' : 'Main menu'}>
+      <ul>
+        <li><button type="button" aria-expanded="false" aria-controls="mega" data-mega-toggle>Extensions <span aria-hidden="true" style="font-size:.7em">▾</span></button></li>
+        {links.map(([h, n]) => <li><a href={h} aria-current={path === h ? 'page' : undefined}>{n}</a></li>)}
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="lang-toggle" href={other} hreflang={nl ? 'en' : 'nl'} title={nl ? 'Switch to English' : 'Naar Nederlands'}>
+        <span aria-current={nl ? 'true' : undefined}>NL</span><span aria-hidden="true">/</span><span aria-current={!nl ? 'true' : undefined}>EN</span>
+      </a>
+      <a class="btn btn--sm" href={consult} data-track="consult_cta">{nl ? 'Plan je consult' : 'Book a consultation'}</a>
+      <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" data-menu-open aria-label={nl ? 'Menu openen' : 'Open menu'}><span class="menu-toggle__bars"><span></span><span></span></span></button>
+    </div>
+  </div>
+  <div class="mega" id="mega" data-mega>
+    <div class="container mega__grid" style={`grid-template-columns:repeat(${Math.min(methods.length, 5)},1fr) 1.1fr`}>
+      {methods.map((m) => (
+        <a class="mega__item card" href={nl ? m.slug : '/en/extensions'}>
+          <Img ratio="3x4" shot={m.shot} reveal={false} />
+          <strong>{m.name}</strong>
+          <p>{m.idealFor.split(',')[0]}</p>
+        </a>
+      ))}
+      <div class="mega__side">
+        <p class="eyebrow eyebrow--plain">{nl ? 'Kiezen' : 'Choose'}</p>
+        <a href={nl ? '/extensions' : '/en/extensions'}>{nl ? 'Alle methodes vergeleken' : 'All methods compared'} <span class="arrow" aria-hidden="true">→</span></a>
+        <a href={nl ? '/extension-check' : '/en/extension-check'} data-open-quiz>{nl ? 'Doe de extension-check' : 'Take the extension check'} <span class="arrow" aria-hidden="true">→</span></a>
+        {nl && <a href="/extensions-bruiloft">Extensions voor je bruiloft <span class="arrow" aria-hidden="true">→</span></a>}
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" data-mobile-menu role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="mobile-menu__top">
+    <a href={home} class="wordmark">BY LADO</a>
+    <button type="button" class="mobile-menu__close" data-menu-close aria-label={nl ? 'Menu sluiten' : 'Close menu'}><Icon name="close" size={24} /></button>
+  </div>
+  <nav aria-label={nl ? 'Mobiel menu' : 'Mobile menu'}>
+    <ul>
+      <li><a href={nl ? '/extensions' : '/en/extensions'} style="--i:0">Extensions</a>
+        {nl && <ul class="sub">{methods.map((m) => <li><a href={m.slug}>{m.name}</a></li>)}<li><a href="/extension-check" data-open-quiz>Extension-check</a></li></ul>}
+      </li>
+      {links.map(([h, n], i) => <li><a href={h} style={`--i:${i + 1}`}>{n}</a></li>)}
+    </ul>
+  </nav>
+  <div class="mobile-menu__foot">
+    <a class="btn btn--block" href={consult} data-track="consult_cta">{nl ? 'Plan je consult' : 'Book a consultation'}</a>
+    {hasWa() && <a class="btn btn--outline btn--block" href={waLink(nl ? 'Hoi Quinty! ' : 'Hi Quinty! ')} target="_blank" rel="noopener" data-track="whatsapp_click"><Icon name="whatsapp" size={18} /> WhatsApp</a>}
+    <p><a href={other}>{nl ? 'English' : 'Nederlands'}</a> · <a href={SITE.ladoBridal} data-track="cross_brand_click">Lado Bridal</a></p>
+  </div>
+</div>

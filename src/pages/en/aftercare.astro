@@ -1,0 +1,12 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Cta from '../../components/Cta.astro';
+const crumbs = [{ name: 'Home', href: '/en' }, { name: 'Aftercare', href: '/en/aftercare' }];
+const t = [['Washing', 'Wash with your head upright or tilted back, use a mild shampoo and keep conditioner and oils away from the roots.'], ['Drying', 'Always blow-dry the roots thoroughly.'], ['Brushing', 'Use a soft extension brush, from the ends up, holding the roots with your other hand.'], ['Sleeping', 'Never sleep with wet hair; wear a loose braid.'], ['Sport & swimming', 'Braid your hair, rinse out chlorine and salt straight away.'], ['Heat styling', 'Always use heat protection and keep hot tools away from the bonds.']];
+---
+<Base title="Hair extensions aftercare | By Lado" description="Practical aftercare for hair extensions: washing, drying, brushing, sleeping, sport and heat styling." breadcrumbs={crumbs}>
+  <PageHero lang="en" crumbs={crumbs} eyebrow="Aftercare" h1="Aftercare: <em>keep them beautiful</em>" cta={false} lead="How long your extensions stay beautiful is largely in your hands." />
+  <section class="section--tight" style="padding-top:0"><div class="container prose"><p class="ph-block">[CHECK all advice with Quinty]</p>{t.map(([h, d]) => <><h2>{h}</h2><p>{d}</p></>)}</div></section>
+  <Cta lang="en" />
+</Base>

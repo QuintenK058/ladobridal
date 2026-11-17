@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import Img from '../components/Img.astro';
+import Timeline from '../components/Timeline.astro';
+---
+<Base title="Bedankt voor je aanvraag | By Lado" description="Je aanvraag is ontvangen." noindex>
+  <section class="page-hero"><div class="container grid align-center">
+    <div class="col-main"><p class="eyebrow">Aanvraag ontvangen</p><h1 class="mt-1">Dank je wel<span data-thanks-name></span>.</h1><p class="lead">Ik bekijk je aanvraag persoonlijk en neem snel contact met je op voor een moment. <span class="ph">[CHECK: reactietermijn]</span> Liefs, Quinty</p></div>
+    <div class="col-aside"><Img ratio="4x5" arch shot="portret Quinty, glimlach" priority /></div>
+  </div></section>
+  <section class="section section--bone"><div class="container">
+    <div class="section-head"><h2>Zo <em>bereid je je voor</em></h2></div>
+    <Timeline horizontal steps={[{ title: 'Haar wassen', text: 'Was je haar de dag ervoor, zonder conditioner of producten bij de aanzet. <span class="ph">[CHECK]</span>' }, { title: 'Inspiratie', text: 'Neem foto’s mee van wat je mooi vindt.' }, { title: 'Daglicht', text: 'Kom in je natuurlijke haarkleur, zonder tijdelijke kleuring.' }]} />
+  </div></section>
+  <section class="section"><div class="container cluster"><a class="btn" href="/resultaten">Bekijk resultaten</a><a class="btn btn--outline" href="/nazorg">Lees de nazorg</a></div></section>
+</Base>
