@@ -4,6 +4,7 @@ import PageHero from '../components/PageHero.astro';
 import Img from '../components/Img.astro';
 import HairVideo from '../components/HairVideo.astro';
 import Cta from '../components/Cta.astro';
+import Icon from '../components/Icon.astro';
 import { RESULTS, RESULT_SLOTS, METHOD_LABEL } from '../data/content';
 import { confirmed } from '../data/methods';
 const crumbs = [{ name: 'Home', href: '/' }, { name: 'Resultaten', href: '/resultaten' }];
@@ -31,14 +32,35 @@ const groups = [
       </div>
       <div class="results-grid" data-results>
         {items.map((r, i) => (
-          <figure class="result" data-method={r.method} data-colour={r.colour} data-goal={r.goal} data-hair-type={r.hairType} style={`margin:0;view-transition-name:res-${i}`}>
+          <figure class="result" data-method={r.method} data-colour={r.colour} data-goal={r.goal} data-hair-type={r.hairType} data-before={'before' in r ? r.before : ''} data-after={'after' in r ? r.after : ''} data-caption={`${METHOD_LABEL[r.method]} · ${r.length} cm · ${r.hairType} haar · ${r.goal}`} style={`margin:0;view-transition-name:res-${i}`}>
+            <button type="button" class="result__open" data-result-open aria-label={`${METHOD_LABEL[r.method]} · ${r.length} cm, ${r.hairType} haar: vergroot voor en na`}>
             <div class="result__pair"><Img ratio="3x4" shot={`voor · ${r.colour}`} alt={`Voor ${METHOD_LABEL[r.method]} extensions, ${r.hairType} haar`} dark /><Img ratio="3x4" shot={`na · ${METHOD_LABEL[r.method]} ${r.length} cm`} alt={`Na ${METHOD_LABEL[r.method]} extensions, ${r.length} cm, ${r.colour}, ${r.hairType} haar`} /></div>
+            </button>
             <figcaption class="result__cap"><strong>{METHOD_LABEL[r.method]} · {r.length} cm{'grams' in r && r.grams ? ` · ${r.grams} g` : ' · [gram]'}</strong>{r.hairType} haar · {r.goal}{r.note ? ` — ${r.note}` : ''}</figcaption>
           </figure>
         ))}
       </div>
     </div>
   </section>
+  <div class="lightbox" data-res-lightbox role="dialog" aria-modal="true" aria-label="Resultaat vergroot" aria-hidden="true">
+    <div class="lightbox__top"><span class="small" data-lb-count></span><button type="button" data-lb-close aria-label="Sluiten"><Icon name="close" size={26} /></button></div>
+    <div class="lightbox__stage">
+      <div class="ba" data-ba style="height:min(68vh,820px);width:auto;aspect-ratio:4/5;max-width:100%">
+        <div class="ba__layer" data-lb-before></div><div class="ba__layer ba__after" data-lb-after></div>
+        <span class="ba__tag" style="left:1rem">Voor</span><span class="ba__tag" style="right:1rem">Na</span>
+        <input type="range" min="0" max="100" value="50" aria-label="Vergelijk voor en na" />
+        <span class="ba__handle" aria-hidden="true"></span>
+        <button type="button" class="ba__toggle" data-ba-toggle>Tik: voor / na</button>
+      </div>
+    </div>
+    <div class="lightbox__bottom">
+      <button type="button" data-lb-prev aria-label="Vorig resultaat"><Icon name="arrow-left" size={26} /></button>
+      <p class="small" data-lb-cap style="flex:1;text-align:center"></p>
+      <button type="button" data-lb-next aria-label="Volgend resultaat"><Icon name="arrow-right" size={26} /></button>
+      <a class="btn btn--light btn--sm" href="/consult" data-track="consult_cta" style="flex-basis:100%">Wil je dit resultaat? Plan je consult</a>
+    </div>
+  </div>
+
   <section class="section section--bone"><div class="container">
     <div class="section-head"><p class="eyebrow">In beweging</p><h2>Zo <em>beweegt</em> het</h2></div>
     <div class="look-grid look-grid--3">{[1, 2, 3].map((n) => <HairVideo ratio="9x16" shot={`resultaat ${n}, 9:16 loop`} />)}</div>

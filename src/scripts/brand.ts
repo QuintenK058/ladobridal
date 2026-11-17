@@ -76,6 +76,41 @@ export function initBrand() {
     })));
   }
 
+  /* Results lightbox with before/after slider */
+  const lb = document.querySelector<HTMLElement>('[data-res-lightbox]');
+  if (lb && grid) {
+    const items = () => $$('.result', grid).filter((r) => !r.classList.contains('is-hidden'));
+    const before = lb.querySelector<HTMLElement>('[data-lb-before]')!, after = lb.querySelector<HTMLElement>('[data-lb-after]')!;
+    const cap = lb.querySelector<HTMLElement>('[data-lb-cap]')!, cnt = lb.querySelector<HTMLElement>('[data-lb-count]')!;
+    const range = lb.querySelector<HTMLInputElement>('input[type=range]')!;
+    let idx = 0, opener: HTMLElement | null = null;
+    const layer = (src: string, label: string, dark: boolean) => src
+      ? `<img src="${src}-1600.webp" alt="${label}" style="width:100%;height:100%;object-fit:cover">`
+      : `<div class="ph-img${dark ? ' ph-img--dark' : ''}" role="img" aria-label="${label}"><span class="ph-img__label">Foto · ${label}</span></div>`;
+    const render = () => {
+      const list = items(); const it = list[idx]; const c = it.dataset.caption || '';
+      before.innerHTML = layer(it.dataset.before || '', `voor · ${c}`, true); after.innerHTML = layer(it.dataset.after || '', `na · ${c}`, false);
+      cap.textContent = c; cnt.textContent = `${idx + 1} / ${list.length}`; range.value = '50'; range.dispatchEvent(new Event('input'));
+    };
+    const open = (it: HTMLElement, btn: HTMLElement) => { opener = btn; idx = items().indexOf(it); render(); lb.classList.add('is-open'); lb.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden'; range.focus(); track('results_lightbox_open', { item: it.dataset.caption }); };
+    const close = () => { lb.classList.remove('is-open'); lb.setAttribute('aria-hidden', 'true'); document.body.style.overflow = ''; opener?.focus(); };
+    const step = (d: number) => { const n = items().length; idx = (idx + d + n) % n; render(); };
+    $$('[data-result-open]', grid).forEach((b) => b.addEventListener('click', () => open(b.closest<HTMLElement>('.result')!, b)));
+    lb.querySelector('[data-lb-close]')!.addEventListener('click', close);
+    lb.querySelector('[data-lb-prev]')!.addEventListener('click', () => step(-1));
+    lb.querySelector('[data-lb-next]')!.addEventListener('click', () => step(1));
+    document.addEventListener('keydown', (e) => {
+      if (!lb.classList.contains('is-open')) return;
+      if (e.key === 'Escape') close();
+      if ((e.key === 'ArrowRight' || e.key === 'ArrowLeft') && document.activeElement !== range) step(e.key === 'ArrowRight' ? 1 : -1);
+      if (e.key === 'Tab') { const f = [...lb.querySelectorAll<HTMLElement>('button, a, input')].filter((x) => x.offsetParent !== null); const first = f[0], last = f[f.length - 1]; if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); } else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); } }
+    });
+    let x0: number | null = null;
+    const bar = lb.querySelector<HTMLElement>('.lightbox__bottom')!;
+    bar.addEventListener('touchstart', (e) => (x0 = e.touches[0].clientX), { passive: true });
+    bar.addEventListener('touchend', (e) => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1); x0 = null; });
+  }
+
   /* Guide offer: exit intent (desktop) / 45 s (mobile), once per visitor, easy to close */
   const offer = document.querySelector<HTMLElement>('[data-offer]');
   let seen = false; try { seen = !!localStorage.getItem('bylado-offer'); } catch { /* */ }
@@ -96,5 +131,6 @@ export function initBrand() {
     (f.querySelector('[data-guide-done]') as HTMLElement).hidden = false; (f.querySelector('button[type=submit]') as HTMLElement).hidden = true;
   }));
 
+  $$('[data-print]').forEach((b) => b.addEventListener('click', () => print()));
   const n = document.querySelector('[data-thanks-name]'); if (n) { const v = session.get('bylado-thanks-name'); if (v) n.textContent = `, ${v}`; }
 }

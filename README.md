@@ -40,5 +40,6 @@ Vercel: import the repo; `vercel.json` sets clean URLs and headers. Set the env 
 - 35 routes × 360/390/768/1024/1440 px: no overflow, no JS errors (Chromium).
 - Extension-check: all 36 goal × hair type × lifestyle paths reach a result.
 - Consult flow, calculator → consult prefill, `?type=onderhoud`, sticky bar, overlay (Esc) tested.
+- Results lightbox (before/after slider, prev/next, Esc, focus return, tap toggle on touch) and printable aftercare card (/nazorg → print or save as PDF) tested.
 - Lighthouse mobile (local): performance 94–99, accessibility 100, SEO 100 (method pages show lower SEO only because they are noindex until confirmed); CLS ≤ 0.001.
 - Not tested here: Safari/iOS, real Supabase/Resend, real videos/photos.
