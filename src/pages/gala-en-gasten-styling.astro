@@ -1,0 +1,57 @@
+---
+import ServiceLayout from '../layouts/ServiceLayout.astro';
+import Section from '../components/Section.astro';
+import { PRICES, euro } from '../data/site';
+---
+<ServiceLayout
+  title="Hair & make-up voor gala’s, feesten en gasten | Lado Bridal"
+  description="Haar of make-up voor bruidsmeisjes en gasten (€75 p.p.), de moeder van de bruid (€75 incl. stylingadvies), gala’s en fotoshoots (vanaf €175 per look)."
+  ogTitle="Gala- en gastenstyling · Lado Bridal"
+  ogDescription="Bruidsmeisjes, moeder van de bruid, gala’s en fotoshoots: haar en make-up op locatie vanuit Leeuwarden."
+  path="/gala-en-gasten-styling" serviceName="Hair & make-up voor gasten, gala’s en fotoshoots" crumb="Gala & gasten" price={PRICES.guest}
+  eyebrow="04 — Gala &amp; gasten"
+  h1="Hair &amp; make-up voor gala’s, feesten en gasten"
+  lead="Voor iedereen die naast de bruid wil stralen: bruidsmeisjes, moeders en gasten op de trouwdag, en voor gala’s, feesten en fotoshoots."
+  heroShot="bruidsmeisjes groep, haar en make-up · 4:5"
+  forWhoTitle="Voor de mensen <em>om de bruid heen</em>"
+  forWho={`<p>Op een trouwdag staat niet alleen de bruid op de foto. Bruidsmeisjes, getuigen en de moeder van de bruid zijn er de hele dag bij. Wanneer ik de bruid style, kan ik ook hen meenemen in de planning, zodat iedereen er verzorgd uitziet en de looks bij elkaar passen zonder hetzelfde te zijn.</p>
+<p><strong>Bruidsmeisjes en gasten</strong> kiezen voor haar óf make-up, voor €${PRICES.guest} per persoon. Wil iemand allebei, dan reken ik dat als twee behandelingen.</p>
+<p><strong>De moeder van de bruid</strong> (€${PRICES.mother}) krijgt naast haar of make-up ook stylingadvies: welke kleuren passen bij haar outfit, hoe ze haar haar het beste draagt bij een hoed of fascinator, en wat ze zelf bij zich houdt voor de rest van de dag.</p>
+<p>Ook zonder bruiloft kun je bij mij terecht: voor een <strong>gala, feest of fotoshoot</strong>. Een editorial of fotoshoot kost vanaf €${PRICES.photoshoot} per look.</p>`}
+  processTitle="Zo plannen we <em>de groep</em>"
+  process={[
+    { title: 'Aantal en wensen', text: 'Je geeft door wie er gestyled wordt, en of het haar, make-up of allebei is.' },
+    { title: 'Planning', text: 'Ik maak een tijdschema per persoon. De bruid is als laatste klaar, zodat haar look zo fris mogelijk blijft.' },
+    { title: 'Op locatie', text: 'Ik werk op dezelfde plek als de bruid: thuis, in een hotel of op de locatie.' },
+    { title: 'Klaar voor de foto’s', text: 'Iedereen is op tijd klaar voor de first look of de fotograaf.' },
+  ]}
+  looksTitle="Passend, <em>niet hetzelfde</em>"
+  looks={[
+    { name: 'Bruidsmeisjes', text: 'Een gedeelde lijn (bijvoorbeeld allemaal half-los) met een eigen variatie per persoon.', shot: 'bruidsmeisjes kapsels' },
+    { name: 'Moeder van de bruid', text: 'Verzorgd en tijdloos, afgestemd op haar outfit en eventuele hoed.', shot: 'moeder van de bruid' },
+    { name: 'Gala & feest', text: 'Een avondlook die er ook om twee uur ’s nachts nog goed uitziet.', shot: 'gala look avond' },
+    { name: 'Fotoshoot & editorial', text: 'Looks voor een shoot, met aandacht voor licht en camera.', shot: 'editorial fotoshoot' },
+  ]}
+  includedTitle="Prijzen <em>per persoon</em>"
+  included={[`Bruidsmeisje of gast: haar óf make-up — ${euro(PRICES.guest)} p.p.`, `Moeder van de bruid incl. stylingadvies — ${euro(PRICES.mother)}`, `Extra set wimpers — ${euro(PRICES.lashes)}`, `Fotoshoot / editorial — vanaf ${euro(PRICES.photoshoot)} per look`, `Extra touch-up uur — ${euro(PRICES.touchUpHour)} per uur`]}
+  priceLabel="Gasten & bruidsmeisjes"
+  priceValue={`<small>per persoon</small>${euro(PRICES.guest)}`}
+  priceNote="Plus reiskosten (€0,35 per km vanaf Leeuwarden, heen en terug). Bij een trouwdag reis ik één keer, ook als ik meerdere personen style."
+  service="gasten"
+  faq={[
+    { q: 'Kan ik alleen gasten laten stylen, zonder de bruid?', a: '<p>Voor een trouwdag style ik gasten en bruidsmeisjes in combinatie met de bruid. Voor een gala, feest of fotoshoot kun je los boeken.</p>' },
+    { q: 'Hoeveel personen kun je op één ochtend stylen?', a: '<p>Dat hangt af van de looks en de starttijd. Ik maak een realistische planning en laat je in de offerte zien hoe laat ik begin. Bij een grote groep bespreken we vooraf of de tijd past.</p>' },
+    { q: 'Wat kost een fotoshoot of editorial?', a: `<p>Vanaf ${euro(PRICES.photoshoot)} per look. Een look is één combinatie van haar en make-up; wisselen we tijdens de shoot van stijl, dan is dat een tweede look.</p>` },
+    { q: 'Moet iedereen hetzelfde kapsel?', a: '<p>Nee, liever niet. Ik zoek een rode draad (bijvoorbeeld de hoogte van het kapsel of de kleur van de lippen) en pas de rest aan per persoon.</p>' },
+  ]}
+  related={[
+    { href: '/complete-bruidslook', label: 'Complete Bruidslook voor de bruid', note: 'Meest gekozen' },
+    { href: '/tarieven', label: 'Alle tarieven en de prijscalculator' },
+    { href: '/bruidsstylist-leeuwarden', label: 'Bruidsstylist Leeuwarden' },
+  ]}
+>
+  <Section eyebrow="Reiskosten" title="Eén reis, <em>meerdere</em> mensen">
+    <p>Reiskosten reken ik één keer per trouwdag: €0,35 per kilometer vanaf Leeuwarden, heen en terug. Style ik naast de bruid nog drie bruidsmeisjes en de moeder van de bruid, dan blijven de reiskosten gelijk. Een grotere groep maakt een locatie verder weg dus relatief voordeliger.</p>
+    <p>Ligt de locatie meer dan 75 km (enkele reis) van Leeuwarden, dan komen er verblijfkosten bij. Die staan altijd vooraf in je offerte.</p>
+  </Section>
+</ServiceLayout>

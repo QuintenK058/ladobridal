@@ -1,0 +1,97 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import Timeline from '../components/Timeline.astro';
+import Faq from '../components/Faq.astro';
+import Reviews from '../components/Reviews.astro';
+import Related from '../components/Related.astro';
+import Cta from '../components/Cta.astro';
+import Img from '../components/Img.astro';
+import { faqSchema } from '../data/schema';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Proefsessie', href: '/proefsessie' }];
+const faq = [
+  { q: 'Is de proefsessie inbegrepen?', a: '<p>Ja, bij de Complete Bruidslook is een volledige proefsessie altijd inbegrepen. Ook bij een los bruidskapsel of losse bruidsvisagie hoort een proefsessie bij de voorbereiding.</p>' },
+  { q: 'Hoe lang duurt een proefsessie?', a: '<p><span class="ph">[CHECK: gemiddelde duur proefsessie in uren]</span> We nemen de tijd om te praten, te proberen, te vergelijken en bij te stellen.</p>' },
+  { q: 'Wanneer plan ik de proefsessie?', a: '<p>4–8 weken voor de bruiloft. Dan heb je je jurk meestal al en weet je hoe je haar zit, maar is er nog tijd om iets aan te passen.</p>' },
+  { q: 'Wat als ik de look tijdens de proefsessie niet mooi vind?', a: '<p>Dan passen we hem aan, ter plekke. Daar is de proefsessie voor. We stellen bij tot je de look voor je ziet op je trouwdag.</p>' },
+  { q: 'Ik woon in het buitenland. Hoe gaat het dan?', a: '<p>De intake en de voorbereiding kunnen digitaal: je stuurt foto’s van je haar, je huid in daglicht, je jurk en je inspiratie, en we bespreken alles via een videogesprek. De proefsessie plannen we wanneer je in Nederland bent, of op locatie vlak voor de bruiloft. Lees meer over <a href="/destination-wedding-stylist">bruidsstyling in het buitenland</a>.</p>' },
+  { q: 'Mag ik iemand meenemen?', a: '<p>Ja, een moeder, zus of getuige is welkom. Eén vertrouwd persoon werkt vaak beter dan een hele groep: dan blijft het jouw keuze.</p>' },
+];
+---
+<Base title="De proefsessie bruidsstyling in Leeuwarden | Lado Bridal"
+  description="Zo gaat de proefsessie voor je bruidskapsel en make-up: 4–8 weken vooraf in de studio in Leeuwarden, met checklist. Ook digitaal voor bruiden in het buitenland."
+  ogTitle="De proefsessie · Lado Bridal" ogDescription="Wat je kunt verwachten, wat je meeneemt en wanneer je hem plant: de proefsessie voor je bruidslook."
+  breadcrumbs={crumbs} schema={[faqSchema(faq)]}>
+  <PageHero crumbs={crumbs} eyebrow="Proefsessie" h1="De proefsessie: zo bereiden we jouw bruidslook voor"
+    lead="De proefsessie is het moment waarop je bruidslook echt vorm krijgt. Je zit in alle rust in mijn studio in Leeuwarden, we proberen, vergelijken en stellen bij, en je gaat naar huis met het gevoel dat er op je trouwdag niets meer hoeft te verrassen."
+    shot="proefsessie in de studio, bruid in spiegel · 4:5" />
+
+  <Section eyebrow="Waarom" title="Waarom een proefsessie <em>rust</em> geeft">
+    <p>Veel bruiden zijn vooral bang voor de onzekerheid: wordt het wel wat ik wil? Zie ik er nog uit als mezelf? Blijft het zitten? De proefsessie haalt die vragen weg, weken voordat het ertoe doet.</p>
+    <p>Tijdens de sessie zie je de look op jouw gezicht en jouw haar, in plaats van op een foto van iemand anders. Je ziet hoe de make-up eruitziet in daglicht en op een foto met flits. Je voelt hoe het kapsel zit en of de sluier goed valt. En je leert mij kennen, zodat je op je trouwochtend iemand naast je hebt die je al vertrouwt.</p>
+    <p>Ook voor mij is de proefsessie onmisbaar. Ik leer je huid en je haar kennen, ik weet hoeveel tijd ik op de ochtend nodig heb, en ik kan de planning en de producten precies afstemmen.</p>
+  </Section>
+
+  <section class="section section--linen">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Het verloop</p><h2>Wat er gebeurt <em>tijdens</em> de proefsessie</h2></div>
+      <Timeline horizontal steps={[
+        { title: 'Kennismaken', text: 'We kijken samen naar je inspiratie, je jurk en de planning van je dag.' },
+        { title: 'Huid & haar', text: 'Ik bekijk je huid en haar en vertel wat ik zou doen, en waarom.' },
+        { title: 'De look maken', text: 'Haar en make-up, stap voor stap. Je kijkt mee en mag alles zeggen.' },
+        { title: 'Foto’s & bijstellen', text: 'We maken foto’s in daglicht en met flits, en stellen bij tot het klopt.' },
+        { title: 'Vastleggen', text: 'Ik noteer alles voor je styling guide en de planning van de ochtend.' },
+      ]} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid align-center">
+      <div class="col-text">
+        <p class="eyebrow">Checklist</p>
+        <h2 class="mt-1">Wat neem je <em>mee?</em></h2>
+        <ul class="checklist mt-3" role="list">
+          <li>Inspiratiefoto’s: wat je mooi vindt, en net zo nuttig, wat je niet wilt</li>
+          <li>Een foto van je jurk, vooral de hals, de rug en de stof</li>
+          <li>Je sluier, haarkam, bloemen of andere accessoires</li>
+          <li>Eventuele extensions of clip-ins</li>
+          <li>Een top met een vergelijkbare halslijn als je jurk</li>
+          <li>Je eigen lippenstift of producten die je graag gebruikt</li>
+          <li>Kom met schoon haar en een schone huid, tenzij we iets anders afspreken</li>
+        </ul>
+        <a class="text-link mt-3" href="/gidsen/proefsessie-voorbereiden-checklist">De volledige checklist <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+      <div class="col-media"><Img ratio="3x4" shot="flatlay: sluier, haarkam, inspiratiefoto’s" /></div>
+    </div>
+  </section>
+
+  <Section eyebrow="Timing" title="4–8 weken <em>vooraf</em>" linen>
+    <p>De beste periode voor de proefsessie is 4–8 weken voor de bruiloft. Dan is je jurk meestal klaar of bijna klaar, weet je welke accessoires je draagt en is je haar ongeveer zoals het op de dag zal zijn. Er is dan ook nog genoeg tijd om iets te veranderen, of om een kapper je haar te laten bijwerken.</p>
+    <p>Ga je je haar verven of knippen? Plan dat liefst vóór de proefsessie, of overleg even. Een nieuwe kleur of lengte kan het kapsel veranderen.</p>
+    <h3>Digitaal, voor bruiden in het buitenland</h3>
+    <p>Woon je in het buitenland of trouw je daar? Dan kan de voorbereiding digitaal: een videogesprek, foto’s van je haar en huid in daglicht, je jurk en je inspiratie. De proefsessie zelf plannen we wanneer je in Nederland bent, of op locatie in de dagen voor de bruiloft.</p>
+  </Section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Ervaringen</p><h2>Wat bruiden <em>zeggen</em></h2></div>
+      <Reviews variant="pair" service="complete" />
+    </div>
+  </section>
+
+  <section class="section section--linen">
+    <div class="container grid">
+      <div class="col-quarter"><p class="eyebrow">FAQ</p><h2 class="mt-1">Vragen over de <em>proefsessie</em></h2></div>
+      <div class="col-rest"><Faq items={faq} /></div>
+    </div>
+  </section>
+
+  <Related links={[
+    { href: '/complete-bruidslook', label: 'Complete Bruidslook, inclusief proefsessie', note: 'Meest gekozen' },
+    { href: '/bruidskapsel', label: 'Bruidskapsel op locatie' },
+    { href: '/bruidsvisagie', label: 'Bruidsvisagie & bruidsmake-up' },
+    { href: '/bruidsstylist-leeuwarden', label: 'Bruidsstylist Leeuwarden' },
+  ]} />
+  <Cta />
+</Base>

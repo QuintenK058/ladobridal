@@ -1,0 +1,43 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import { PRICES, euro, INCLUDED_EN } from '../../data/site';
+const price = PRICES.completeBruidslook;
+---
+<ServiceLayout lang="en"
+  title="Complete Bruidslook: hair & make-up in one | Lado Bridal"
+  description={`Bridal hair and make-up by one stylist: one vision, one timeline, a calm morning. Includes trial and styling guide${price ? `, from ${euro(price, 'en')}` : ''}.`}
+  path="/en/complete-bruidslook" serviceName="Complete Bruidslook (bridal hair and make-up)" crumb="Complete Bruidslook" price={price}
+  eyebrow="03 — Most chosen" h1="Complete Bruidslook: hair and make-up in one hand"
+  lead={`One stylist for your hair and your make-up: one vision for your look, one timeline for your morning and one familiar face beside you. ${price ? `From <strong>${euro(price, 'en')}</strong>, including trial and styling guide.` : ''}`}
+  heroShot="bride full look · 4:5"
+  forWhoTitle="Why one stylist is <em>calmer</em>"
+  forWho={`<p>With a separate hairdresser and make-up artist you plan two people, two trials and two time slots on your wedding morning. Each sees only half of your look.</p><p>With the Complete Bruidslook I look after the whole: make-up colours that match how your hair falls, an updo height that suits your neckline, and a morning pace that suits you. One timeline, one person to call if anything changes.</p>`}
+  processTitle="From intake to <em>last dance</em>"
+  process={[
+    { title: 'Introduction', text: 'A phone intake about your day, dress, venue and wishes.' },
+    { title: 'Quote within 2 working days', text: 'All costs upfront, including travel and extra people.' },
+    { title: 'Trial', text: 'Hair and make-up together, 4–8 weeks before in Leeuwarden.' },
+    { title: 'Wedding morning', text: 'I come to you with a timeline that has room to breathe.' },
+    { title: 'Styling guide', text: 'What you need for the rest of the day, and optional touch-ups.' },
+  ]}
+  looksTitle="One look, <em>head to toe</em>"
+  looks={[
+    { name: 'Romantic', text: 'Soft waves, glowing skin, a rosy lip.', shot: 'romantic bridal look' },
+    { name: 'Classic', text: 'A sleek low bun, defined eyes, neutral lip.', shot: 'classic bridal look' },
+    { name: 'Boho natural', text: 'Textured half-up, minimal make-up, a fresh flush.', shot: 'boho bridal look' },
+    { name: 'Modern glam', text: 'A sleek updo, statement eye, glowing skin.', shot: 'modern glam look' },
+  ]}
+  includedTitle="Always <em>included</em>"
+  included={INCLUDED_EN}
+  priceLabel="Complete Bruidslook"
+  priceValue={price ? `<small>from</small>${euro(price, 'en')}` : '<small>from</small><span class="ph">[PRICE]</span>'}
+  priceNote="Including trial and styling guide. Plus travel (€0.35 per km from Leeuwarden, return). Bridesmaids and guests €75 each."
+  service="complete"
+  faqTitle="Questions about the <em>Complete Bruidslook</em>"
+  faq={[
+    { q: 'What exactly is included?', a: '<p>Bridal hair and make-up on the day, a phone intake, a full trial in the studio in Leeuwarden, premium long-wear products, lashes and a personal styling guide.</p>' },
+    { q: 'Can bridesmaids and my mother be styled too?', a: '<p>Yes: €75 per person for hair or make-up; mother of the bride €75 including styling advice.</p>' },
+    { q: 'How do I secure my date?', a: '<p>After the quote, you confirm with a signature and a 25% deposit.</p>' },
+  ]}
+  related={[{ href: '/en/rates', label: 'Rates' }, { href: '/en/trial-session', label: 'The trial session' }, { href: '/en/destination-wedding-stylist', label: 'Destination weddings' }]}
+/>

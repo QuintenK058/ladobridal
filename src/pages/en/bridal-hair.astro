@@ -1,0 +1,43 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import { PRICES, euro } from '../../data/site';
+const price = PRICES.bruidskapsel;
+---
+<ServiceLayout lang="en"
+  title="Bridal hair stylist on location in the Netherlands | Lado Bridal"
+  description="Bridal hair that lasts all day: down, half-up or updo, with veil or accessories. Trial in Leeuwarden, on-location styling on your wedding day."
+  path="/en/bridal-hair" serviceName="Bridal hair on location" crumb="Bridal hair" price={price}
+  eyebrow="01 — Bridal hair" h1="Bridal hair on location in Friesland and beyond"
+  lead="A hairstyle that suits you and your dress, and that still sits at eleven at night just as it did at the ceremony. I come to you on your wedding morning, after a trial in my studio in Leeuwarden."
+  heroShot="bridal hair from behind · 4:5"
+  forWhoTitle="For brides who don’t want to <em>think</em> about their hair"
+  forWho={`<p>On your wedding day you don’t want to worry about your hair. It needs to look right when you step out of the car, when you stand outside for photos and when you’re still dancing at midnight. That’s what bridal hair is for: secure on the inside, soft and natural on the outside.</p><p>I style every hair type: fine hair that drops quickly, thick hair that needs structure, curls we want to show off, short hair and hair with extensions. Want hair and make-up from one person? The <a href="/en/complete-bruidslook">Complete Bruidslook</a> is usually the calmer choice.</p>`}
+  processTitle="From idea to <em>final pin</em>"
+  process={[
+    { title: 'Intake', text: 'We talk about your dress, veil, venue and the style you love.' },
+    { title: 'Trial', text: '4–8 weeks before, in the studio in Leeuwarden.' },
+    { title: 'Preparing your hair', text: 'Advice on washing, extensions and the day before.' },
+    { title: 'Wedding morning', text: 'I come to you and take my time. The veil goes in once your dress is on.' },
+    { title: 'All day', text: 'Spare pins and a styling guide. Optional touch-ups.' },
+  ]}
+  looksTitle="Down, half-up or <em>updo</em>"
+  looks={[
+    { name: 'Down', text: 'Soft waves with a base that holds the curl all day.', shot: 'bridal hair down' },
+    { name: 'Half-up', text: 'Face free, length visible. Lovely with a veil or comb.', shot: 'half-up bridal hair' },
+    { name: 'Updo', text: 'From a loose romantic bun to sleek and classic.', shot: 'bridal updo' },
+    { name: 'Veil & accessories', text: 'Secured so they stay put without weighing you down.', shot: 'veil detail' },
+  ]}
+  includedTitle="What’s <em>included</em>"
+  included={['Phone intake', 'Trial session in Leeuwarden', 'Professional long-hold styling products', 'Securing your veil and accessories', 'Styling guide and spare pins', 'A generous timeline on the morning']}
+  priceLabel="Bridal hair"
+  priceValue={price ? `<small>from</small>${euro(price, 'en')}` : '<small>from</small><span class="ph">[FROM PRICE]</span>'}
+  priceNote="Plus travel (€0.35 per km from Leeuwarden, return). Personal quote within 2 working days."
+  service="kapsel"
+  faqTitle="Questions about <em>bridal hair</em>"
+  faq={[
+    { q: 'How long does bridal hair last?', a: '<p>All day and night, with the right preparation: a hidden structural base, curls set properly, and techniques adapted to wind or heat.</p>' },
+    { q: 'What should I bring to the trial?', a: '<p>Inspiration photos, a photo of your dress (neckline and back), your veil or accessories and any extensions. See <a href="/en/trial-session">the trial session</a>.</p>' },
+    { q: 'Do you style bridesmaids too?', a: '<p>Yes: €75 per person for hair or make-up; mother of the bride €75 including styling advice.</p>' },
+  ]}
+  related={[{ href: '/en/complete-bruidslook', label: 'Complete Bruidslook', note: 'Most chosen' }, { href: '/en/bridal-makeup', label: 'Bridal make-up' }, { href: '/en/trial-session', label: 'The trial session' }]}
+/>

@@ -1,0 +1,113 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import Timeline from '../components/Timeline.astro';
+import Img from '../components/Img.astro';
+import Reviews from '../components/Reviews.astro';
+import Faq from '../components/Faq.astro';
+import Related from '../components/Related.astro';
+import Cta from '../components/Cta.astro';
+import { REGION_PAGES, type RegionPage } from '../data/regions';
+import { PRICES, INCLUDED_NL, euro, travelCost } from '../data/site';
+import { faqSchema, serviceSchema } from '../data/schema';
+
+export function getStaticPaths() {
+  return REGION_PAGES.map((r) => ({ params: { region: r.slug }, props: { r } }));
+}
+const { r } = Astro.props as { r: RegionPage };
+const path = `/${r.slug}`;
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Regio’s', href: '/bruidsstylist-nederland' }, { name: r.name, href: path }];
+---
+<Base title={r.title} description={r.description} ogTitle={r.ogTitle} ogDescription={r.ogDescription} geo={r.geo} breadcrumbs={crumbs}
+  schema={[serviceSchema({ name: `Bruidsstyling ${r.name}`, path, description: r.description, area: r.area }), faqSchema(r.faq)]}>
+  <PageHero crumbs={crumbs} eyebrow={`Bruidsstylist · ${r.name}`} h1={r.h1} lead={r.lead} shot={r.portfolio[0]} badge
+    secondary={{ href: '/tarieven#calculator', label: 'Bereken je prijs' }} />
+
+  <Section eyebrow={r.name} title={`Haar en make-up in <em>${r.name}</em>`}>
+    <Fragment set:html={r.intro} />
+  </Section>
+
+  <Section eyebrow="Trouwlocaties" title={r.weddingTitle} linen>
+    <Fragment set:html={r.wedding} />
+  </Section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Voorbeeldplanning</p><h2 set:html={r.morningTitle} /><p class="lead">{r.morningIntro}</p></div>
+      <Timeline horizontal steps={r.morning} />
+      <p class="small muted mt-3">Tijden en volgorde verschillen per bruiloft. Je persoonlijke planning ontvang je na de proefsessie.</p>
+    </div>
+  </section>
+
+  <section class="section section--linen">
+    <div class="container grid">
+      <div class="col-main">
+        <p class="eyebrow">Werkgebied</p>
+        <h2 class="mt-1" set:html={r.areaTitle} />
+        <div class="prose mt-2" set:html={r.areaText} />
+        <ul class="cluster mt-2" role="list" style="--gap:.4rem 1.2rem;font-size:var(--fs-small);color:var(--taupe)">
+          {r.towns.map((t) => <li>{t}</li>)}
+        </ul>
+        {r.locations.length > 0 && (
+          <>
+            <h3 class="mt-3">Trouwlocaties in deze regio</h3>
+            <ul class="stack mt-1" role="list" style="--stack:.6rem">{r.locations.map((l) => <li><a class="link" href={l.href}>{l.label}</a></li>)}</ul>
+          </>
+        )}
+      </div>
+      <aside class="col-aside price-box reveal">
+        <p class="eyebrow eyebrow--plain">Complete Bruidslook</p>
+        <p class="package__price"><small>vanaf</small>{PRICES.completeBruidslook ? euro(PRICES.completeBruidslook) : <span class="ph">[PRIJS]</span>}</p>
+        <ul class="checklist small" role="list" style="gap:.6rem">{INCLUDED_NL.slice(0, 4).map((i) => <li>{i}</li>)}</ul>
+        <button type="button" class="btn btn--block" data-open-form>Check je datum</button>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid">
+      <div class="col-quarter"><p class="eyebrow">Reiskosten</p><h2 class="mt-1" set:html={r.travelTitle} /></div>
+      <div class="col-rest">
+        <div class="prose" set:html={r.travelText} />
+        <table class="addons mt-2">
+          <caption class="sr-only">Voorbeelden reiskosten {r.name}</caption>
+          <thead><tr><th scope="col">Plaats</th><th scope="col" style="text-align:right">Reiskosten</th></tr></thead>
+          <tbody>
+            {r.travelExamples.map(([place, km]) => (
+              <tr><th scope="row">{place} <span class="muted small">· ca. {km} km × 2 × €0,35</span>{km > PRICES.overnightFromKm && <span class="muted small"> · + verblijfkosten</span>}</th><td>{euro(travelCost(km))}</td></tr>
+            ))}
+          </tbody>
+        </table>
+        <p class="small muted mt-2">Boven 75 km enkele reis komen er verblijfkosten bij; ze staan altijd vooraf in je offerte. <a class="link" href="/tarieven#calculator">Bereken je eigen indicatie</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--linen">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Ervaringen</p><h2>Bruiden over hun dag</h2></div>
+      <Reviews variant="pair" region={r.review} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Portfolio</p><h2>Bruiden in <em>{r.name}</em></h2></div>
+      <div class="look-grid look-grid--3">
+        {r.portfolio.map((s, i) => <Img ratio={i === 1 ? '3x4' : '4x5'} shot={`${s} · ${r.name}`} delay={i * 0.08} />)}
+      </div>
+      <a class="text-link mt-3" href="/portfolio">Bekijk het volledige portfolio <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="section section--linen">
+    <div class="container grid">
+      <div class="col-quarter"><p class="eyebrow">FAQ</p><h2 class="mt-1">Vragen over trouwen in <em>{r.name}</em></h2></div>
+      <div class="col-rest"><Faq items={r.faq} /></div>
+    </div>
+  </section>
+
+  <Related title="Ook in de buurt" links={r.near.map((n) => ({ href: n.href, label: n.label }))} />
+  <Cta sub={`Vul je trouwdatum in en vertel me waar in ${r.name} je trouwt. Je ontvangt binnen 2 werkdagen een persoonlijke offerte, inclusief reiskosten.`} />
+</Base>

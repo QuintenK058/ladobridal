@@ -1,0 +1,5 @@
+# 301 redirect map. None of the existing ranking URLs change, so this is (intentionally) almost empty.
+# Add old → new pairs here if a URL ever changes, e.g.:
+# /oude-url   /nieuwe-url   301
+/home       /             301
+/en/        /en           301

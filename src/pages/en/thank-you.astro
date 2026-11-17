@@ -1,0 +1,13 @@
+---
+import Base from '../../layouts/Base.astro';
+import Img from '../../components/Img.astro';
+import { SITE } from '../../data/site';
+---
+<Base title="Thank you for your request | Lado Bridal" description="Your request has been received. You’ll receive a personal quote within 2 working days." noindex>
+  <section class="page-hero"><div class="container grid align-center">
+    <div class="col-main"><p class="eyebrow">Request received</p><h1 class="mt-1">Thank you<span data-thanks-name></span>.</h1>
+      <p class="lead">I’ll look at your request personally, and you’ll receive a personal quote within 2 working days. Love, Quinty</p>
+      <div class="cluster mt-3"><a class="btn" href="/en/portfolio">View portfolio</a><a class="btn btn--outline" href={SITE.instagram} target="_blank" rel="noopener">Instagram</a><a class="btn btn--outline" href="/en/trial-session">The trial session</a></div></div>
+    <div class="col-aside"><Img ratio="4x5" arch shot="portrait Quinty" priority /></div>
+  </div></section>
+</Base>

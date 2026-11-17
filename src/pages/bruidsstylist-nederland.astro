@@ -1,0 +1,102 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import Faq from '../components/Faq.astro';
+import Reviews from '../components/Reviews.astro';
+import Cta from '../components/Cta.astro';
+import { REGIONS, LOCATIONS, PRICES, euro } from '../data/site';
+import { faqSchema, serviceSchema } from '../data/schema';
+const path = '/bruidsstylist-nederland';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Bruidsstylist op locatie in Nederland', href: path }];
+// Tile cartogram (approximate positions), 5 columns × 6 rows, 80px tiles
+const tiles = [
+  { n: 'Groningen', c: 3, r: 0, href: '/bruidsstylist-groningen' },
+  { n: 'Friesland', c: 2, r: 0, href: '/bruidsstylist-friesland' },
+  { n: 'Drenthe', c: 3, r: 1, href: '/bruidsstylist-drenthe' },
+  { n: 'N-Holland', c: 1, r: 1, href: '/bruidsstylist-noord-holland' },
+  { n: 'Flevoland', c: 2, r: 1 },
+  { n: 'Overijssel', c: 3, r: 2, href: '/bruidsstylist-zwolle' },
+  { n: 'Z-Holland', c: 1, r: 2 },
+  { n: 'Utrecht', c: 2, r: 2 },
+  { n: 'Gelderland', c: 3, r: 3 },
+  { n: 'Zeeland', c: 0, r: 3 },
+  { n: 'N-Brabant', c: 1, r: 3 },
+  { n: 'Limburg', c: 2, r: 4 },
+];
+const faq = [
+  { q: 'Kom je ook buiten Noord-Nederland?', a: '<p>Ja. Ik werk vooral in Friesland, Groningen, Drenthe, Overijssel en Noord-Holland, maar kom ook naar Flevoland, Utrecht en verder. Hoe verder weg, hoe belangrijker een goede planning: vaak overnacht ik in de buurt.</p>' },
+  { q: 'Hoe werkt boeken als je verder weg woont?', a: '<p>Precies hetzelfde: een telefonische intake, een offerte binnen 2 werkdagen met alle kosten vooraf, en een proefsessie in Leeuwarden 4–8 weken voor de bruiloft. Reis- en verblijfkosten staan apart in de offerte.</p>' },
+  { q: 'Wat betekent “bruidsstylist aan huis”?', a: '<p>Dat ik op je trouwochtend naar je toe kom: naar je huis, je hotel of je trouwlocatie. Je hoeft je in je jurk nergens heen te haasten.</p>' },
+  { q: 'Wanneer komen er verblijfkosten bij?', a: '<p>Als je locatie meer dan 75 km (enkele reis) van Leeuwarden ligt. Ik overnacht dan in de buurt, zodat ik ’s ochtends op tijd en uitgerust ben.</p>' },
+];
+---
+<Base title="Bruidsstylist op locatie in Nederland | Aan huis | Lado Bridal"
+  description="Bruidsstylist op locatie en aan huis in heel Nederland: bruidskapsel en make-up in Friesland, Groningen, Drenthe, Overijssel, Noord-Holland en daarbuiten."
+  ogTitle="Bruidsstylist op locatie in Nederland · Lado Bridal" ogDescription="Overzicht van alle regio’s: waar ik kom, hoe boeken werkt en wat reizen kost."
+  breadcrumbs={crumbs} schema={[serviceSchema({ name: 'Bruidsstyling op locatie in Nederland', path, description: 'Bruidskapsel en bruidsmake-up op locatie en aan huis in heel Nederland.', area: [{ type: 'Country', name: 'Nederland' }] }), faqSchema(faq)]}>
+  <PageHero crumbs={crumbs} eyebrow="Werkgebied" h1="Bruidsstylist op locatie in Nederland"
+    lead="Op je trouwochtend kom ik naar je toe: thuis, in een hotel of op je locatie. Vanuit mijn studio in Leeuwarden werk ik in heel Noord-Nederland en daarbuiten. Kies hieronder je regio." />
+
+  <section class="section--tight">
+    <div class="container grid align-center">
+      <div class="col-half">
+        <svg class="nl-map" viewBox="0 0 420 420" role="img" aria-labelledby="map-title">
+          <title id="map-title">Schematische kaart van Nederland met de regio’s waar Lado Bridal werkt</title>
+          {tiles.map((t) => {
+            const x = 10 + t.c * 82, y = 10 + t.r * 82;
+            return t.href ? (
+              <a href={t.href} aria-label={`Bruidsstylist ${t.n.replace('N-', 'Noord-')}`}>
+                <rect class="region" x={x} y={y} width="78" height="78" />
+                <text x={x + 39} y={y + 43} text-anchor="middle">{t.n}</text>
+              </a>
+            ) : (
+              <g><rect class="region region--other" x={x} y={y} width="78" height="78" /><text x={x + 39} y={y + 43} text-anchor="middle" style="fill:var(--taupe)">{t.n}</text></g>
+            );
+          })}
+          <circle cx={10 + 2 * 82 + 52} cy={10 + 30} r="5" fill="var(--espresso)" />
+        </svg>
+        <p class="small muted">● Studio in Leeuwarden. Gekleurde vakken zijn klikbaar.</p>
+      </div>
+      <div class="col-half">
+        <ul class="region-list" role="list">
+          {REGIONS.filter((r) => r.slug !== path).map((r) => <li><a href={r.slug} data-preview={`bruiloft in ${r.name}`}>{r.label}<small>{r.note}</small></a></li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <Section eyebrow="Ook verder weg" title="Flevoland, Utrecht <em>en verder</em>" linen>
+    <p>Mijn vaste werkgebied is Noord-Nederland, maar bruiden uit Flevoland, Utrecht en de rest van het land weten me ook te vinden. Via Lemmer en de A6 is Flevoland goed bereikbaar; Utrecht ligt op ongeveer 170 km. Voor zulke afstanden plan ik altijd een overnachting, zodat ik op je trouwochtend uitgerust en op tijd ben.</p>
+    <p>Hoe verder weg je trouwt, hoe meer een groep het waard maakt: reis- en verblijfkosten reken ik één keer per trouwdag, ongeacht hoeveel personen ik style.</p>
+    <h3>Hoe boeken werkt als je verder weg woont</h3>
+    <ol>
+      <li><strong>Aanvraag</strong>: je datum en locatie via het formulier of WhatsApp.</li>
+      <li><strong>Intake</strong>: een telefoongesprek over je wensen.</li>
+      <li><strong>Offerte binnen 2 werkdagen</strong>: met reis- en verblijfkosten apart vermeld.</li>
+      <li><strong>Bevestiging</strong>: handtekening en 25% aanbetaling.</li>
+      <li><strong>Proefsessie</strong> in Leeuwarden, 4–8 weken vooraf.</li>
+    </ol>
+    <p>Trouw je in het buitenland? Lees dan over <a href="/destination-wedding-stylist">bruidsstyling in het buitenland</a>.</p>
+  </Section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Per trouwlocatie</p><h2>Bruidsstyling per <em>type locatie</em></h2></div>
+      <ul class="region-list" role="list">{LOCATIONS.map((l) => <li><a href={l.slug} style="font-size:clamp(1.4rem,1.1rem + 1.2vw,2.1rem)">{l.anchor}</a></li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section section--linen">
+    <div class="container"><Reviews variant="pair" /></div>
+  </section>
+
+  <section class="section">
+    <div class="container grid">
+      <div class="col-quarter"><p class="eyebrow">FAQ</p><h2 class="mt-1">Bruidsstylist <em>aan huis</em></h2>
+        <p class="mt-2 muted small">Complete Bruidslook vanaf {PRICES.completeBruidslook ? euro(PRICES.completeBruidslook) : '[prijs]'}, plus reiskosten.</p></div>
+      <div class="col-rest"><Faq items={faq} /></div>
+    </div>
+  </section>
+  <Cta />
+</Base>

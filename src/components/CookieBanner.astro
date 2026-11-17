@@ -1,0 +1,22 @@
+---
+interface Props { lang: 'nl' | 'en' }
+const nl = Astro.props.lang === 'nl';
+---
+<div class="cookie" data-cookie role="dialog" aria-labelledby="cookie-title" aria-live="polite" hidden>
+  <h2 id="cookie-title">{nl ? 'Cookies' : 'Cookies'}</h2>
+  <p>{nl
+    ? 'Ik gebruik analytische en marketingcookies om te zien hoe bruiden de site gebruiken en om advertenties te meten. Alleen als jij dat goed vindt.'
+    : 'I use analytics and marketing cookies to see how brides use the site and to measure ads. Only if you agree.'}
+    <a class="link" href={nl ? '/privacy' : '/en/privacy'}>{nl ? 'Meer info' : 'More info'}</a></p>
+  <div class="cookie__settings" data-cookie-panel hidden>
+    <label class="row-between"><span>{nl ? 'Noodzakelijk (altijd aan)' : 'Necessary (always on)'}</span><span class="toggle"><input type="checkbox" checked disabled /><span></span></span></label>
+    <label class="row-between"><span>{nl ? 'Analytisch (Google Analytics)' : 'Analytics (Google Analytics)'}</span><span class="toggle"><input type="checkbox" data-consent="analytics" /><span></span></span></label>
+    <label class="row-between"><span>{nl ? 'Marketing (Meta Pixel)' : 'Marketing (Meta Pixel)'}</span><span class="toggle"><input type="checkbox" data-consent="marketing" /><span></span></span></label>
+  </div>
+  <div class="cookie__actions">
+    <button type="button" class="btn" data-cookie-accept>{nl ? 'Accepteren' : 'Accept'}</button>
+    <button type="button" class="btn btn--outline" data-cookie-necessary>{nl ? 'Alleen noodzakelijk' : 'Necessary only'}</button>
+    <button type="button" class="btn btn--outline" data-cookie-toggle>{nl ? 'Instellingen' : 'Settings'}</button>
+    <button type="button" class="btn" data-cookie-save hidden>{nl ? 'Opslaan' : 'Save'}</button>
+  </div>
+</div>

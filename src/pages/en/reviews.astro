@@ -1,0 +1,13 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Reviews from '../../components/Reviews.astro';
+import Cta from '../../components/Cta.astro';
+import { SITE } from '../../data/site';
+const crumbs = [{ name: 'Home', href: '/en' }, { name: 'Reviews', href: '/en/reviews' }];
+---
+<Base title="Reviews from brides · 5.0 on Google | Lado Bridal" description="Read real Google reviews from brides about their bridal hair and make-up with Lado Bridal, from Friesland to Italy." breadcrumbs={crumbs}>
+  <PageHero lang="en" crumbs={crumbs} eyebrow="Reviews" h1="Reviews from brides" badge cta={false} lead="Reviews are shown in their original language, exactly as written on Google." secondary={{ href: SITE.googleProfileUrl, label: 'All reviews on Google ↗' }} />
+  <section class="section--tight"><div class="container"><Reviews variant="carousel" lang="en" /></div></section>
+  <Cta lang="en" />
+</Base>

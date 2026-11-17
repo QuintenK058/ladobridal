@@ -1,0 +1,64 @@
+---
+import ServiceLayout from '../layouts/ServiceLayout.astro';
+import Section from '../components/Section.astro';
+import { PRICES, euro } from '../data/site';
+const price = PRICES.bruidskapsel;
+---
+<ServiceLayout
+  title="Bruidskapsel op locatie in Friesland | Lado Bridal"
+  description="Een bruidskapsel dat de hele dag blijft zitten: los, half-los of opgestoken, met sluier of accessoires. Proefsessie in Leeuwarden, op je trouwdag op locatie."
+  ogTitle="Bruidskapsel op locatie · Lado Bridal"
+  ogDescription="Los, half-los of opgestoken: een bruidskapsel dat wind, warmte en de dansvloer doorstaat. Met proefsessie in Leeuwarden."
+  path="/bruidskapsel" serviceName="Bruidskapsel op locatie" crumb="Bruidskapsel" price={price}
+  eyebrow="01 — Bruidskapsel"
+  h1="Bruidskapsel op locatie in Friesland en Noord-Nederland"
+  lead="Een kapsel dat bij jou en je jurk past, en dat om elf uur ’s avonds nog net zo zit als bij de ceremonie. Ik kom op je trouwochtend naar je toe, na een proefsessie in mijn studio in Leeuwarden."
+  heroShot="bruidskapsel achterkant, los opgestoken · 4:5"
+  forWhoTitle="Voor bruiden die hun haar <em>niet</em> willen voelen"
+  forWho={`<p>Op je trouwdag wil je niet bezig zijn met je haar. Je wilt dat het goed zit als je uit de auto stapt, als je buiten staat voor de foto’s en als je om middernacht nog danst. Daar is een bruidskapsel voor: stevig van binnen, zacht en natuurlijk van buiten.</p>
+<p>Ik style bruiden met elk haartype: fijn haar dat snel uitzakt, dik haar dat veel steun nodig heeft, krullen die we juist willen laten zien, kort haar en haar met extensions. Het uitgangspunt is altijd jouw haar, niet een foto van Pinterest die alleen werkt met twee keer zoveel volume.</p>
+<p>Kies je alleen voor een bruidskapsel, dan doe je je make-up zelf of via iemand anders. Wil je allebei in één hand, dan is de <a href="/complete-bruidslook">Complete Bruidslook</a> vaak rustiger: één planning, één persoon die het geheel bewaakt.</p>
+<h3>Je haar voorbereiden</h3>
+<p>De beste basis is schoon haar zonder zware producten. Was je haar de avond of ochtend vooraf, tenzij we bij de proefsessie iets anders afspreken: sommig haar houdt beter vast als het een dag niet gewassen is. Draag je extensions of clip-ins, neem ze dan mee naar de proefsessie, zodat ik kan zien hoe ze vallen en hoe ik ze verwerk.</p>`}
+  processTitle="Van idee tot <em>laatste speld</em>"
+  process={[
+    { title: 'Intake', text: 'We bellen over je jurk, je sluier of accessoires, je locatie en de stijl die je mooi vindt.' },
+    { title: 'Proefsessie', text: '4–8 weken vooraf in de studio in Leeuwarden. We proberen je favoriete stijl en schaven bij tot het klopt.' },
+    { title: 'Haar voorbereiden', text: 'Je krijgt advies over wassen, extensions en wat je de dag vooraf beter wel of niet doet.' },
+    { title: 'Trouwochtend', text: 'Ik kom naar je toe en neem ruim de tijd. De sluier gaat er pas in als je jurk aan is.' },
+    { title: 'De hele dag', text: 'Je krijgt een paar extra spelden en een styling guide mee. Optioneel blijf ik voor touch-ups.' },
+  ]}
+  looksTitle="Los, half-los of <em>opgestoken</em>"
+  looks={[
+    { name: 'Los', text: 'Zachte golven die er natuurlijk uitzien, maar met een basis die de krul de hele dag vasthoudt.', shot: 'los bruidskapsel met golven' },
+    { name: 'Half-los', text: 'Het beste van twee werelden: je gezicht vrij, je lengte zichtbaar. Mooi met een sluier of haarkam.', shot: 'half-los bruidskapsel' },
+    { name: 'Opgestoken', text: 'Van een losse, romantische knot tot strak en klassiek. Ideaal bij een open rug of hoge hals.', shot: 'opgestoken bruidskapsel' },
+    { name: 'Met sluier & accessoires', text: 'Sluier, haarkam, bloemen of pins: ik verwerk ze zo dat ze stevig zitten en je haar niet zwaar maken.', shot: 'detail sluier en haarkam' },
+  ]}
+  includedTitle="Wat bij je <em>bruidskapsel</em> hoort"
+  included={['Telefonische intake', 'Proefsessie in de studio in Leeuwarden', 'Professionele, langhoudende stylingproducten', 'Bevestigen van sluier en accessoires', 'Styling guide en extra spelden voor de dag', 'Ruime planning op de trouwochtend']}
+  priceLabel="Bruidskapsel"
+  priceValue={price ? `<small>vanaf</small>${euro(price)}` : '<small>vanaf</small><span class="ph">[VANAF-PRIJS INCL. BTW]</span>'}
+  priceNote="Plus reiskosten (€0,35 per km vanaf Leeuwarden, heen en terug). Je ontvangt binnen 2 werkdagen een persoonlijke offerte."
+  service="kapsel"
+  faq={[
+    { q: 'Hoe lang blijft een bruidskapsel zitten?', a: '<p>De hele dag en avond, als we het goed voorbereiden. Ik werk met een stevige basis (bijvoorbeeld een verborgen vlecht of een goed opgebouwde knot) en zet de krul vast voordat hij helemaal is afgekoeld. Bij wind, hitte of een vochtige locatie aan het water pas ik de techniek daarop aan.</p>' },
+    { q: 'Wat neem ik mee naar de proefsessie?', a: '<p>Inspiratiefoto’s, een foto van je jurk (vooral de hals en rug), je sluier of accessoires en eventuele extensions. Draag een top met een vergelijkbare halslijn, dan zie je beter hoe het kapsel bij je jurk staat. Lees ook <a href="/proefsessie">zo gaat de proefsessie</a>.</p>' },
+    { q: 'Kan ik een bruidskapsel krijgen met kort of fijn haar?', a: '<p>Ja. Met kort haar werken we vaak met textuur, een accessoire of een kleine opsteek. Fijn haar krijgt meer volume met de juiste voorbereiding, en eventueel met clip-in extensions voor extra houvast.</p>' },
+    { q: 'Doe je ook het haar van bruidsmeisjes of moeders?', a: '<p>Ja. Bruidsmeisjes en gasten kosten €75 per persoon (haar of make-up), de moeder van de bruid €75 inclusief stylingadvies. Zie <a href="/gala-en-gasten-styling">gala- en gastenstyling</a>.</p>' },
+    { q: 'Wanneer gaat de sluier erin?', a: '<p>Meestal als je jurk aan is, vlak voor je vertrekt. Zo kan de sluier niet aan iets blijven haken tijdens het aankleden. Ik blijf tot dat moment.</p>' },
+  ]}
+  related={[
+    { href: '/complete-bruidslook', label: 'Complete Bruidslook: haar en make-up in één hand', note: 'Meest gekozen' },
+    { href: '/bruidsvisagie', label: 'Bruidsvisagie & bruidsmake-up' },
+    { href: '/proefsessie', label: 'Zo gaat de proefsessie' },
+    { href: '/bruidsstylist-friesland', label: 'Bruidsstylist Friesland' },
+    { href: '/bruidsstylist-groningen', label: 'Bruidsstylist Groningen' },
+  ]}
+>
+  <Section eyebrow="Blijft zitten" title="Wind, warmte <em>en dansen</em>">
+    <p>Een trouwdag in Noord-Nederland betekent vaak wind. Op een dijk, aan het water of op een Waddeneiland kan die flink trekken. Een volledig los kapsel is daar kwetsbaar; een half-los kapsel of een losse, zachte opsteek houdt beter stand en ziet er op foto’s nog steeds natuurlijk uit.</p>
+    <p>Bij warmte en vochtige lucht zakken krullen sneller uit. Ik bouw de krul dan op met meer steun en zet hem goed vast, en ik kies producten die houvast geven zonder dat je haar stijf of plakkerig aanvoelt. Op een dag met een lange receptie en een feest plannen we eventueel een <strong>touch-up</strong>: een extra uur (€65) waarin ik je haar opfris voor het diner of de avond.</p>
+    <p>Dansen is de laatste test. Spelden zet ik zo dat ze verborgen zitten en kruislings vasthouden, zodat de opsteek niet meebeweegt als jij beweegt. Je krijgt een paar reservespelden mee voor de zekerheid.</p>
+  </Section>
+</ServiceLayout>

@@ -1,0 +1,33 @@
+---
+import Breadcrumbs from './Breadcrumbs.astro';
+import Img from './Img.astro';
+import RatingBadge from './RatingBadge.astro';
+interface Props {
+  crumbs: { name: string; href: string }[];
+  eyebrow: string; h1: string; lead?: string; shot?: string; ratio?: '4x5' | '3x4' | '3x2';
+  cta?: boolean; secondary?: { href: string; label: string }; badge?: boolean; lang?: 'nl' | 'en'; arch?: boolean;
+}
+const { crumbs, eyebrow, h1, lead, shot, ratio = '4x5', cta = true, secondary, badge, lang = 'nl', arch } = Astro.props;
+const nl = lang === 'nl';
+---
+<section class="page-hero">
+  <div class="container">
+    <Breadcrumbs items={crumbs} lang={lang} />
+    <div class="grid mt-3">
+      <div class={shot ? 'col-main' : 'col-wide'} style={shot ? undefined : 'grid-column:1/span 10'}>
+        <p class="eyebrow">{eyebrow}</p>
+        <h1 set:html={h1} />
+        {lead && <p class="lead" set:html={lead} />}
+        {(cta || secondary) && (
+          <div class="page-hero__actions">
+            {cta && <button type="button" class="btn" data-open-form>{nl ? 'Check je datum' : 'Check your date'} <span class="arrow" aria-hidden="true">→</span></button>}
+            {secondary && <a class="btn btn--outline" href={secondary.href}>{secondary.label}</a>}
+          </div>
+        )}
+        {badge && <div class="mt-3"><RatingBadge lang={lang} /></div>}
+        <slot />
+      </div>
+      {shot && <div class="col-aside"><Img ratio={ratio} shot={shot} priority arch={arch} /></div>}
+    </div>
+  </div>
+</section>

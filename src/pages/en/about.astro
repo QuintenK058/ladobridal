@@ -1,0 +1,19 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Section from '../../components/Section.astro';
+import Cta from '../../components/Cta.astro';
+import { SITE } from '../../data/site';
+const crumbs = [{ name: 'Home', href: '/en' }, { name: 'About', href: '/en/about' }];
+---
+<Base title="About Quinty Kant, bridal stylist from Leeuwarden | Lado Bridal" description="Meet Quinty Kant: MUAH-certified bridal hairstylist and make-up artist from Leeuwarden. 4 years of experience, 40+ brides, calm, precise and natural." breadcrumbs={crumbs}>
+  <PageHero lang="en" crumbs={crumbs} eyebrow="About" h1="About Quinty Kant, bridal stylist from Leeuwarden" lead="I’m Quinty. I style brides on the morning of their wedding, and my favourite moment is when a bride looks in the mirror and says: this is me, at my most beautiful." shot="portrait Quinty · arch" arch />
+  <Section eyebrow="My story" title="How I became a <em>bridal stylist</em>">
+    <p class="ph-block">[STORY · to be written by Quinty, ±150 words]</p>
+    <p>I’m MUAH-certified, I’ve worked as a bridal stylist for {SITE.stats.years} years and I’ve styled more than {SITE.stats.brides} brides, {SITE.stats.international}+ of them at weddings abroad. My studio is in Leeuwarden, where I do the trials; on your wedding day I come to you.</p>
+  </Section>
+  <Section eyebrow="Approach" title="Calm, precise <em>and you</em>" linen>
+    <p>A wedding morning is exciting. I see it as my job to bring calm: I’m on time, my kit is ready and I work at a pace that leaves room for a cup of coffee and an unexpected phone call. I style you, not a trend.</p>
+  </Section>
+  <Cta lang="en" title="Shall we <em>meet?</em>" />
+</Base>

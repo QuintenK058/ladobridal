@@ -1,0 +1,169 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Timeline from '../components/Timeline.astro';
+import Faq from '../components/Faq.astro';
+import Reviews from '../components/Reviews.astro';
+import Cta from '../components/Cta.astro';
+import { PRICES, INCLUDED_NL, euro, travelCost } from '../data/site';
+import { DISTANCES } from '../data/distances';
+import { faqSchema, serviceSchema } from '../data/schema';
+
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Tarieven', href: '/tarieven' }];
+const priceHtml = (n: number | null, label = '[VANAF-PRIJS]') => (n ? euro(n) : `<span class="ph">${label}</span>`);
+const packages = [
+  { key: 'kapsel', name: 'Bruidskapsel', price: PRICES.bruidskapsel, href: '/bruidskapsel', items: ['Telefonische intake', 'Proefsessie in Leeuwarden', 'Sluier en accessoires bevestigen', 'Styling guide'] },
+  { key: 'visagie', name: 'Bruidsvisagie', price: PRICES.bruidsvisagie, href: '/bruidsvisagie', items: ['Telefonische intake', 'Proefsessie in Leeuwarden', 'Huidvoorbereiding', 'Wimpers inbegrepen'] },
+  { key: 'complete', name: 'Complete Bruidslook', price: PRICES.completeBruidslook, href: '/complete-bruidslook', featured: true, items: ['Haar én make-up', 'Volledige proefsessie in de studio', 'Persoonlijke styling guide', 'Eén planning, één stylist'] },
+  { key: 'destination', name: 'Destination wedding', price: null, href: '/destination-wedding-stylist', items: ['Complete Bruidslook in het buitenland', 'Proefsessie vooraf, ook digitaal', 'Meerdaagse boekingen', 'Vluchten en verblijf apart vermeld'] },
+];
+const faq = [
+  { q: 'Zijn de prijzen inclusief btw?', a: '<p>Ja, alle prijzen op deze site zijn eindprijzen voor particulieren. <span class="ph">[CHECK: incl. btw of KOR bevestigen]</span> Alleen reiskosten en eventuele verblijfkosten hangen af van je locatie; die staan vooraf in je offerte.</p>' },
+  { q: 'Hoe worden reiskosten berekend?', a: '<p>€0,35 per kilometer vanaf Leeuwarden, heen en terug: enkele reis in km × 2 × €0,35. Een locatie op 30 km kost dus €21 aan reiskosten. Ik reken één keer per trouwdag, ook als ik meerdere personen style.</p>' },
+  { q: 'Wanneer komen er verblijfkosten bij?', a: '<p>Als de locatie verder dan 75 km (enkele reis) van Leeuwarden ligt. Ik overnacht dan in de buurt, zodat ik ’s ochtends uitgerust en op tijd bij je ben. De kosten staan altijd vooraf in je offerte.</p>' },
+  { q: 'Hoe leg ik mijn datum vast?', a: '<p>Na de offerte bevestig je met je handtekening en een aanbetaling van 25%. Daarna staat je datum vast. Het restant betaal je volgens de afspraken in de offerte. <span class="ph">[CHECK: betaaltermijn restbedrag]</span></p>' },
+  { q: 'Waarom staat er bij destination weddings geen vaste prijs?', a: '<p>Omdat reistijd, vluchten, verblijf en het aantal dagen per bruiloft sterk verschillen. De styling zelf volgt de Complete Bruidslook; de rest krijg je als aparte posten in een offerte op maat.</p>' },
+  { q: 'Is de proefsessie apart te boeken?', a: '<p>De proefsessie hoort bij je bruidsboeking en is bij de Complete Bruidslook altijd inbegrepen. <span class="ph">[CHECK: losse proefsessie mogelijk? prijs?]</span></p>' },
+];
+const calcCfg = { perKm: PRICES.perKm, overnightFromKm: PRICES.overnightFromKm, guest: PRICES.guest, mother: PRICES.mother, lashes: PRICES.lashes, touchUp: PRICES.touchUpHour };
+---
+<Base title="Tarieven bruidsstyling & prijscalculator | Lado Bridal"
+  description={`Eerlijke tarieven voor bruidskapsel en bruidsmake-up. Complete Bruidslook vanaf ${PRICES.completeBruidslook ? euro(PRICES.completeBruidslook) : '[prijs]'}, gasten €75 p.p., reiskosten €0,35/km. Bereken direct je prijsindicatie.`}
+  ogTitle="Tarieven bruidsstyling · Lado Bridal" ogDescription="Alle prijzen vooraf, inclusief een calculator voor je eigen prijsindicatie: pakket, gasten, extra’s en reiskosten."
+  breadcrumbs={crumbs} schema={[serviceSchema({ name: 'Complete Bruidslook', path: '/tarieven', description: 'Bruidskapsel en bruidsmake-up inclusief proefsessie en styling guide.' }), faqSchema(faq)]}>
+  <PageHero crumbs={crumbs} eyebrow="Tarieven" h1="Tarieven bruidsstyling" badge
+    lead="Eerlijke prijzen, vooraf. Wat je uiteindelijk betaalt hangt af van je pakket, het aantal personen en de afstand tot je locatie. Hieronder zie je alle tarieven, en met de calculator bereken je zelf een indicatie."
+    secondary={{ href: '#calculator', label: 'Naar de calculator' }}>
+    <p class="small muted mt-2">Alle prijzen zijn eindprijzen voor particulieren <span class="ph">[CHECK: incl. btw / KOR]</span>.</p>
+  </PageHero>
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="packages">
+        {packages.map((p) => (
+          <article class:list={['package', p.featured && 'package--featured']}>
+            {p.featured && <span class="badge" style="border-color:#D8B98A;color:inherit;align-self:start">Meest gekozen</span>}
+            <h2 class="package__name">{p.name}</h2>
+            <p class="package__price"><small>{p.key === 'destination' ? 'prijs' : 'vanaf'}</small><Fragment set:html={p.key === 'destination' ? 'op maat' : priceHtml(p.price)} /></p>
+            <ul class="checklist" role="list">{p.items.map((i) => <li>{i}</li>)}</ul>
+            <a class="text-link" href={p.href}>Meer over {p.name.toLowerCase().replace('complete bruidslook', 'de Complete Bruidslook')} <span class="arrow" aria-hidden="true">→</span></a>
+            <button type="button" class:list={['btn btn--block', p.featured ? 'btn--light' : 'btn--outline']} data-open-form>Vraag offerte aan</button>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid">
+      <div class="col-half">
+        <p class="eyebrow">Altijd inbegrepen</p>
+        <h2 class="mt-1">In elk <em>pakket</em></h2>
+        <ul class="checklist mt-3" role="list">{INCLUDED_NL.map((i) => <li>{i}</li>)}</ul>
+      </div>
+      <div class="col-half">
+        <p class="eyebrow">Extra’s</p>
+        <h2 class="mt-1">Gasten &amp; <em>aanvullingen</em></h2>
+        <table class="addons mt-3">
+          <caption class="sr-only">Prijzen van aanvullingen</caption>
+          <tbody>
+            <tr><th scope="row">Bruidsmeisje of gast (haar óf make-up)</th><td>{euro(PRICES.guest)} p.p.</td></tr>
+            <tr><th scope="row">Moeder van de bruid, incl. stylingadvies</th><td>{euro(PRICES.mother)}</td></tr>
+            <tr><th scope="row">Extra set wimpers</th><td>{euro(PRICES.lashes)}</td></tr>
+            <tr><th scope="row">Fotoshoot / editorial</th><td>vanaf {euro(PRICES.photoshoot)} per look</td></tr>
+            <tr><th scope="row">Extra touch-up uur</th><td>{euro(PRICES.touchUpHour)} per uur</td></tr>
+            <tr><th scope="row">Reiskosten vanaf Leeuwarden (heen en terug)</th><td>€0,35 per km</td></tr>
+          </tbody>
+        </table>
+        <p class="small muted mt-2">Boven 75 km enkele reis komen er verblijfkosten bij. Voorbeeld: Sneek ligt op ca. 25 km, dus 25 × 2 × €0,35 = {euro(travelCost(25))}.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICE CALCULATOR -->
+  <section class="section section--linen" id="calculator">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Prijscalculator</p><h2>Bereken je <em>prijsindicatie</em></h2><p class="lead">Kies je pakket, voeg personen en extra’s toe en vul de afstand in. Je ziet direct een indicatie, die je met één klik als offerteaanvraag verstuurt.</p></div>
+      <form class="calc" data-calc={JSON.stringify(calcCfg)} onsubmit="return false">
+        <div>
+          <fieldset>
+            <legend>1 · Pakket</legend>
+            <div class="choice-grid choice-grid--2">
+              {packages.map((p, i) => (
+                <label class="choice"><input type="radio" name="pkg" value={p.key} checked={p.key === 'complete'} data-price={p.price ?? ''} data-label={p.name} /><span>{p.name}<small set:html={p.key === 'destination' ? 'op maat' : p.price ? `vanaf ${euro(p.price)}` : 'prijs volgt'} /></span></label>
+              ))}
+            </div>
+            <p class="small muted mt-1" data-pkg-note hidden></p>
+          </fieldset>
+          <fieldset>
+            <legend>2 · Personen &amp; extra’s</legend>
+            <div class="row-between"><span>Bruidsmeisjes / gasten <small class="muted">({euro(PRICES.guest)} p.p.)</small></span>
+              <span class="stepper" data-stepper="guests" data-max="8"><button type="button" data-delta="-1" aria-label="Eén gast minder">−</button><output aria-live="polite">0</output><button type="button" data-delta="1" aria-label="Eén gast meer">+</button></span></div>
+            <label class="row-between"><span>Moeder van de bruid <small class="muted">({euro(PRICES.mother)})</small></span><span class="toggle"><input type="checkbox" name="mother" /><span></span></span></label>
+            <div class="row-between"><span>Extra set wimpers <small class="muted">({euro(PRICES.lashes)})</small></span>
+              <span class="stepper" data-stepper="lashes" data-max="8"><button type="button" data-delta="-1" aria-label="Eén set minder">−</button><output aria-live="polite">0</output><button type="button" data-delta="1" aria-label="Eén set meer">+</button></span></div>
+            <div class="row-between"><span>Touch-up uren <small class="muted">({euro(PRICES.touchUpHour)}/uur)</small></span>
+              <span class="stepper" data-stepper="touchup" data-max="4"><button type="button" data-delta="-1" aria-label="Eén uur minder">−</button><output aria-live="polite">0</output><button type="button" data-delta="1" aria-label="Eén uur meer">+</button></span></div>
+          </fieldset>
+          <fieldset data-km-wrap>
+            <legend>3 · Afstand</legend>
+            <div class="field">
+              <label for="calc-place">Plaats van je trouwlocatie</label>
+              <select id="calc-place" name="place">
+                <option value="">Kies een plaats, of gebruik de schuif</option>
+                {DISTANCES.map(([p, k]) => <option value={k}>{p} (ca. {k} km)</option>)}
+              </select>
+            </div>
+            <label for="calc-km" class="field-label" style="margin-top:1rem">Enkele reis vanaf Leeuwarden: <span data-km-out>0 km</span></label>
+            <input class="range" type="range" id="calc-km" name="km" min="0" max="300" step="5" value="0" />
+            <p class="small muted">Afstanden zijn een indicatie. Je offerte rekent met de werkelijke route. <!-- TODO: postcode → afstand via een routing-API --></p>
+          </fieldset>
+        </div>
+        <div class="calc__out" aria-live="polite">
+          <p class="eyebrow">Indicatie</p>
+          <p class="calc__total" data-total>€ 0</p>
+          <ul class="calc__lines" data-lines></ul>
+          <p class="calc__note" data-km-note hidden>Boven 75 km rekenen we een overnachting; deze staat vooraf in je offerte.</p>
+          <p class="calc__note">Dit is een indicatie, je ontvangt binnen 2 werkdagen een persoonlijke offerte.</p>
+          <button type="button" class="btn btn--light btn--block mt-2" data-calc-cta>Vraag deze offerte aan <span class="arrow" aria-hidden="true">→</span></button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Boeken</p><h2>Zo leg je je <em>datum vast</em></h2></div>
+      <Timeline horizontal steps={[
+        { title: 'Aanvraag', text: 'Je vult het formulier in of stuurt een WhatsApp met je datum en locatie.' },
+        { title: 'Intake', text: 'We bellen kort over je dag, je wensen en het aantal personen.' },
+        { title: 'Offerte binnen 2 werkdagen', text: 'Alle kosten vooraf, inclusief reis- en eventuele verblijfkosten.' },
+        { title: 'Bevestiging', text: 'Je tekent de offerte en betaalt 25% aanbetaling. Je datum staat vast.' },
+        { title: 'Proefsessie', text: '4–8 weken voor de bruiloft in de studio in Leeuwarden.' },
+      ]} />
+    </div>
+  </section>
+
+  <section class="section section--linen">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Ervaringen</p><h2>Wat bruiden <em>zeggen</em></h2></div>
+      <Reviews variant="pair" service="complete" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid">
+      <div class="col-quarter"><p class="eyebrow">FAQ</p><h2 class="mt-1">Vragen over <em>tarieven</em></h2>
+        <p class="mt-2"><a class="link" href="/wat-kost-een-bruidsstyliste-friesland">Wat kost een bruidsstyliste in Friesland? Lees de prijsgids</a></p></div>
+      <div class="col-rest"><Faq items={faq} /></div>
+    </div>
+  </section>
+
+  <section class="section--tight section--linen">
+    <div class="container cluster" style="justify-content:space-between">
+      <p class="h3" style="max-width:32ch">Wil je weten hoe deze prijzen zich verhouden tot de markt?</p>
+      <a class="btn btn--outline" href="/wat-kost-een-bruidsstyliste-friesland">Prijsgids: wat kost een bruidsstyliste?</a>
+    </div>
+  </section>
+  <Cta />
+</Base>

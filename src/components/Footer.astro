@@ -1,0 +1,57 @@
+---
+import { SITE, REGIONS } from '../data/site';
+import Icon from './Icon.astro';
+interface Props { lang: 'nl' | 'en' }
+const { lang } = Astro.props;
+const nl = lang === 'nl';
+const year = new Date().getFullYear();
+const services = nl
+  ? [['/bruidskapsel', 'Bruidskapsel'], ['/bruidsvisagie', 'Bruidsvisagie'], ['/complete-bruidslook', 'Complete Bruidslook'], ['/gala-en-gasten-styling', 'Gala & gasten'], ['/proefsessie', 'Proefsessie'], ['/destination-wedding-stylist', 'Destination weddings']]
+  : [['/en/bridal-hair', 'Bridal hair'], ['/en/bridal-makeup', 'Bridal make-up'], ['/en/complete-bruidslook', 'Complete Bruidslook'], ['/en/guests-and-events', 'Guests & events'], ['/en/trial-session', 'Trial session'], ['/en/destination-wedding-stylist', 'Destination weddings']];
+const info = nl
+  ? [['/tarieven', 'Tarieven'], ['/wat-kost-een-bruidsstyliste-friesland', 'Wat kost een bruidsstyliste?'], ['/trouwlocaties', 'Trouwlocaties'], ['/gidsen', 'Gidsen'], ['/ervaringen', 'Ervaringen'], ['/portfolio', 'Portfolio'], ['/over-mij', 'Over mij'], ['/contact', 'Contact']]
+  : [['/en/rates', 'Rates'], ['/en/reviews', 'Reviews'], ['/en/portfolio', 'Portfolio'], ['/en/about', 'About'], ['/en/contact', 'Contact']];
+---
+<footer class="site-footer on-dark" data-footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href={nl ? '/' : '/en'} class="wordmark">LADO BRIDAL</a>
+        <p class="footer-bio">{nl
+          ? 'Bruidskapsel en bruidsmake-up door Quinty Kant, MUAH-gecertificeerd bruidsstylist uit Leeuwarden. Op locatie in Noord-Nederland, de rest van Nederland en het buitenland.'
+          : 'Bridal hair and make-up by Quinty Kant, MUAH-certified bridal stylist from Leeuwarden, the Netherlands. On location across the Netherlands and abroad.'}</p>
+        <address class="nap">
+          <span>{SITE.name} · {SITE.owner}</span>
+          <span>{SITE.streetAddress ? `${SITE.streetAddress}, ${SITE.postalCode} ` : ''}{SITE.city}, {SITE.province}</span>
+          <a href={SITE.phoneHref} data-track="phone_click">{SITE.phoneDisplay}</a>
+          <a href={`mailto:${SITE.email}`} data-track="email_click">{SITE.email}</a>
+        </address>
+        <div class="cluster mt-2" style="--gap:.5rem">
+          <a class="icon-btn" href={SITE.instagram} target="_blank" rel="noopener" aria-label="Instagram @lado.bridal" style="width:44px;height:44px"><Icon name="instagram" /></a>
+          <a class="icon-btn" href={SITE.whatsapp} target="_blank" rel="noopener" aria-label="WhatsApp" data-track="whatsapp_click" style="width:44px;height:44px"><Icon name="whatsapp" /></a>
+        </div>
+      </div>
+      <div>
+        <h2 class="footer-title">{nl ? 'Diensten' : 'Services'}</h2>
+        <ul>{services.map(([h, n]) => <li><a href={h}>{n}</a></li>)}</ul>
+      </div>
+      <div>
+        <h2 class="footer-title">{nl ? 'Regio’s' : 'Regions'}</h2>
+        <ul>{REGIONS.map((r) => <li><a href={r.slug} hreflang={nl ? undefined : 'nl'}>{r.label}</a></li>)}</ul>
+      </div>
+      <div>
+        <h2 class="footer-title">Info</h2>
+        <ul>{info.map(([h, n]) => <li><a href={h}>{n}</a></li>)}</ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <ul>
+        <li><a href={nl ? '/privacy' : '/en/privacy'}>{nl ? 'Privacy' : 'Privacy'}</a></li>
+        <li><a href="/algemene-voorwaarden">{nl ? 'Algemene voorwaarden' : 'Terms (Dutch)'}</a></li>
+        <li><button type="button" data-cookie-settings style="text-decoration:underline">{nl ? 'Cookie-instellingen' : 'Cookie settings'}</button></li>
+        <li>KVK {SITE.kvk || <span class="ph">[KVK-NUMMER]</span>}</li>
+      </ul>
+      <span>© {year} {SITE.name}</span>
+    </div>
+  </div>
+</footer>

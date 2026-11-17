@@ -1,0 +1,171 @@
+---
+import Reviews from './Reviews.astro';
+interface Props { lang?: 'nl' | 'en'; mode?: 'drawer' | 'inline' }
+const { lang = 'nl', mode = 'inline' } = Astro.props;
+const nl = lang === 'nl';
+const p = mode === 'drawer' ? 'lfd' : 'lfi';
+const t = nl ? {
+  step: 'Stap', of: 'van', next: 'Volgende', back: 'Terug', send: 'Verstuur aanvraag',
+  q1: 'Wanneer is jullie trouwdatum?', unknown: 'Nog niet bekend', month: 'Maand', year: 'Jaar', flexible: 'Ik ben flexibel',
+  q2: 'Wat zoek je?', q3: 'Waar is je bruiloft?', country: 'In welk land?', locName: 'Naam van de locatie (optioneel)',
+  q4: 'Hoeveel personen wil je naast jezelf laten stylen?', mother: 'Moeder van de bruid ook?', yes: 'Ja', no: 'Nee',
+  q5: 'Hoe kan ik je bereiken?', name: 'Je naam', email: 'E-mailadres', phone: 'Telefoonnummer', found: 'Hoe heb je Lado Bridal gevonden?',
+  msg: 'Wil je nog iets vertellen? (optioneel)', msgHint: 'Bijvoorbeeld de stijl die je mooi vindt, je jurk of de planning van de dag.',
+  upload: 'Inspiratiefoto’s (optioneel, max. 5)', privacy: 'Ik gebruik je gegevens alleen om je aanvraag te beantwoorden.', privacyLink: 'Lees de privacyverklaring',
+  services: ['Complete Bruidslook', 'Bruidskapsel', 'Bruidsvisagie', 'Gala of gast', 'Destination wedding'],
+  regions: ['Friesland', 'Groningen', 'Drenthe', 'Overijssel', 'Noord-Holland', 'Elders in Nederland', 'Buitenland'],
+  persons: ['0', '1–2', '3–5', '6+'],
+  sources: ['Instagram', 'Google', 'Via via', 'Trouwlocatie', 'Anders'],
+  months: ['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'],
+  choose: 'Kies…',
+} : {
+  step: 'Step', of: 'of', next: 'Next', back: 'Back', send: 'Send request',
+  q1: 'When is your wedding date?', unknown: 'Not decided yet', month: 'Month', year: 'Year', flexible: 'I’m flexible',
+  q2: 'What are you looking for?', q3: 'Where is your wedding?', country: 'Which country?', locName: 'Venue name (optional)',
+  q4: 'How many people besides you would you like styled?', mother: 'Mother of the bride as well?', yes: 'Yes', no: 'No',
+  q5: 'How can I reach you?', name: 'Your name', email: 'Email address', phone: 'Phone number', found: 'How did you find Lado Bridal?',
+  msg: 'Anything else you’d like to share? (optional)', msgHint: 'For example the style you love, your dress or the timing of the day.',
+  upload: 'Inspiration photos (optional, max. 5)', privacy: 'I only use your details to answer your request.', privacyLink: 'Read the privacy statement',
+  services: ['Complete Bruidslook', 'Bridal hair', 'Bridal make-up', 'Event or guest', 'Destination wedding'],
+  regions: ['Friesland', 'Groningen', 'Drenthe', 'Overijssel', 'Noord-Holland', 'Elsewhere in NL', 'Abroad'],
+  persons: ['0', '1–2', '3–5', '6+'],
+  sources: ['Instagram', 'Google', 'Word of mouth', 'Wedding venue', 'Other'],
+  months: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+  choose: 'Choose…',
+};
+const serviceValues = ['complete', 'kapsel', 'visagie', 'gasten', 'destination'];
+const regionValues = ['friesland', 'groningen', 'drenthe', 'overijssel', 'noord-holland', 'elders-nl', 'buitenland'];
+const thisYear = new Date().getFullYear();
+const years = [thisYear, thisYear + 1, thisYear + 2, thisYear + 3];
+---
+<form class="lead-form" data-lead-form data-lang={lang} data-thanks={nl ? '/bedankt' : '/en/thank-you'} novalidate>
+  <Reviews variant="snippet" lang={lang} />
+  <div class="cluster" style="justify-content:space-between">
+    <p class="lead-form__stepcount" aria-live="polite"><span data-step-label>{t.step} 1 {t.of} 5</span></p>
+  </div>
+  <div class="lead-form__progress mt-1" aria-hidden="true"><span data-progress></span></div>
+
+  <!-- Honeypot: humans never see or fill this -->
+  <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+  <input type="hidden" name="lang" value={lang} />
+  <input type="hidden" name="calc" value="" />
+
+  <section class="lead-step is-active" data-step="1">
+    <fieldset>
+      <legend class="h3">{t.q1}</legend>
+      <div class="field" data-known-date>
+        <label for={`${p}-date`}>{nl ? 'Trouwdatum' : 'Wedding date'}</label>
+        <input type="date" id={`${p}-date`} name="wedding_date" aria-describedby={`${p}-date-err`} />
+        <p class="field__error" id={`${p}-date-err`} hidden></p>
+      </div>
+      <label class="row-between" style="border:0">
+        <span>{t.unknown}</span>
+        <span class="toggle"><input type="checkbox" name="date_unknown" data-date-unknown /><span></span></span>
+      </label>
+      <div class="grid" data-unknown-fields hidden style="row-gap:0">
+        <div class="field col-half">
+          <label for={`${p}-month`}>{t.month}</label>
+          <select id={`${p}-month`} name="wedding_month"><option value="">{t.choose}</option>{t.months.map((m, i) => <option value={i + 1}>{m}</option>)}<option value="flex">{t.flexible}</option></select>
+        </div>
+        <div class="field col-half">
+          <label for={`${p}-year`}>{t.year}</label>
+          <select id={`${p}-year`} name="wedding_year"><option value="">{t.choose}</option>{years.map((y) => <option value={y}>{y}</option>)}<option value="flex">{t.flexible}</option></select>
+        </div>
+        <p class="field__error" data-error-for="month" hidden style="grid-column:1/-1"></p>
+      </div>
+      <p class="lead-form__feedback" data-season-feedback hidden aria-live="polite"></p>
+    </fieldset>
+  </section>
+
+  <section class="lead-step" data-step="2">
+    <fieldset>
+      <legend class="h3">{t.q2}</legend>
+      <div class="choice-grid">
+        {t.services.map((s, i) => (
+          <label class="choice"><input type="radio" name="service" value={serviceValues[i]} required /><span>{s}{i === 0 && <small>{nl ? 'Meest gekozen' : 'Most chosen'}</small>}</span></label>
+        ))}
+      </div>
+      <p class="field__error" data-error-for="service" hidden></p>
+    </fieldset>
+  </section>
+
+  <section class="lead-step" data-step="3">
+    <fieldset>
+      <legend class="h3">{t.q3}</legend>
+      <div class="choice-grid choice-grid--2">
+        {t.regions.map((r, i) => (
+          <label class="choice"><input type="radio" name="region" value={regionValues[i]} required /><span>{r}</span></label>
+        ))}
+      </div>
+      <p class="field__error" data-error-for="region" hidden></p>
+      <div class="field mt-2" data-country hidden>
+        <label for={`${p}-country`}>{t.country}</label>
+        <input type="text" id={`${p}-country`} name="country" autocomplete="country-name" />
+      </div>
+      <div class="field mt-2">
+        <label for={`${p}-venue`}>{t.locName}</label>
+        <input type="text" id={`${p}-venue`} name="venue" />
+      </div>
+    </fieldset>
+  </section>
+
+  <section class="lead-step" data-step="4">
+    <fieldset>
+      <legend class="h3">{t.q4}</legend>
+      <div class="choice-grid choice-grid--2">
+        {t.persons.map((x) => (
+          <label class="choice"><input type="radio" name="persons" value={x} required /><span>{x}</span></label>
+        ))}
+      </div>
+      <p class="field__error" data-error-for="persons" hidden></p>
+      <p class="field-label mt-3">{t.mother}</p>
+      <div class="choice-grid choice-grid--2">
+        <label class="choice"><input type="radio" name="mother" value="ja" /><span>{t.yes}</span></label>
+        <label class="choice"><input type="radio" name="mother" value="nee" checked /><span>{t.no}</span></label>
+      </div>
+    </fieldset>
+  </section>
+
+  <section class="lead-step" data-step="5">
+    <fieldset>
+      <legend class="h3">{t.q5}</legend>
+      <div class="field">
+        <label for={`${p}-name`}>{t.name}</label>
+        <input type="text" id={`${p}-name`} name="name" autocomplete="name" required aria-describedby={`${p}-name-err`} />
+        <p class="field__error" id={`${p}-name-err`} hidden></p>
+      </div>
+      <div class="field">
+        <label for={`${p}-email`}>{t.email}</label>
+        <input type="email" id={`${p}-email`} name="email" autocomplete="email" inputmode="email" required aria-describedby={`${p}-email-err`} />
+        <p class="field__error" id={`${p}-email-err`} hidden></p>
+      </div>
+      <div class="field">
+        <label for={`${p}-phone`}>{t.phone}</label>
+        <input type="tel" id={`${p}-phone`} name="phone" autocomplete="tel" inputmode="tel" required aria-describedby={`${p}-phone-err`} />
+        <p class="field__error" id={`${p}-phone-err`} hidden></p>
+      </div>
+      <div class="field">
+        <label for={`${p}-source`}>{t.found}</label>
+        <select id={`${p}-source`} name="source"><option value="">{t.choose}</option>{t.sources.map((s) => <option>{s}</option>)}</select>
+      </div>
+      <div class="field">
+        <label for={`${p}-msg`}>{t.msg}</label>
+        <textarea id={`${p}-msg`} name="message" aria-describedby={`${p}-msg-hint`}></textarea>
+        <p class="field__hint" id={`${p}-msg-hint`}>{t.msgHint}</p>
+      </div>
+      <div class="field">
+        <label for={`${p}-files`}>{t.upload}</label>
+        <input type="file" id={`${p}-files`} name="files" accept="image/jpeg,image/png,image/webp,image/heic" multiple aria-describedby={`${p}-files-err`} />
+        <p class="field__error" id={`${p}-files-err`} hidden></p>
+      </div>
+      <p class="privacy-note">{t.privacy} <a href={nl ? '/privacy' : '/en/privacy'}>{t.privacyLink}</a>.</p>
+      <p class="field__error" data-submit-error hidden role="alert"></p>
+    </fieldset>
+  </section>
+
+  <div class="lead-form__nav">
+    <button type="button" class="btn btn--outline btn--sm" data-back hidden>← {t.back}</button>
+    <button type="button" class="btn" data-next style="margin-left:auto">{t.next} <span class="arrow" aria-hidden="true">→</span></button>
+    <button type="submit" class="btn" data-submit hidden style="margin-left:auto">{t.send}</button>
+  </div>
+</form>

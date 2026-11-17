@@ -1,0 +1,81 @@
+---
+/** Temporary design-system overview (noindex). Remove before launch or keep behind auth. */
+import Base from '../layouts/Base.astro';
+import Img from '../components/Img.astro';
+import RatingBadge from '../components/RatingBadge.astro';
+import Timeline from '../components/Timeline.astro';
+import Faq from '../components/Faq.astro';
+import Reviews from '../components/Reviews.astro';
+import Cta from '../components/Cta.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+const colors = [['--ivory', '#FAF7F2', 'Basis'], ['--linen', '#F2ECE3', 'Wisselsecties'], ['--sand', '#E8D9C5', 'Lijnen'], ['--blush', '#E9D5CF', 'Beeldachtergrond'], ['--espresso', '#2B2420', 'Tekst'], ['--taupe', '#6F625A', 'Secundaire tekst · 5,5:1'], ['--gold', '#A8834F', 'Details · niet voor body-tekst']];
+---
+<Base title="Styleguide | Lado Bridal" description="Design system Lado Bridal (intern)." noindex>
+  <section class="page-hero"><div class="container">
+    <Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'Styleguide', href: '/styleguide' }]} />
+    <p class="eyebrow mt-3">Intern · noindex</p><h1 class="mt-1">Styleguide</h1>
+    <p class="lead">Tokens, typografie, beeld, componenten en motion. Tijdelijke route.</p>
+  </div></section>
+
+  <section class="section--tight"><div class="container">
+    <h2 class="h3">01 — Kleur</h2>
+    <div class="look-grid look-grid--4 mt-2">{colors.map(([v, hex, use]) => (
+      <div><div style={`aspect-ratio:3/2;background:var(${v});border:1px solid var(--sand)`}></div><p class="small mt-1"><strong>{v}</strong> {hex}<br /><span class="muted">{use}</span></p></div>
+    ))}</div>
+    <p class="small muted mt-2">Contrast: taupe/ivoor 5,5:1 · taupe/linnen 5,0:1 · goud/ivoor 3,3:1 (alleen niet-tekst/groot) · goud/linnen 2,97:1 → focusringen zijn daarom espresso (op donker: ivoor).</p>
+  </div></section>
+
+  <section class="section--tight section--linen"><div class="container stack" style="--stack:1.5rem">
+    <h2 class="h3">02 — Typografie</h2>
+    <p class="display">Display <em>droomlook</em></p>
+    <p class="h1">H1 · Bruidskapsel op locatie</p>
+    <p class="h2">H2 · Zo werken we <em>samen</em></p>
+    <p class="h3">H3 · Cormorant Garamond 500</p>
+    <p class="lead">Lead · Jost 400, 18–22px. Max 65 tekens per regel voor lopende tekst.</p>
+    <p>Body · Jost 400, 16–18px, regelafstand 1,65.</p>
+    <p class="eyebrow">01 — Eyebrow label</p>
+  </div></section>
+
+  <section class="section--tight"><div class="container">
+    <h2 class="h3">03 — Beeld</h2>
+    <div class="look-grid look-grid--4 mt-2">
+      <Img ratio="4x5" shot="4:5 portret" caption="4:5" />
+      <Img ratio="3x4" shot="3:4" caption="3:4" />
+      <Img ratio="3x2" shot="3:2 landschap" caption="3:2" />
+      <Img ratio="4x5" arch shot="arch" caption="Arch-masker" />
+    </div>
+    <div class="prose mt-3 small">
+      <p><strong>Bestandsnamen:</strong> beschrijvend, kleine letters, koppeltekens: <code>bruidskapsel-los-opgestoken-friesland</code>. Exporteer per foto <code>-800</code> en <code>-1600</code> in <code>.avif</code> en <code>.webp</code> naar <code>public/img/</code> en zet <code>src="/img/bruidskapsel-los-opgestoken-friesland"</code> op het <code>Img</code>-component, met een Nederlandse alt-tekst.</p>
+      <p><strong>Nooit</strong> stockfoto’s van bruiden. Placeholders blijven staan tot er echte foto’s zijn.</p>
+    </div>
+  </div></section>
+
+  <section class="section--tight section--linen"><div class="container stack" style="--stack:1.5rem">
+    <h2 class="h3">04 — Knoppen &amp; links</h2>
+    <div class="cluster"><button class="btn">Primair</button><button class="btn btn--outline">Secundair</button><button class="btn" disabled>Uitgeschakeld</button><a class="text-link" href="#">Tekstlink <span class="arrow">→</span></a></div>
+    <div class="cluster"><RatingBadge /><span class="badge">Meest gekozen</span></div>
+    <Breadcrumbs items={[{ name: 'Home', href: '/' }, { name: 'Regio’s', href: '#' }, { name: 'Friesland', href: '#' }]} />
+  </div></section>
+
+  <section class="section--tight"><div class="container">
+    <h2 class="h3">05 — Stats</h2>
+    <dl class="stats mt-2"><div><dt class="sr-only">Jaar</dt><dd class="stat__num" data-count="4">4</dd><dd class="stat__label">jaar ervaring</dd></div><div><dt class="sr-only">Bruiden</dt><dd class="stat__num" data-count="40" data-suffix="+">40+</dd><dd class="stat__label">bruiden</dd></div><div><dt class="sr-only">Int.</dt><dd class="stat__num" data-count="5" data-suffix="+">5+</dd><dd class="stat__label">internationaal</dd></div><div><dt class="sr-only">Google</dt><dd class="stat__num">5,0</dd><dd class="stat__label">op Google</dd></div></dl>
+  </div></section>
+
+  <section class="section--tight section--linen"><div class="container">
+    <h2 class="h3">06 — Tijdlijn</h2>
+    <div class="mt-2"><Timeline horizontal steps={[{ title: 'Stap', text: 'Tekst' }, { title: 'Stap', text: 'Tekst' }, { title: 'Stap', text: 'Tekst' }]} /></div>
+  </div></section>
+
+  <section class="section--tight"><div class="container">
+    <h2 class="h3">07 — Reviews &amp; FAQ</h2>
+    <div class="mt-2"><Reviews variant="carousel" /></div>
+    <div class="mt-3"><Faq items={[{ q: 'Voorbeeldvraag als H3 in een button?', a: '<p>Antwoord met vloeiende hoogte-animatie.</p>' }]} id="sg" /></div>
+  </div></section>
+
+  <section class="section--tight section--linen"><div class="container prose small">
+    <h2 class="h3">08 — Motion</h2>
+    <p>Eén easing: <code>cubic-bezier(0.22, 1, 0.36, 1)</code>, 0,6–1,2 s. Primitives: <code>.reveal</code>, <code>.reveal-img</code> (clip-path wipe + 1,08→1), <code>data-split</code> (woord/regel-reveal), <code>data-parallax</code>, <code>data-count</code>, marquee, magnetische knoppen, cursor (alleen fijne pointer), Lenis (alleen desktop), view transitions tussen pagina’s. <code>prefers-reduced-motion</code> schakelt parallax, pinning, cursor, preloader en smooth scroll uit. Content staat altijd direct in de HTML; animaties zijn alleen visueel.</p>
+  </div></section>
+  <Cta light />
+</Base>

@@ -1,0 +1,56 @@
+---
+import Base from './Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Img from '../components/Img.astro';
+import Faq from '../components/Faq.astro';
+import Cta from '../components/Cta.astro';
+import { GUIDES, SITE } from '../data/site';
+import { articleSchema, faqSchema } from '../data/schema';
+interface Props {
+  title: string; description: string; path: string; h1: string; lead: string; updated: string; updatedLabel: string;
+  toc: { id: string; label: string }[]; faq?: { q: string; a: string }[]; noindex?: boolean; crumbName: string;
+}
+const p = Astro.props;
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Gidsen', href: '/gidsen' }, { name: p.crumbName, href: p.path }];
+const related = GUIDES.filter((g) => g.slug !== p.path && g.ready).slice(0, 3);
+---
+<Base title={p.title} description={p.description} ogType="article" breadcrumbs={crumbs} noindex={p.noindex}
+  schema={[articleSchema({ headline: p.h1, path: p.path, description: p.description, dateModified: p.updated }), ...(p.faq ? [faqSchema(p.faq)] : [])]}>
+  <article>
+    <header class="page-hero">
+      <div class="container">
+        <Breadcrumbs items={crumbs} />
+        <div class="grid mt-3">
+          <div class="col-wide" style="grid-column:1/span 9">
+            <p class="eyebrow">Gids</p>
+            <h1 set:html={p.h1} />
+            <p class="lead" set:html={p.lead} />
+            <div class="author-box mt-3" style="max-width:520px">
+              <Img ratio="1x1" shot="Quinty" reveal={false} />
+              <div class="small"><strong>{SITE.owner}</strong><br />MUAH-gecertificeerd bruidsstylist · <span class="muted">Laatst bijgewerkt: {p.updatedLabel}</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="container grid" style="padding-bottom:var(--section)">
+      <aside class="col-quarter sticky-desk">
+        <nav class="toc" aria-label="Inhoud"><strong>Inhoud</strong><ol>{p.toc.map((t) => <li><a href={`#${t.id}`}>{t.label}</a></li>)}</ol></nav>
+      </aside>
+      <div class="col-rest prose"><slot /></div>
+    </div>
+  </article>
+  {p.faq && (
+    <section class="section section--linen">
+      <div class="container grid">
+        <div class="col-quarter"><p class="eyebrow">FAQ</p><h2 class="mt-1">Veelgestelde <em>vragen</em></h2></div>
+        <div class="col-rest"><Faq items={p.faq} /></div>
+      </div>
+    </section>
+  )}
+  {related.length > 0 && (
+    <section class="section--tight"><div class="container"><h2 class="h3">Lees ook</h2>
+      <ul class="region-list mt-2" role="list">{related.map((g) => <li><a href={g.slug} style="font-size:clamp(1.4rem,1.1rem + 1.2vw,2.1rem)">{g.title}</a></li>)}</ul></div></section>
+  )}
+  <Cta />
+</Base>

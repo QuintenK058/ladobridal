@@ -1,0 +1,14 @@
+---
+import { SITE } from '../data/site';
+import Icon from './Icon.astro';
+interface Props { lang?: 'nl' | 'en' }
+const { lang = 'nl' } = Astro.props;
+---
+<a class="rating-badge" href={SITE.googleProfileUrl} target="_blank" rel="noopener" data-track="review_google_click"
+   title={lang === 'nl' ? 'Bekijk de reviews op Google (opent in nieuw venster)' : 'See the reviews on Google (opens in new window)'}>
+  <span class="rating-badge__score">{lang === 'nl' ? SITE.rating.value.toFixed(1).replace('.', ',') : SITE.rating.value.toFixed(1)}</span>
+  <span>
+    <span class="stars" aria-hidden="true">{[1,2,3,4,5].map(() => <Icon name="star" size={13} />)}</span><br />
+    <span class="sr-only">{lang === 'nl' ? 'van 5 sterren ' : 'out of 5 stars '}</span><span>{lang === 'nl' ? `op Google · ${SITE.rating.count} reviews` : `on Google · ${SITE.rating.count} reviews`}</span>
+  </span>
+</a>

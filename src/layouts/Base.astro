@@ -1,0 +1,135 @@
+---
+import '@fontsource/cormorant-garamond/latin-300.css';
+import '@fontsource/cormorant-garamond/latin-500.css';
+import '@fontsource/cormorant-garamond/latin-300-italic.css';
+import '@fontsource/jost/latin-400.css';
+import '@fontsource/jost/latin-500.css';
+import displayFont from '@fontsource/cormorant-garamond/files/cormorant-garamond-latin-300-normal.woff2?url';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import LeadForm from '../components/LeadForm.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+import Icon from '../components/Icon.astro';
+import { SITE, waLink } from '../data/site';
+import { counterpart, langOf } from '../data/i18n';
+import { businessSchema, personSchema, BUSINESS_ID } from '../data/schema';
+
+interface Props {
+  title: string;
+  description: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+  geo?: { region: string; placename: string };
+  breadcrumbs?: { name: string; href: string }[];
+  schema?: Record<string, unknown>[];
+  inlineForm?: boolean;
+  overDark?: boolean;
+  preloader?: boolean;
+}
+const { title, description, ogType = 'website', noindex = false, geo, breadcrumbs, schema = [], inlineForm = false, overDark = false, preloader = false } = Astro.props;
+const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/(.)\/$/, '$1') || '/';
+const lang = langOf(path);
+const nl = lang === 'nl';
+const canonical = `${SITE.url}${path === '/' ? '' : path}`;
+const other = counterpart(path);
+const nlPath = nl ? path : other;
+const enPath = nl ? other : path;
+const ogSlug = path === '/' ? 'home' : path.slice(1).replace(/\//g, '--');
+const ogImage = `${SITE.url}/og/${ogSlug}.png`;
+const ogTitle = Astro.props.ogTitle ?? title.replace(/\s*\|\s*Lado Bridal$/, '');
+const ogDescription = Astro.props.ogDescription ?? description;
+
+const graph: Record<string, unknown>[] = [
+  businessSchema(),
+  personSchema(),
+  { '@type': 'WebSite', '@id': `${SITE.url}/#website`, url: SITE.url, name: SITE.name, inLanguage: ['nl-NL', 'en'], publisher: { '@id': BUSINESS_ID } },
+  { '@type': 'WebPage', '@id': `${canonical}#webpage`, url: canonical, name: title, description, inLanguage: nl ? 'nl-NL' : 'en', isPartOf: { '@id': `${SITE.url}/#website` }, about: { '@id': BUSINESS_ID } },
+  ...(breadcrumbs?.length ? [{ '@type': 'BreadcrumbList', itemListElement: breadcrumbs.map((b, i) => ({ '@type': 'ListItem', position: i + 1, name: b.name, item: `${SITE.url}${b.href === '/' ? '' : b.href}` })) }] : []),
+  ...schema,
+];
+const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c');
+---
+<!doctype html>
+<html lang={nl ? 'nl-NL' : 'en'} class="no-js">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex, follow" />}
+  {!noindex && nlPath && <link rel="alternate" hreflang="nl-NL" href={`${SITE.url}${nlPath === '/' ? '' : nlPath}`} />}
+  {!noindex && enPath && <link rel="alternate" hreflang="en" href={`${SITE.url}${enPath}`} />}
+  {!noindex && nlPath && <link rel="alternate" hreflang="x-default" href={`${SITE.url}${nlPath === '/' ? '' : nlPath}`} />}
+  {geo && <meta name="geo.region" content={geo.region} />}
+  {geo && <meta name="geo.placename" content={geo.placename} />}
+  <meta property="og:type" content={ogType} />
+  <meta property="og:site_name" content="Lado Bridal" />
+  <meta property="og:locale" content={nl ? 'nl_NL' : 'en_GB'} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:title" content={ogTitle} />
+  <meta property="og:description" content={ogDescription} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={ogTitle} />
+  <meta name="twitter:description" content={ogDescription} />
+  <meta name="twitter:image" content={ogImage} />
+  <meta name="theme-color" content="#FAF7F2" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preload" href={displayFont} as="font" type="font/woff2" crossorigin />
+  <script is:inline>
+    document.documentElement.classList.replace('no-js', 'js');
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('reduced');
+    // Consent Mode v2 — everything denied until the visitor chooses.
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    window.gtag = gtag;
+    gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500 });
+  </script>
+  <script type="application/ld+json" set:html={jsonld} />
+</head>
+<body data-lang={lang}>
+  <a class="skip-link" href="#main">{nl ? 'Naar de inhoud' : 'Skip to content'}</a>
+  {preloader && (
+    <div class="preloader" data-preloader aria-hidden="true" hidden>
+      <div><div class="preloader__mark">LADO BRIDAL</div><span class="preloader__line"></span></div>
+    </div>
+  )}
+  <Header lang={lang} path={path} overDark={overDark} />
+  <main id="main">
+    <slot />
+  </main>
+  <Footer lang={lang} />
+
+  <div class="mobile-bar" data-mobile-bar>
+    <button type="button" class="btn" data-open-form data-track-label="sticky">{nl ? 'Check je datum' : 'Check your date'}</button>
+    <a class="icon-btn" href={waLink(nl ? 'Hoi Quinty, ' : 'Hi Quinty, ')} target="_blank" rel="noopener" aria-label="WhatsApp" data-track="whatsapp_click"><Icon name="whatsapp" /></a>
+  </div>
+
+  {!inlineForm && (
+    <div class="drawer" data-drawer aria-hidden="true">
+      <div class="drawer__backdrop" data-drawer-close></div>
+      <div class="drawer__panel" role="dialog" aria-modal="true" aria-labelledby="drawer-title">
+        <div class="drawer__head">
+          <p class="eyebrow" id="drawer-title">{nl ? 'Check je datum' : 'Check your date'}</p>
+          <button type="button" class="drawer__close" data-drawer-close aria-label={nl ? 'Sluiten' : 'Close'}><Icon name="close" size={24} /></button>
+        </div>
+        <LeadForm lang={lang} mode="drawer" />
+      </div>
+    </div>
+  )}
+
+  <CookieBanner lang={lang} />
+  <div class="cursor" data-cursor aria-hidden="true"><span>{nl ? 'Bekijk' : 'View'}</span></div>
+  <div class="hover-preview" data-hover-preview aria-hidden="true"></div>
+
+  <script>
+    import '../scripts/main';
+  </script>
+</body>
+</html>

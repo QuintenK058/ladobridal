@@ -1,0 +1,27 @@
+---
+import { SITE, waLink } from '../data/site';
+import Icon from './Icon.astro';
+interface Props { lang?: 'nl' | 'en'; title?: string; sub?: string; light?: boolean; eyebrow?: string; headingTag?: 'h2' | 'p' }
+const { lang = 'nl', light = false, headingTag = 'h2' } = Astro.props;
+const nl = lang === 'nl';
+const title = Astro.props.title ?? (nl ? 'Is jouw datum <em>nog vrij?</em>' : 'Is your date <em>still free?</em>');
+const sub = Astro.props.sub ?? (nl ? 'Het hoogseizoen (mei–september) is vaak 9–12 maanden vooruit volgeboekt. In rustigere maanden is een paar maanden vooraf meestal genoeg.' : 'Peak season (May–September) usually books up 9–12 months ahead. For quieter months a few months is usually enough.');
+const Tag = headingTag;
+const uid = 'cta-date-' + Math.random().toString(36).slice(2, 8);
+---
+<section class:list={['section', light ? 'section--linen cta-block--light' : 'section--dark on-dark', 'cta-block']}>
+  <div class="container">
+    <p class="eyebrow">{Astro.props.eyebrow ?? (nl ? 'Beschikbaarheid' : 'Availability')}</p>
+    <Tag class="display reveal-text mt-2" data-split set:html={title} />
+    <p class="lead mt-2 reveal">{sub}</p>
+    <form class="cta-inline mt-3 reveal" data-date-start action={nl ? '/contact' : '/en/contact'} method="get">
+      <label for={uid}>{nl ? 'Jullie trouwdatum' : 'Your wedding date'}</label>
+      <input type="date" id={uid} name="datum" />
+      <button class:list={['btn', light ? '' : 'btn--light']} type="submit">{nl ? 'Check je datum' : 'Check your date'} <span class="arrow" aria-hidden="true">→</span></button>
+    </form>
+    <div class="cta-block__row reveal">
+      <a class:list={['btn btn--sm', light ? 'btn--outline' : 'btn--ghost-light']} href={waLink(nl ? 'Hoi Quinty, ik wil graag weten of mijn trouwdatum nog vrij is: ' : 'Hi Quinty, I would like to check whether my wedding date is available: ')} target="_blank" rel="noopener" data-track="whatsapp_click"><Icon name="whatsapp" size={18} /> WhatsApp</a>
+      <span class="small">{nl ? 'of bel' : 'or call'} <a class="link" href={SITE.phoneHref} data-track="phone_click">{SITE.phoneDisplay}</a></span>
+    </div>
+  </div>
+</section>

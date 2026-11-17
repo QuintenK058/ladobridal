@@ -1,0 +1,48 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PageHero from '../../../components/PageHero.astro';
+import Section from '../../../components/Section.astro';
+import Timeline from '../../../components/Timeline.astro';
+import Img from '../../../components/Img.astro';
+import Reviews from '../../../components/Reviews.astro';
+import Faq from '../../../components/Faq.astro';
+import Cta from '../../../components/Cta.astro';
+import { PRICES, euro, DESTINATIONS_EN } from '../../../data/site';
+import { faqSchema, serviceSchema } from '../../../data/schema';
+const path = '/en/destination-wedding-stylist';
+const crumbs = [{ name: 'Home', href: '/en' }, { name: 'Destination weddings', href: path }];
+const price = PRICES.completeBruidslook ? euro(PRICES.completeBruidslook, 'en') : '[PRICE]';
+const faq = [
+  { q: 'What does a destination wedding stylist cost?', a: `<p>Styling follows the Complete Bruidslook, from ${price}. Travel time, flights and accommodation are listed separately in a tailored quote.</p>` },
+  { q: 'How does the trial work if I marry abroad?', a: '<p>In my studio in Leeuwarden before you leave, or prepared digitally if you live abroad, with the trial on location in the days before the wedding.</p>' },
+  { q: 'Can I book you for several days?', a: '<p>Yes, multi-day bookings are welcome.</p>' },
+];
+---
+<Base title="Destination wedding hair & make-up artist | Lado Bridal" description={`Bridal stylist for your wedding abroad: Italy, Spain, France and more. Complete Bruidslook from ${price} + tailored travel and accommodation. Trial beforehand.`}
+  breadcrumbs={crumbs} schema={[serviceSchema({ name: 'Destination wedding styling', path, description: 'Bridal hair and make-up for weddings abroad.' }), faqSchema(faq)]}>
+  <PageHero lang="en" crumbs={crumbs} eyebrow="Destination weddings" h1="Bridal stylist for your wedding abroad" badge shot="bride abroad, warm light · 4:5"
+    lead="Getting married in Italy, Spain or France, with a stylist you already know and trust? I travel with you. We do the trial beforehand, and on your wedding day I’m right there beside you." >
+    <p class="price-from mt-2">Complete Bruidslook from {price} <span class="small muted" style="font-family:var(--sans)">+ tailored travel &amp; accommodation</span></p>
+  </PageHero>
+  <Section eyebrow="Why" title="Why bring your <em>own stylist</em>?">
+    <p>Finding a stylist on location is hard when you don’t speak the language, can’t do a trial and have to rely on photos. With a stylist from the Netherlands you do the trial beforehand, calmly, and on the day you have someone beside you who you already know. I’ve styled 5+ international weddings, including a wedding weekend in Italy.</p>
+    <p>Heat, wind and sun ask for genuinely long-wear work: a well-prepared skin, a thin base that’s properly set, waterproof eyes and a hairstyle with structure.</p>
+  </Section>
+  <section class="section section--linen"><div class="container">
+    <Timeline horizontal steps={[
+      { title: 'Intake', text: 'Country, venue, number of days and people.' },
+      { title: 'Tailored quote', text: 'Styling, travel time, flights and accommodation as separate items.' },
+      { title: 'Trial', text: 'In Leeuwarden, or prepared digitally.' },
+      { title: 'Travel', text: 'I arrive ahead of time, rested.' },
+      { title: 'Your day(s)', text: 'Styling per day, with touch-ups where needed.' },
+    ]} />
+    <p class="eyebrow eyebrow--plain mt-4" style="letter-spacing:.3em">{DESTINATIONS_EN.join(' · ')}</p>
+  </div></section>
+  <section class="section"><div class="container grid align-center">
+    <div class="col-media--left"><Img ratio="4x5" shot="wedding weekend Italy" /></div>
+    <div class="col-text--right"><h2>A wedding weekend <em>in Italy</em></h2><div class="mt-2"><Reviews variant="snippet" featured="italy" lang="en" /></div>
+      <a class="text-link mt-2" href="/en/destination-wedding-stylist/italy">Bridal stylist for your wedding in Italy <span class="arrow" aria-hidden="true">→</span></a></div>
+  </div></section>
+  <section class="section section--linen"><div class="container grid"><div class="col-quarter"><h2>FAQ</h2></div><div class="col-rest"><Faq items={faq} /></div></div></section>
+  <Cta lang="en" title="Marrying abroad? <em>Check your date.</em>" />
+</Base>

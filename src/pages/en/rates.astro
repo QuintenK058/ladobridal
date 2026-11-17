@@ -1,0 +1,40 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Cta from '../../components/Cta.astro';
+import { PRICES, INCLUDED_EN, euro, travelCost } from '../../data/site';
+const crumbs = [{ name: 'Home', href: '/en' }, { name: 'Rates', href: '/en/rates' }];
+const e = (n: number | null) => (n ? euro(n, 'en') : '<span class="ph">[FROM PRICE]</span>');
+const pk = [
+  ['Bridal hair', PRICES.bruidskapsel, '/en/bridal-hair'], ['Bridal make-up', PRICES.bruidsvisagie, '/en/bridal-makeup'],
+  ['Complete Bruidslook', PRICES.completeBruidslook, '/en/complete-bruidslook'], ['Destination wedding', null, '/en/destination-wedding-stylist'],
+] as const;
+---
+<Base title="Bridal hair & make-up rates | Lado Bridal" description={`Honest bridal styling rates: Complete Bruidslook from ${PRICES.completeBruidslook ? euro(PRICES.completeBruidslook, 'en') : '[price]'}, guests €75 each, travel €0.35/km. All costs upfront.`} breadcrumbs={crumbs}>
+  <PageHero lang="en" crumbs={crumbs} eyebrow="Rates" h1="Bridal styling rates" badge lead="Honest prices, upfront. What you pay depends on your package, the number of people and the distance to your venue." />
+  <section class="section--tight"><div class="container"><div class="packages">
+    {pk.map(([n, p, h], i) => (
+      <article class:list={['package', i === 2 && 'package--featured']}>
+        <h2 class="package__name">{n}</h2>
+        <p class="package__price"><small>{i === 3 ? 'price' : 'from'}</small><Fragment set:html={i === 3 ? 'tailored' : e(p)} /></p>
+        <a class="text-link" href={h}>More <span class="arrow" aria-hidden="true">→</span></a>
+        <button type="button" class:list={['btn btn--block', i === 2 ? 'btn--light' : 'btn--outline']} data-open-form>Request a quote</button>
+      </article>
+    ))}
+  </div></div></section>
+  <section class="section"><div class="container grid">
+    <div class="col-half"><h2>Always <em>included</em></h2><ul class="checklist mt-3" role="list">{INCLUDED_EN.map((i) => <li>{i}</li>)}</ul></div>
+    <div class="col-half"><h2>Extras</h2>
+      <table class="addons mt-3"><tbody>
+        <tr><th scope="row">Bridesmaid or guest (hair or make-up)</th><td>{euro(PRICES.guest, 'en')} each</td></tr>
+        <tr><th scope="row">Mother of the bride, incl. styling advice</th><td>{euro(PRICES.mother, 'en')}</td></tr>
+        <tr><th scope="row">Extra set of lashes</th><td>{euro(PRICES.lashes, 'en')}</td></tr>
+        <tr><th scope="row">Photoshoot / editorial</th><td>from {euro(PRICES.photoshoot, 'en')} per look</td></tr>
+        <tr><th scope="row">Extra touch-up hour</th><td>{euro(PRICES.touchUpHour, 'en')}</td></tr>
+        <tr><th scope="row">Travel from Leeuwarden (return)</th><td>€0.35 per km</td></tr>
+      </tbody></table>
+      <p class="small muted mt-2">Over 75 km one way, accommodation is added. Example: 60 km one way = 60 × 2 × €0.35 = {euro(travelCost(60), 'en')}. Your date is confirmed with a signature and 25% deposit. A price calculator is available on the <a class="link" href="/tarieven#calculator" hreflang="nl">Dutch rates page</a>.</p>
+    </div>
+  </div></section>
+  <Cta lang="en" />
+</Base>

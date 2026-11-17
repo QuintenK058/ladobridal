@@ -1,0 +1,101 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Img from '../components/Img.astro';
+import Section from '../components/Section.astro';
+import Reviews from '../components/Reviews.astro';
+import Cta from '../components/Cta.astro';
+import { SITE } from '../data/site';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Over mij', href: '/over-mij' }];
+---
+<Base title="Over Quinty Kant, bruidsstylist uit Leeuwarden | Lado Bridal"
+  description="Maak kennis met Quinty Kant: MUAH-gecertificeerd bruidsstylist en make-up artist uit Leeuwarden. 4 jaar ervaring, 40+ bruiden, rustig, precies en natuurlijk."
+  ogTitle="Over Quinty Kant · Lado Bridal" ogDescription="Bruidsstylist en make-up artist uit Leeuwarden. Rustig, precies en natuurlijk."
+  breadcrumbs={crumbs}>
+  <PageHero crumbs={crumbs} eyebrow="Over mij" h1="Over Quinty Kant, bruidsstylist uit Leeuwarden"
+    lead="Ik ben Quinty. Ik style bruiden op de ochtend van hun bruiloft, en ik vind het mooiste moment als een bruid in de spiegel kijkt en zegt: dit ben ik, maar dan op mijn mooist."
+    shot="portret Quinty, natuurlijk licht · 4:5 · arch" arch cta={false} secondary={{ href: '#kennismaken', label: 'Plan een kennismaking' }} />
+
+  <Section eyebrow="Mijn verhaal" title="Hoe ik <em>bruidsstylist</em> werd">
+    <p class="ph-block">[VERHAAL · door Quinty aan te vullen: hoe ze in bridal styling terechtkwam, wat haar raakt aan trouwdagen, waarom ze voor Lado Bridal koos. ±200 woorden, in de ik-vorm.]</p>
+    <p>Wat ik wel kan vertellen: ik ben gecertificeerd door MUAH, ik werk al {SITE.stats.years} jaar als bruidsstylist en ik heb inmiddels meer dan {SITE.stats.brides} bruiden gestyled, waarvan {SITE.stats.international}+ op een bruiloft in het buitenland. Mijn studio is in Leeuwarden; daar doe ik de proefsessies. Op de trouwdag zelf kom ik naar jou toe.</p>
+  </Section>
+
+  <section class="section section--linen">
+    <div class="container grid align-center">
+      <div class="col-media--left"><Img ratio="3x4" shot="MUAH-certificaat of badge · 3:4" /></div>
+      <div class="col-text--right reveal">
+        <p class="eyebrow">Certificering</p>
+        <h2 class="mt-1">MUAH-<em>gecertificeerd</em></h2>
+        <p class="mt-2">Ik ben opgeleid en gecertificeerd als bruidskapper en make-up artist door MUAH. <span class="ph">[CHECK: korte, correcte omschrijving van de MUAH-opleiding/certificering + beeld van het certificaat]</span></p>
+      </div>
+    </div>
+  </section>
+
+  <Section eyebrow="Werkwijze" title="Rust, precisie <em>en jij</em>">
+    <p>Een trouwochtend is spannend. Er zijn veel mensen, er is een planning, en alles moet op tijd. Ik zie het als mijn taak om daar rust in te brengen. Ik ben er op tijd, ik heb mijn spullen klaarstaan, en ik werk in een tempo dat ruimte laat voor een kop koffie en een onverwacht telefoontje.</p>
+    <p>Precies werken betekent voor mij: een kapsel dat niet alleen mooi is, maar ook zit. Make-up die er van dichtbij zacht uitziet en op foto’s niet vervaagt. Een planning die ik vooraf met je doorneem, zodat je weet wat er gebeurt.</p>
+    <p>En natuurlijk: ik style jou, niet een trend. Ik kijk naar je gezicht, je haar, je jurk en je locatie, en ik vertel eerlijk wat bij jou past.</p>
+    <h3>Wat je op de ochtend van mij kunt verwachten</h3>
+    <ul>
+      <li>Ik ben er op het afgesproken tijdstip, met een ruime marge in de planning.</li>
+      <li>Ik werk met schone kwasten en materialen per persoon.</li>
+      <li>Ik houd de tijd in de gaten, zodat jij dat niet hoeft te doen.</li>
+      <li>Ik blijf tot je sluier zit, of langer als je touch-ups hebt geboekt.</li>
+    </ul>
+  </Section>
+
+  <section class="section section--linen">
+    <div class="container grid">
+      <div class="col-text">
+        <p class="eyebrow">Mijn kit</p>
+        <h2 class="mt-1">Premium, langhoudend <em>en hygiënisch</em></h2>
+        <div class="prose mt-2">
+          <p>Ik werk met premium producten die lang blijven zitten en vriendelijk zijn voor de huid: foundations die goed hechten zonder zwaar te voelen, waterproof producten rond de ogen, en stylingproducten die houvast geven zonder dat je haar stijf wordt.</p>
+          <p>Hygiëne is voor mij vanzelfsprekend. Kwasten worden na elke klant gereinigd, ik gebruik spatels in plaats van vingers in potjes, en wegwerpmaterialen waar dat hoort, zoals mascaraborsteltjes.</p>
+          <p><span class="ph">[CHECK: hygiëne-details bevestigen; merken alleen noemen als Quinty dat wil]</span></p>
+        </div>
+      </div>
+      <div class="col-media" style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <Img ratio="3x4" arch shot="kit: kwasten" />
+        <div style="margin-top:20%"><Img ratio="3x4" arch shot="kit: producten" parallax={0.06} /></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Waar ik voor sta</p><h2>Drie dingen die <em>altijd</em> gelden</h2></div>
+      <div class="grid">
+        {[
+          ['Jij blijft jezelf.', 'Ik versterk wat er is. Je moet jezelf herkennen op je foto’s, ook over twintig jaar.'],
+          ['Rust boven haast.', 'Een ruime planning is geen luxe maar de basis. Een rustige ochtend zie je terug op de foto’s.'],
+          ['Eerlijk vooraf.', 'Je weet van tevoren wat het kost, hoe de ochtend verloopt en wat je kunt verwachten.'],
+        ].map(([t, d], i) => (
+          <div class="col-third reveal" style={`--d:${i * 0.1}s;border-top:1px solid var(--sand);padding-top:1.5rem`}>
+            <p class="h2" style="font-size:clamp(1.8rem,1.4rem + 1.4vw,2.6rem)">{t}</p>
+            <p class="mt-1 muted">{d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--linen" aria-label="Achter de schermen">
+    <div class="container">
+      <div class="look-grid look-grid--3">
+        <Img ratio="4x5" arch shot="behind the scenes: werken aan een bruidskapsel" />
+        <div style="margin-top:12%"><Img ratio="3x4" arch shot="behind the scenes: make-up aanbrengen" parallax={0.05} /></div>
+        <Img ratio="4x5" arch shot="behind the scenes: spiegelmoment bruid" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container"><Reviews variant="pair" /></div>
+  </section>
+
+  <section id="kennismaken">
+    <Cta title="Zullen we <em>kennismaken?</em>" sub="Vertel me over je dag. Ik bel je voor een korte, vrijblijvende intake en je ontvangt binnen 2 werkdagen een persoonlijke offerte." eyebrow="Kennismaken" />
+  </section>
+</Base>

@@ -1,0 +1,111 @@
+---
+import Base from '../../layouts/Base.astro';
+import Img from '../../components/Img.astro';
+import RatingBadge from '../../components/RatingBadge.astro';
+import Timeline from '../../components/Timeline.astro';
+import Reviews from '../../components/Reviews.astro';
+import Faq from '../../components/Faq.astro';
+import Cta from '../../components/Cta.astro';
+import { SITE, PRICES, INCLUDED_EN, DESTINATIONS_EN, euro } from '../../data/site';
+import { faqSchema } from '../../data/schema';
+const price = PRICES.completeBruidslook ? euro(PRICES.completeBruidslook, 'en') : '[PRICE]';
+const faq = [
+  { q: 'Is the trial session included?', a: '<p>Yes. The Complete Bruidslook always includes a full trial session in my studio in Leeuwarden, 4–8 weeks before the wedding. <a href="/en/trial-session">How the trial works</a>.</p>' },
+  { q: 'Do you travel to the venue?', a: '<p>Yes. On your wedding day I come to you: your home, a hotel or the venue itself.</p>' },
+  { q: 'Do you travel abroad?', a: '<p>Gladly — Italy, Spain, France, Portugal, Austria, Greece, Belgium and Germany, and multi-day bookings are welcome. See <a href="/en/destination-wedding-stylist">destination weddings</a>.</p>' },
+  { q: 'How far ahead should I book?', a: '<p>Peak season (May–September) usually books up 9–12 months ahead. For quieter months a few months is usually enough. Your date is confirmed with a signature and a 25% deposit.</p>' },
+  { q: 'What does it cost?', a: `<p>The Complete Bruidslook (hair and make-up, including trial and styling guide) starts from ${price}. Travel is €0.35 per km from Leeuwarden, return. See <a href="/en/rates">rates</a>.</p>` },
+];
+---
+<Base title="Bridal hair & make-up artist in the Netherlands | Lado Bridal"
+  description="Bridal hair and make-up by Quinty Kant, MUAH-certified. Trial session in Leeuwarden, on-location styling across the Netherlands and abroad. Check your date."
+  ogTitle="Lado Bridal · Bridal hair & make-up on location" schema={[faqSchema(faq)]} overDark>
+  <section class="hero" data-hero>
+    <div class="hero__media"><Img ratio="4x5" shot="hero · bride portrait, warm daylight" priority kenBurns reveal={false} dark /></div>
+    <div class="container hero__content">
+      <p class="display hero-words" data-split>Your <em>dream look,</em> styled to perfection.</p>
+      <h1>Bridal hair &amp; make-up in Friesland, across the Netherlands and abroad</h1>
+      <div class="hero__actions">
+        <button type="button" class="btn btn--light" data-open-form>Check your date <span class="arrow" aria-hidden="true">→</span></button>
+        <a class="btn btn--ghost-light" href="/en/portfolio">View portfolio</a>
+      </div>
+      <div class="cluster mt-3" style="--gap:1.25rem"><RatingBadge lang="en" /><p class="hero__meta" style="margin:0">MUAH-certified · 40+ brides · Trial session included</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid align-center">
+      <div class="col-media--left"><Img ratio="4x5" arch shot="portrait Quinty in the studio" /></div>
+      <div class="col-text--right">
+        <p class="eyebrow">About me</p>
+        <h2 class="mt-2 reveal-text" data-split>Hi, I’m <em>Quinty.</em></h2>
+        <div class="stack mt-2 reveal" style="--stack:1rem">
+          <p>I’m a MUAH-certified bridal hairstylist and make-up artist from Leeuwarden, in the north of the Netherlands. For four years I’ve styled brides on the morning of their wedding, from a town hall in Friesland to a wedding weekend in Italy.</p>
+          <p>I work calmly and precisely, with a timeline that leaves room to breathe. My style is natural: you, on your most beautiful day.</p>
+        </div>
+        <a class="text-link mt-2" href="/en/about">More about me <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section--tight"><div class="container">
+    <dl class="stats">
+      <div><dt class="sr-only">Years</dt><dd class="stat__num" data-count={SITE.stats.years}>{SITE.stats.years}</dd><dd class="stat__label">years of experience</dd></div>
+      <div><dt class="sr-only">Brides</dt><dd class="stat__num" data-count={SITE.stats.brides} data-suffix="+">{SITE.stats.brides}+</dd><dd class="stat__label">brides styled</dd></div>
+      <div><dt class="sr-only">International</dt><dd class="stat__num" data-count={SITE.stats.international} data-suffix="+">{SITE.stats.international}+</dd><dd class="stat__label">international weddings</dd></div>
+      <div><dt class="sr-only">Google</dt><dd class="stat__num" data-count="5" data-decimals="1">5.0</dd><dd class="stat__label">on Google</dd></div>
+    </dl>
+  </div></section>
+
+  <section class="section" id="services">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Services</p><h2>For every <em>special</em> moment</h2></div>
+      <div class="look-grid look-grid--4">
+        {[
+          ['/en/bridal-hair', 'Bridal hair', 'Down, half-up or updo, built to last all day.'],
+          ['/en/bridal-makeup', 'Bridal make-up', 'Skin that looks like skin, on camera and in real life.'],
+          ['/en/complete-bruidslook', 'Complete Bruidslook', `Hair and make-up in one hand, from ${price}. Most chosen.`],
+          ['/en/guests-and-events', 'Guests & events', 'Bridesmaids, mothers, galas and photoshoots.'],
+        ].map(([h, t, d], i) => (
+          <a class="card" href={h}><Img ratio={i % 2 ? '3x4' : '4x5'} shot={t} delay={i * 0.08} /><span class="card__title">{t}</span><p>{d}</p></a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--linen">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">How it works</p><h2>How we work <em>together</em></h2></div>
+      <Timeline horizontal steps={[
+        { title: 'Introduction', text: 'A phone intake about your day, your dress and your wishes.' },
+        { title: 'Quote within 2 working days', text: 'All costs upfront. Confirmed with a signature and 25% deposit.' },
+        { title: 'Trial in Leeuwarden', text: '4–8 weeks before the wedding, in my studio.' },
+        { title: 'Your wedding day', text: 'I come to you, with a generous timeline.' },
+        { title: 'Glowing until the last dance', text: 'A styling guide for the day, and optional touch-ups.' },
+      ]} />
+      <ul class="checklist checklist--2 mt-4" role="list">{INCLUDED_EN.map((i) => <li>{i}</li>)}</ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container"><div class="section-head"><p class="eyebrow">Reviews</p><h2>What brides <em>say</em></h2></div><Reviews variant="carousel" lang="en" />
+      <a class="text-link mt-3" href="/en/reviews">All reviews <span class="arrow" aria-hidden="true">→</span></a></div>
+  </section>
+
+  <section class="section section--dark on-dark">
+    <div class="container">
+      <p class="eyebrow">Destination weddings</p>
+      <h2 class="display mt-2 reveal-text" data-split style="max-width:14ch">Getting married abroad? I’ll <em>travel with you.</em></h2>
+      <p class="eyebrow eyebrow--plain mt-3" style="color:#E2D8CC;letter-spacing:.3em">{DESTINATIONS_EN.join(' · ')}</p>
+      <a class="btn btn--light mt-3" href="/en/destination-wedding-stylist">Destination wedding styling <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <section class="section section--linen">
+    <div class="container grid">
+      <div class="col-quarter"><p class="eyebrow">FAQ</p><h2 class="mt-2">Good to <em>know</em></h2></div>
+      <div class="col-rest"><Faq items={faq} id="en-faq" /></div>
+    </div>
+  </section>
+  <Cta lang="en" />
+</Base>

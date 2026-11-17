@@ -1,0 +1,18 @@
+---
+interface Props { items: { q: string; a: string }[]; id?: string }
+const { items, id = 'faq' } = Astro.props;
+---
+<div class="faq" data-faq>
+  {items.map((it, i) => (
+    <div class="faq__item">
+      <h3>
+        <button class="faq__q" type="button" aria-expanded="false" aria-controls={`${id}-a${i}`} id={`${id}-q${i}`}>
+          <span>{it.q}</span><span class="faq__icon" aria-hidden="true"></span>
+        </button>
+      </h3>
+      <div class="faq__a" id={`${id}-a${i}`} role="region" aria-labelledby={`${id}-q${i}`}>
+        <div><div class="faq__a-inner" set:html={it.a} /></div>
+      </div>
+    </div>
+  ))}
+</div>

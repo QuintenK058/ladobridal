@@ -1,0 +1,42 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import { PRICES, euro } from '../../data/site';
+const price = PRICES.bruidsvisagie;
+---
+<ServiceLayout lang="en"
+  title="Bridal make-up artist on location, Netherlands | Lado Bridal"
+  description="Long-wear bridal make-up that looks like skin, in real life and on camera. Natural to glam, lashes included. Trial in Leeuwarden, styling on location."
+  path="/en/bridal-makeup" serviceName="Bridal make-up on location" crumb="Bridal make-up" price={price}
+  eyebrow="02 — Bridal make-up" h1="Bridal make-up on location"
+  lead="Make-up in which you recognise yourself, only at your most radiant. It survives emotion, hugs, a warm day and a camera flash, and still feels light on your skin."
+  heroShot="bridal make-up close-up · 4:5"
+  forWhoTitle="For brides who want to look <em>like themselves</em>"
+  forWho={`<p>Most brides who come to me wear little make-up day to day. They want to look special on their wedding day, but not like someone else. Bridal make-up is about an even, glowing complexion, eyes that read well on camera and lips that still have colour after dinner.</p><p>Prefer a bolder look? That’s possible too; at the trial we find the balance between your taste, your dress, the venue and the light of the day.</p>`}
+  processTitle="From skin to <em>final layer</em>"
+  process={[
+    { title: 'Intake', text: 'We discuss your skin, any sensitivities, your dress and the look you have in mind.' },
+    { title: 'Trial', text: '4–8 weeks before, with photos in daylight and with flash.' },
+    { title: 'Skin prep advice', text: 'What to do (and avoid) in the weeks before.' },
+    { title: 'Wedding morning', text: 'Skin prep, long-wear base, eyes, lashes and lips.' },
+    { title: 'All day', text: 'Your lip colour to take with you, plus a styling guide.' },
+  ]}
+  looksTitle="From natural to <em>glam</em>"
+  looks={[
+    { name: 'Natural', text: 'Skin that looks like skin, soft definition and a fresh flush.', shot: 'natural bridal make-up' },
+    { name: 'Soft glam', text: 'More depth on the eyes and a defined lip.', shot: 'soft glam make-up' },
+    { name: 'Glam', text: 'A statement eye or lip, balanced to stay elegant.', shot: 'glam bridal make-up' },
+  ]}
+  includedTitle="What’s <em>included</em>"
+  included={['Phone intake', 'Trial session in Leeuwarden', 'Skin prep on the morning', 'Premium, long-wear, skin-friendly products', 'Lashes included (extra set: €15)', 'Hygienic way of working']}
+  priceLabel="Bridal make-up"
+  priceValue={price ? `<small>from</small>${euro(price, 'en')}` : '<small>from</small><span class="ph">[FROM PRICE]</span>'}
+  priceNote="Plus travel (€0.35 per km from Leeuwarden, return). Personal quote within 2 working days."
+  service="visagie"
+  faqTitle="Questions about <em>bridal make-up</em>"
+  faq={[
+    { q: 'Will my make-up last all day?', a: '<p>Yes: thin, well-bonded layers, set properly, with long-wear and waterproof products around the eyes. You keep your lip colour for after dinner.</p>' },
+    { q: 'I have sensitive skin. Is that OK?', a: '<p>Absolutely. Mention it at the intake and I’ll adapt the products. The trial doubles as a test.</p>' },
+    { q: 'Are lashes included?', a: '<p>Yes. An extra set costs €15.</p>' },
+  ]}
+  related={[{ href: '/en/complete-bruidslook', label: 'Complete Bruidslook', note: 'Most chosen' }, { href: '/en/bridal-hair', label: 'Bridal hair' }, { href: '/en/trial-session', label: 'The trial session' }]}
+/>

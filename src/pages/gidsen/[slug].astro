@@ -1,0 +1,38 @@
+---
+/** Guide stubs: template + brief, noindex until Quinty approves the copy (set ready: true in data/site.ts GUIDES). */
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { GUIDES } from '../../data/site';
+const BRIEFS: Record<string, { lead: string; toc: [string, string][]; brief: string }> = {
+  'planning-trouwochtend-haar-en-make-up': {
+    lead: 'Hoe laat begin je, wie gaat eerst, en hoeveel buffer heb je nodig? Een stap-voor-stap planning voor je trouwochtend.',
+    toc: [['starttijd', 'Terugrekenen vanaf de ceremonie'], ['volgorde', 'Wie gaat eerst?'], ['buffer', 'Hoeveel buffer?'], ['fotograaf', 'Afstemmen met de fotograaf'], ['voorbeeld', 'Voorbeeldplanning']],
+    brief: 'Doel: bruiden helpen hun ochtend te plannen. Zoekintentie: “planning trouwdag haar en make-up”, “hoe laat beginnen visagie bruiloft”. Inhoud: terugrekenen vanaf ceremonie, volgorde (gasten eerst, bruid laatst), buffer, fotograaf/first look, 2 voorbeeldplanningen (1 bruid / bruid + 4). CTA: Check je datum. Links: /complete-bruidslook, /proefsessie, /gala-en-gasten-styling. Tijden per look door Quinty in te vullen.',
+  },
+  'bruidskapsel-los-of-opgestoken': {
+    lead: 'Los, half-los of opgestoken: welk bruidskapsel past bij jouw haar, jurk en locatie?',
+    toc: [['los', 'Los'], ['half-los', 'Half-los'], ['opgestoken', 'Opgestoken'], ['jurk', 'Kiezen op basis van je jurk'], ['locatie', 'Kiezen op basis van je locatie']],
+    brief: 'Doel: keuzehulp. Zoekintentie: “bruidskapsel los of opgestoken”, “welk bruidskapsel past bij mij”. Inhoud: voor- en nadelen per stijl, halslijn jurk, haartype, wind/hitte per locatie, sluier. Echte portfoliofoto’s per stijl. Links: /bruidskapsel, /trouwlocaties, /portfolio.',
+  },
+  'bruidsmake-up-die-de-hele-dag-blijft-zitten': {
+    lead: 'Van huidvoorbereiding tot touch-up: zo blijft je bruidsmake-up zitten van de ceremonie tot de laatste dans.',
+    toc: [['huid', 'Huidvoorbereiding'], ['basis', 'De basis'], ['ogen', 'Ogen en wimpers'], ['lippen', 'Lippen'], ['dag', 'Tijdens de dag']],
+    brief: 'Doel: expertise tonen + vertrouwen. Zoekintentie: “bruidsmake-up langhoudend”, “make-up blijft zitten bruiloft”. Inhoud: huid weken vooraf, primer/basis, vastzetten, waterproof, lipkleur, hitte (37°C-verhaal met review). Geen merknamen zonder akkoord Quinty. Links: /bruidsvisagie, /destination-wedding-stylist.',
+  },
+  'proefsessie-voorbereiden-checklist': {
+    lead: 'Wat neem je mee naar je proefsessie, en hoe haal je er het meeste uit? De volledige checklist.',
+    toc: [['meenemen', 'Wat neem je mee?'], ['haar-huid', 'Haar en huid vooraf'], ['vragen', 'Vragen om te stellen'], ['foto', 'Foto’s maken'], ['erna', 'Na de proefsessie']],
+    brief: 'Doel: boekingsangst verlagen. Zoekintentie: “proefsessie bruid wat meenemen”, “proefsessie visagie checklist”. Inhoud: uitgebreide checklist (printbaar), wat te dragen, haar wassen ja/nee, wie meenemen, foto’s daglicht+flits. Links: /proefsessie, /complete-bruidslook.',
+  },
+};
+export function getStaticPaths() {
+  return GUIDES.filter((g) => g.slug.startsWith('/gidsen/')).map((g) => ({ params: { slug: g.slug.replace('/gidsen/', '') }, props: { g } }));
+}
+const { g } = Astro.props;
+const slug = g.slug.replace('/gidsen/', '');
+const b = BRIEFS[slug];
+---
+<ArticleLayout title={`${g.title} | Lado Bridal`} description={b.lead} path={g.slug} crumbName={g.title} h1={g.title} lead={b.lead}
+  updated="2026-11-17" updatedLabel="november 2026" noindex={!g.ready} toc={b.toc.map(([id, label]) => ({ id, label }))}>
+  <div class="ph-block"><strong>BRIEF (niet publiceren tot de tekst is goedgekeurd — pagina staat op noindex):</strong><br />{b.brief}</div>
+  {b.toc.map(([id, label]) => (<><h2 id={id}>{label}</h2><p class="ph-block">[TEKST · {label} · ±150–250 woorden]</p></>))}
+</ArticleLayout>

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /bedankt
+Disallow: /en/thank-you
+Disallow: /styleguide
+
+Sitemap: https://ladobridal.com/sitemap.xml

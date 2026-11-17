@@ -1,0 +1,35 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import { PRICES, euro } from '../../data/site';
+---
+<ServiceLayout lang="en"
+  title="Hair & make-up for guests, galas and events | Lado Bridal"
+  description="Hair or make-up for bridesmaids and guests (€75 each), mother of the bride (€75 incl. styling advice), galas and photoshoots (from €175 per look)."
+  path="/en/guests-and-events" serviceName="Hair & make-up for guests, galas and photoshoots" crumb="Guests & events" price={PRICES.guest}
+  eyebrow="04 — Guests &amp; events" h1="Hair &amp; make-up for galas, parties and guests"
+  lead="For everyone who wants to shine alongside the bride: bridesmaids, mothers and guests on the wedding day, and for galas, parties and photoshoots."
+  heroShot="bridesmaids group · 4:5"
+  forWhoTitle="For the people <em>around the bride</em>"
+  forWho={`<p><strong>Bridesmaids and guests</strong> choose hair or make-up, ${euro(PRICES.guest, 'en')} per person. <strong>Mother of the bride</strong> (${euro(PRICES.mother, 'en')}) also gets styling advice. For a <strong>gala, party or photoshoot</strong>, an editorial look starts from ${euro(PRICES.photoshoot, 'en')}.</p><p>Travel is charged once per wedding day, however many people I style.</p>`}
+  processTitle="How we plan <em>the group</em>"
+  process={[
+    { title: 'Who and what', text: 'Who is being styled, and whether it’s hair, make-up or both.' },
+    { title: 'Timeline', text: 'A schedule per person, with the bride finishing last.' },
+    { title: 'On location', text: 'I work where the bride gets ready.' },
+    { title: 'Ready for photos', text: 'Everyone on time for the photographer.' },
+  ]}
+  looksTitle="Matching, <em>not identical</em>"
+  looks={[
+    { name: 'Bridesmaids', text: 'A shared line with a personal twist.', shot: 'bridesmaids hair' },
+    { name: 'Mother of the bride', text: 'Polished and timeless.', shot: 'mother of the bride' },
+    { name: 'Gala & party', text: 'An evening look that lasts.', shot: 'gala look' },
+    { name: 'Photoshoot', text: 'Looks made for camera and light.', shot: 'editorial shoot' },
+  ]}
+  includedTitle="Prices <em>per person</em>"
+  included={[`Bridesmaid or guest, hair or make-up — ${euro(PRICES.guest, 'en')}`, `Mother of the bride incl. styling advice — ${euro(PRICES.mother, 'en')}`, `Extra set of lashes — ${euro(PRICES.lashes, 'en')}`, `Photoshoot / editorial — from ${euro(PRICES.photoshoot, 'en')} per look`, `Extra touch-up hour — ${euro(PRICES.touchUpHour, 'en')}`]}
+  priceLabel="Guests & bridesmaids" priceValue={`<small>per person</small>${euro(PRICES.guest, 'en')}`}
+  priceNote="Plus travel (€0.35 per km from Leeuwarden, return), charged once per wedding day."
+  service="gasten" faqTitle="Questions"
+  faq={[{ q: 'Can I book guests without the bride?', a: '<p>For a wedding day, guests are styled together with the bride. Galas, parties and shoots can be booked separately.</p>' }, { q: 'What is a “look” for a photoshoot?', a: '<p>One combination of hair and make-up. A change of style during the shoot is a second look.</p>' }]}
+  related={[{ href: '/en/complete-bruidslook', label: 'Complete Bruidslook for the bride' }, { href: '/en/rates', label: 'All rates' }]}
+/>

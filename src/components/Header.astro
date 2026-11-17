@@ -1,0 +1,98 @@
+---
+import { SITE, waLink } from '../data/site';
+import { counterpart } from '../data/i18n';
+import Img from './Img.astro';
+import Icon from './Icon.astro';
+interface Props { lang: 'nl' | 'en'; path: string; overDark?: boolean }
+const { lang, path, overDark } = Astro.props;
+const nl = lang === 'nl';
+const other = counterpart(path) ?? (nl ? '/en' : '/');
+
+const services = nl ? [
+  { href: '/bruidskapsel', name: 'Bruidskapsel', line: 'Los, half-los of opgestoken', shot: 'bruidskapsel' },
+  { href: '/bruidsvisagie', name: 'Bruidsvisagie', line: 'Natuurlijk tot glam, langhoudend', shot: 'make-up' },
+  { href: '/complete-bruidslook', name: 'Complete Bruidslook', line: 'Haar en make-up in één hand', shot: 'volledige look' },
+  { href: '/gala-en-gasten-styling', name: 'Gala & gasten', line: 'Bruidsmeisjes, moeders, gala’s', shot: 'gasten' },
+] : [
+  { href: '/en/bridal-hair', name: 'Bridal hair', line: 'Down, half-up or updo', shot: 'bridal hair' },
+  { href: '/en/bridal-makeup', name: 'Bridal make-up', line: 'Natural to glam, long-wear', shot: 'make-up' },
+  { href: '/en/complete-bruidslook', name: 'Complete Bruidslook', line: 'Hair and make-up in one hand', shot: 'full look' },
+  { href: '/en/guests-and-events', name: 'Guests & events', line: 'Bridesmaids, mothers, galas', shot: 'guests' },
+];
+const side = nl ? [
+  { href: '/proefsessie', name: 'De proefsessie' },
+  { href: '/destination-wedding-stylist', name: 'Destination weddings' },
+  { href: '/trouwlocaties', name: 'Trouwlocaties' },
+  { href: '/bruidsstylist-nederland', name: 'Regio’s' },
+] : [
+  { href: '/en/trial-session', name: 'The trial session' },
+  { href: '/en/destination-wedding-stylist', name: 'Destination weddings' },
+];
+const links = nl ? [
+  { href: '/tarieven', name: 'Tarieven' }, { href: '/portfolio', name: 'Portfolio' }, { href: '/ervaringen', name: 'Ervaringen' },
+  { href: '/over-mij', name: 'Over mij' }, { href: '/contact', name: 'Contact' },
+] : [
+  { href: '/en/rates', name: 'Rates' }, { href: '/en/portfolio', name: 'Portfolio' }, { href: '/en/reviews', name: 'Reviews' },
+  { href: '/en/about', name: 'About' }, { href: '/en/contact', name: 'Contact' },
+];
+const cur = (href: string) => (path === href ? 'page' : undefined);
+const home = nl ? '/' : '/en';
+---
+<header class:list={['site-header', overDark && 'is-over-dark', !overDark && 'is-solid-start']} data-header>
+  <div class="container site-header__inner">
+    <a href={home} class="wordmark">LADO BRIDAL<small>{nl ? 'HAIR & MAKE-UP' : 'HAIR & MAKE-UP'}</small></a>
+    <nav class="nav" aria-label={nl ? 'Hoofdmenu' : 'Main menu'}>
+      <ul>
+        <li>
+          <button type="button" aria-expanded="false" aria-controls="mega" data-mega-toggle>{nl ? 'Diensten' : 'Services'} <span aria-hidden="true" style="font-size:.7em">▾</span></button>
+        </li>
+        {links.map((l) => <li><a href={l.href} aria-current={cur(l.href)}>{l.name}</a></li>)}
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="lang-toggle" href={other} hreflang={nl ? 'en' : 'nl'} lang={nl ? 'en' : 'nl'} title={nl ? 'Switch to English' : 'Naar Nederlands'}>
+        <span aria-current={nl ? 'true' : undefined}>NL</span><span aria-hidden="true">/</span><span aria-current={!nl ? 'true' : undefined}>EN</span>
+      </a>
+      <button type="button" class="btn btn--sm" data-open-form data-track-label="header">{nl ? 'Check je datum' : 'Check your date'}</button>
+      <button type="button" class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" data-menu-open aria-label={nl ? 'Menu openen' : 'Open menu'}>
+        <span class="menu-toggle__bars"><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+  <div class="mega" id="mega" data-mega>
+    <div class="container mega__grid">
+      {services.map((s) => (
+        <a class="mega__item card" href={s.href}>
+          <Img ratio="4x5" shot={s.shot} reveal={false} />
+          <strong>{s.name}</strong>
+          <p>{s.line}</p>
+        </a>
+      ))}
+      <div class="mega__side">
+        <p class="eyebrow eyebrow--plain">{nl ? 'Ook' : 'Also'}</p>
+        {side.map((s) => <a href={s.href}>{s.name} <span class="arrow" aria-hidden="true">→</span></a>)}
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobile-menu" data-mobile-menu role="dialog" aria-modal="true" aria-label="Menu" hidden>
+  <div class="mobile-menu__top">
+    <a href={home} class="wordmark">LADO BRIDAL</a>
+    <button type="button" class="mobile-menu__close" data-menu-close aria-label={nl ? 'Menu sluiten' : 'Close menu'}><Icon name="close" size={24} /></button>
+  </div>
+  <nav aria-label={nl ? 'Mobiel menu' : 'Mobile menu'}>
+    <ul>
+      <li><a href={nl ? '/#diensten' : '/en#services'} style="--i:0">{nl ? 'Diensten' : 'Services'}</a>
+        <ul class="sub">{services.map((s) => <li><a href={s.href}>{s.name}</a></li>)}{side.map((s) => <li><a href={s.href}>{s.name}</a></li>)}</ul>
+      </li>
+      {links.map((l, i) => <li><a href={l.href} style={`--i:${i + 1}`} aria-current={cur(l.href)}>{l.name}</a></li>)}
+    </ul>
+  </nav>
+  <div class="mobile-menu__foot">
+    <button type="button" class="btn btn--block" data-open-form>{nl ? 'Check je datum' : 'Check your date'}</button>
+    <a class="btn btn--outline btn--block" href={waLink(nl ? 'Hoi Quinty, ' : 'Hi Quinty, ')} target="_blank" rel="noopener" data-track="whatsapp_click"><Icon name="whatsapp" size={18} /> WhatsApp</a>
+    <p><a href={SITE.phoneHref} data-track="phone_click">{SITE.phoneDisplay}</a> · <a href={`mailto:${SITE.email}`} data-track="email_click">{SITE.email}</a></p>
+    <p><a href={other}>{nl ? 'English' : 'Nederlands'}</a></p>
+  </div>
+</div>

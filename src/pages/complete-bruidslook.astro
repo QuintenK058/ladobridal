@@ -1,0 +1,69 @@
+---
+import ServiceLayout from '../layouts/ServiceLayout.astro';
+import Section from '../components/Section.astro';
+import { PRICES, euro, INCLUDED_NL } from '../data/site';
+const price = PRICES.completeBruidslook;
+---
+<ServiceLayout
+  title="Complete Bruidslook: haar & make-up in één hand | Lado Bridal"
+  description={`Bruidskapsel en bruidsmake-up door één stylist: één visie, één planning, een rustige ochtend. Inclusief proefsessie en styling guide${price ? `, vanaf ${euro(price)}` : ''}.`}
+  ogTitle="Complete Bruidslook · Lado Bridal"
+  ogDescription="Haar en make-up in één hand, inclusief proefsessie in Leeuwarden en persoonlijke styling guide. Het meest gekozen pakket."
+  path="/complete-bruidslook" serviceName="Complete Bruidslook (bruidskapsel en bruidsmake-up)" crumb="Complete Bruidslook" price={price}
+  eyebrow="03 — Meest gekozen"
+  h1="Complete Bruidslook: haar en make-up in één hand"
+  lead={`Eén stylist voor je haar en je make-up. Dat betekent één visie op je look, één planning voor je ochtend en één vertrouwd gezicht naast je als het spannend wordt. ${price ? `Vanaf <strong>${euro(price)}</strong>, inclusief proefsessie en styling guide.` : ''}`}
+  heroShot="bruid volledige look, haar en make-up · 4:5"
+  forWhoTitle="Waarom één stylist <em>rustiger</em> is"
+  forWho={`<p>Met een aparte kapper en visagist plan je twee mensen, twee proefsessies en twee tijdsblokken op je trouwochtend. Ze moeten op elkaar wachten en ze zien elk maar de helft van je look. Dat kan prima, maar het levert vaak meer gedoe op dan je zou willen op een dag die al vol zit.</p>
+<p>Bij de Complete Bruidslook bewaak ik het geheel. Ik stem de kleur van je make-up af op hoe je haar valt, de hoogte van je opsteek op de hals van je jurk, en het tempo van de ochtend op wat jij prettig vindt. Er is één planning, die ik vooraf met je doorneem, en één persoon die je kunt bellen als er iets verandert.</p>
+<p>Het is het pakket dat de meeste bruiden kiezen, en het enige waarin ik de proefsessie en een uitgebreide, persoonlijke styling guide standaard voor je combineer.</p>`}
+  processTitle="Van intake tot <em>laatste dans</em>"
+  process={[
+    { title: 'Kennismaking', text: 'Een telefonische intake over je dag, je jurk, je locatie en je wensen.' },
+    { title: 'Offerte binnen 2 werkdagen', text: 'Alle kosten vooraf op papier, inclusief eventuele reiskosten en extra personen.' },
+    { title: 'Proefsessie', text: 'Haar en make-up samen, 4–8 weken vooraf in de studio in Leeuwarden.' },
+    { title: 'Trouwochtend', text: 'Ik kom naar je toe met een planning waarin ruimte zit. Jij hoeft nergens op te letten.' },
+    { title: 'Styling guide', text: 'Wat je de rest van de dag nodig hebt, wanneer je wat bijwerkt, en optioneel touch-ups.' },
+  ]}
+  looksTitle="Eén look, <em>van top tot teen</em>"
+  looks={[
+    { name: 'Romantisch', text: 'Zachte golven, een stralende huid en een roze lip. Tijdloos bij een kanten jurk.', shot: 'romantische bruidslook' },
+    { name: 'Klassiek elegant', text: 'Een strakke lage knot, gedefinieerde ogen en een neutrale lip.', shot: 'klassieke bruidslook' },
+    { name: 'Boho naturel', text: 'Half-los met textuur, minimale make-up en een frisse blos. Mooi bij een schuur of buitenceremonie.', shot: 'boho bruidslook buiten' },
+    { name: 'Moderne glam', text: 'Een gladde opsteek, een uitgesproken oog en een huid die straalt in avondlicht.', shot: 'moderne glam bruidslook' },
+  ]}
+  includedTitle="Altijd <em>inbegrepen</em>"
+  included={INCLUDED_NL}
+  priceLabel="Complete Bruidslook"
+  priceValue={price ? `<small>vanaf</small>${euro(price)}` : '<small>vanaf</small><span class="ph">[PRIJS INCL. BTW]</span>'}
+  priceNote="Inclusief proefsessie en styling guide. Plus reiskosten (€0,35 per km vanaf Leeuwarden, heen en terug). Bruidsmeisjes en gasten €75 p.p."
+  service="complete"
+  faq={[
+    { q: 'Wat zit er precies in de Complete Bruidslook?', a: '<p>Je bruidskapsel en je bruidsmake-up op de trouwdag, een telefonische intake, een volledige proefsessie in de studio in Leeuwarden, premium langhoudende producten, wimpers en een persoonlijke styling guide voor de dag.</p>' },
+    { q: 'Hoeveel tijd heb je nodig op de trouwochtend?', a: '<p>Dat hangt af van je haar, de look en of er nog meer mensen gestyled worden. Ik maak vooraf een planning per persoon, met ruimte voor onverwachte dingen. Jij krijgt die planning ruim voor de dag, zodat je fotograaf en de rest van de ochtend erop kunnen aansluiten.</p>' },
+    { q: 'Kunnen bruidsmeisjes en mijn moeder ook gestyled worden?', a: '<p>Ja. Bruidsmeisjes en gasten kosten €75 per persoon (haar of make-up), de moeder van de bruid €75 inclusief stylingadvies. Ik plan hen in vóór jou, zodat jij als laatste klaar bent en alles fris blijft.</p>' },
+    { q: 'Kan ik touch-ups boeken tijdens de dag?', a: '<p>Ja, een extra touch-up uur kost €65. Handig bij een lange dag met een aparte avondceremonie of een fotoshoot laat op de dag.</p>' },
+    { q: 'Hoe leg ik mijn datum vast?', a: '<p>Na de offerte bevestig je met een handtekening en een aanbetaling van 25%. Daarna staat je datum vast. In het hoogseizoen (mei–september) raken data vaak 9–12 maanden vooruit vol.</p>' },
+  ]}
+  related={[
+    { href: '/tarieven', label: 'Tarieven en prijscalculator' },
+    { href: '/proefsessie', label: 'Zo gaat de proefsessie' },
+    { href: '/destination-wedding-stylist', label: 'Complete Bruidslook in het buitenland' },
+    { href: '/bruidsstylist-friesland', label: 'Bruidsstylist Friesland' },
+    { href: '/bruidsstylist-noord-holland', label: 'Bruidsstylist Noord-Holland' },
+  ]}
+>
+  <Section eyebrow="De styling guide" title="Wat je <em>meekrijgt</em> voor de dag">
+    <p>Na je proefsessie maak ik een persoonlijke styling guide. Daarin staat wat we hebben afgesproken en wat je zelf de rest van de dag nodig hebt:</p>
+    <ul>
+      <li>de look, met foto’s van je proefsessie;</li>
+      <li>de planning van de ochtend per persoon;</li>
+      <li>hoe je je huid en haar in de dagen vooraf voorbereidt;</li>
+      <li>welke kleur lippenstift je bijwerkt, en wanneer;</li>
+      <li>wat je in je tasje of bij je getuige stopt voor onderweg.</li>
+    </ul>
+    <p><span class="ph">[CHECK: inhoud styling guide bevestigen met Quinty]</span></p>
+    <p>Zo hoef je op de dag zelf niets te onthouden. Wil je liever dat ik blijf, dan kan dat met een extra touch-up uur.</p>
+  </Section>
+</ServiceLayout>

@@ -1,0 +1,99 @@
+---
+import Base from './Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import Timeline from '../components/Timeline.astro';
+import Img from '../components/Img.astro';
+import Reviews from '../components/Reviews.astro';
+import Faq from '../components/Faq.astro';
+import Related from '../components/Related.astro';
+import Cta from '../components/Cta.astro';
+import { faqSchema, serviceSchema } from '../data/schema';
+import type { ServiceTag } from '../data/reviews';
+
+interface Props {
+  lang?: 'nl' | 'en';
+  title: string; description: string; ogTitle?: string; ogDescription?: string;
+  path: string; serviceName: string; crumb: string;
+  eyebrow: string; h1: string; lead: string; heroShot: string;
+  forWhoTitle: string; forWho: string;
+  processTitle: string; process: { title: string; text: string }[];
+  looksTitle: string; looks: { name: string; text: string; shot: string }[];
+  includedTitle: string; included: string[]; priceLabel: string; priceValue: string; priceNote?: string;
+  service: ServiceTag;
+  faqTitle?: string; faq: { q: string; a: string }[];
+  related: { href: string; label: string; note?: string }[];
+  price?: number | null;
+}
+const p = Astro.props;
+const nl = (p.lang ?? 'nl') === 'nl';
+const home = nl ? { name: 'Home', href: '/' } : { name: 'Home', href: '/en' };
+const crumbs = [home, { name: p.crumb, href: p.path }];
+---
+<Base title={p.title} description={p.description} ogTitle={p.ogTitle} ogDescription={p.ogDescription} breadcrumbs={crumbs}
+  schema={[serviceSchema({ name: p.serviceName, path: p.path, description: p.description, price: p.price, area: [{ type: 'AdministrativeArea', name: 'Friesland' }, { type: 'AdministrativeArea', name: 'Groningen' }, { type: 'AdministrativeArea', name: 'Drenthe' }, { type: 'AdministrativeArea', name: 'Overijssel' }, { type: 'AdministrativeArea', name: 'Noord-Holland' }, { type: 'Country', name: 'Nederland' }] }), faqSchema(p.faq)]}>
+  <PageHero crumbs={crumbs} eyebrow={p.eyebrow} h1={p.h1} lead={p.lead} shot={p.heroShot} lang={p.lang} badge
+    secondary={{ href: nl ? '/tarieven' : '/en/rates', label: nl ? 'Bekijk tarieven' : 'See rates' }} />
+
+  <Section eyebrow={nl ? 'Voor wie' : 'Who it’s for'} title={p.forWhoTitle}>
+    <Fragment set:html={p.forWho} />
+  </Section>
+
+  <section class="section section--linen">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">{nl ? 'Zo gaat het' : 'How it works'}</p><h2 set:html={p.processTitle} /></div>
+      <Timeline horizontal={p.process.length <= 5} steps={p.process} />
+    </div>
+  </section>
+
+  <slot />
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">{nl ? 'Looks' : 'Looks'}</p><h2 set:html={p.looksTitle} /></div>
+      <div class:list={['look-grid', p.looks.length >= 4 ? 'look-grid--4' : 'look-grid--3']}>
+        {p.looks.map((l, i) => (
+          <article class="card">
+            <Img ratio={i % 2 ? '3x4' : '4x5'} shot={l.shot} delay={i * 0.08} />
+            <h3 class="card__title">{l.name}</h3>
+            <p>{l.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--linen">
+    <div class="container grid">
+      <div class="col-main">
+        <p class="eyebrow">{nl ? 'Inbegrepen' : 'Included'}</p>
+        <h2 class="mt-1" set:html={p.includedTitle} />
+        <ul class="checklist mt-3" role="list">{p.included.map((i) => <li>{i}</li>)}</ul>
+      </div>
+      <aside class="col-aside price-box reveal">
+        <p class="eyebrow eyebrow--plain">{p.priceLabel}</p>
+        <p class="package__price" set:html={p.priceValue} />
+        {p.priceNote && <p class="small muted" set:html={p.priceNote} />}
+        <button type="button" class="btn btn--block" data-open-form>{nl ? 'Vraag een offerte aan' : 'Request a quote'}</button>
+        <a class="text-link" href={nl ? '/tarieven#calculator' : '/en/rates'}>{nl ? 'Bereken je prijsindicatie' : 'See all rates'} <span class="arrow" aria-hidden="true">→</span></a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">{nl ? 'Ervaringen' : 'Reviews'}</p><h2>{nl ? 'Wat bruiden zeggen' : 'What brides say'}</h2></div>
+      <Reviews variant="pair" service={p.service} lang={p.lang} />
+    </div>
+  </section>
+
+  <section class="section section--linen">
+    <div class="container grid">
+      <div class="col-quarter"><p class="eyebrow">FAQ</p><h2 class="mt-1" set:html={p.faqTitle ?? (nl ? 'Vragen over ' + p.crumb.toLowerCase() : 'Questions')} /></div>
+      <div class="col-rest"><Faq items={p.faq} /></div>
+    </div>
+  </section>
+
+  <Related title={nl ? 'Ook interessant' : 'Also of interest'} links={p.related} />
+  <Cta lang={p.lang} />
+</Base>

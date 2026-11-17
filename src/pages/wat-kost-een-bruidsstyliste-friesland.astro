@@ -1,0 +1,79 @@
+---
+import ArticleLayout from '../layouts/ArticleLayout.astro';
+import { PRICES, euro, travelCost } from '../data/site';
+const p = (n: number | null) => (n ? euro(n) : '<span class="ph">[VANAF-PRIJS]</span>');
+const faq = [
+  { q: 'Wat kost een bruidsstyliste in Friesland gemiddeld?', a: '<p><span class="ph">[MARKTRANGE · in te vullen na eigen marktonderzoek, zie methode]</span> Bij Lado Bridal begint de Complete Bruidslook (haar en make-up, inclusief proefsessie) vanaf ' + (PRICES.completeBruidslook ? euro(PRICES.completeBruidslook) : '[prijs]') + '.</p>' },
+  { q: 'Is een proefsessie bij de prijs inbegrepen?', a: '<p>Bij Lado Bridal is de proefsessie bij de Complete Bruidslook altijd inbegrepen. Bij andere stylisten is dat niet altijd zo; vraag er dus expliciet naar als je prijzen vergelijkt.</p>' },
+  { q: 'Hoe worden reiskosten berekend?', a: '<p>€0,35 per km vanaf Leeuwarden, heen en terug. Boven 75 km enkele reis komen er verblijfkosten bij.</p>' },
+  { q: 'Waarom verschillen prijzen tussen stylisten zo veel?', a: '<p>Door verschillen in ervaring, wat er inbegrepen is (proefsessie, wimpers, styling guide, touch-ups), de kwaliteit van producten en hoeveel tijd een stylist per bruid neemt.</p>' },
+];
+---
+<ArticleLayout
+  title="Wat kost een bruidsstyliste in Friesland? Prijzen & tips"
+  description="Wat kost een bruidskapsel, bruidsmake-up en een proefsessie in Friesland? Eerlijke prijsgids met echte tarieven, reiskosten en tips om te vergelijken."
+  path="/wat-kost-een-bruidsstyliste-friesland" crumbName="Wat kost een bruidsstyliste?"
+  h1="Wat kost een bruidsstyliste in Friesland?"
+  lead="Een eerlijk overzicht van wat bruidskapsel en bruidsmake-up kosten, wat er wel en niet inbegrepen hoort te zijn, en hoe reiskosten werken. Met mijn eigen tarieven erbij, zodat je weet waar je aan toe bent."
+  updated="2026-11-17" updatedLabel="november 2026"
+  toc={[
+    { id: 'samenvatting', label: 'In het kort' },
+    { id: 'bruidskapsel', label: 'Wat kost een bruidskapsel?' },
+    { id: 'bruidsmake-up', label: 'Wat kost bruidsmake-up?' },
+    { id: 'proefsessie', label: 'Wat kost een proefsessie?' },
+    { id: 'reiskosten', label: 'Reiskosten bruidsstylist' },
+    { id: 'vergelijken', label: 'Prijzen vergelijken' },
+    { id: 'methode', label: 'Hoe deze gids tot stand kwam' },
+  ]}
+  faq={faq}>
+  <h2 id="samenvatting">In het kort</h2>
+  <p>De prijs van een bruidsstyliste hangt af van drie dingen: wat je laat doen (haar, make-up of allebei), hoeveel personen er gestyled worden, en hoe ver de stylist moet reizen. Hieronder zie je de tarieven van Lado Bridal naast elkaar.</p>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th scope="col">Dienst</th><th scope="col">Lado Bridal</th><th scope="col">Markt Friesland</th></tr></thead>
+    <tbody>
+      <tr><td>Complete Bruidslook (haar + make-up, incl. proefsessie)</td><td>vanaf <Fragment set:html={p(PRICES.completeBruidslook)} /></td><td><span class="ph">[RANGE]</span></td></tr>
+      <tr><td>Bruidskapsel</td><td>vanaf <Fragment set:html={p(PRICES.bruidskapsel)} /></td><td><span class="ph">[RANGE]</span></td></tr>
+      <tr><td>Bruidsmake-up</td><td>vanaf <Fragment set:html={p(PRICES.bruidsvisagie)} /></td><td><span class="ph">[RANGE]</span></td></tr>
+      <tr><td>Bruidsmeisje of gast (haar óf make-up)</td><td>{euro(PRICES.guest)} p.p.</td><td><span class="ph">[RANGE]</span></td></tr>
+      <tr><td>Moeder van de bruid, incl. stylingadvies</td><td>{euro(PRICES.mother)}</td><td><span class="ph">[RANGE]</span></td></tr>
+      <tr><td>Extra touch-up uur</td><td>{euro(PRICES.touchUpHour)}</td><td><span class="ph">[RANGE]</span></td></tr>
+      <tr><td>Reiskosten</td><td>€0,35/km heen en terug</td><td><span class="ph">[RANGE]</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>Alle tarieven en de prijscalculator vind je op de pagina <a href="/tarieven">tarieven</a>.</p>
+
+  <h2 id="bruidskapsel">Wat kost een bruidskapsel?</h2>
+  <p>Bij een bruidskapsel betaal je voor meer dan de styling op de dag zelf: de intake, de proefsessie, het bevestigen van je sluier en accessoires, en de tijd die een stylist neemt om het kapsel zo op te bouwen dat het de hele dag blijft zitten. Een opsteek met veel detail kost meer tijd dan losse golven, en lang, dik haar meer dan kort haar.</p>
+  <p>Bij Lado Bridal begint een bruidskapsel vanaf <Fragment set:html={p(PRICES.bruidskapsel)} />. Lees meer over het <a href="/bruidskapsel">bruidskapsel</a>.</p>
+
+  <h2 id="bruidsmake-up">Wat kost bruidsmake-up?</h2>
+  <p>Bruidsmake-up is iets anders dan make-up voor een feestje. Hij moet emotie, warmte en een hele dag fotografen doorstaan. Daarvoor zijn premium, langhoudende producten nodig, een goede huidvoorbereiding en wimpers die bij je ogen passen. Let bij het vergelijken op wat er inbegrepen is: wimpers, proefsessie en een lipkleur om mee te nemen zijn niet overal standaard.</p>
+  <p>Bij Lado Bridal begint bruidsmake-up vanaf <Fragment set:html={p(PRICES.bruidsvisagie)} />, wimpers inbegrepen. Lees meer over <a href="/bruidsvisagie">bruidsvisagie</a>.</p>
+
+  <h2 id="proefsessie">Wat kost een proefsessie?</h2>
+  <p>Sommige stylisten rekenen de proefsessie apart, andere nemen hem op in het pakket. Bij Lado Bridal zit een volledige proefsessie in de studio in Leeuwarden altijd in de <a href="/complete-bruidslook">Complete Bruidslook</a>. Dat maakt vergelijken soms lastig: een lagere pakketprijs zonder proefsessie is uiteindelijk niet altijd goedkoper. Meer over <a href="/proefsessie">de proefsessie</a>.</p>
+
+  <h2 id="reiskosten">Reiskosten bruidsstylist</h2>
+  <p>Een bruidsstylist komt op je trouwdag naar je toe, en dat kost reistijd en kilometers. Bij Lado Bridal reken ik €0,35 per kilometer vanaf Leeuwarden, heen en terug. Voor een paar Friese plaatsen (afstanden indicatief):</p>
+  <ul>
+    <li>Sneek, ca. 25 km: {euro(travelCost(25))}</li>
+    <li>Drachten, ca. 30 km: {euro(travelCost(30))}</li>
+    <li>Lemmer, ca. 50 km: {euro(travelCost(50))}</li>
+  </ul>
+  <p>Ligt je locatie verder dan 75 km enkele reis, dan komen er verblijfkosten bij. Ze staan altijd vooraf in je offerte. Reken je eigen situatie uit in de <a href="/tarieven#calculator">prijscalculator</a>.</p>
+
+  <h2 id="vergelijken">Waar let je op bij het vergelijken van prijzen?</h2>
+  <ul>
+    <li><strong>Wat zit erin?</strong> Proefsessie, wimpers, styling guide, touch-ups?</li>
+    <li><strong>Zijn prijzen inclusief btw?</strong> Voor particulieren hoort een prijs een eindprijs te zijn.</li>
+    <li><strong>Hoe worden reis- en verblijfkosten berekend?</strong> Vraag een voorbeeld voor jouw locatie.</li>
+    <li><strong>Hoeveel tijd neemt de stylist?</strong> Een ruime planning is rust op je trouwochtend.</li>
+    <li><strong>Portfolio en reviews.</strong> Kijk naar echte bruiden, niet alleen naar styled shoots. Zie het <a href="/portfolio">portfolio</a> en de <a href="/ervaringen">ervaringen</a>.</li>
+  </ul>
+  <p>Trouw je in het buitenland? Dan werkt het anders; lees over <a href="/destination-wedding-stylist">bruidsstyling in het buitenland</a>.</p>
+
+  <h2 id="methode">Hoe deze gids tot stand kwam</h2>
+  <p class="ph-block">[METHODE · beschrijf eerlijk hoe de marktranges zijn bepaald, bv. “gebaseerd op de openbare tarieven van X bruidsstylisten in Friesland, gecontroleerd in maand jaar”. Vul de kolom “Markt Friesland” pas in als dit onderzoek is gedaan; laat hem anders weg.]</p>
+</ArticleLayout>

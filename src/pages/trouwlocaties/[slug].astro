@@ -1,0 +1,57 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Section from '../../components/Section.astro';
+import Timeline from '../../components/Timeline.astro';
+import Img from '../../components/Img.astro';
+import Reviews from '../../components/Reviews.astro';
+import Faq from '../../components/Faq.astro';
+import Related from '../../components/Related.astro';
+import Cta from '../../components/Cta.astro';
+import { LOCATION_PAGES, type LocationPage } from '../../data/locations';
+import { faqSchema } from '../../data/schema';
+export function getStaticPaths() { return LOCATION_PAGES.map((l) => ({ params: { slug: l.slug }, props: { l } })); }
+const { l } = Astro.props as { l: LocationPage };
+const path = `/trouwlocaties/${l.slug}`;
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Trouwlocaties', href: '/trouwlocaties' }, { name: l.name, href: path }];
+---
+<Base title={l.title} description={l.description} breadcrumbs={crumbs} schema={[faqSchema(l.faq)]}>
+  <PageHero crumbs={crumbs} eyebrow="Trouwlocatie" h1={l.h1} lead={l.lead} shot={l.shots[0]} />
+  {l.sections.map((s, i) => (
+    <Section title={s.title} linen={i % 2 === 1}><Fragment set:html={s.html} /></Section>
+  ))}
+
+  <section class="section--tight section--dark on-dark">
+    <div class="container cluster" style="justify-content:space-between">
+      <p class="h2" style="max-width:20ch">Trouw je hier? <em>Check je datum.</em></p>
+      <button type="button" class="btn btn--light" data-open-form>Check je datum <span class="arrow" aria-hidden="true">→</span></button>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Voorbeeldplanning</p><h2>Je trouwochtend <em>hier</em></h2></div>
+      <Timeline horizontal steps={l.morning} />
+    </div>
+  </section>
+
+  <section class="section section--linen">
+    <div class="container">
+      <div class="look-grid look-grid--3">{l.shots.map((s, i) => <Img ratio={i === 1 ? '3x4' : '4x5'} shot={s} delay={i * 0.08} />)}</div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container"><Reviews variant="pair" region={l.review} /></div>
+  </section>
+
+  <section class="section section--linen">
+    <div class="container grid">
+      <div class="col-quarter"><p class="eyebrow">FAQ</p><h2 class="mt-1">Veelgestelde <em>vragen</em></h2></div>
+      <div class="col-rest"><Faq items={l.faq} /></div>
+    </div>
+  </section>
+
+  <Related links={[{ href: l.region.href, label: l.region.label }, { href: '/tarieven', label: 'Tarieven en prijscalculator' }, { href: '/contact', label: 'Contact en beschikbaarheid' }, { href: '/trouwlocaties', label: 'Alle trouwlocaties' }]} />
+  <Cta />
+</Base>

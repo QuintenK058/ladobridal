@@ -1,0 +1,31 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Img from '../../components/Img.astro';
+import Cta from '../../components/Cta.astro';
+import { LOCATION_PAGES } from '../../data/locations';
+import { LOCATIONS } from '../../data/site';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Trouwlocaties', href: '/trouwlocaties' }];
+const anchor = (slug: string) => LOCATIONS.find((l) => l.slug === `/trouwlocaties/${slug}`)!.anchor;
+---
+<Base title="Bruidsstyling per trouwlocatie in Noord-Nederland | Lado Bridal"
+  description="Haar en make-up afgestemd op je trouwlocatie: landgoederen, Friese Meren, Groningse borgen, stadhuis Leeuwarden, Waddeneilanden en schuurbruiloften."
+  ogTitle="Bruidsstyling per trouwlocatie · Lado Bridal" ogDescription="Van landgoed tot Waddeneiland: wat elke locatie vraagt van je haar en make-up."
+  breadcrumbs={crumbs}>
+  <PageHero crumbs={crumbs} eyebrow="Trouwlocaties" h1="Bruidsstyling per trouwlocatie in Noord-Nederland"
+    lead="Elke locatie vraagt iets anders van je look. Wind aan het water, gedempt licht in een historische zaal, een boottocht naar een eiland of een avond dansen in een schuur. Hieronder lees je per type locatie waar ik op let." />
+  {LOCATION_PAGES.map((l, i) => (
+    <section class:list={['section', i % 2 === 1 && 'section--linen']}>
+      <div class="container grid align-center">
+        <div class={i % 2 ? 'col-media' : 'col-media--left'} style={i % 2 ? 'order:2' : undefined}><Img ratio="3x2" shot={l.shots[0]} /></div>
+        <div class={i % 2 ? 'col-text' : 'col-text--right'}>
+          <p class="eyebrow">{String(i + 1).padStart(2, '0')}</p>
+          <h2 class="mt-1">{l.name}</h2>
+          <p class="mt-2">{l.hubText}</p>
+          <a class="text-link mt-2" href={`/trouwlocaties/${l.slug}`}>{anchor(l.slug)} <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+  ))}
+  <Cta />
+</Base>

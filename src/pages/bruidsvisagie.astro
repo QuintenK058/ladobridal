@@ -1,0 +1,63 @@
+---
+import ServiceLayout from '../layouts/ServiceLayout.astro';
+import Section from '../components/Section.astro';
+import { PRICES, euro } from '../data/site';
+const price = PRICES.bruidsvisagie;
+---
+<ServiceLayout
+  title="Bruidsvisagie & bruidsmake-up op locatie | Lado Bridal"
+  description="Bruidsmake-up die op je huid lijkt en de hele dag blijft zitten. Natuurlijk of glam, met wimpers, getest op foto en flitslicht. Proefsessie in Leeuwarden."
+  ogTitle="Bruidsvisagie op locatie · Lado Bridal"
+  ogDescription="Langhoudende bruidsmake-up die er in het echt én op de foto’s goed uitziet. Met proefsessie in Leeuwarden."
+  path="/bruidsvisagie" serviceName="Bruidsvisagie op locatie" crumb="Bruidsvisagie" price={price}
+  eyebrow="02 — Bruidsvisagie"
+  h1="Bruidsvisagie &amp; bruidsmake-up op locatie"
+  lead="Make-up waarin je jezelf herkent, alleen dan op je mooist. Hij overleeft emotie, knuffels, een warme dag en een flitser, en hij voelt licht aan op je huid."
+  heroShot="bruidsmake-up close-up, natuurlijk licht · 4:5"
+  forWhoTitle="Voor bruiden die er <em>als zichzelf</em> uit willen zien"
+  forWho={`<p>De meeste bruiden die bij mij komen, dragen in het dagelijks leven weinig make-up. Ze willen er op hun trouwdag bijzonder uitzien, maar niet als iemand anders. Daar is bruidsvisagie op gericht: een egale, stralende huid, ogen die opvallen op foto’s en lippen die na het eten nog kleur hebben.</p>
+<p>Houd je juist van een uitgesproken look, met een smokey eye of een rode lip? Ook dat kan. Bij de proefsessie zoeken we samen de balans tussen jouw smaak, je jurk, de locatie en het licht van die dag.</p>
+<h3>Huidvoorbereiding</h3>
+<p>Mooie make-up begint bij de huid. In de weken voor de bruiloft is het verstandig geen nieuwe producten of behandelingen meer te proberen; een onverwachte reactie wil je nu niet. Ik bereid je huid op de ochtend zelf voor met hydratatie en een primer die past bij jouw huidtype, zodat de foundation dun kan blijven en toch de hele dag zit.</p>`}
+  processTitle="Van huid tot <em>laatste laagje</em>"
+  process={[
+    { title: 'Intake', text: 'We bespreken je huid, eventuele gevoeligheden, je jurk en de look die je voor je ziet.' },
+    { title: 'Proefsessie', text: '4–8 weken vooraf in Leeuwarden. We testen de producten op jouw huid en maken foto’s in daglicht en met flits.' },
+    { title: 'Huid voorbereiden', text: 'Je krijgt advies voor de weken ervoor: wat je beter wel en niet doet.' },
+    { title: 'Trouwochtend', text: 'Huidvoorbereiding, langhoudende basis, ogen, wimpers en lippen. Rustig, zonder haast.' },
+    { title: 'De hele dag', text: 'Je krijgt je lipkleur en een styling guide mee. Optioneel blijf ik voor touch-ups.' },
+  ]}
+  looksTitle="Van naturel tot <em>glam</em>"
+  looks={[
+    { name: 'Naturel', text: 'Een huid die eruitziet als huid, zachte definitie en een frisse blos. Het meest gekozen.', shot: 'naturel bruidsmake-up' },
+    { name: 'Soft glam', text: 'Iets meer diepte op de ogen en een gedefinieerde lip. Mooi voor een avondceremonie.', shot: 'soft glam make-up' },
+    { name: 'Glam', text: 'Een uitgesproken oog of lip, gebalanceerd zodat het geheel elegant blijft.', shot: 'glam bruidsmake-up' },
+  ]}
+  includedTitle="Wat bij je <em>bruidsmake-up</em> hoort"
+  included={['Telefonische intake', 'Proefsessie in de studio in Leeuwarden', 'Huidvoorbereiding op de ochtend zelf', 'Premium, langhoudende en huidvriendelijke producten', 'Wimpers inbegrepen (extra set: €15)', 'Hygiënische werkwijze met schone kwasten per persoon']}
+  priceLabel="Bruidsvisagie"
+  priceValue={price ? `<small>vanaf</small>${euro(price)}` : '<small>vanaf</small><span class="ph">[VANAF-PRIJS INCL. BTW]</span>'}
+  priceNote="Plus reiskosten (€0,35 per km vanaf Leeuwarden, heen en terug). Je ontvangt binnen 2 werkdagen een persoonlijke offerte."
+  service="visagie"
+  faq={[
+    { q: 'Blijft bruidsmake-up de hele dag zitten?', a: '<p>Ja, met de juiste voorbereiding en producten. Ik werk in dunne lagen die goed hechten, zet de basis vast en gebruik langhoudende, waar nodig waterproof producten rond de ogen. Je krijgt je lipkleur mee, want die is het enige dat je na het eten even bijwerkt.</p>' },
+    { q: 'Ik heb een gevoelige huid. Kan dat?', a: '<p>Zeker. Vertel het bij de intake, dan stem ik de producten daarop af. De proefsessie is meteen een test: zo weet je ruim voor de bruiloft hoe je huid reageert.</p>' },
+    { q: 'Hoe ziet make-up eruit op foto’s met flits?', a: '<p>Sommige producten reflecteren het flitslicht, waardoor je gezicht op foto’s lichter of glanzender lijkt. Ik kies producten die daar niet gevoelig voor zijn en we maken bij de proefsessie testfoto’s met en zonder flits.</p>' },
+    { q: 'Zijn wimpers inbegrepen?', a: '<p>Ja. Ik kies wimpers die passen bij je ogen en de look: van losse accenten tot een volle strip. Een extra set kost €15.</p>' },
+    { q: 'Kun je ook mijn make-up voor de proefsessie en de bruiloft op elkaar afstemmen als ik in het buitenland woon?', a: '<p>Ja. Woon je in het buitenland, dan kan de intake en voorbereiding digitaal, en plannen we de proefsessie wanneer je in Nederland bent of vlak voor de bruiloft. Zie <a href="/destination-wedding-stylist">bruidsstyling in het buitenland</a>.</p>' },
+  ]}
+  related={[
+    { href: '/complete-bruidslook', label: 'Complete Bruidslook: haar en make-up in één hand', note: 'Meest gekozen' },
+    { href: '/bruidskapsel', label: 'Bruidskapsel op locatie' },
+    { href: '/proefsessie', label: 'Zo gaat de proefsessie' },
+    { href: '/bruidsstylist-leeuwarden', label: 'Bruidsstylist Leeuwarden' },
+    { href: '/bruidsstylist-drenthe', label: 'Bruidsstylist Drenthe' },
+  ]}
+>
+  <Section eyebrow="Op de foto" title="Mooi in het echt <em>én</em> op foto’s">
+    <p>Je trouwfoto’s bekijk je nog jaren. Make-up die in de spiegel perfect lijkt, kan op een foto vlak of juist te zwaar ogen. Ik let daarom op drie dingen.</p>
+    <p><strong>Definitie.</strong> Een camera haalt contrast weg. Een beetje meer diepte in de wenkbrauwen, de wimperlijn en de contouren zorgt dat je gezicht op foto’s niet vervaagt, terwijl het van dichtbij nog steeds zacht oogt.</p>
+    <p><strong>Glans op de juiste plekken.</strong> Een stralende huid is mooi, maar glans over het hele gezicht wordt op foto’s al snel ‘vet’. Ik houd de glow op de jukbeenderen en zet de T-zone vast.</p>
+    <p><strong>Het licht van jouw dag.</strong> Buiten in de zon, in een donkere schuur of in een stadhuis met tl-licht: het licht bepaalt hoe kleuren overkomen. Bij de proefsessie bespreken we waar je trouwt, zodat de look daarop klopt.</p>
+  </Section>
+</ServiceLayout>

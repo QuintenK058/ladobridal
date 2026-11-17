@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Section from '../../components/Section.astro';
+import Img from '../../components/Img.astro';
+import Reviews from '../../components/Reviews.astro';
+import Faq from '../../components/Faq.astro';
+import Related from '../../components/Related.astro';
+import Cta from '../../components/Cta.astro';
+import { PRICES, euro } from '../../data/site';
+import { faqSchema, serviceSchema } from '../../data/schema';
+const path = '/destination-wedding-stylist/italie';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Destination weddings', href: '/destination-wedding-stylist' }, { name: 'Italië', href: path }];
+const price = PRICES.completeBruidslook ? euro(PRICES.completeBruidslook) : '[PRIJS]';
+const faq = [
+  { q: 'Heb je al eerder in Italië gewerkt?', a: '<p>Ja, ik heb een bruid gestyled tijdens haar trouwweekend in Italië. <span class="ph">[CHECK: regio/details die Quinty wil delen]</span></p>' },
+  { q: 'Wat kost een bruidsstylist uit Nederland voor een bruiloft in Italië?', a: `<p>De Complete Bruidslook begint vanaf ${price}. Vluchten, verblijf en reistijd staan als aparte posten in je offerte op maat.</p>` },
+  { q: 'Hoe houd je make-up goed in de Italiaanse zomer?', a: '<p>Met een dunne, goed vastgezette basis, waterproof producten rond de ogen en een touch-up moment voor het diner. Ik plan je styling ook liefst niet in de heetste ruimte van de villa.</p>' },
+  { q: 'Kun je ook gasten stylen in Italië?', a: '<p>Ja, bruidsmeisjes en gasten €75 per persoon, moeder van de bruid €75 inclusief stylingadvies. Bij een meerdaagse boeking plannen we per dag.</p>' },
+];
+---
+<Base title="Bruidsstylist bruiloft Italië | Haar & make-up | Lado Bridal"
+  description={`Trouwen in Italië met je eigen bruidsstylist uit Nederland. Haar en make-up voor villa’s en wijngoederen in Toscane en Umbrië, vanaf ${price} + reis en verblijf.`}
+  ogTitle="Bruidsstylist voor je bruiloft in Italië · Lado Bridal" ogDescription="Proefsessie in Nederland, styling in Italië: een look die de Italiaanse zomer aankan."
+  breadcrumbs={crumbs} schema={[serviceSchema({ name: 'Bruidsstyling Italië', path, description: 'Bruidskapsel en bruidsmake-up voor bruiloften in Italië.', area: [{ type: 'Country', name: 'Italië' }] }), faqSchema(faq)]}>
+  <PageHero crumbs={crumbs} eyebrow="Destination · Italië" h1="Bruidsstylist voor je bruiloft in Italië"
+    lead="Een villa tussen de cipressen, een wijngoed in de heuvels, een diner onder de sterren. Trouwen in Italië is een droom, en je look moet die hele lange, warme dag meegaan."
+    shot="bruid in Italiaanse villa, gouden licht · 4:5" badge />
+
+  <Section eyebrow="Italië" title="Trouwen in <em>Toscane en Umbrië</em>">
+    <p>Veel bruiloften in Italië vinden plaats in een villa of op een wijngoed, bijvoorbeeld in Toscane of Umbrië. Vaak is het een weekend: een welkomstdiner op vrijdag, de bruiloft op zaterdag en een brunch op zondag. Dat betekent meerdere looks, en een stylist die er alle dagen bij kan zijn.</p>
+    <p>Het licht in Italië is warm en goudkleurig, vooral aan het eind van de middag. Dat is prachtig voor foto’s, maar het vraagt om een huid die straalt zonder te glimmen, en om make-up die niet oranje oogt in dat warme licht.</p>
+    <p class="ph-block">[ECHTE ERVARING · beschrijving van het trouwweekend in Italië door Quinty, plus foto’s met toestemming]</p>
+  </Section>
+
+  <Section eyebrow="Hitte" title="Een look die de <em>Italiaanse zomer</em> aankan" linen>
+    <p>In juli en augustus loopt de temperatuur in Midden-Italië regelmatig hoog op. Een getting-ready-ruimte zonder airco kan warm worden. Ik vraag daarom vooraf naar de ruimte en plan je styling op de koelste plek.</p>
+    <ul>
+      <li>Een huid die ik voorbereid op warmte: licht, matterend waar nodig, en goed vastgezet.</li>
+      <li>Waterproof producten rond de ogen, voor de hitte én voor de emotie.</li>
+      <li>Een kapsel met steun: krullen houden het in de warmte beter als ze goed zijn opgebouwd.</li>
+      <li>Een touch-up voor het diner, als het licht het mooist is.</li>
+    </ul>
+  </Section>
+
+  <section class="section">
+    <div class="container">
+      <div class="look-grid look-grid--3">
+        <Img ratio="4x5" shot="villa Toscane, bruid" />
+        <Img ratio="3x4" shot="detail kapsel, Italië" delay={0.08} />
+        <Img ratio="4x5" shot="diner onder de sterren" delay={0.16} />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--linen">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Ervaring</p><h2>Een bruid over haar <em>trouwweekend in Italië</em></h2></div>
+      <Reviews variant="pair" featured="italy" region="destination" />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid">
+      <div class="col-quarter"><p class="eyebrow">FAQ</p><h2 class="mt-1">Trouwen in Italië: <em>visagie en haar</em></h2></div>
+      <div class="col-rest"><Faq items={faq} /></div>
+    </div>
+  </section>
+  <Related links={[{ href: '/destination-wedding-stylist', label: 'Bruidsstyling in het buitenland: alle landen' }, { href: '/complete-bruidslook', label: 'Complete Bruidslook' }, { href: '/proefsessie', label: 'De proefsessie' }]} />
+  <Cta title="Trouwen in Italië? <em>Check je datum.</em>" />
+</Base>

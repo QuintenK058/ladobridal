@@ -1,0 +1,244 @@
+route	placeholder
+/algemene-voorwaarden	KVK-NUMMER
+/algemene-voorwaarden	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/bedankt	KVK-NUMMER
+/bedankt	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/bruidskapsel	VANAF-PRIJS INCL. BTW
+/bruidskapsel	REVIEW · echte Google-review · dienst kapsel
+/bruidskapsel	REVIEW · tweede echte Google-review (fallback: algemeen)
+/bruidskapsel	KVK-NUMMER
+/bruidskapsel	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/bruidsstylist-drenthe	CHECK: welke Drentse plaatsen/locaties werkt Quinty daadwerkelijk? Aanvullen.
+/bruidsstylist-drenthe	REVIEW · echte Google-review · regio drenthe
+/bruidsstylist-drenthe	REVIEW · tweede echte Google-review (fallback: algemeen)
+/bruidsstylist-drenthe	KVK-NUMMER
+/bruidsstylist-drenthe	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/bruidsstylist-friesland	REVIEW · echte Google-review · regio friesland
+/bruidsstylist-friesland	REVIEW · tweede echte Google-review (fallback: algemeen)
+/bruidsstylist-friesland	KVK-NUMMER
+/bruidsstylist-friesland	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/bruidsstylist-groningen	REVIEW · echte Google-review · regio groningen
+/bruidsstylist-groningen	REVIEW · tweede echte Google-review (fallback: algemeen)
+/bruidsstylist-groningen	CHECK: afstanden Oost-Groningen bevestigen
+/bruidsstylist-groningen	KVK-NUMMER
+/bruidsstylist-groningen	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/bruidsstylist-leeuwarden	CHECK: studioadres openbaar? Zo ja: adres + kaart hieronder. Zo nee: alleen “studio in Leeuwarden”.
+/bruidsstylist-leeuwarden	REVIEW · echte Google-review · regio leeuwarden
+/bruidsstylist-leeuwarden	REVIEW · tweede echte Google-review (fallback: algemeen)
+/bruidsstylist-leeuwarden	CHECK: adres openbaar of niet
+/bruidsstylist-leeuwarden	CHECK: is klaarmaken in de studio een optie?
+/bruidsstylist-leeuwarden	KVK-NUMMER
+/bruidsstylist-leeuwarden	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/bruidsstylist-nederland	REVIEW · echte Google-review
+/bruidsstylist-nederland	REVIEW · tweede echte Google-review (fallback: algemeen)
+/bruidsstylist-nederland	KVK-NUMMER
+/bruidsstylist-nederland	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/bruidsstylist-noord-holland	CHECK: welke plaatsen/locaties in Noord-Holland bevestigt Quinty?
+/bruidsstylist-noord-holland	CHECK: concrete plaatsen
+/bruidsstylist-noord-holland	REVIEW · echte Google-review · regio noord-holland
+/bruidsstylist-noord-holland	REVIEW · tweede echte Google-review (fallback: algemeen)
+/bruidsstylist-noord-holland	KVK-NUMMER
+/bruidsstylist-noord-holland	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/bruidsstylist-zwolle	CHECK: welke plaatsen/locaties in Overijssel (bv. Kampen, Steenwijk, Giethoorn) bevestigt Quinty?
+/bruidsstylist-zwolle	CHECK: Giethoorn en andere plaatsen
+/bruidsstylist-zwolle	REVIEW · echte Google-review · regio overijssel
+/bruidsstylist-zwolle	REVIEW · tweede echte Google-review (fallback: algemeen)
+/bruidsstylist-zwolle	KVK-NUMMER
+/bruidsstylist-zwolle	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/bruidsvisagie	VANAF-PRIJS INCL. BTW
+/bruidsvisagie	REVIEW · echte Google-review · dienst visagie
+/bruidsvisagie	REVIEW · tweede echte Google-review (fallback: algemeen)
+/bruidsvisagie	KVK-NUMMER
+/bruidsvisagie	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/complete-bruidslook	CHECK: inhoud styling guide bevestigen met Quinty
+/complete-bruidslook	REVIEW · echte Google-review · dienst complete
+/complete-bruidslook	REVIEW · tweede echte Google-review (fallback: algemeen)
+/complete-bruidslook	KVK-NUMMER
+/complete-bruidslook	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/contact	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/contact	KVK-NUMMER
+/destination-wedding-stylist/italie	ECHTE ERVARING · beschrijving van het trouwweekend in Italië door Quinty, plus foto’s met toestemming
+/destination-wedding-stylist/italie	REVIEW · echte Google-review · regio destination
+/destination-wedding-stylist/italie	REVIEW · tweede echte Google-review (fallback: algemeen)
+/destination-wedding-stylist/italie	CHECK: regio/details die Quinty wil delen
+/destination-wedding-stylist/italie	KVK-NUMMER
+/destination-wedding-stylist/italie	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/destination-wedding-stylist	CASE · korte beschrijving van het Italië-weekend door Quinty: regio, aantal dagen, looks per dag, wat de uitdaging was
+/destination-wedding-stylist	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/destination-wedding-stylist	REVIEW · echte Google-review · regio destination
+/destination-wedding-stylist	REVIEW · tweede echte Google-review (fallback: algemeen)
+/destination-wedding-stylist	KVK-NUMMER
+/en/about	STORY · to be written by Quinty, ±150 words
+/en/about	KVK-NUMMER
+/en/about	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/en/bridal-hair	FROM PRICE
+/en/bridal-hair	REVIEW · echte Google-review · dienst kapsel
+/en/bridal-hair	REVIEW · tweede echte Google-review (fallback: algemeen)
+/en/bridal-hair	KVK-NUMMER
+/en/bridal-hair	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/en/bridal-makeup	FROM PRICE
+/en/bridal-makeup	REVIEW · echte Google-review · dienst visagie
+/en/bridal-makeup	REVIEW · tweede echte Google-review (fallback: algemeen)
+/en/bridal-makeup	KVK-NUMMER
+/en/bridal-makeup	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/en/complete-bruidslook	REVIEW · echte Google-review · dienst complete
+/en/complete-bruidslook	REVIEW · tweede echte Google-review (fallback: algemeen)
+/en/complete-bruidslook	KVK-NUMMER
+/en/complete-bruidslook	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/en/contact	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/en/contact	KVK-NUMMER
+/en/destination-wedding-stylist/italy	REAL EXPERIENCE · Quinty’s Italy wedding weekend, with photos (with permission)
+/en/destination-wedding-stylist/italy	REVIEW · echte Google-review · regio destination
+/en/destination-wedding-stylist/italy	REVIEW · tweede echte Google-review (fallback: algemeen)
+/en/destination-wedding-stylist/italy	KVK-NUMMER
+/en/destination-wedding-stylist/italy	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/en/destination-wedding-stylist	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/en/destination-wedding-stylist	KVK-NUMMER
+/en/guests-and-events	REVIEW · echte Google-review · dienst gasten
+/en/guests-and-events	REVIEW · tweede echte Google-review (fallback: algemeen)
+/en/guests-and-events	KVK-NUMMER
+/en/guests-and-events	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/en/portfolio	KVK-NUMMER
+/en/portfolio	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/en/privacy	DRAFT — have checked before publishing. Mirrors the Dutch privacy statement.
+/en/privacy	KVK-NUMMER
+/en/privacy	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/en/rates	FROM PRICE
+/en/rates	KVK-NUMMER
+/en/rates	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/en/reviews	REVIEW · echte Google-review over de look die bij 37°C bleef zitten
+/en/reviews	REVIEW · echte Google-review over het trouwweekend in Italië
+/en/reviews	REVIEW · echte Google-review (Friesland)
+/en/reviews	KVK-NUMMER
+/en/reviews	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/en/thank-you	KVK-NUMMER
+/en/thank-you	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/en/trial-session	KVK-NUMMER
+/en/trial-session	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/en	REVIEW · echte Google-review over de look die bij 37°C bleef zitten
+/en	REVIEW · echte Google-review over het trouwweekend in Italië
+/en	REVIEW · echte Google-review (Friesland)
+/en	KVK-NUMMER
+/en	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/ervaringen	GOOGLE REVIEW-LINK · knop “Schrijf een review” voor oud-bruiden
+/ervaringen	REVIEW 1 · volledige tekst uit Google + voornaam · locatie bruiloft · maand jaar · dienst · optioneel foto met toestemming
+/ervaringen	REVIEW 2 · volledige tekst uit Google + voornaam · locatie bruiloft · maand jaar · dienst · optioneel foto met toestemming
+/ervaringen	REVIEW 3 · volledige tekst uit Google + voornaam · locatie bruiloft · maand jaar · dienst · optioneel foto met toestemming
+/ervaringen	REVIEW 4 · volledige tekst uit Google + voornaam · locatie bruiloft · maand jaar · dienst · optioneel foto met toestemming
+/ervaringen	REVIEW 5 · volledige tekst uit Google + voornaam · locatie bruiloft · maand jaar · dienst · optioneel foto met toestemming
+/ervaringen	REVIEW 6 · volledige tekst uit Google + voornaam · locatie bruiloft · maand jaar · dienst · optioneel foto met toestemming
+/ervaringen	QUOTE · exacte zin uit de Google-review van deze bruid
+/ervaringen	NOTITIE QUINTY · hoe de look is opgebouwd: voorbereiding, producten, techniek, planning van de dag — door Quinty te schrijven
+/ervaringen	KVK-NUMMER
+/ervaringen	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/gala-en-gasten-styling	REVIEW · echte Google-review · dienst gasten
+/gala-en-gasten-styling	REVIEW · tweede echte Google-review (fallback: algemeen)
+/gala-en-gasten-styling	KVK-NUMMER
+/gala-en-gasten-styling	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/gidsen/bruidskapsel-los-of-opgestoken	TEKST · Los · ±150–250 woorden
+/gidsen/bruidskapsel-los-of-opgestoken	TEKST · Half-los · ±150–250 woorden
+/gidsen/bruidskapsel-los-of-opgestoken	TEKST · Opgestoken · ±150–250 woorden
+/gidsen/bruidskapsel-los-of-opgestoken	TEKST · Kiezen op basis van je jurk · ±150–250 woorden
+/gidsen/bruidskapsel-los-of-opgestoken	TEKST · Kiezen op basis van je locatie · ±150–250 woorden
+/gidsen/bruidskapsel-los-of-opgestoken	KVK-NUMMER
+/gidsen/bruidskapsel-los-of-opgestoken	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/gidsen/bruidsmake-up-die-de-hele-dag-blijft-zitten	TEKST · Huidvoorbereiding · ±150–250 woorden
+/gidsen/bruidsmake-up-die-de-hele-dag-blijft-zitten	TEKST · De basis · ±150–250 woorden
+/gidsen/bruidsmake-up-die-de-hele-dag-blijft-zitten	TEKST · Ogen en wimpers · ±150–250 woorden
+/gidsen/bruidsmake-up-die-de-hele-dag-blijft-zitten	TEKST · Lippen · ±150–250 woorden
+/gidsen/bruidsmake-up-die-de-hele-dag-blijft-zitten	TEKST · Tijdens de dag · ±150–250 woorden
+/gidsen/bruidsmake-up-die-de-hele-dag-blijft-zitten	KVK-NUMMER
+/gidsen/bruidsmake-up-die-de-hele-dag-blijft-zitten	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/gidsen/planning-trouwochtend-haar-en-make-up	TEKST · Terugrekenen vanaf de ceremonie · ±150–250 woorden
+/gidsen/planning-trouwochtend-haar-en-make-up	TEKST · Wie gaat eerst? · ±150–250 woorden
+/gidsen/planning-trouwochtend-haar-en-make-up	TEKST · Hoeveel buffer? · ±150–250 woorden
+/gidsen/planning-trouwochtend-haar-en-make-up	TEKST · Afstemmen met de fotograaf · ±150–250 woorden
+/gidsen/planning-trouwochtend-haar-en-make-up	TEKST · Voorbeeldplanning · ±150–250 woorden
+/gidsen/planning-trouwochtend-haar-en-make-up	KVK-NUMMER
+/gidsen/planning-trouwochtend-haar-en-make-up	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/gidsen/proefsessie-voorbereiden-checklist	TEKST · Wat neem je mee? · ±150–250 woorden
+/gidsen/proefsessie-voorbereiden-checklist	TEKST · Haar en huid vooraf · ±150–250 woorden
+/gidsen/proefsessie-voorbereiden-checklist	TEKST · Vragen om te stellen · ±150–250 woorden
+/gidsen/proefsessie-voorbereiden-checklist	TEKST · Foto’s maken · ±150–250 woorden
+/gidsen/proefsessie-voorbereiden-checklist	TEKST · Na de proefsessie · ±150–250 woorden
+/gidsen/proefsessie-voorbereiden-checklist	KVK-NUMMER
+/gidsen/proefsessie-voorbereiden-checklist	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/gidsen	KVK-NUMMER
+/gidsen	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/	BESCHRIJVING VAN DEZE SPECIFIEKE LOOK + toestemming bruid
+/	REVIEW · echte Google-review over de look die bij 37°C bleef zitten
+/	REVIEW · echte Google-review over het trouwweekend in Italië
+/	REVIEW · echte Google-review (Friesland)
+/	KVK-NUMMER
+/	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/over-mij	VERHAAL · door Quinty aan te vullen: hoe ze in bridal styling terechtkwam, wat haar raakt aan trouwdagen, waarom ze voor Lado Bridal koos. ±200 woorden, in de ik-vorm.
+/over-mij	CHECK: korte, correcte omschrijving van de MUAH-opleiding/certificering + beeld van het certificaat
+/over-mij	CHECK: hygiëne-details bevestigen; merken alleen noemen als Quinty dat wil
+/over-mij	REVIEW · echte Google-review
+/over-mij	REVIEW · tweede echte Google-review (fallback: algemeen)
+/over-mij	KVK-NUMMER
+/over-mij	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/portfolio	KVK-NUMMER
+/portfolio	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/privacy	CONCEPT — laten controleren voor publicatie. Vul bewaartermijnen en verwerkers aan.
+/privacy	KVK
+/privacy	CHECK regio
+/privacy	KVK-NUMMER
+/privacy	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/proefsessie	REVIEW · echte Google-review · dienst complete
+/proefsessie	REVIEW · tweede echte Google-review (fallback: algemeen)
+/proefsessie	CHECK: gemiddelde duur proefsessie in uren
+/proefsessie	KVK-NUMMER
+/proefsessie	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/styleguide	REVIEW · echte Google-review over de look die bij 37°C bleef zitten
+/styleguide	REVIEW · echte Google-review over het trouwweekend in Italië
+/styleguide	REVIEW · echte Google-review (Friesland)
+/styleguide	KVK-NUMMER
+/styleguide	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/tarieven	CHECK: incl. btw / KOR
+/tarieven	VANAF-PRIJS
+/tarieven	REVIEW · echte Google-review · dienst complete
+/tarieven	REVIEW · tweede echte Google-review (fallback: algemeen)
+/tarieven	CHECK: incl. btw of KOR bevestigen
+/tarieven	CHECK: betaaltermijn restbedrag
+/tarieven	CHECK: losse proefsessie mogelijk? prijs?
+/tarieven	KVK-NUMMER
+/tarieven	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/trouwlocaties/borgen-groningen	ECHTE LOCATIES · alleen locaties noemen waar Quinty heeft gewerkt of die ze goedkeurt
+/trouwlocaties/borgen-groningen	REVIEW · echte Google-review · regio groningen
+/trouwlocaties/borgen-groningen	REVIEW · tweede echte Google-review (fallback: algemeen)
+/trouwlocaties/borgen-groningen	KVK-NUMMER
+/trouwlocaties/borgen-groningen	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/trouwlocaties/friese-meren	ECHTE LOCATIES · alleen locaties noemen waar Quinty heeft gewerkt of die ze goedkeurt
+/trouwlocaties/friese-meren	REVIEW · echte Google-review · regio friesland
+/trouwlocaties/friese-meren	REVIEW · tweede echte Google-review (fallback: algemeen)
+/trouwlocaties/friese-meren	KVK-NUMMER
+/trouwlocaties/friese-meren	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/trouwlocaties/landgoed-friese-wouden	ECHTE LOCATIES · alleen locaties noemen waar Quinty heeft gewerkt of die ze goedkeurt
+/trouwlocaties/landgoed-friese-wouden	REVIEW · echte Google-review · regio friesland
+/trouwlocaties/landgoed-friese-wouden	REVIEW · tweede echte Google-review (fallback: algemeen)
+/trouwlocaties/landgoed-friese-wouden	KVK-NUMMER
+/trouwlocaties/landgoed-friese-wouden	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/trouwlocaties/schuurbruiloft-drenthe-overijssel	ECHTE LOCATIES · alleen locaties noemen waar Quinty heeft gewerkt of die ze goedkeurt
+/trouwlocaties/schuurbruiloft-drenthe-overijssel	REVIEW · echte Google-review · regio drenthe
+/trouwlocaties/schuurbruiloft-drenthe-overijssel	REVIEW · tweede echte Google-review (fallback: algemeen)
+/trouwlocaties/schuurbruiloft-drenthe-overijssel	KVK-NUMMER
+/trouwlocaties/schuurbruiloft-drenthe-overijssel	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/trouwlocaties/stadhuis-leeuwarden	ECHTE LOCATIES · alleen locaties noemen waar Quinty heeft gewerkt of die ze goedkeurt
+/trouwlocaties/stadhuis-leeuwarden	REVIEW · echte Google-review · regio leeuwarden
+/trouwlocaties/stadhuis-leeuwarden	REVIEW · tweede echte Google-review (fallback: algemeen)
+/trouwlocaties/stadhuis-leeuwarden	KVK-NUMMER
+/trouwlocaties/stadhuis-leeuwarden	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/trouwlocaties/waddeneilanden	ECHTE LOCATIES · alleen locaties noemen waar Quinty heeft gewerkt of die ze goedkeurt
+/trouwlocaties/waddeneilanden	REVIEW · echte Google-review · regio friesland
+/trouwlocaties/waddeneilanden	REVIEW · tweede echte Google-review (fallback: algemeen)
+/trouwlocaties/waddeneilanden	CHECK: ook Texel?
+/trouwlocaties/waddeneilanden	KVK-NUMMER
+/trouwlocaties/waddeneilanden	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/trouwlocaties	KVK-NUMMER
+/trouwlocaties	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google
+/wat-kost-een-bruidsstyliste-friesland	RANGE
+/wat-kost-een-bruidsstyliste-friesland	VANAF-PRIJS
+/wat-kost-een-bruidsstyliste-friesland	MARKTRANGE · in te vullen na eigen marktonderzoek, zie methode
+/wat-kost-een-bruidsstyliste-friesland	KVK-NUMMER
+/wat-kost-een-bruidsstyliste-friesland	REVIEWFRAGMENT · bv. “Mijn make-up zat er na een hele dag bij 37°C nog perfect op.” — exacte tekst + naam uit Google

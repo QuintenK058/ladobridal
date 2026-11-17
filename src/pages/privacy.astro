@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { SITE } from '../data/site';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Privacy', href: '/privacy' }];
+---
+<Base title="Privacyverklaring | Lado Bridal" description="Hoe Lado Bridal omgaat met je persoonsgegevens: welke gegevens, waarvoor, hoe lang en welke rechten je hebt." breadcrumbs={crumbs}>
+  <PageHero crumbs={crumbs} eyebrow="Privacy" h1="Privacyverklaring" cta={false} lead="Kort en duidelijk: welke gegevens ik verzamel, waarom, en wat jij daarover te zeggen hebt." />
+  <section class="section--tight" style="padding-top:0"><div class="container"><div class="prose">
+    <p class="ph-block">[CONCEPT — laten controleren voor publicatie. Vul bewaartermijnen en verwerkers aan.]</p>
+    <h2>Wie is verantwoordelijk?</h2>
+    <p>{SITE.name}, {SITE.owner}, {SITE.city}. KVK {SITE.kvk || '[KVK]'}. Contact: <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+    <h2>Welke gegevens?</h2>
+    <p>Als je het formulier invult: je naam, e-mailadres, telefoonnummer, trouwdatum, locatie, gewenste dienst, aantal personen, je bericht en eventuele inspiratiefoto’s. Daarnaast de pagina waarop je het formulier invulde en, als je via een advertentie kwam, de campagnegegevens (UTM).</p>
+    <h2>Waarvoor?</h2>
+    <p>Alleen om je aanvraag te beantwoorden, een offerte te maken en, als je boekt, de opdracht uit te voeren. Ik verkoop je gegevens nooit.</p>
+    <h2>Hoe lang?</h2>
+    <p>Aanvragen die niet tot een boeking leiden, verwijder ik na <span class="ph">[X maanden]</span>. Inspiratiefoto’s verwijder ik na de bruiloft of na het verlopen van de offerte. Gegevens van boekingen bewaar ik zolang de wet dat vereist (fiscale bewaarplicht).</p>
+    <h2>Verwerkers</h2>
+    <p>Formulieren worden opgeslagen bij Supabase (servers in de EU <span class="ph">[CHECK regio]</span>). E-mail wordt verstuurd via <span class="ph">[e-maildienst]</span>.</p>
+    <h2>Cookies</h2>
+    <p>Noodzakelijke opslag (zoals je cookiekeuze en de stand van het formulier) gebruik ik altijd. Google Analytics en de Meta Pixel laden alleen als je daar toestemming voor geeft. Je kunt je keuze altijd wijzigen via <button type="button" data-cookie-settings class="link">cookie-instellingen</button>.</p>
+    <h2>Je rechten</h2>
+    <p>Je mag je gegevens inzien, laten corrigeren of verwijderen. Mail naar {SITE.email}. Ben je het niet eens met hoe ik met je gegevens omga, dan kun je een klacht indienen bij de Autoriteit Persoonsgegevens.</p>
+  </div></div></section>
+</Base>

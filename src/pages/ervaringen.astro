@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Img from '../components/Img.astro';
+import Icon from '../components/Icon.astro';
+import Cta from '../components/Cta.astro';
+import { SITE } from '../data/site';
+import { REVIEWS, formatReviewDate } from '../data/reviews';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Ervaringen', href: '/ervaringen' }];
+const showFilters = REVIEWS.length >= 12; // filters with a handful of reviews give empty results
+const serviceLabel: Record<string, string> = { complete: 'Complete Bruidslook', kapsel: 'Bruidskapsel', visagie: 'Bruidsvisagie', gasten: 'Gala & gasten' };
+const stories = [
+  { key: 'italy', title: 'Een trouwweekend in Italië', shots: ['bruid in Italië, ochtendlicht', 'detail kapsel met sluier', 'bruid en bruidegom bij zonsondergang'] },
+  { key: 'heat', title: 'Een hele dag bij 37°C', shots: ['bruid buiten in de zon', 'close-up make-up na de avond', 'dansende bruid'] },
+];
+---
+<Base title="Ervaringen van bruiden · 5,0 op Google | Lado Bridal"
+  description={`Lees de ervaringen van bruiden met Lado Bridal: ${SITE.rating.value.toFixed(1).replace('.', ',')} sterren op Google. Echte reviews over bruidskapsel, bruidsmake-up en destination weddings.`}
+  ogTitle="Ervaringen van bruiden · Lado Bridal" ogDescription="Echte Google-reviews van bruiden over hun haar en make-up, van Friesland tot Italië."
+  breadcrumbs={crumbs}
+  schema={REVIEWS.length ? [{ '@type': 'ItemList', name: 'Reviews van bruiden', itemListElement: REVIEWS.map((r, i) => ({ '@type': 'ListItem', position: i + 1, item: { '@type': 'Review', reviewBody: r.text, author: { '@type': 'Person', name: r.name }, datePublished: r.date, reviewRating: { '@type': 'Rating', ratingValue: 5, bestRating: 5 }, itemReviewed: { '@id': `${SITE.url}/#business` } } })) }] : []}>
+  <PageHero crumbs={crumbs} eyebrow="Ervaringen" h1="Ervaringen van bruiden" cta={false}
+    lead="Een bruid boekt iemand die ze nog nooit heeft ontmoet, voor de meest gefotografeerde dag van haar leven. Daarom laat ik het woord hier aan de bruiden zelf.">
+    <div class="cluster mt-3" style="--gap:1.5rem;align-items:center">
+      <p style="font-family:var(--serif);font-size:4.5rem;line-height:1;font-weight:300">{SITE.rating.value.toFixed(1).replace('.', ',')}</p>
+      <div><span class="stars">{[1,2,3,4,5].map(() => <Icon name="star" size={18} />)}</span><p class="small muted">{SITE.rating.count} reviews op Google</p></div>
+    </div>
+    <div class="page-hero__actions">
+      <a class="btn" href={SITE.googleProfileUrl} target="_blank" rel="noopener" data-track="review_google_click">Bekijk alle reviews op Google ↗</a>
+      {SITE.googleReviewUrl
+        ? <a class="btn btn--outline" href={SITE.googleReviewUrl} target="_blank" rel="noopener">Schrijf een review</a>
+        : <span class="ph">[GOOGLE REVIEW-LINK · knop “Schrijf een review” voor oud-bruiden]</span>}
+    </div>
+  </PageHero>
+
+  <section class="section--tight">
+    <div class="container">
+      {showFilters && (
+        <div class="filter-chips" role="group" aria-label="Filter reviews">
+          {['Alle', 'Friesland', 'Groningen', 'Destination', 'Complete Bruidslook', 'Gasten'].map((f, i) => <button type="button" class="chip" aria-pressed={i === 0 ? 'true' : 'false'}>{f}</button>)}
+        </div>
+      )}
+      <div class="review-wall">
+        {REVIEWS.map((r) => (
+          <article class="review-card">
+            <span class="stars" aria-label="5 sterren">{[1,2,3,4,5].map(() => <Icon name="star" size={13} />)}</span>
+            {r.photo && <div class="mt-1"><img src={r.photo} alt={`${r.name} op haar trouwdag`} loading="lazy" width="480" height="600" /></div>}
+            <blockquote class="mt-1"><p>{r.text}</p></blockquote>
+            <footer><strong>{r.name}</strong>{r.location && ` · ${r.location}`} · {formatReviewDate(r.date)}{r.service && ` · ${serviceLabel[r.service]}`} · <a class="link" href={r.url ?? SITE.googleProfileUrl} target="_blank" rel="noopener">Google</a></footer>
+          </article>
+        ))}
+        {!REVIEWS.length && [1, 2, 3, 4, 5, 6].map((n) => (
+          <article class="review-card"><div class="ph-block">[REVIEW {n} · volledige tekst uit Google + voornaam · locatie bruiloft · maand jaar · dienst · optioneel foto met toestemming] — invullen in <code>src/data/reviews.ts</code></div></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {stories.map((s, i) => (
+    <section class:list={['section', i % 2 === 0 && 'section--linen']}>
+      <div class="container">
+        <div class="section-head"><p class="eyebrow">Uitgelicht verhaal</p><h2>{s.title}</h2></div>
+        <div class="look-grid look-grid--3">{s.shots.map((sh, j) => <Img ratio={j === 1 ? '3x4' : '4x5'} shot={sh} delay={j * 0.08} />)}</div>
+        <div class="grid mt-3">
+          <blockquote class="col-half pull-quote" style="font-size:clamp(1.4rem,1.1rem + 1.4vw,2.2rem)"><p><span class="ph">[QUOTE · exacte zin uit de Google-review van deze bruid]</span></p></blockquote>
+          <div class="col-half">
+            <p class="eyebrow eyebrow--plain">Quinty over deze look</p>
+            <p class="mt-1 ph-block">[NOTITIE QUINTY · hoe de look is opgebouwd: voorbereiding, producten, techniek, planning van de dag — door Quinty te schrijven]</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="section">
+    <div class="container grid align-center">
+      <div class="col-text"><p class="eyebrow">Video</p><h2 class="mt-1">In haar <em>eigen woorden</em></h2><p class="mt-2 muted">Ruimte voor een korte videotestimonial van een bruid, alleen met haar toestemming.</p></div>
+      <div class="col-media"><Img ratio="16x9" shot="videotestimonial · 16:9 · placeholder" /></div>
+    </div>
+  </section>
+  <Cta />
+</Base>

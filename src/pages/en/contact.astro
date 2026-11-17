@@ -1,0 +1,29 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumbs from '../../components/Breadcrumbs.astro';
+import LeadForm from '../../components/LeadForm.astro';
+import RatingBadge from '../../components/RatingBadge.astro';
+import Icon from '../../components/Icon.astro';
+import { SITE, waLink } from '../../data/site';
+const crumbs = [{ name: 'Home', href: '/en' }, { name: 'Contact', href: '/en/contact' }];
+---
+<Base title="Contact & availability | Lado Bridal" description="Check whether your wedding date is available. Request a quote via the form, WhatsApp or phone. Personal quote within 2 working days." breadcrumbs={crumbs} inlineForm>
+  <section class="page-hero"><div class="container">
+    <Breadcrumbs items={crumbs} lang="en" />
+    <div class="grid mt-3">
+      <div class="col-text" style="align-self:start">
+        <p class="eyebrow">Contact</p>
+        <h1 class="mt-1">Contact &amp; <em>availability</em></h1>
+        <p class="lead">Tell me about your day. You’ll receive a personal quote within 2 working days.</p>
+        <div class="mt-3"><RatingBadge lang="en" /></div>
+        <ul class="stack mt-3" role="list" style="--stack:1rem">
+          <li><a class="cluster" style="--gap:.75rem" href={waLink('Hi Quinty, I would like to check whether my wedding date is available. My date: ')} target="_blank" rel="noopener" data-track="whatsapp_click"><Icon name="whatsapp" /> WhatsApp {SITE.phone}</a></li>
+          <li><a class="cluster" style="--gap:.75rem" href={SITE.phoneHref} data-track="phone_click"><Icon name="phone" /> {SITE.phone}</a></li>
+          <li><a class="cluster" style="--gap:.75rem" href={`mailto:${SITE.email}`} data-track="email_click"><Icon name="mail" /> {SITE.email}</a></li>
+          <li><a class="cluster" style="--gap:.75rem" href={SITE.instagram} target="_blank" rel="noopener"><Icon name="instagram" /> {SITE.instagramHandle}</a></li>
+        </ul>
+      </div>
+      <div class="col-media" style="background:var(--linen);padding:clamp(1.5rem,4vw,3rem)"><LeadForm lang="en" mode="inline" /></div>
+    </div>
+  </div></section>
+</Base>

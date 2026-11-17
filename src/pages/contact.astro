@@ -1,0 +1,53 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import LeadForm from '../components/LeadForm.astro';
+import RatingBadge from '../components/RatingBadge.astro';
+import Faq from '../components/Faq.astro';
+import Icon from '../components/Icon.astro';
+import { SITE, waLink } from '../data/site';
+import { faqSchema } from '../data/schema';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Contact', href: '/contact' }];
+const faq = [
+  { q: 'Hoe snel hoor ik iets?', a: '<p>Je ontvangt binnen 2 werkdagen een persoonlijke offerte. Vaak bel ik eerst even voor een korte intake.</p>' },
+  { q: 'Is mijn datum al vast als ik het formulier invul?', a: '<p>Nee, het formulier is een aanvraag. Je datum staat vast na ondertekening van de offerte en een aanbetaling van 25%.</p>' },
+  { q: 'Kan ik ook gewoon appen?', a: '<p>Ja, via <a href="' + SITE.whatsapp + '">WhatsApp</a>. Stuur je trouwdatum en locatie mee, dan kan ik meteen kijken.</p>' },
+];
+---
+<Base title="Contact & beschikbaarheid | Lado Bridal" description="Check of je trouwdatum nog vrij is. Vraag een offerte aan via het formulier, WhatsApp of telefoon. Je ontvangt binnen 2 werkdagen een persoonlijke offerte."
+  ogTitle="Contact & beschikbaarheid · Lado Bridal" ogDescription="Is jouw trouwdatum nog vrij? Vraag het aan via het formulier of WhatsApp."
+  breadcrumbs={crumbs} inlineForm schema={[faqSchema(faq), { '@type': 'ContactPage', url: `${SITE.url}/contact` }]}>
+  <section class="page-hero">
+    <div class="container">
+      <Breadcrumbs items={crumbs} />
+      <div class="grid mt-3">
+        <div class="col-text" style="align-self:start">
+          <p class="eyebrow">Contact</p>
+          <h1 class="mt-1">Contact &amp; <em>beschikbaarheid</em></h1>
+          <p class="lead">Vertel me over je dag. Je ontvangt binnen 2 werkdagen een persoonlijke offerte.</p>
+          <div class="mt-3"><RatingBadge /></div>
+          <ul class="stack mt-3" role="list" style="--stack:1rem">
+            <li><a class="cluster" style="--gap:.75rem" href={waLink('Hoi Quinty, ik wil graag weten of mijn trouwdatum nog vrij is. Mijn datum: ')} target="_blank" rel="noopener" data-track="whatsapp_click"><Icon name="whatsapp" /> WhatsApp {SITE.phoneDisplay}</a></li>
+            <li><a class="cluster" style="--gap:.75rem" href={SITE.phoneHref} data-track="phone_click"><Icon name="phone" /> {SITE.phoneDisplay}</a></li>
+            <li><a class="cluster" style="--gap:.75rem" href={`mailto:${SITE.email}`} data-track="email_click"><Icon name="mail" /> {SITE.email}</a></li>
+            <li><a class="cluster" style="--gap:.75rem" href={SITE.instagram} target="_blank" rel="noopener"><Icon name="instagram" /> {SITE.instagramHandle}</a></li>
+          </ul>
+          <div class="mt-3 small muted">
+            <p><strong style="color:var(--espresso)">Studio</strong>: {SITE.streetAddress ? `${SITE.streetAddress}, ${SITE.postalCode} ` : ''}Leeuwarden{!SITE.streetAddress && ' (adres bij het inplannen van je proefsessie)'}. Op je trouwdag kom ik naar je toe.</p>
+            <p class="mt-1"><strong style="color:var(--espresso)">Reactietijd</strong>: binnen 2 werkdagen.</p>
+          </div>
+        </div>
+        <div class="col-media" style="background:var(--linen);padding:clamp(1.5rem,4vw,3rem)" id="formulier">
+          <p class="eyebrow eyebrow--plain" style="margin-bottom:1rem">Check je datum</p>
+          <LeadForm mode="inline" />
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section section--linen">
+    <div class="container grid">
+      <div class="col-quarter"><p class="eyebrow">FAQ</p><h2 class="mt-1">Goed om te <em>weten</em></h2></div>
+      <div class="col-rest"><Faq items={faq} /></div>
+    </div>
+  </section>
+</Base>

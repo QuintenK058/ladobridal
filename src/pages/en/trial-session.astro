@@ -1,0 +1,33 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Section from '../../components/Section.astro';
+import Timeline from '../../components/Timeline.astro';
+import Faq from '../../components/Faq.astro';
+import Cta from '../../components/Cta.astro';
+import { faqSchema } from '../../data/schema';
+const crumbs = [{ name: 'Home', href: '/en' }, { name: 'Trial session', href: '/en/trial-session' }];
+const faq = [
+  { q: 'When should I plan the trial?', a: '<p>4–8 weeks before the wedding.</p>' },
+  { q: 'I live abroad. How does it work?', a: '<p>Preparation can be done digitally (video call, photos of your hair and skin in daylight, your dress and inspiration). The trial itself is planned when you’re in the Netherlands, or on location in the days before the wedding.</p>' },
+  { q: 'Can I bring someone?', a: '<p>Yes, one trusted person (mother, sister, maid of honour) is welcome.</p>' },
+];
+---
+<Base title="Bridal trial session in Leeuwarden | Lado Bridal" description="How the bridal hair and make-up trial works: 4–8 weeks before, in the studio in Leeuwarden, with a checklist. Digital preparation for brides abroad." breadcrumbs={crumbs} schema={[faqSchema(faq)]}>
+  <PageHero lang="en" crumbs={crumbs} eyebrow="Trial session" h1="The trial session: how we prepare your bridal look" lead="The trial is where your bridal look really takes shape. In the calm of my studio in Leeuwarden we try, compare and adjust, so nothing on your wedding day comes as a surprise." shot="trial in the studio · 4:5" />
+  <section class="section section--linen"><div class="container">
+    <div class="section-head"><p class="eyebrow">What happens</p><h2>During the <em>trial</em></h2></div>
+    <Timeline horizontal steps={[
+      { title: 'Getting to know you', text: 'Your inspiration, your dress, the plan for the day.' },
+      { title: 'Skin & hair', text: 'I look at your skin and hair and explain my approach.' },
+      { title: 'Creating the look', text: 'Hair and make-up, step by step.' },
+      { title: 'Photos & adjusting', text: 'Photos in daylight and with flash; we fine-tune.' },
+      { title: 'Recording', text: 'Everything noted for your styling guide and timeline.' },
+    ]} />
+  </div></section>
+  <Section eyebrow="Checklist" title="What to <em>bring</em>">
+    <ul><li>Inspiration photos — what you love, and what you don’t</li><li>A photo of your dress (neckline, back, fabric)</li><li>Your veil, comb, flowers or other accessories</li><li>Any extensions or clip-ins</li><li>A top with a similar neckline to your dress</li></ul>
+  </Section>
+  <section class="section section--linen"><div class="container grid"><div class="col-quarter"><h2>FAQ</h2></div><div class="col-rest"><Faq items={faq} /></div></div></section>
+  <Cta lang="en" />
+</Base>

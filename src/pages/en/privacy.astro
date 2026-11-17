@@ -1,0 +1,13 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import { SITE } from '../../data/site';
+const crumbs = [{ name: 'Home', href: '/en' }, { name: 'Privacy', href: '/en/privacy' }];
+---
+<Base title="Privacy statement | Lado Bridal" description="How Lado Bridal handles your personal data: what, why, how long and your rights." breadcrumbs={crumbs}>
+  <PageHero lang="en" crumbs={crumbs} eyebrow="Privacy" h1="Privacy statement" cta={false} />
+  <section class="section--tight" style="padding-top:0"><div class="container"><div class="prose">
+    <p class="ph-block">[DRAFT — have checked before publishing. Mirrors the Dutch privacy statement.]</p>
+    <p>{SITE.name} ({SITE.owner}, {SITE.city}) only uses the details you submit through the form to answer your request, prepare a quote and, if you book, carry out the booking. Analytics and marketing cookies load only with your consent. You can access, correct or delete your data by emailing {SITE.email}. The <a href="/privacy" hreflang="nl">Dutch version</a> is leading.</p>
+  </div></div></section>
+</Base>

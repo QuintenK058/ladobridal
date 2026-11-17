@@ -1,0 +1,74 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Img from '../components/Img.astro';
+import Icon from '../components/Icon.astro';
+import Cta from '../components/Cta.astro';
+import { SITE } from '../data/site';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Portfolio', href: '/portfolio' }];
+/** Replace shot placeholders with real photos: set `src` (see Img.astro) + a descriptive Dutch alt text. */
+const items = [
+  { cat: 'kapsel', ratio: '4x5', shot: 'los opgestoken bruidskapsel', alt: 'Bruid met los opgestoken bruidskapsel op een landgoed in Friesland', caption: 'Los opgestoken · Landgoed, Friese Wouden' },
+  { cat: 'visagie', ratio: '3x4', shot: 'naturel bruidsmake-up close-up', alt: 'Close-up van natuurlijke bruidsmake-up met zachte wimpers', caption: 'Naturel make-up · Leeuwarden' },
+  { cat: 'complete', ratio: '4x5', shot: 'complete look bij het water', alt: 'Bruid met half-los kapsel en natuurlijke make-up aan het water', caption: 'Complete look · Friese Meren' },
+  { cat: 'destination complete', ratio: '3x2', shot: 'bruid in Italië, landschap', alt: 'Bruid met Complete Bruidslook bij een bruiloft in Italië', caption: 'Destination · Italië' },
+  { cat: 'kapsel', ratio: '3x4', shot: 'half-los met sluier', alt: 'Half-los bruidskapsel met lange sluier', caption: 'Half-los met sluier · Groningen' },
+  { cat: 'gasten', ratio: '4x5', shot: 'bruidsmeisjes groep', alt: 'Drie bruidsmeisjes met bijpassende kapsels', caption: 'Bruidsmeisjes · Drenthe' },
+  { cat: 'visagie', ratio: '4x5', shot: 'soft glam avondlook', alt: 'Bruid met soft glam make-up in avondlicht', caption: 'Soft glam · Avondceremonie' },
+  { cat: 'complete', ratio: '3x4', shot: 'boho look in schuur', alt: 'Bruid met boho bruidslook in een schuur', caption: 'Boho naturel · Schuurbruiloft, Overijssel' },
+  { cat: 'destination', ratio: '4x5', shot: 'bruid aan zee', alt: 'Bruid met losse golven aan de kust in het buitenland', caption: 'Destination · aan zee' },
+  { cat: 'kapsel', ratio: '1x1', shot: 'detail haarkam', alt: 'Detail van een haarkam in een lage knot', caption: 'Detail · lage knot met haarkam' },
+  { cat: 'gasten', ratio: '3x4', shot: 'moeder van de bruid', alt: 'Moeder van de bruid met verzorgd kapsel', caption: 'Moeder van de bruid' },
+  { cat: 'complete', ratio: '4x5', shot: 'stadhuis bruid', alt: 'Bruid met klassieke look voor een stadhuis', caption: 'Klassiek · Stadhuis Leeuwarden' },
+];
+const filters = [['all', 'Alle'], ['kapsel', 'Bruidskapsel'], ['visagie', 'Bruidsvisagie'], ['complete', 'Complete look'], ['destination', 'Destination'], ['gasten', 'Gala & gasten']];
+---
+<Base title="Portfolio bruidskapsels & bruidsmake-up | Lado Bridal"
+  description="Bekijk bruidskapsels en bruidsmake-up van Lado Bridal: los, half-los en opgestoken, naturel tot glam, in Friesland, Noord-Nederland en het buitenland."
+  ogTitle="Portfolio · Lado Bridal" ogDescription="Bruidskapsels en bruidsmake-up van Friese landgoederen tot Italiaanse bruiloften."
+  breadcrumbs={crumbs}>
+  <PageHero crumbs={crumbs} eyebrow="Portfolio" h1="Portfolio bruidskapsels &amp; bruidsmake-up" cta={false}
+    lead="Echte bruiden, echte trouwdagen. Filter op wat je zoekt en klik op een foto voor een grotere weergave." />
+  <section class="section--tight" style="padding-top:0">
+    <div class="container">
+      <div class="filter-chips" role="group" aria-label="Filter portfolio">
+        {filters.map(([v, l], i) => <button type="button" class="chip" data-filter={v} aria-pressed={i === 0 ? 'true' : 'false'}>{l}</button>)}
+      </div>
+      <div class="masonry" data-masonry>
+        {items.map((it, i) => (
+          <figure class="masonry__item" data-cat={it.cat} data-caption={it.caption} style={`margin-left:0;margin-right:0;view-transition-name:pf-${i}`}>
+            <button type="button" class="masonry__btn" aria-label={`Vergroot: ${it.caption}`}>
+              <Img ratio={it.ratio as any} shot={it.shot} alt={it.alt} reveal={false} />
+              <span class="masonry__cap">{it.caption}</span>
+            </button>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="lightbox" data-lightbox role="dialog" aria-modal="true" aria-label="Foto vergroot" aria-hidden="true">
+    <div class="lightbox__top"><span class="small" data-lb-count></span><button type="button" data-lb-close aria-label="Sluiten"><Icon name="close" size={26} /></button></div>
+    <div class="lightbox__stage" data-lb-stage></div>
+    <div class="lightbox__bottom">
+      <button type="button" data-lb-prev aria-label="Vorige foto"><Icon name="arrow-left" size={26} /></button>
+      <p class="small" data-lb-cap style="flex:1;text-align:center"></p>
+      <button type="button" data-lb-next aria-label="Volgende foto"><Icon name="arrow-right" size={26} /></button>
+      <button type="button" class="btn btn--light btn--sm" data-open-form style="flex-basis:100%">Deze look voor jouw dag? Check je datum</button>
+    </div>
+  </div>
+
+  <section class="section section--linen">
+    <div class="container">
+      <div class="cluster" style="justify-content:space-between;margin-bottom:2rem">
+        <div><p class="eyebrow">Instagram</p><h2 class="mt-1">Volg <em>@lado.bridal</em></h2></div>
+        <a class="btn btn--outline" href={SITE.instagram} target="_blank" rel="noopener"><Icon name="instagram" size={18} /> Naar Instagram</a>
+      </div>
+      <div class="insta-grid">
+        {[1, 2, 3, 4, 5, 6].map((n) => <a href={SITE.instagram} target="_blank" rel="noopener" aria-label={`Instagram-post ${n} van @lado.bridal`}><Img ratio="1x1" shot={`Instagram ${n}`} /></a>)}
+      </div>
+      <p class="small muted mt-2">Statische afbeeldingen (geen zware embed), handmatig bij te werken in <code>src/pages/portfolio.astro</code>.</p>
+    </div>
+  </section>
+  <Cta />
+</Base>

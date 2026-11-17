@@ -1,0 +1,23 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PageHero from '../../../components/PageHero.astro';
+import Section from '../../../components/Section.astro';
+import Reviews from '../../../components/Reviews.astro';
+import Cta from '../../../components/Cta.astro';
+import { PRICES, euro } from '../../../data/site';
+import { serviceSchema } from '../../../data/schema';
+const path = '/en/destination-wedding-stylist/italy';
+const crumbs = [{ name: 'Home', href: '/en' }, { name: 'Destination weddings', href: '/en/destination-wedding-stylist' }, { name: 'Italy', href: path }];
+const price = PRICES.completeBruidslook ? euro(PRICES.completeBruidslook, 'en') : '[PRICE]';
+---
+<Base title="Bridal hair & make-up for your wedding in Italy | Lado Bridal" description={`Your own bridal stylist from the Netherlands for your wedding in Italy: villas and wine estates in Tuscany and Umbria. From ${price} + travel.`}
+  breadcrumbs={crumbs} schema={[serviceSchema({ name: 'Bridal styling Italy', path, description: 'Bridal hair and make-up for weddings in Italy.', area: [{ type: 'Country', name: 'Italy' }] })]}>
+  <PageHero lang="en" crumbs={crumbs} eyebrow="Destination · Italy" h1="Bridal stylist for your wedding in Italy" badge shot="bride at an Italian villa · 4:5"
+    lead="A villa among the cypress trees, a wine estate in the hills, dinner under the stars. Your look has to last that whole long, warm day." />
+  <Section eyebrow="Italy" title="Long, warm days, <em>golden light</em>">
+    <p>Many weddings in Italy take place at a villa or wine estate, often over a weekend: welcome dinner, wedding day and a brunch. That means several looks, and a stylist who can be there every day. Italian light is warm and golden, so I build skin that glows without shine, and make-up that doesn’t turn orange in that warm light.</p>
+    <p class="ph-block">[REAL EXPERIENCE · Quinty’s Italy wedding weekend, with photos (with permission)]</p>
+  </Section>
+  <section class="section section--linen"><div class="container"><Reviews variant="pair" featured="italy" region="destination" lang="en" /></div></section>
+  <Cta lang="en" title="Marrying in Italy? <em>Check your date.</em>" />
+</Base>

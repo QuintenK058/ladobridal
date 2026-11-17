@@ -1,0 +1,18 @@
+---
+import Base from '../layouts/Base.astro';
+import { REGIONS } from '../data/site';
+---
+<Base title="Pagina niet gevonden | Lado Bridal" description="Deze pagina bestaat niet (meer). Bekijk de diensten, regio’s of neem contact op." noindex>
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow">404</p>
+      <h1 class="mt-1">Deze pagina is <em>niet gevonden</em></h1>
+      <p class="lead">Misschien is de link verouderd. Hier vind je verder:</p>
+      <div class="grid mt-3">
+        <div class="col-third"><h2 class="h3">Diensten</h2><ul class="stack mt-1" role="list" style="--stack:.5rem"><li><a class="link" href="/complete-bruidslook">Complete Bruidslook</a></li><li><a class="link" href="/bruidskapsel">Bruidskapsel</a></li><li><a class="link" href="/bruidsvisagie">Bruidsvisagie</a></li><li><a class="link" href="/tarieven">Tarieven</a></li></ul></div>
+        <div class="col-third"><h2 class="h3">Regio’s</h2><ul class="stack mt-1" role="list" style="--stack:.5rem">{REGIONS.map((r) => <li><a class="link" href={r.slug}>{r.label}</a></li>)}</ul></div>
+        <div class="col-third"><h2 class="h3">Contact</h2><p class="mt-1"><a class="btn" href="/contact">Check je datum</a></p></div>
+      </div>
+    </div>
+  </section>
+</Base>
