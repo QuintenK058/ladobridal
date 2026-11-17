@@ -23,7 +23,7 @@ const faq = [
       <h1>Hair extensions in Leeuwarden, natural and made to measure</h1>
       <div class="hero__actions"><a class="btn" href="/en/consult" data-track="consult_cta">Book your consultation <span class="arrow" aria-hidden="true">→</span></a><a class="btn btn--outline" href="/en/extension-check" data-open-quiz>Take the extension check</a></div>
     </div>
-    <div class="bl-hero__media"><HairVideo shot="hair in motion, warm light" label="Extensions · no filter" /></div>
+    <div class="bl-hero__media"><HairVideo shot="hair in motion" art="hero" label="Extensions · no filter" /></div>
   </div></section>
   <section class="section"><div class="container promise">
     {[['01', 'Nobody sees <em>the difference.</em>', 'Colour matched to the strand, often blending several shades, then cut and blended into your own hair.'], ['02', 'Your own hair <em>first.</em>', 'I look at what your hair can carry. Sometimes my advice is less weight, another method, or: not yet.'], ['03', 'Honest prices, <em>maintenance included.</em>', 'You see upfront what placement costs and what maintenance and new hair cost per year.']].map(([n, t, d]) => <div class="promise__item reveal"><div><span class="promise__num">{n}</span><p class="h2 mt-1" set:html={t} /><p class="muted">{d}</p></div></div>)}
@@ -33,7 +33,7 @@ const faq = [
     <div class="col-text--right"><p class="eyebrow">Results</p><h2 class="mt-1">Results that <em>speak for themselves</em></h2><a class="btn btn--light mt-3" href="/en/results">See all results</a></div>
   </div></section>
   <section class="section"><div class="container"><div class="section-head"><p class="eyebrow">Methods</p><h2>Which extensions <em>suit you?</em></h2></div>
-    <div class="look-grid look-grid--3">{confirmed().map((m) => <a class="card" href="/en/extensions"><Img ratio="3x4" shot={m.shot} /><span class="card__title">{m.name}</span></a>)}</div>
+    <div class="look-grid look-grid--3">{confirmed().map((m) => <a class="card" href="/en/extensions"><Img ratio="3x4" shot={m.shot} art={m.key} /><span class="card__title">{m.name}</span></a>)}</div>
     <a class="text-link mt-3" href="/en/extensions">All methods compared <span class="arrow" aria-hidden="true">→</span></a></div></section>
   <section class="section section--bone"><div class="container"><div class="section-head"><h2>How it <em>works</em></h2></div>
     <Timeline horizontal steps={[{ title: 'Consultation', text: 'Hair analysis, your wishes, honest advice, colour.' }, { title: 'Ordering hair', text: 'Your hair is ordered in your shade(s).' }, { title: 'Placement', text: 'Placed, then cut and blended into your own hair.' }, { title: 'Aftercare', text: 'Care advice and maintenance every <span class="ph">[X]</span> weeks.' }]} /></div></section>

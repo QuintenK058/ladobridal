@@ -46,7 +46,7 @@ const total = Qs.length + 2;
                 <label class="tile">
                   <input type="radio" name={q.name} value={v} required />
                   <span class="tile__media" style={q.name === 'length' ? `height:${40 + j * 20}%` : undefined}>
-                    {q.name !== 'length' && <Img ratio="4x5" shot={`${l}${sub ? ' ' + sub : ''}`} reveal={false} />}
+                    {q.name !== 'length' && <Img ratio="4x5" shot={`${l}${sub ? ' ' + sub : ''}`} art={v} reveal={false} />}
                   </span>
                   <span class="tile__label">{l}</span>{sub && <span class="tile__sub">{sub}</span>}
                 </label>

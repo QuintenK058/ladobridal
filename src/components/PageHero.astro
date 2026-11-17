@@ -2,8 +2,8 @@
 import Breadcrumbs from './Breadcrumbs.astro';
 import Img from './Img.astro';
 import BeforeAfter from './BeforeAfter.astro';
-interface Props { crumbs: { name: string; href: string }[]; eyebrow: string; h1: string; lead?: string; shot?: string; ba?: string; cta?: boolean; secondary?: { href: string; label: string }; lang?: 'nl' | 'en'; vlabel?: string; photo?: { src: string; alt: string } }
-const { crumbs, eyebrow, h1, lead, shot, ba, cta = true, secondary, lang = 'nl', vlabel, photo } = Astro.props;
+interface Props { crumbs: { name: string; href: string }[]; eyebrow: string; h1: string; lead?: string; shot?: string; ba?: string; cta?: boolean; secondary?: { href: string; label: string }; lang?: 'nl' | 'en'; vlabel?: string; photo?: { src: string; alt: string }; art?: string }
+const { crumbs, eyebrow, h1, lead, shot, ba, cta = true, secondary, lang = 'nl', vlabel, photo, art } = Astro.props;
 const nl = lang === 'nl';
 ---
 <section class="page-hero">
@@ -23,7 +23,7 @@ const nl = lang === 'nl';
         {cta && <p class="reassure">{nl ? 'Vrijblijvend advies · Eerlijk over wat wel en niet kan' : 'No-obligation advice · Honest about what is and isn’t possible'}</p>}
         <slot />
       </div>
-      {(shot || ba) && <div class="col-aside rel">{vlabel && <span class="v-label">{vlabel}</span>}{ba ? <BeforeAfter caption={ba} lang={lang} /> : <Img ratio="4x5" shot={shot!} priority src={photo?.src} alt={photo?.alt} />}</div>}
+      {(shot || ba) && <div class="col-aside rel">{vlabel && <span class="v-label">{vlabel}</span>}{ba ? <BeforeAfter caption={ba} lang={lang} /> : <Img ratio="4x5" shot={shot!} priority src={photo?.src} alt={photo?.alt} art={art} />}</div>}
     </div>
   </div>
 </section>

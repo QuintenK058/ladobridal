@@ -8,6 +8,7 @@ npm run dev      # http://localhost:4321
 npm run build    # dist/ + sitemap.xml
 npm run check    # QA: H1s, titles, links, hreflang, JSON-LD, placeholders, duplicate sentences vs ../lado-bridal/dist
 npm run og       # regenerate OG images (Playwright), then build again
+npm run art      # regenerate the decorative hair-strand illustrations in public/art (never used as proof)
 ```
 
 ## Where things live

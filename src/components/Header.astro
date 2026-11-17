@@ -36,7 +36,7 @@ const home = nl ? '/' : '/en';
     <div class="container mega__grid" style={`grid-template-columns:repeat(${Math.min(methods.length, 5)},1fr) 1.1fr`}>
       {methods.map((m) => (
         <a class="mega__item card" href={nl ? m.slug : '/en/extensions'}>
-          <Img ratio="3x4" shot={m.shot} reveal={false} />
+          <Img ratio="3x4" shot={m.shot} art={m.key} reveal={false} />
           <strong>{m.name}</strong>
           <p>{m.idealFor.split(',')[0]}</p>
         </a>
