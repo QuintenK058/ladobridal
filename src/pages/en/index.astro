@@ -1,6 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Img from '../../components/Img.astro';
+import { PHOTO } from '../../data/photos';
 import RatingBadge from '../../components/RatingBadge.astro';
 import Timeline from '../../components/Timeline.astro';
 import Reviews from '../../components/Reviews.astro';
@@ -21,7 +22,7 @@ const faq = [
   description="Bridal hair and make-up by Quinty Kant, MUAH-certified. Trial session in Leeuwarden, on-location styling across the Netherlands and abroad. Check your date."
   ogTitle="Lado Bridal · Bridal hair & make-up on location" schema={[faqSchema(faq)]} overDark>
   <section class="hero" data-hero>
-    <div class="hero__media"><Img ratio="4x5" shot="hero · bride portrait, warm daylight" priority kenBurns reveal={false} dark /></div>
+    <div class="hero__media"><Img ratio="4x5" shot="hero" src={PHOTO.toost.src} alt="Bride and groom raising a glass; bride with an updo and hair accessory" priority kenBurns reveal={false} sizes="(min-width: 900px) 44vw, 100vw" /></div>
     <div class="container hero__content">
       <p class="display hero-words" data-split>Your <em>dream look,</em> styled to perfection.</p>
       <h1>Bridal hair &amp; make-up in Friesland, across the Netherlands and abroad</h1>
@@ -35,7 +36,7 @@ const faq = [
 
   <section class="section">
     <div class="container grid align-center">
-      <div class="col-media--left"><Img ratio="4x5" arch shot="portrait Quinty in the studio" /></div>
+      <div class="col-media--left"><Img ratio="4x5" arch shot="portrait Quinty" src={PHOTO.quinty.src} alt="Portrait of Quinty Kant, bridal stylist and make-up artist" /></div>
       <div class="col-text--right">
         <p class="eyebrow">About me</p>
         <h2 class="mt-2 reveal-text" data-split>Hi, I’m <em>Quinty.</em></h2>

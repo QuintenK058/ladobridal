@@ -1,4 +1,5 @@
 ---
+import { PHOTO } from '../data/photos';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Img from '../components/Img.astro';
@@ -14,7 +15,7 @@ const crumbs = [{ name: 'Home', href: '/' }, { name: 'Over mij', href: '/over-mi
   breadcrumbs={crumbs}>
   <PageHero crumbs={crumbs} eyebrow="Over mij" h1="Over Quinty Kant, bruidsstylist uit Leeuwarden"
     lead="Ik ben Quinty. Ik style bruiden op de ochtend van hun bruiloft, en ik vind het mooiste moment als een bruid in de spiegel kijkt en zegt: dit ben ik, maar dan op mijn mooist."
-    shot="portret Quinty, natuurlijk licht · 4:5 · arch" arch cta={false} secondary={{ href: '#kennismaken', label: 'Plan een kennismaking' }} />
+    shot="portret Quinty" photo={PHOTO.quinty} arch cta={false} secondary={{ href: '#kennismaken', label: 'Plan een kennismaking' }} />
 
   <Section eyebrow="Mijn verhaal" title="Hoe ik <em>bruidsstylist</em> werd">
     <p class="ph-block">[VERHAAL · door Quinty aan te vullen: hoe ze in bridal styling terechtkwam, wat haar raakt aan trouwdagen, waarom ze voor Lado Bridal koos. ±200 woorden, in de ik-vorm.]</p>
@@ -84,9 +85,9 @@ const crumbs = [{ name: 'Home', href: '/' }, { name: 'Over mij', href: '/over-mi
   <section class="section section--linen" aria-label="Achter de schermen">
     <div class="container">
       <div class="look-grid look-grid--3">
-        <Img ratio="4x5" arch shot="behind the scenes: werken aan een bruidskapsel" />
-        <div style="margin-top:12%"><Img ratio="3x4" arch shot="behind the scenes: make-up aanbrengen" parallax={0.05} /></div>
-        <Img ratio="4x5" arch shot="behind the scenes: spiegelmoment bruid" />
+        <Img ratio="4x5" arch shot="achter de schermen" src={PHOTO.aanHetWerk.src} alt={PHOTO.aanHetWerk.alt} />
+        <div style="margin-top:12%"><Img ratio="3x4" arch shot="make-up" src={PHOTO.wenkbrauwen.src} alt={PHOTO.wenkbrauwen.alt} parallax={0.05} /></div>
+        <Img ratio="4x5" arch shot="krullen zetten" src={PHOTO.krullen.src} alt={PHOTO.krullen.alt} />
       </div>
     </div>
   </section>

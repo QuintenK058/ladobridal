@@ -1,4 +1,5 @@
 ---
+import { PHOTO } from '../data/photos';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Img from '../components/Img.astro';
@@ -8,20 +9,23 @@ import { SITE } from '../data/site';
 const crumbs = [{ name: 'Home', href: '/' }, { name: 'Portfolio', href: '/portfolio' }];
 /** Replace shot placeholders with real photos: set `src` (see Img.astro) + a descriptive Dutch alt text. */
 const items = [
-  { cat: 'kapsel', ratio: '4x5', shot: 'los opgestoken bruidskapsel', alt: 'Bruid met los opgestoken bruidskapsel op een landgoed in Friesland', caption: 'Los opgestoken · Landgoed, Friese Wouden' },
-  { cat: 'visagie', ratio: '3x4', shot: 'naturel bruidsmake-up close-up', alt: 'Close-up van natuurlijke bruidsmake-up met zachte wimpers', caption: 'Naturel make-up · Leeuwarden' },
-  { cat: 'complete', ratio: '4x5', shot: 'complete look bij het water', alt: 'Bruid met half-los kapsel en natuurlijke make-up aan het water', caption: 'Complete look · Friese Meren' },
-  { cat: 'destination complete', ratio: '3x2', shot: 'bruid in Italië, landschap', alt: 'Bruid met Complete Bruidslook bij een bruiloft in Italië', caption: 'Destination · Italië' },
-  { cat: 'kapsel', ratio: '3x4', shot: 'half-los met sluier', alt: 'Half-los bruidskapsel met lange sluier', caption: 'Half-los met sluier · Groningen' },
-  { cat: 'gasten', ratio: '4x5', shot: 'bruidsmeisjes groep', alt: 'Drie bruidsmeisjes met bijpassende kapsels', caption: 'Bruidsmeisjes · Drenthe' },
-  { cat: 'visagie', ratio: '4x5', shot: 'soft glam avondlook', alt: 'Bruid met soft glam make-up in avondlicht', caption: 'Soft glam · Avondceremonie' },
-  { cat: 'complete', ratio: '3x4', shot: 'boho look in schuur', alt: 'Bruid met boho bruidslook in een schuur', caption: 'Boho naturel · Schuurbruiloft, Overijssel' },
-  { cat: 'destination', ratio: '4x5', shot: 'bruid aan zee', alt: 'Bruid met losse golven aan de kust in het buitenland', caption: 'Destination · aan zee' },
-  { cat: 'kapsel', ratio: '1x1', shot: 'detail haarkam', alt: 'Detail van een haarkam in een lage knot', caption: 'Detail · lage knot met haarkam' },
-  { cat: 'gasten', ratio: '3x4', shot: 'moeder van de bruid', alt: 'Moeder van de bruid met verzorgd kapsel', caption: 'Moeder van de bruid' },
-  { cat: 'complete', ratio: '4x5', shot: 'stadhuis bruid', alt: 'Bruid met klassieke look voor een stadhuis', caption: 'Klassiek · Stadhuis Leeuwarden' },
+  { cat: 'kapsel', ratio: '4x5', p: PHOTO.hogeKnot, caption: 'Hoge knot met volume' },
+  { cat: 'complete', ratio: '3x4', p: PHOTO.toost, caption: 'Opgestoken met haaraccessoire' },
+  { cat: 'visagie', ratio: '3x4', p: PHOTO.sluier, caption: 'Soft glam met sluier' },
+  { cat: 'kapsel', ratio: '4x5', p: PHOTO.halfLos, caption: 'Half-los met lange golven' },
+  { cat: 'complete', ratio: '3x2', p: PHOTO.omhelzing, caption: 'Romantische opsteek met parels' },
+  { cat: 'kapsel', ratio: '4x5', p: PHOTO.golven, caption: 'Hollywood-golven op donker haar' },
+  { cat: 'complete', ratio: '2x3', p: PHOTO.kapel, caption: 'In het licht van de kapel' },
+  { cat: 'kapsel', ratio: '4x5', p: PHOTO.lageKnot, caption: 'Losse lage knot' },
+  { cat: 'visagie', ratio: '3x4', p: PHOTO.oogschaduw, caption: 'Soft glam: oogschaduw' },
+  { cat: 'complete', ratio: '4x5', p: PHOTO.tafel, caption: 'Zachte opsteek met parels' },
+  { cat: 'kapsel', ratio: '3x4', p: PHOTO.blondeKrullen, caption: 'Half-los met volle krullen' },
+  { cat: 'complete', ratio: '2x3', p: PHOTO.gevlochten, caption: 'Gevlochten opsteek met bloemen' },
+  { cat: 'kapsel', ratio: '3x4', p: PHOTO.lageStaart, caption: 'Strakke lage staart' },
+  { cat: 'complete', ratio: '2x3', p: PHOTO.kapelOmhelzing, caption: 'Opgestoken bruidskapsel' },
+  { cat: 'visagie', ratio: '3x4', p: PHOTO.wenkbrauwen, caption: 'Wenkbrauwen bijwerken' },
 ];
-const filters = [['all', 'Alle'], ['kapsel', 'Bruidskapsel'], ['visagie', 'Bruidsvisagie'], ['complete', 'Complete look'], ['destination', 'Destination'], ['gasten', 'Gala & gasten']];
+const filters = [['all', 'Alle'], ['kapsel', 'Bruidskapsel'], ['visagie', 'Bruidsvisagie'], ['complete', 'Complete look']]; // Destination / Gala & gasten chips return once there are real photos
 ---
 <Base title="Portfolio bruidskapsels & bruidsmake-up | Lado Bridal"
   description="Bekijk bruidskapsels en bruidsmake-up van Lado Bridal: los, half-los en opgestoken, naturel tot glam, in Friesland, Noord-Nederland en het buitenland."
@@ -38,7 +42,7 @@ const filters = [['all', 'Alle'], ['kapsel', 'Bruidskapsel'], ['visagie', 'Bruid
         {items.map((it, i) => (
           <figure class="masonry__item" data-cat={it.cat} data-caption={it.caption} style={`margin-left:0;margin-right:0;view-transition-name:pf-${i}`}>
             <button type="button" class="masonry__btn" aria-label={`${it.caption}, vergroten`}>
-              <Img ratio={it.ratio as any} shot={it.shot} alt={it.alt} reveal={false} />
+              <Img ratio={it.ratio as any} shot={it.caption} src={it.p.src} alt={it.p.alt} reveal={false} sizes="(min-width: 900px) 30vw, 50vw" />
               <span class="masonry__cap">{it.caption}</span>
             </button>
           </figure>

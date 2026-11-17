@@ -1,4 +1,5 @@
 ---
+import { PHOTO } from '../data/photos';
 import ServiceLayout from '../layouts/ServiceLayout.astro';
 import Section from '../components/Section.astro';
 import { PRICES, euro, INCLUDED_NL } from '../data/site';
@@ -13,7 +14,7 @@ const price = PRICES.completeBruidslook;
   eyebrow="03 — Meest gekozen"
   h1="Complete Bruidslook: haar en make-up in één hand"
   lead={`Eén stylist voor je haar en je make-up. Dat betekent één visie op je look, één planning voor je ochtend en één vertrouwd gezicht naast je als het spannend wordt. ${price ? `Vanaf <strong>${euro(price)}</strong>, inclusief proefsessie en styling guide.` : ''}`}
-  heroShot="bruid volledige look, haar en make-up · 4:5"
+  heroShot="complete look" heroPhoto={PHOTO.toost}
   forWhoTitle="Waarom één stylist <em>rustiger</em> is"
   forWho={`<p>Met een aparte kapper en visagist plan je twee mensen, twee proefsessies en twee tijdsblokken op je trouwochtend. Ze moeten op elkaar wachten en ze zien elk maar de helft van je look. Dat kan prima, maar het levert vaak meer gedoe op dan je zou willen op een dag die al vol zit.</p>
 <p>Bij de Complete Bruidslook bewaak ik het geheel. Ik stem de kleur van je make-up af op hoe je haar valt, de hoogte van je opsteek op de hals van je jurk, en het tempo van de ochtend op wat jij prettig vindt. Er is één planning, die ik vooraf met je doorneem, en één persoon die je kunt bellen als er iets verandert.</p>
@@ -28,10 +29,10 @@ const price = PRICES.completeBruidslook;
   ]}
   looksTitle="Eén look, <em>van top tot teen</em>"
   looks={[
-    { name: 'Romantisch', text: 'Zachte golven, een stralende huid en een roze lip. Tijdloos bij een kanten jurk.', shot: 'romantische bruidslook' },
-    { name: 'Klassiek elegant', text: 'Een strakke lage knot, gedefinieerde ogen en een neutrale lip.', shot: 'klassieke bruidslook' },
-    { name: 'Boho naturel', text: 'Half-los met textuur, minimale make-up en een frisse blos. Mooi bij een schuur of buitenceremonie.', shot: 'boho bruidslook buiten' },
-    { name: 'Moderne glam', text: 'Een gladde opsteek, een uitgesproken oog en een huid die straalt in avondlicht.', shot: 'moderne glam bruidslook' },
+    { name: 'Romantisch', text: 'Zachte golven, een stralende huid en een roze lip. Tijdloos bij een kanten jurk.', shot: 'romantisch', photo: PHOTO.omhelzing },
+    { name: 'Klassiek elegant', text: 'Een strakke lage knot, gedefinieerde ogen en een neutrale lip.', shot: 'klassiek', photo: PHOTO.tafel },
+    { name: 'Boho naturel', text: 'Half-los met textuur, minimale make-up en een frisse blos. Mooi bij een schuur of buitenceremonie.', shot: 'boho', photo: PHOTO.gevlochten },
+    { name: 'Moderne glam', text: 'Een gladde opsteek, een uitgesproken oog en een huid die straalt in avondlicht.', shot: 'moderne glam', photo: PHOTO.golven },
   ]}
   includedTitle="Altijd <em>inbegrepen</em>"
   included={INCLUDED_NL}

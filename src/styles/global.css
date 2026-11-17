@@ -795,3 +795,4 @@ input[type='range'].range { width: 100%; accent-color: var(--espresso); height: 
 @media (max-width: 1099px) { .mega { display: none; } }
 @media (max-width: 599px) { .btn { white-space: normal; text-align: center; line-height: 1.4; padding-block: .6em; } }
 .calc__out .eyebrow, .package--featured .eyebrow, .on-dark .eyebrow { color: #CFC3B5; }
+.media picture { display: block; width: 100%; height: 100%; }

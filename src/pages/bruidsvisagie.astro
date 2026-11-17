@@ -1,4 +1,5 @@
 ---
+import { PHOTO } from '../data/photos';
 import ServiceLayout from '../layouts/ServiceLayout.astro';
 import Section from '../components/Section.astro';
 import { PRICES, euro } from '../data/site';
@@ -13,7 +14,7 @@ const price = PRICES.bruidsvisagie;
   eyebrow="02 — Bruidsvisagie"
   h1="Bruidsvisagie &amp; bruidsmake-up op locatie"
   lead="Make-up waarin je jezelf herkent, alleen dan op je mooist. Hij overleeft emotie, knuffels, een warme dag en een flitser, en hij voelt licht aan op je huid."
-  heroShot="bruidsmake-up close-up, natuurlijk licht · 4:5"
+  heroShot="bruidsmake-up" heroPhoto={PHOTO.sluier}
   forWhoTitle="Voor bruiden die er <em>als zichzelf</em> uit willen zien"
   forWho={`<p>De meeste bruiden die bij mij komen, dragen in het dagelijks leven weinig make-up. Ze willen er op hun trouwdag bijzonder uitzien, maar niet als iemand anders. Daar is bruidsvisagie op gericht: een egale, stralende huid, ogen die opvallen op foto’s en lippen die na het eten nog kleur hebben.</p>
 <p>Houd je juist van een uitgesproken look, met een smokey eye of een rode lip? Ook dat kan. Bij de proefsessie zoeken we samen de balans tussen jouw smaak, je jurk, de locatie en het licht van die dag.</p>
@@ -29,8 +30,8 @@ const price = PRICES.bruidsvisagie;
   ]}
   looksTitle="Van naturel tot <em>glam</em>"
   looks={[
-    { name: 'Naturel', text: 'Een huid die eruitziet als huid, zachte definitie en een frisse blos. Het meest gekozen.', shot: 'naturel bruidsmake-up' },
-    { name: 'Soft glam', text: 'Iets meer diepte op de ogen en een gedefinieerde lip. Mooi voor een avondceremonie.', shot: 'soft glam make-up' },
+    { name: 'Naturel', text: 'Een huid die eruitziet als huid, zachte definitie en een frisse blos. Het meest gekozen.', shot: 'naturel', photo: PHOTO.wenkbrauwen },
+    { name: 'Soft glam', text: 'Iets meer diepte op de ogen en een gedefinieerde lip. Mooi voor een avondceremonie.', shot: 'soft glam', photo: PHOTO.oogschaduw },
     { name: 'Glam', text: 'Een uitgesproken oog of lip, gebalanceerd zodat het geheel elegant blijft.', shot: 'glam bruidsmake-up' },
   ]}
   includedTitle="Wat bij je <em>bruidsmake-up</em> hoort"

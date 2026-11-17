@@ -1,4 +1,5 @@
 ---
+import { PHOTO } from '../data/photos';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Section from '../components/Section.astro';
@@ -17,11 +18,15 @@ export function getStaticPaths() {
 }
 const { r } = Astro.props as { r: RegionPage };
 const path = `/${r.slug}`;
+const pool = [PHOTO.hogeKnot, PHOTO.omhelzing, PHOTO.halfLos, PHOTO.golven, PHOTO.tafel, PHOTO.blondeKrullen, PHOTO.lageKnot, PHOTO.gevlochten, PHOTO.toost];
+const off = REGION_PAGES.findIndex((x) => x.slug === r.slug);
+const hero = pool[off % pool.length];
+const strip = [1, 2, 3].map((k) => pool[(off + k * 2) % pool.length]);
 const crumbs = [{ name: 'Home', href: '/' }, { name: 'Regio’s', href: '/bruidsstylist-nederland' }, { name: r.name, href: path }];
 ---
 <Base title={r.title} description={r.description} ogTitle={r.ogTitle} ogDescription={r.ogDescription} geo={r.geo} breadcrumbs={crumbs}
   schema={[serviceSchema({ name: `Bruidsstyling ${r.name}`, path, description: r.description, area: r.area }), faqSchema(r.faq)]}>
-  <PageHero crumbs={crumbs} eyebrow={`Bruidsstylist · ${r.name}`} h1={r.h1} lead={r.lead} shot={r.portfolio[0]} badge
+  <PageHero crumbs={crumbs} eyebrow={`Bruidsstylist · ${r.name}`} h1={r.h1} lead={r.lead} shot="portfolio" photo={hero} badge
     secondary={{ href: '/tarieven#calculator', label: 'Bereken je prijs' }} />
 
   <Section eyebrow={r.name} title={`Haar en make-up in <em>${r.name}</em>`}>
@@ -93,9 +98,9 @@ const crumbs = [{ name: 'Home', href: '/' }, { name: 'Regio’s', href: '/bruids
 
   <section class="section">
     <div class="container">
-      <div class="section-head"><p class="eyebrow">Portfolio</p><h2>Bruiden in <em>{r.name}</em></h2></div>
+      <div class="section-head"><p class="eyebrow">Portfolio</p><h2>Uit mijn <em>portfolio</em></h2><p class="small muted">Foto’s per regio volgen; dit is een selectie uit mijn werk.</p></div>
       <div class="look-grid look-grid--3">
-        {r.portfolio.map((s, i) => <Img ratio={i === 1 ? '3x4' : '4x5'} shot={`${s} · ${r.name}`} delay={i * 0.08} />)}
+        {strip.map((p, i) => <Img ratio={i === 1 ? '3x4' : '4x5'} shot="portfolio" src={p.src} alt={p.alt} delay={i * 0.08} />)}
       </div>
       <a class="text-link mt-3" href="/portfolio">Bekijk het volledige portfolio <span class="arrow" aria-hidden="true">→</span></a>
     </div>

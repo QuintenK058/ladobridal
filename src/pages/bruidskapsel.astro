@@ -1,4 +1,5 @@
 ---
+import { PHOTO } from '../data/photos';
 import ServiceLayout from '../layouts/ServiceLayout.astro';
 import Section from '../components/Section.astro';
 import { PRICES, euro } from '../data/site';
@@ -13,7 +14,7 @@ const price = PRICES.bruidskapsel;
   eyebrow="01 — Bruidskapsel"
   h1="Bruidskapsel op locatie in Friesland en Noord-Nederland"
   lead="Een kapsel dat bij jou en je jurk past, en dat om elf uur ’s avonds nog net zo zit als bij de ceremonie. Ik kom op je trouwochtend naar je toe, na een proefsessie in mijn studio in Leeuwarden."
-  heroShot="bruidskapsel achterkant, los opgestoken · 4:5"
+  heroShot="bruidskapsel" heroPhoto={PHOTO.hogeKnot}
   forWhoTitle="Voor bruiden die hun haar <em>niet</em> willen voelen"
   forWho={`<p>Op je trouwdag wil je niet bezig zijn met je haar. Je wilt dat het goed zit als je uit de auto stapt, als je buiten staat voor de foto’s en als je om middernacht nog danst. Daar is een bruidskapsel voor: stevig van binnen, zacht en natuurlijk van buiten.</p>
 <p>Ik style bruiden met elk haartype: fijn haar dat snel uitzakt, dik haar dat veel steun nodig heeft, krullen die we juist willen laten zien, kort haar en haar met extensions. Het uitgangspunt is altijd jouw haar, niet een foto van Pinterest die alleen werkt met twee keer zoveel volume.</p>
@@ -30,10 +31,10 @@ const price = PRICES.bruidskapsel;
   ]}
   looksTitle="Los, half-los of <em>opgestoken</em>"
   looks={[
-    { name: 'Los', text: 'Zachte golven die er natuurlijk uitzien, maar met een basis die de krul de hele dag vasthoudt.', shot: 'los bruidskapsel met golven' },
-    { name: 'Half-los', text: 'Het beste van twee werelden: je gezicht vrij, je lengte zichtbaar. Mooi met een sluier of haarkam.', shot: 'half-los bruidskapsel' },
-    { name: 'Opgestoken', text: 'Van een losse, romantische knot tot strak en klassiek. Ideaal bij een open rug of hoge hals.', shot: 'opgestoken bruidskapsel' },
-    { name: 'Met sluier & accessoires', text: 'Sluier, haarkam, bloemen of pins: ik verwerk ze zo dat ze stevig zitten en je haar niet zwaar maken.', shot: 'detail sluier en haarkam' },
+    { name: 'Los', text: 'Zachte golven die er natuurlijk uitzien, maar met een basis die de krul de hele dag vasthoudt.', shot: 'los', photo: PHOTO.golven },
+    { name: 'Half-los', text: 'Het beste van twee werelden: je gezicht vrij, je lengte zichtbaar. Mooi met een sluier of haarkam.', shot: 'half-los', photo: PHOTO.halfLos },
+    { name: 'Opgestoken', text: 'Van een losse, romantische knot tot strak en klassiek. Ideaal bij een open rug of hoge hals.', shot: 'opgestoken', photo: PHOTO.lageKnot },
+    { name: 'Met sluier & accessoires', text: 'Sluier, haarkam, bloemen of pins: ik verwerk ze zo dat ze stevig zitten en je haar niet zwaar maken.', shot: 'accessoires', photo: PHOTO.omhelzing },
   ]}
   includedTitle="Wat bij je <em>bruidskapsel</em> hoort"
   included={['Telefonische intake', 'Proefsessie in de studio in Leeuwarden', 'Professionele, langhoudende stylingproducten', 'Bevestigen van sluier en accessoires', 'Styling guide en extra spelden voor de dag', 'Ruime planning op de trouwochtend']}

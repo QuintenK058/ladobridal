@@ -1,4 +1,5 @@
 ---
+import { PHOTO } from '../data/photos';
 import Base from '../layouts/Base.astro';
 import Img from '../components/Img.astro';
 import RatingBadge from '../components/RatingBadge.astro';
@@ -19,13 +20,13 @@ const faq = [
 ];
 
 const portfolio = [
-  { shot: 'los opgestoken bruidskapsel, achterkant', cap: 'Los opgestoken · Landgoed, Friese Wouden' },
-  { shot: 'natuurlijke bruidsmake-up, close-up', cap: 'Natuurlijke glow · Stadhuis Leeuwarden' },
-  { shot: 'bruid met sluier bij het water', cap: 'Half-los met sluier · Friese Meren' },
-  { shot: 'bruid in Italiaanse villa, warm licht', cap: 'Complete Bruidslook · Toscane' },
-  { shot: 'detail haaraccessoire', cap: 'Detail · haarkam en zachte golven' },
-  { shot: 'bruid in schuur, zacht tegenlicht', cap: 'Romantisch los · Schuurbruiloft, Drenthe' },
-  { shot: 'bruidsmeisjes groep', cap: 'Bruidsmeisjes · Groningen' },
+  { p: PHOTO.hogeKnot, cap: 'Hoge knot met volume' },
+  { p: PHOTO.omhelzing, cap: 'Romantische opsteek met parels' },
+  { p: PHOTO.blondeKrullen, cap: 'Half-los met volle krullen' },
+  { p: PHOTO.kapel, cap: 'In het licht van de kapel' },
+  { p: PHOTO.golven, cap: 'Hollywood-golven op donker haar' },
+  { p: PHOTO.gevlochten, cap: 'Gevlochten opsteek met bloemen' },
+  { p: PHOTO.lageStaart, cap: 'Strakke lage staart' },
 ];
 ---
 <Base
@@ -40,7 +41,7 @@ const portfolio = [
   <!-- 2. HERO -->
   <section class="hero" data-hero>
     <div class="hero__media">
-      <Img ratio="4x5" shot="hero · bruid portret, warm daglicht · 4:5 (mobiel full-bleed)" priority kenBurns reveal={false} dark />
+      <Img ratio="4x5" shot="hero" src={PHOTO.toost.src} alt={PHOTO.toost.alt} priority kenBurns reveal={false} sizes="(min-width: 900px) 44vw, 100vw" />
     </div>
     <div class="container hero__content">
       <p class="display hero-words" data-split>Jouw <em>droomlook,</em> tot in de perfectie gestyled.</p>
@@ -68,9 +69,9 @@ const portfolio = [
   <section class="section">
     <div class="container grid align-center">
       <div class="col-media--left intro-media">
-        <Img ratio="4x5" arch shot="portret Quinty in de studio · 4:5 · arch" />
+        <Img ratio="4x5" arch shot="portret Quinty" src={PHOTO.quinty.src} alt={PHOTO.quinty.alt} />
         <div class="intro-media__detail" data-parallax="0.08">
-          <Img ratio="3x4" shot="detail: handen met kwast" delay={0.2} />
+          <Img ratio="3x4" shot="detail" src={PHOTO.wenkbrauwen.src} alt={PHOTO.wenkbrauwen.alt} delay={0.2} sizes="25vw" />
         </div>
       </div>
       <div class="col-text--right">
@@ -109,7 +110,7 @@ const portfolio = [
         <h2 class="reveal-text" data-split>Voor élk <em>bijzonder</em> moment</h2>
       </div>
       <article class="service-block">
-        <div class="service-block__media"><Img ratio="4x5" shot="bruidskapsel achterkant, los opgestoken" /></div>
+        <div class="service-block__media"><Img ratio="4x5" shot="bruidskapsel" src={PHOTO.lageKnot.src} alt={PHOTO.lageKnot.alt} /></div>
         <div class="service-block__text reveal">
           <span class="service-block__num">01 — Bruidskapsel</span>
           <h3>Bruidskapsel</h3>
@@ -118,7 +119,7 @@ const portfolio = [
         </div>
       </article>
       <article class="service-block service-block--flip">
-        <div class="service-block__media"><Img ratio="3x4" shot="close-up bruidsmake-up, natuurlijk" /></div>
+        <div class="service-block__media"><Img ratio="3x4" shot="bruidsmake-up" src={PHOTO.sluier.src} alt={PHOTO.sluier.alt} /></div>
         <div class="service-block__text reveal">
           <span class="service-block__num">02 — Bruidsvisagie</span>
           <h3>Bruidsvisagie</h3>
@@ -127,7 +128,7 @@ const portfolio = [
         </div>
       </article>
       <article class="service-block">
-        <div class="service-block__media"><Img ratio="4x5" shot="bruid volledige look, haar en make-up" /></div>
+        <div class="service-block__media"><Img ratio="4x5" shot="complete look" src={PHOTO.tafel.src} alt={PHOTO.tafel.alt} /></div>
         <div class="service-block__text reveal">
           <span class="service-block__num">03 — Complete Bruidslook</span>
           <span class="badge mt-1">Meest gekozen</span>
@@ -138,7 +139,7 @@ const portfolio = [
         </div>
       </article>
       <article class="service-block service-block--flip">
-        <div class="service-block__media"><Img ratio="3x4" shot="bruidsmeisjes en moeder van de bruid" /></div>
+        <div class="service-block__media"><Img ratio="3x4" shot="gasten" src={PHOTO.halfLos.src} alt={PHOTO.halfLos.alt} /></div>
         <div class="service-block__text reveal">
           <span class="service-block__num">04 — Gala &amp; gasten</span>
           <h3>Gala &amp; gasten</h3>
@@ -159,7 +160,7 @@ const portfolio = [
       <div class="h-gallery__track" tabindex="0" aria-label="Portfoliogalerij, scroll horizontaal">
         {portfolio.map((p) => (
           <figure class="h-gallery__item" style="margin:0">
-            <Img ratio="4x5" shot={p.shot} reveal={false} />
+            <Img ratio="4x5" shot={p.cap} src={p.p.src} alt={p.p.alt} reveal={false} sizes="(min-width: 900px) 30vw, 78vw" />
             <figcaption class="caption">{p.cap}</figcaption>
           </figure>
         ))}

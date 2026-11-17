@@ -15,10 +15,10 @@ interface Props {
   lang?: 'nl' | 'en';
   title: string; description: string; ogTitle?: string; ogDescription?: string;
   path: string; serviceName: string; crumb: string;
-  eyebrow: string; h1: string; lead: string; heroShot: string;
+  eyebrow: string; h1: string; lead: string; heroShot: string; heroPhoto?: { src: string; alt: string };
   forWhoTitle: string; forWho: string;
   processTitle: string; process: { title: string; text: string }[];
-  looksTitle: string; looks: { name: string; text: string; shot: string }[];
+  looksTitle: string; looks: { name: string; text: string; shot: string; photo?: { src: string; alt: string } }[];
   includedTitle: string; included: string[]; priceLabel: string; priceValue: string; priceNote?: string;
   service: ServiceTag;
   faqTitle?: string; faq: { q: string; a: string }[];
@@ -32,7 +32,7 @@ const crumbs = [home, { name: p.crumb, href: p.path }];
 ---
 <Base title={p.title} description={p.description} ogTitle={p.ogTitle} ogDescription={p.ogDescription} breadcrumbs={crumbs}
   schema={[serviceSchema({ name: p.serviceName, path: p.path, description: p.description, price: p.price, area: [{ type: 'AdministrativeArea', name: 'Friesland' }, { type: 'AdministrativeArea', name: 'Groningen' }, { type: 'AdministrativeArea', name: 'Drenthe' }, { type: 'AdministrativeArea', name: 'Overijssel' }, { type: 'AdministrativeArea', name: 'Noord-Holland' }, { type: 'Country', name: 'Nederland' }] }), faqSchema(p.faq)]}>
-  <PageHero crumbs={crumbs} eyebrow={p.eyebrow} h1={p.h1} lead={p.lead} shot={p.heroShot} lang={p.lang} badge
+  <PageHero crumbs={crumbs} eyebrow={p.eyebrow} h1={p.h1} lead={p.lead} shot={p.heroShot} photo={p.heroPhoto} lang={p.lang} badge
     secondary={{ href: nl ? '/tarieven' : '/en/rates', label: nl ? 'Bekijk tarieven' : 'See rates' }} />
 
   <Section eyebrow={nl ? 'Voor wie' : 'Who it’s for'} title={p.forWhoTitle}>
@@ -54,7 +54,7 @@ const crumbs = [home, { name: p.crumb, href: p.path }];
       <div class:list={['look-grid', p.looks.length >= 4 ? 'look-grid--4' : 'look-grid--3']}>
         {p.looks.map((l, i) => (
           <article class="card">
-            <Img ratio={i % 2 ? '3x4' : '4x5'} shot={l.shot} delay={i * 0.08} />
+            <Img ratio={i % 2 ? '3x4' : '4x5'} shot={l.shot} delay={i * 0.08} src={l.photo?.src} alt={l.photo?.alt} />
             <h3 class="card__title">{l.name}</h3>
             <p>{l.text}</p>
           </article>

@@ -1,4 +1,5 @@
 ---
+import { PHOTO } from '../data/photos';
 import Base from '../layouts/Base.astro';
 import Img from '../components/Img.astro';
 import Timeline from '../components/Timeline.astro';
@@ -12,7 +13,7 @@ import { SITE } from '../data/site';
         <h1 class="mt-1">Dank je wel<span data-thanks-name></span>.</h1>
         <p class="lead">Wat fijn dat je aan mij denkt voor je trouwdag. Ik bekijk je aanvraag persoonlijk, en je ontvangt binnen 2 werkdagen een persoonlijke offerte. Liefs, Quinty</p>
       </div>
-      <div class="col-aside"><Img ratio="4x5" arch shot="portret Quinty, glimlach" priority /></div>
+      <div class="col-aside"><Img ratio="4x5" arch shot="Quinty" src={PHOTO.quinty.src} alt={PHOTO.quinty.alt} priority /></div>
     </div>
   </section>
   <section class="section section--linen">

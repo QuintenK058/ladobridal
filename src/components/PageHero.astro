@@ -4,10 +4,10 @@ import Img from './Img.astro';
 import RatingBadge from './RatingBadge.astro';
 interface Props {
   crumbs: { name: string; href: string }[];
-  eyebrow: string; h1: string; lead?: string; shot?: string; ratio?: '4x5' | '3x4' | '3x2';
+  eyebrow: string; h1: string; lead?: string; shot?: string; photo?: { src: string; alt: string }; ratio?: '4x5' | '3x4' | '3x2';
   cta?: boolean; secondary?: { href: string; label: string }; badge?: boolean; lang?: 'nl' | 'en'; arch?: boolean;
 }
-const { crumbs, eyebrow, h1, lead, shot, ratio = '4x5', cta = true, secondary, badge, lang = 'nl', arch } = Astro.props;
+const { crumbs, eyebrow, h1, lead, shot, ratio = '4x5', cta = true, secondary, badge, lang = 'nl', arch, photo } = Astro.props;
 const nl = lang === 'nl';
 ---
 <section class="page-hero">
@@ -27,7 +27,7 @@ const nl = lang === 'nl';
         {badge && <div class="mt-3"><RatingBadge lang={lang} /></div>}
         <slot />
       </div>
-      {shot && <div class="col-aside"><Img ratio={ratio} shot={shot} priority arch={arch} /></div>}
+      {shot && <div class="col-aside"><Img ratio={ratio} shot={shot} priority arch={arch} src={photo?.src} alt={photo?.alt} /></div>}
     </div>
   </div>
 </section>

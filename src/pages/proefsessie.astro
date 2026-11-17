@@ -1,4 +1,5 @@
 ---
+import { PHOTO } from '../data/photos';
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import Section from '../components/Section.astro';
@@ -25,7 +26,7 @@ const faq = [
   breadcrumbs={crumbs} schema={[faqSchema(faq)]}>
   <PageHero crumbs={crumbs} eyebrow="Proefsessie" h1="De proefsessie: zo bereiden we jouw bruidslook voor"
     lead="De proefsessie is het moment waarop je bruidslook echt vorm krijgt. Je zit in alle rust in mijn studio in Leeuwarden, we proberen, vergelijken en stellen bij, en je gaat naar huis met het gevoel dat er op je trouwdag niets meer hoeft te verrassen."
-    shot="proefsessie in de studio, bruid in spiegel · 4:5" />
+    shot="proefsessie" photo={PHOTO.krullen} />
 
   <Section eyebrow="Waarom" title="Waarom een proefsessie <em>rust</em> geeft">
     <p>Veel bruiden zijn vooral bang voor de onzekerheid: wordt het wel wat ik wil? Zie ik er nog uit als mezelf? Blijft het zitten? De proefsessie haalt die vragen weg, weken voordat het ertoe doet.</p>

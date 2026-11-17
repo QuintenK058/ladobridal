@@ -1,4 +1,5 @@
 ---
+import { PHOTO } from '../data/photos';
 import Base from './Base.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Img from '../components/Img.astro';
@@ -26,7 +27,7 @@ const related = GUIDES.filter((g) => g.slug !== p.path && g.ready).slice(0, 3);
             <h1 set:html={p.h1} />
             <p class="lead" set:html={p.lead} />
             <div class="author-box mt-3" style="max-width:520px">
-              <Img ratio="1x1" shot="Quinty" reveal={false} />
+              <Img ratio="1x1" shot="Quinty" src={PHOTO.quinty.src} alt="" reveal={false} sizes="72px" />
               <div class="small"><strong>{SITE.owner}</strong><br />MUAH-gecertificeerd bruidsstylist · <span class="muted">Laatst bijgewerkt: {p.updatedLabel}</span></div>
             </div>
           </div>
