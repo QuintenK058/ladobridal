@@ -20,7 +20,7 @@ export const RESULT_SLOTS: Omit<Result, 'id' | 'note'>[] = [
 ];
 
 export interface Review { id: string; text: string; name: string; date: string; method?: MethodKey; photo?: string; url?: string; featured?: 'fijn-haar' | 'correctie' }
-export const REVIEWS: Review[] = []; // paste ONLY real reviews about extensions (never Lado Bridal bridal reviews)
+export const REVIEWS: Review[] = []; // paste ONLY real reviews about extensions
 
 export const METHOD_LABEL: Record<MethodKey, string> = { tape: 'Tape', keratine: 'Keratine', weft: 'Weft', microring: 'Microring', clipin: 'Clip-in' };
 

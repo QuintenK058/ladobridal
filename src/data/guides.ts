@@ -15,5 +15,5 @@ export const GUIDES: Guide[] = [
     brief: 'ALLEEN Quinty’s eigen cijfers per methode (geen internetgemiddelden). Links: alle methodepagina’s, /prijzen.' },
   { slug: 'extensions-voor-je-bruiloft', title: 'Extensions voor je bruiloft', ready: false, lead: 'Wanneer plaatsen, hoe combineren met je proefsessie en bruidskapsel.',
     toc: [['timing', 'Timing'], ['proefsessie', 'Samen met je proefsessie'], ['kapsel', 'Opgestoken of los'], ['clipins', 'Clip-ins als alternatief']],
-    brief: 'Cross-link naar ladobridal.com (geen tekst van Lado Bridal kopiëren). Links: /extensions-bruiloft, /clip-in-extensions.' },
+    brief: 'Timing rond de bruiloft, samenwerking met de bruidsstylist, clip-ins als tijdelijke optie. Links: /extensions-bruiloft, /clip-in-extensions.' },
 ];

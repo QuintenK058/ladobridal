@@ -23,7 +23,7 @@ Volledige lijst per pagina: `npm run check` → `QA-PLACEHOLDERS.tsv`.
 - [ ] “Vrijblijvend advies · Eerlijk over wat wel en niet kan” onder CTA’s
 - [ ] Eerstvolgende plek (`SITE.nextSlot`), alleen als er echt een wachttijd is
 - [ ] Extensions-gids (pdf) voor de e-mailpopup + nazorgkaarten per methode
-- [ ] Google Bedrijfsprofiel voor By Lado (los van Lado Bridal)
+- [ ] Google Bedrijfsprofiel voor By Lado
 
 ## Bewuste keuzes
 - `--stone` is donkerder dan in de brief (#6B5F57 i.p.v. #7A6E66): het origineel haalt geen AA-contrast (4,45:1).

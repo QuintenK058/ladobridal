@@ -1,6 +1,6 @@
 /**
  * DRAFT copy for the guides — to be approved by Quinty. Pages stay noindex until `ready: true` in guides.ts.
- * Rules followed: no invented numbers (placeholders), no medical claims, no guarantees, no text from ladobridal.com.
+ * Rules followed: no invented numbers (placeholders), no medical claims, no guarantees.
  */
 const P = (s: string) => `<span class="ph">[${s}]</span>`;
 
@@ -35,7 +35,7 @@ export const DRAFTS: Record<string, Record<string, string>> = {
   },
   'extensions-voor-je-bruiloft': {
     timing: `<p>Wil je extensions voor je bruiloft, plan ze dan ruim van tevoren. Zo kun je eraan wennen, ze een paar keer wassen en stylen, en ontdekken hoe ze bij je haar vallen. ${P('CHECK: Quinty’s advies, bv. X weken vóór de bruiloft')}</p>`,
-    proefsessie: `<p>Laat de extensions plaatsen vóór je proefsessie voor haar en make-up. Dan wordt je bruidskapsel afgestemd op het haar dat je echt hebt op de dag. Heb je je proefsessie bij <a href="https://ladobridal.com">Lado Bridal</a>, dan is alles op één plek bekend.</p>`,
+    proefsessie: `<p>Laat de extensions plaatsen vóór je proefsessie voor haar en make-up. Dan wordt je bruidskapsel afgestemd op het haar dat je echt hebt op de dag. Neem je extensions-gegevens (methode en datum van plaatsen) mee naar je stylist, zodat die er rekening mee houdt.</p>`,
     kapsel: `<p><strong>Opgestoken</strong>: extensions geven meer haar om mee te werken, waardoor een knot voller en een opsteek steviger wordt. De bevestigingspunten worden zo verwerkt dat ze verborgen blijven. <strong>Los</strong>: extra volume houdt de krul langer vast en geeft lengtes die mooi onder een sluier vallen.</p>`,
     clipins: `<p>Wil je alleen voor je trouwdag meer haar? Dan zijn <a href="/clip-in-extensions">clip-in extensions</a> een mooie tijdelijke oplossing. Neem ze mee naar je proefsessie, zodat ze worden meegenomen in je bruidskapsel. Lees ook <a href="/extensions-bruiloft">extensions voor je bruiloft</a>.</p>`,
   },

@@ -9,7 +9,7 @@ export function serviceSchema(o: { name: string; path: string; description: stri
   return s;
 }
 export const articleSchema = (o: { headline: string; path: string; description: string; dateModified: string }) => ({ '@type': 'Article', headline: o.headline, description: o.description, mainEntityOfPage: `${SITE.url}${o.path}`, dateModified: o.dateModified, datePublished: o.dateModified, author: { '@id': PERSON_ID }, publisher: { '@id': BUSINESS_ID }, inLanguage: 'nl-NL' });
-export const personSchema = () => ({ '@type': 'Person', '@id': PERSON_ID, name: SITE.owner, jobTitle: 'Hair extensions specialist', worksFor: { '@id': BUSINESS_ID }, sameAs: [SITE.instagram, SITE.tiktok, SITE.ladoBridal].filter(Boolean) });
+export const personSchema = () => ({ '@type': 'Person', '@id': PERSON_ID, name: SITE.owner, jobTitle: 'Hair extensions specialist', worksFor: { '@id': BUSINESS_ID }, sameAs: [SITE.instagram, SITE.tiktok].filter(Boolean) });
 export function businessSchema() {
   const address: Record<string, string> = { '@type': 'PostalAddress', addressLocality: SITE.city, addressRegion: SITE.province, addressCountry: 'NL' };
   if (SITE.streetAddress) { address.streetAddress = SITE.streetAddress; address.postalCode = SITE.postalCode; }
@@ -19,7 +19,6 @@ export function businessSchema() {
     address, geo: { '@type': 'GeoCoordinates', latitude: SITE.geo.lat, longitude: SITE.geo.lng },
     areaServed: [{ '@type': 'City', name: 'Leeuwarden' }, { '@type': 'AdministrativeArea', name: 'Friesland' }],
     founder: { '@id': PERSON_ID }, sameAs: [SITE.instagram, SITE.tiktok, SITE.reviewProfileUrl].filter(Boolean),
-    subjectOf: { '@type': 'WebSite', name: 'Lado Bridal', url: SITE.ladoBridal },
   };
   if (SITE.phone) b.telephone = SITE.phone;
   if (SITE.email) b.email = SITE.email;

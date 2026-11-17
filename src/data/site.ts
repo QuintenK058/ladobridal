@@ -28,7 +28,6 @@ export const SITE = {
   consultPrice: null as null | number, // CHECK: 0 = gratis
   consultMinutes: null as null | number,
   nextSlot: '',                        // CHECK: honest waiting time, e.g. 'maart' — empty hides it
-  ladoBridal: 'https://ladobridal.com',
   lastUpdated: '2026-11',
 };
 

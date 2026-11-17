@@ -10,7 +10,7 @@ const fmt = (d: string) => new Intl.DateTimeFormat('nl-NL', { month: 'long', yea
 ---
 <Base title="Reviews hair extensions | Ervaringen By Lado Leeuwarden" description="Lees echte ervaringen met hair extensions bij By Lado in Leeuwarden: per methode, met naam en datum. Alleen reviews over extensions." breadcrumbs={crumbs}>
   <PageHero crumbs={crumbs} eyebrow="Reviews" h1="Ervaringen met hair extensions bij <em>By Lado</em>" cta={false}
-    lead="Alleen echte reviews, en alleen over extensions. Bruidsreviews van Lado Bridal staan hier bewust niet tussen.">
+    lead="Alleen echte reviews, en alleen over extensions.">
     <div class="cluster mt-3" style="--gap:1rem">
       {SITE.rating ? <p class="h2">{SITE.rating.value.toFixed(1).replace('.', ',')} <span class="small muted">op {SITE.rating.source} · {SITE.rating.count} reviews</span></p> : <span class="ph">[SCORE + BRON + AANTAL]</span>}
       {SITE.reviewProfileUrl ? <a class="btn btn--outline" href={SITE.reviewProfileUrl} target="_blank" rel="noopener" data-track="review_click">Bekijk alle reviews ↗</a> : <span class="ph">[LINK REVIEWPROFIEL]</span>}

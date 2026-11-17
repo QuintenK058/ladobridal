@@ -1,5 +1,5 @@
 // Edge function: triggered by a Database Webhook on INSERT into public.leads.
-// Sends (1) a notification to info@ladobridal.com and (2) a short branded confirmation to the bride, via Resend.
+// Sends (1) a notification to OWNER_EMAIL and (2) a short branded confirmation to the client, via Resend.
 // Secrets: RESEND_API_KEY, MAIL_FROM (e.g. "By Lado <info@bylado.nl>", domain verified in Resend with SPF/DKIM).
 const RESEND = Deno.env.get('RESEND_API_KEY')!;
 const FROM = Deno.env.get('MAIL_FROM') ?? 'By Lado <info@bylado.nl>';

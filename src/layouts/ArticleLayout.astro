@@ -18,7 +18,7 @@ const related = GUIDES.filter((g) => `/gidsen/${g.slug}` !== p.path && g.ready).
     <header class="page-hero"><div class="container">
       <Breadcrumbs items={crumbs} />
       <p class="eyebrow mt-3">Gids</p><h1 class="mt-1" set:html={p.h1} /><p class="lead" set:html={p.lead} />
-      <div class="author-box mt-3" style="max-width:540px"><Img ratio="1x1" shot="Quinty" src={PHOTO.quinty.src} alt="" reveal={false} sizes="72px" /><div class="small"><strong>Quinty Kant</strong><br />Extensions specialist · MUAH-gecertificeerd bruidsstylist · <span class="muted">Laatst bijgewerkt: november 2026</span></div></div>
+      <div class="author-box mt-3" style="max-width:540px"><Img ratio="1x1" shot="Quinty" src={PHOTO.quinty.src} alt="" reveal={false} sizes="72px" /><div class="small"><strong>Quinty Kant</strong><br />Extensions specialist · By Lado · <span class="muted">Laatst bijgewerkt: november 2026</span></div></div>
     </div></header>
     <div class="container grid" style="padding-bottom:var(--section)">
       <aside class="col-quarter sticky-desk"><nav class="toc" aria-label="Inhoud"><strong>Inhoud</strong><ol>{p.toc.map((t) => <li><a href={`#${t.id}`}>{t.label}</a></li>)}</ol></nav></aside>

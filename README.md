@@ -1,6 +1,6 @@
 # By Lado — hair extensions website
 
-Static Astro site (every route pre-rendered to full HTML: content, meta, hreflang, JSON-LD). Sister site of Lado Bridal; shares the engineering base, not the copy or design.
+Static Astro site for By Lado, a hair extensions studio (every route pre-rendered to full HTML: content, meta, hreflang, JSON-LD).
 
 ```
 npm install

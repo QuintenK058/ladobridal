@@ -1,15 +1,13 @@
 ---
 import ServicePage from '../layouts/ServicePage.astro';
 import Section from '../components/Section.astro';
-import { SITE } from '../data/site';
 ---
-<ServicePage title="Extensions voor je bruiloft | Volume onder je sluier | By Lado" description="Hair extensions voor je bruiloft of event in Leeuwarden: wanneer plaatsen, hoe het samengaat met je proefsessie en bruidskapsel bij Lado Bridal."
+<ServicePage title="Extensions voor je bruiloft | Volume onder je sluier | By Lado" description="Hair extensions voor je bruiloft of event in Leeuwarden: wanneer je ze laat plaatsen, hoe ze samengaan met je bruidskapsel en wanneer clip-ins slimmer zijn."
   path="/extensions-bruiloft" crumb="Extensions voor je bruiloft" eyebrow="Bruiloft & event" h1="Extensions voor je <em>bruiloft</em>" shot="bruidskapsel met extensions, achterkant"
   lead="Meer volume onder je sluier, lange golven voor je bruidskapsel of gewoon het haar dat je altijd al wilde op je mooiste dag. Met goede timing passen extensions en je bruidslook perfect samen."
   faq={[
     { q: 'Hoeveel weken voor mijn bruiloft moet ik extensions laten zetten?', a: '<p><span class="ph">[CHECK: Quinty’s advies, bv. X weken vóór de proefsessie]</span> Belangrijk is dat ze er al zitten bij je proefsessie, zodat je bruidskapsel erop wordt afgestemd.</p>' },
     { q: 'Kan ik ook clip-ins dragen op mijn trouwdag?', a: '<p>Ja, dat is een mooie tijdelijke oplossing. Neem ze mee naar je proefsessie. Zie <a href="/clip-in-extensions">clip-in extensions</a>.</p>' },
-    { q: 'Kan Quinty ook mijn bruidskapsel en make-up doen?', a: `<p>Ja, via Lado Bridal. Bekijk <a href="${SITE.ladoBridal}">ladobridal.com</a>.</p>` },
   ]}
   related={[{ href: '/clip-in-extensions', label: 'Clip-in extensions' }, { href: '/gidsen/extensions-voor-je-bruiloft', label: 'Gids: extensions voor je bruiloft' }, { href: '/tape-extensions', label: 'Tape extensions' }]}>
   <Section eyebrow="Timing" title="Plan extensions <em>vóór</em> je proefsessie">
@@ -18,8 +16,4 @@ import { SITE } from '../data/site';
     <h3>Extensions en een bruidskapsel</h3>
     <p>Opgestoken of los: met extensions heb je meer haar om mee te werken. Bij een opsteek let ik erop dat de bevestigingspunten verborgen blijven; bij losse golven geeft het extra volume dat de krul langer vasthoudt.</p>
   </Section>
-  <section class="section--tight"><div class="container crossbrand">
-    <div><p class="lb-mark">LADO BRIDAL</p><p class="h2 mt-1">Haar én make-up voor <em>je trouwdag</em></p><p class="muted mt-1">Bruidskapsel en bruidsmake-up op locatie, met proefsessie in Leeuwarden.</p></div>
-    <a class="btn btn--outline" href={SITE.ladoBridal} data-track="cross_brand_click">Naar Lado Bridal ↗</a>
-  </div></section>
 </ServicePage>
