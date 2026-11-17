@@ -1,12 +1,13 @@
 ---
 import Base from '../layouts/Base.astro';
 import Img from '../components/Img.astro';
+import { PHOTO } from '../data/photos';
 import Timeline from '../components/Timeline.astro';
 ---
 <Base title="Bedankt voor je aanvraag | By Lado" description="Je aanvraag is ontvangen." noindex>
   <section class="page-hero"><div class="container grid align-center">
     <div class="col-main"><p class="eyebrow">Aanvraag ontvangen</p><h1 class="mt-1">Dank je wel<span data-thanks-name></span>.</h1><p class="lead">Ik bekijk je aanvraag persoonlijk en neem snel contact met je op voor een moment. <span class="ph">[CHECK: reactietermijn]</span> Liefs, Quinty</p></div>
-    <div class="col-aside"><Img ratio="4x5" arch shot="portret Quinty, glimlach" priority /></div>
+    <div class="col-aside"><Img ratio="4x5" arch shot="Quinty" src={PHOTO.quinty.src} alt={PHOTO.quinty.alt} priority /></div>
   </div></section>
   <section class="section section--bone"><div class="container">
     <div class="section-head"><h2>Zo <em>bereid je je voor</em></h2></div>

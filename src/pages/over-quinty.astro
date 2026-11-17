@@ -5,10 +5,11 @@ import Section from '../components/Section.astro';
 import Img from '../components/Img.astro';
 import Cta from '../components/Cta.astro';
 import { SITE } from '../data/site';
+import { PHOTO } from '../data/photos';
 const crumbs = [{ name: 'Home', href: '/' }, { name: 'Over Quinty', href: '/over-quinty' }];
 ---
 <Base title="Over Quinty Kant, extensions specialist Leeuwarden | By Lado" description="Maak kennis met Quinty Kant: extensions specialist in Leeuwarden en MUAH-gecertificeerd bruidsstylist. Eerlijk advies, kleur op maat en je eigen haar eerst." breadcrumbs={crumbs}>
-  <PageHero crumbs={crumbs} eyebrow="Over Quinty" h1="Over Quinty Kant, extensions specialist in <em>Leeuwarden</em>" shot="portret Quinty, studio, natuurlijk licht" vlabel="Quinty Kant"
+  <PageHero crumbs={crumbs} eyebrow="Over Quinty" h1="Over Quinty Kant, extensions specialist in <em>Leeuwarden</em>" shot="portret Quinty" photo={PHOTO.quinty} vlabel="Quinty Kant"
     lead="Ik ben Quinty. Ik werk elke dag met haar, en het mooiste vind ik het moment waarop iemand in de spiegel kijkt en haar eigen haar niet meer van de extensions kan onderscheiden." />
   <Section eyebrow="Mijn verhaal" title="Van bruidsstyling <em>naar extensions</em>">
     <p class="ph-block">[VERHAAL · door Quinty: hoe ze van bruidsstyling bij extensions kwam, wat haar eraan trekt, waarom By Lado. ±200 woorden, ik-vorm.]</p>
@@ -25,7 +26,7 @@ const crumbs = [{ name: 'Home', href: '/' }, { name: 'Over Quinty', href: '/over
   </div></section>
   <section class="section section--bone"><div class="container">
     <div class="section-head"><p class="eyebrow">Studio</p><h2>Achter <em>de schermen</em></h2><p class="lead">{SITE.streetAddress ? `${SITE.streetAddress}, Leeuwarden.` : 'Studio in Leeuwarden, op afspraak.'} Hygiënisch, rustig en met goed daglicht voor kleurmatching.</p></div>
-    <div class="look-grid look-grid--3"><Img ratio="4x5" arch shot="studio, werkplek bij het raam" /><div style="margin-top:14%"><Img ratio="3x4" arch shot="kleurringen en strengen" parallax={0.05} /></div><Img ratio="4x5" arch shot="Quinty aan het werk, sectie voor sectie" /></div>
+    <div class="look-grid look-grid--3"><Img ratio="4x5" arch shot="aan het werk" src={PHOTO.aanHetWerk.src} alt={PHOTO.aanHetWerk.alt} /><div style="margin-top:14%"><Img ratio="3x4" arch shot="kleurringen en strengen" parallax={0.05} /></div><Img ratio="4x5" arch shot="krullen" src={PHOTO.krullen.src} alt={PHOTO.krullen.alt} /></div>
   </div></section>
   <section class="section--tight"><div class="container crossbrand">
     <div><p class="lb-mark">LADO BRIDAL</p><p class="h2 mt-1">Ook <em>bruidsstylist</em></p><p class="muted mt-1">Bruidskapsel en bruidsmake-up op locatie onder de naam Lado Bridal.</p></div>

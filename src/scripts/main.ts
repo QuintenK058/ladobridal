@@ -38,10 +38,18 @@ function splitWords(el: HTMLElement) {
 $$('[data-split]').forEach((el) => { splitWords(el); if (!el.classList.contains('hero-words')) el.classList.add('reveal-text'); });
 
 /* ---------- Reveal on scroll ---------- */
+// A clip-path of inset(100%) makes an element count as never intersecting in Chromium,
+// so clipped image reveals are observed through their (unclipped) parent element.
+const proxy = new Map<Element, Element[]>();
 const io = new IntersectionObserver((entries) => {
-  entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-}, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
-$$('.reveal, .reveal-img, .reveal-text, .signature, [data-count]').forEach((el) => io.observe(el));
+  entries.forEach((e) => {
+    if (!e.isIntersecting) return;
+    (proxy.get(e.target) ?? [e.target]).forEach((t) => t.classList.add('in'));
+    io.unobserve(e.target);
+  });
+}, { rootMargin: '0px 0px -8% 0px', threshold: 0.01 });
+$$('.reveal, .reveal-text, .signature, [data-count]').forEach((el) => io.observe(el));
+$$('.reveal-img').forEach((el) => { const host = el.parentElement ?? el; proxy.set(host, [...(proxy.get(host) ?? []), el]); io.observe(host); });
 // Safety: anything above the fold or missed is shown after load
 addEventListener('load', () => setTimeout(() => $$('.reveal, .reveal-img, .reveal-text').forEach((el) => { const r = el.getBoundingClientRect(); if (r.top < innerHeight) el.classList.add('in'); }), 100));
 

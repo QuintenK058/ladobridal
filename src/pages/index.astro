@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Img from '../components/Img.astro';
+import { PHOTO } from '../data/photos';
 import HairVideo from '../components/HairVideo.astro';
 import BeforeAfter from '../components/BeforeAfter.astro';
 import MethodCard from '../components/MethodCard.astro';
@@ -181,7 +182,7 @@ const swatches = [['#E9D6B4', 'Licht asblond'], ['#D2B080', 'Honingblond'], ['#B
   <!-- 10 ABOUT -->
   <section class="section section--bone">
     <div class="container grid align-center">
-      <div class="col-media--left rel"><span class="v-label">Quinty Kant · Leeuwarden</span><Img ratio="4x5" arch shot="portret Quinty in de studio" /></div>
+      <div class="col-media--left rel"><span class="v-label">Quinty Kant · Leeuwarden</span><Img ratio="4x5" arch shot="portret Quinty" src={PHOTO.quinty.src} alt={PHOTO.quinty.alt} /></div>
       <div class="col-text--right">
         <p class="eyebrow">Over Quinty</p>
         <h2 class="mt-1">De precisie van een <em>bruidsstylist</em></h2>
