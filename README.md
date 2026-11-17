@@ -40,6 +40,8 @@ Filename convention: `bruidskapsel-los-opgestoken-friesland`.
 Without Supabase env the form falls back to opening the visitor’s mail app.
 
 ## Hosting
+Vercel: import the repo (settings come from `vercel.json`: clean URLs, no trailing slash, headers). Env vars under Project → Settings → Environment Variables.
+
 Netlify or Cloudflare Pages: build `npm run build`, publish `dist`. `public/_headers` and `public/_redirects` are included.
 URLs are extensionless (`/bruidsstylist-friesland`), exactly as today — no existing URL changes.
 Before switching DNS: export all indexed URLs from Search Console and check each one resolves.
