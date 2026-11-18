@@ -41,7 +41,7 @@ Hoi Quinty! De website van By Lado is gebouwd. Overal waar we iets niet zeker wi
 
 ## 4. Haar en werkwijze
 19. Welk haar gebruik je (kwaliteit, herkomst, lengtes, kleuren)? ______________________
-20. Certificaten per methode (naam opleiding + jaar): ______________________
+20. Kappersopleiding (naam/niveau + jaar) en de Beauty of Rose-cursus (jaar, welke methodes, foto van het certificaat): ______________________
 21. Kleur of toon je zelf? ☐ Ja ☐ Nee · Hoe lang duurt haar bestellen? ___ dagen/weken
 22. Doe je onderhoud, verwijderen of correcties van extensions die elders zijn gezet? ☐ Onderhoud ☐ Verwijderen ☐ Correctie ☐ Geen
 23. Hoeveel weken vóór een bruiloft adviseer je extensions te laten zetten? ___ weken

@@ -991,3 +991,63 @@ input[type='range'].range { width: 100%; accent-color: var(--ink); height: 44px;
 .media picture { display: block; width: 100%; height: 100%; }
 .preview-pill { margin-left: .75rem; margin-right: auto; font-size: .625rem; letter-spacing: .2em; text-transform: uppercase; border: 1px solid var(--caramel); color: var(--ink); padding: .3em .7em; border-radius: 999px; white-space: nowrap; }
 @media (max-width: 479px) { .preview-pill { display: none; } }
+
+/* ==========================================================================
+   Mobile optimisation pass
+   ========================================================================== */
+/* Comfortable tap targets for text links and footer/legal links */
+.text-link { min-height: 44px; }
+@media (max-width: 899px) {
+  .site-footer ul { gap: 0; }
+  .site-footer ul a, .site-footer ul button { display: inline-flex; align-items: center; min-height: 40px; }
+  .footer-legal ul { gap: 0 1.25rem; }
+}
+/* Never below 12px for visible UI text */
+.ba__tag, .filter-label, .footer-title, .bl-hero__thumb span, .ph-img__label { font-size: max(.75rem, 12px); }
+@media (max-width: 599px) {
+  /* Stacked, equal-width CTAs */
+  .hero__actions, .page-hero__actions, .cta-block__row { flex-direction: column; align-items: stretch; }
+  .hero__actions .btn, .page-hero__actions .btn, .cta-block__row .btn { width: 100%; }
+  .cta-block__row .text-link { align-self: flex-start; }
+  /* Shorter page: decorative imagery takes less height */
+  .promise { gap: 2.75rem; }
+  .promise__img .media { aspect-ratio: 16 / 7; }
+  .length-reveal__hair { height: 46vh; }
+  .length-reveal__wrap { padding-right: 72px; }
+  .bl-hero { padding-bottom: 2.5rem; }
+  .bl-hero__media .hair-video { aspect-ratio: 4 / 3.6; }
+  .method-card { flex-basis: 72vw; }
+  .method-card .media { aspect-ratio: 4 / 3.4; }
+  /* Calculator: choices fit on one line */
+  .calc .choice span { padding: .85rem .6rem; justify-content: center; text-align: center; white-space: nowrap; font-size: .9375rem; }
+  .calc .choice-grid--2 .choice span { justify-content: space-between; text-align: left; }
+  .calc__out { padding: 1.5rem 1.25rem; }
+  /* Section rhythm a little tighter on phones */
+  .section { padding-block: 3.5rem; }
+  .section-head { margin-bottom: 2rem; }
+  .display { letter-spacing: -.035em; }
+  /* Quiz: tiles less tall so 4 options fit in view */
+  .tile__media { aspect-ratio: 4 / 3.4; }
+  .quiz__q { margin: 1rem 0 1.25rem; }
+}
+@media (max-width: 599px) {
+  .promise__img { display: none; }
+  .promise__item p.h2 { font-size: clamp(2rem, 1.6rem + 2.5vw, 2.6rem); }
+  .ba-thumbs { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 10px; padding-bottom: .5rem; scrollbar-width: none; }
+  .ba-thumbs::-webkit-scrollbar { display: none; }
+  .ba-thumbs button { flex: 0 0 30%; scroll-snap-align: start; }
+  .swatch-stage { aspect-ratio: 3 / 2; max-width: none; }
+  .swatches { gap: 10px; margin-top: 1.25rem; }
+  .swatch { width: 44px; height: 44px; }
+  .col-media--left .media--arch { width: 78%; margin-inline: auto; }
+}
+@media (max-width: 599px) {
+  /* 3-up galleries become a swipeable row */
+  .look-grid--3 { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; padding-bottom: .5rem; scrollbar-width: none; }
+  .look-grid--3::-webkit-scrollbar { display: none; }
+  .look-grid--3 > * { flex: 0 0 64%; scroll-snap-align: start; margin-top: 0 !important; }
+  /* Length reveal: no scroll effect on phones, show the full illustration with all marks */
+  .length-reveal__mask { clip-path: none; }
+  .length-reveal__marks li { color: var(--ink); }
+  .length-reveal__hair { height: 52vh; }
+}

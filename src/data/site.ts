@@ -35,6 +35,8 @@ export const SITE = {
    * Set to true once PLACEHOLDERS.md is done.
    */
   launched: false,
+  /** Verified by the owner: trained hairdresser with years of salon experience; extensions training at Beauty of Rose (CHECK spelling + year). */
+  training: { hairdresser: true, extensionsAcademy: 'Beauty of Rose' },
 };
 
 export const hasWa = () => !!SITE.whatsapp;

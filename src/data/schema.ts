@@ -9,7 +9,7 @@ export function serviceSchema(o: { name: string; path: string; description: stri
   return s;
 }
 export const articleSchema = (o: { headline: string; path: string; description: string; dateModified: string }) => ({ '@type': 'Article', headline: o.headline, description: o.description, mainEntityOfPage: `${SITE.url}${o.path}`, dateModified: o.dateModified, datePublished: o.dateModified, author: { '@id': PERSON_ID }, publisher: { '@id': BUSINESS_ID }, inLanguage: 'nl-NL' });
-export const personSchema = () => ({ '@type': 'Person', '@id': PERSON_ID, name: SITE.owner, jobTitle: 'Hair extensions specialist', worksFor: { '@id': BUSINESS_ID }, sameAs: [SITE.instagram, SITE.tiktok].filter(Boolean) });
+export const personSchema = () => ({ '@type': 'Person', '@id': PERSON_ID, name: SITE.owner, jobTitle: 'Kapster en hair extensions specialist', worksFor: { '@id': BUSINESS_ID }, knowsAbout: ['hair extensions', 'haarverlenging', 'haarverdikking', 'kleuradvies', 'knippen'], hasCredential: [{ '@type': 'EducationalOccupationalCredential', credentialCategory: 'Opleiding', name: 'Kappersopleiding' }, { '@type': 'EducationalOccupationalCredential', credentialCategory: 'Certificaat', name: `Extensions-cursus ${SITE.training.extensionsAcademy}`, recognizedBy: { '@type': 'Organization', name: SITE.training.extensionsAcademy } }], sameAs: [SITE.instagram, SITE.tiktok].filter(Boolean) });
 export function businessSchema() {
   const address: Record<string, string> = { '@type': 'PostalAddress', addressLocality: SITE.city, addressRegion: SITE.province, addressCountry: 'NL' };
   if (SITE.streetAddress) { address.streetAddress = SITE.streetAddress; address.postalCode = SITE.postalCode; }
