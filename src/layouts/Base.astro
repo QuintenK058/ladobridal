@@ -45,6 +45,7 @@ const abs = (p: string) => `${SITE.url}${p === '/' ? '' : p}`;
   <meta name="description" content={description} />
   <link rel="canonical" href={canonical} />
   {noindex && <meta name="robots" content="noindex, follow" />}
+  {!noindex && !SITE.launched && <meta name="robots" content="nofollow, noindex" data-prelaunch />}
   {!noindex && nlPath && <link rel="alternate" hreflang="nl-NL" href={abs(nlPath)} />}
   {!noindex && enPath && <link rel="alternate" hreflang="en" href={abs(enPath)} />}
   {!noindex && nlPath && <link rel="alternate" hreflang="x-default" href={abs(nlPath)} />}

@@ -29,6 +29,12 @@ export const SITE = {
   consultMinutes: null as null | number,
   nextSlot: '',                        // CHECK: honest waiting time, e.g. 'maart' — empty hides it
   lastUpdated: '2026-11',
+  /**
+   * Launch gate. While false the site can be public (e.g. on Vercel) without being indexed:
+   * every page gets robots "nofollow, noindex", robots.txt disallows everything and a small “Preview” label shows.
+   * Set to true once PLACEHOLDERS.md is done.
+   */
+  launched: false,
 };
 
 export const hasWa = () => !!SITE.whatsapp;

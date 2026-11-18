@@ -20,7 +20,7 @@ for (const f of files) {
   const html = readFileSync(f, 'utf8');
   const og = html.match(/<meta property="og:image" content="[^"]*\/og\/([^"]+)\.png"/)?.[1];
   const title = (html.match(/<meta property="og:title" content="([^"]+)"/)?.[1] || '').replace(/&#39;/g, '’').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/\s*·\s*By Lado$/, '');
-  if (!og || html.includes('noindex')) continue;
+  if (!og || /content="noindex/.test(html)) continue;
   await page.setContent(`<html><head><style>
     @font-face{font-family:C;src:url(data:font/woff2;base64,${font})}@font-face{font-family:C;font-style:italic;src:url(data:font/woff2;base64,${fontI})}
     @font-face{font-family:J;src:url(data:font/woff2;base64,${jost})}

@@ -18,6 +18,7 @@ const home = nl ? '/' : '/en';
 <header class="site-header" data-header>
   <div class="container site-header__inner">
     <a href={home} class="wordmark">BY LADO<small>hair extensions</small></a>
+    {!SITE.launched && <span class="preview-pill" title={nl ? 'Deze website is nog in opbouw' : 'This website is still being built'}>Preview</span>}
     <nav class="nav" aria-label={nl ? 'Hoofdmenu' : 'Main menu'}>
       <ul>
         <li><button type="button" aria-expanded="false" aria-controls="mega" data-mega-toggle>Extensions <span aria-hidden="true" style="font-size:.7em">▾</span></button></li>
