@@ -63,7 +63,7 @@ const placeholders = list.length ? [] : hints.slice(0, n);
     <div class="carousel-controls">
       <button type="button" data-prev aria-label={nl ? 'Vorige review' : 'Previous review'}><Icon name="arrow-left" /></button>
       <button type="button" data-next aria-label={nl ? 'Volgende review' : 'Next review'}><Icon name="arrow-right" /></button>
-      <span class="count" data-count>1 / {list.length || placeholders.length}</span>
+      <span class="count" data-carousel-count>1 / {list.length || placeholders.length}</span>
     </div>
   </div>
 )}

@@ -154,7 +154,7 @@ $$('[data-faq] .faq__q').forEach((btn) => {
 
 /* ---------- Quote carousel (no autoplay) ---------- */
 $$('[data-carousel]').forEach((c) => {
-  const slides = $$('.quote-slide', c); const count = c.querySelector('[data-count]'); let i = 0;
+  const slides = $$('.quote-slide', c); const count = c.querySelector('[data-carousel-count]'); let i = 0;
   const go = (n: number) => { slides[i].classList.remove('is-active'); i = (n + slides.length) % slides.length; slides[i].classList.add('is-active'); if (count) count.textContent = `${i + 1} / ${slides.length}`; };
   c.querySelector('[data-prev]')?.addEventListener('click', () => go(i - 1));
   c.querySelector('[data-next]')?.addEventListener('click', () => go(i + 1));
