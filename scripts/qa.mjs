@@ -27,7 +27,7 @@ for (const f of files) {
   for (const m of body.matchAll(/href="(\/[^"#?]*)/g)) {
     if (m[1].startsWith('/_astro/')) continue;
     const t = m[1].replace(/\/$/, '') || '/';
-    if (/\.(png|svg|xml|txt|webp|avif|jpg)$/.test(t)) { if (!existsSync(join('public', t)) && !existsSync(join('dist', t))) issues.push(`${route}: missing asset ${t}`); continue; }
+    if (/\.(png|svg|xml|txt|webp|avif|jpg|pdf)$/.test(t)) { if (!existsSync(join('public', t)) && !existsSync(join('dist', t))) issues.push(`${route}: missing asset ${t}`); continue; }
     if (!routes.has(t)) issues.push(`${route}: broken link ${t}`);
   }
   for (const m of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) { try { JSON.parse(m[1]); } catch { issues.push(`${route}: invalid JSON-LD`); } }

@@ -1,0 +1,172 @@
+---
+/**
+ * Print source for the downloadable Extensions-gids (A4). `npm run pdf` renders it to public/downloads/*.pdf.
+ * Client-facing: only confirmed copy — sentences with open placeholders are stripped (confirmedOnly).
+ */
+import '@fontsource-variable/fraunces/opsz.css';
+import '@fontsource-variable/fraunces/opsz-italic.css';
+import '@fontsource/manrope/latin-400.css';
+import '@fontsource/manrope/latin-600.css';
+import { METHODS } from '../../data/methods';
+import { COPY } from '../../data/methodContent';
+import { AFTERCARE, confirmedOnly } from '../../data/aftercare';
+import { SITE } from '../../data/site';
+const host = SITE.url.replace(/^https?:\/\//, '');
+const methods = METHODS.filter((m) => m.offered !== false);
+const questions = [
+  'Welke methode raad je voor mijn haar aan, en waarom niet de andere?',
+  'Hoeveel haar heb ik nodig voor het resultaat dat ik wil, en kan mijn eigen haar dat dragen?',
+  'Wat kost het eerste jaar in totaal: plaatsen, onderhoud en eventueel nieuw haar?',
+  'Hoe vaak moet ik terugkomen voor onderhoud?',
+  'Welk haar gebruik je, en kan het haar bij onderhoud hergebruikt worden?',
+  'Hoe match je de kleur, en wordt het haar in mijn eigen haar geknipt?',
+  'Welke producten en welke borstel heb ik thuis nodig?',
+  'Wat gebeurt er als ik er vanaf wil? Hoe gaat verwijderen?',
+];
+const year = new Date().getFullYear();
+---
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>De Extensions-gids | By Lado</title>
+  <style>
+    @page { size: A4; margin: 18mm 18mm 20mm; }
+    @page :first { margin: 0; }
+    :root { --cream:#F7F2EB; --bone:#EDE5DA; --line:#E0D3C3; --caramel:#9C6B45; --mocha:#4A3328; --ink:#1F1814; --stone:#6B5F57;
+      --serif:'Fraunces Variable', Georgia, serif; --sans:'Manrope', Arial, sans-serif; }
+    * { box-sizing: border-box; }
+    html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    body { margin: 0; background: #fff; color: var(--ink); font: 10.5pt/1.6 var(--sans); }
+    .page { break-after: page; }
+    .page:last-child { break-after: auto; }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 350; line-height: 1.1; margin: 0; font-variation-settings: 'opsz' 96; }
+    h1 { font-size: 46pt; letter-spacing: -.01em; }
+    h2 { font-size: 24pt; margin-bottom: 6mm; }
+    h3 { font-size: 13pt; font-weight: 450; margin: 0 0 1.5mm; }
+    em { font-style: italic; color: var(--caramel); }
+    p { margin: 0 0 3mm; }
+    .eyebrow { font-size: 7.5pt; letter-spacing: .32em; text-transform: uppercase; color: var(--stone); font-weight: 600; margin-bottom: 3mm; }
+    .logo { letter-spacing: .42em; font-weight: 600; font-size: 10pt; }
+    .cover { height: 100vh;  display: flex; flex-direction: column; justify-content: space-between; background: var(--cream); padding: 26mm 24mm 20mm; }
+    .cover .lead { font-size: 13pt; max-width: 120mm; color: var(--ink); margin-top: 8mm; }
+    .cover .strands { height: 70mm; }
+    .cover footer { display: flex; justify-content: space-between; font-size: 8.5pt; color: var(--stone); border-top: 1px solid var(--line); padding-top: 4mm; }
+    .toc li { padding: 2mm 0; border-bottom: 1px solid var(--line); font-family: var(--serif); font-size: 13pt; list-style: none; display: flex; gap: 6mm; }
+    .toc ol { padding: 0; margin: 8mm 0 0; }
+    .toc span { font-family: var(--sans); font-size: 8pt; color: var(--caramel); padding-top: 1.5mm; width: 8mm; }
+    .method { border-top: 1px solid var(--line); padding: 4mm 0; break-inside: avoid; display: grid; grid-template-columns: 46mm 1fr; gap: 6mm; }
+    .method dl { margin: 0; display: grid; grid-template-columns: 26mm 1fr; gap: 1mm 3mm; font-size: 9.5pt; }
+    .method dt { color: var(--stone); }
+    .method dd { margin: 0; }
+    .note { background: var(--bone); padding: 5mm 6mm; margin-top: 6mm; font-size: 9.5pt; break-inside: avoid; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm 10mm; }
+    .care { break-inside: avoid; }
+    .care h3 { font-size: 11.5pt; }
+    .formula { display: flex; gap: 3mm; align-items: center; flex-wrap: wrap; margin: 6mm 0; font-family: var(--serif); font-size: 14pt; }
+    .formula b { font-weight: 400; background: var(--cream); border: 1px solid var(--line); padding: 2mm 4mm; }
+    .check li { list-style: none; padding: 2.4mm 0 2.4mm 9mm; border-bottom: 1px solid var(--line); position: relative; break-inside: avoid; }
+    .check li::before { content: ''; position: absolute; left: 0; top: 3.2mm; width: 4mm; height: 4mm; border: 1px solid var(--caramel); }
+    .check { padding: 0; margin: 0; }
+    .end { background: var(--mocha); color: var(--cream); margin: 0 -18mm; padding: 14mm 22mm; }
+    .end h2 { color: var(--cream); }
+    .end em { color: #E7D3BC; }
+    .end a { color: var(--cream); }
+    .small { font-size: 8.5pt; color: var(--stone); }
+    .end .small { color: #E6DACB; }
+    @media screen { body { background: var(--bone); } .page { background: #fff; width: 210mm; min-height: 297mm; margin: 10mm auto; padding: 18mm; overflow: hidden; } .page:first-child { padding: 0; } }
+  </style>
+</head>
+<body>
+  <section class="page">
+    <div class="cover">
+      <div>
+        <p class="logo">BY LADO</p>
+      </div>
+      <div>
+        <p class="eyebrow">Gratis gids · hair extensions</p>
+        <h1>De Extensions-<em>gids</em></h1>
+        <p class="lead">Alles wat je wilt weten vóór je eerste set: welke methode bij je haar past, hoe je de kosten eerlijk vergelijkt, hoe je ze mooi houdt en wat je vraagt in een consult.</p>
+      </div>
+      <svg class="strands" viewBox="0 0 400 140" aria-hidden="true">
+        {Array.from({ length: 22 }, (_, i) => <path d={`M${10 + i * 18} 0 C ${30 + i * 18} 50, ${-10 + i * 18} 90, ${16 + i * 18} 140`} fill="none" stroke={i % 3 ? '#C9A27A' : '#9C6B45'} stroke-width={i % 4 ? 1 : 1.6} opacity={0.35 + (i % 5) * 0.12} />)}
+      </svg>
+      <footer><span>Quinty Kant · hair extensions specialist · Leeuwarden</span><span>{host}</span></footer>
+    </div>
+  </section>
+
+  <section class="page toc">
+    <p class="eyebrow">Inhoud</p>
+    <h2>In deze <em>gids</em></h2>
+    <ol>
+      <li><span>01</span>Welke methode past bij jou?</li>
+      <li><span>02</span>Kosten: reken altijd per jaar</li>
+      <li><span>03</span>Nazorg: zo blijven ze mooi</li>
+      <li><span>04</span>Vragen voor je consult</li>
+      <li><span>05</span>Over Quinty en By Lado</li>
+    </ol>
+    <div class="note"><strong>Eerst je eigen haar.</strong> Extensions zijn alleen mooi als je eigen haar er gezond onder blijft. Merk je dat je opvallend veel haar verliest of kale plekken krijgt? Ga dan eerst langs je huisarts of een dermatoloog. Extensions zijn geen behandeling voor haaruitval.</div>
+  </section>
+
+  <section class="page">
+    <p class="eyebrow">01 · Methodes</p>
+    <h2>Welke methode <em>past bij jou?</em></h2>
+    <p>Er is geen beste methode, alleen een methode die het beste bij jouw haar en jouw leven past. Zo verschillen ze:</p>
+    {methods.map((m) => (
+      <div class="method">
+        <div><h3>{m.name}</h3><p class="small">{m.short}</p></div>
+        <dl><dt>Ideaal voor</dt><dd>{m.idealFor}</dd><dt>Minder geschikt</dt><dd>{m.notFor}</dd><dt>Haartype</dt><dd>{m.hairTypes}</dd></dl>
+      </div>
+    ))}
+    <p class="small" style="margin-top:4mm">Twijfel je? Doe de extension-check op {host}/extension-check: zes vragen, één minuut.</p>
+  </section>
+
+  <section class="page">
+    <p class="eyebrow">02 · Kosten</p>
+    <h2>Reken altijd <em>per jaar</em></h2>
+    <p>Een vanaf-prijs voor het plaatsen zegt weinig. Extensions zijn een doorlopende investering: je eigen haar groeit, dus de set moet regelmatig opnieuw worden gezet, en haar gaat niet eeuwig mee. Vergelijk daarom altijd wat een methode je in een heel jaar kost.</p>
+    <div class="formula"><b>plaatsen</b> + <b>onderhoud × aantal keer</b> + <b>nieuw haar</b> = <em>jouw jaarprijs</em></div>
+    <div class="grid2">
+      <div><h3>Waar de prijs van afhangt</h3><p>De methode, de hoeveelheid haar, de lengte, de kwaliteit van het haar en hoe vaak er onderhoud nodig is. Een methode die goedkoper is om te plaatsen, kan per jaar duurder uitvallen als het onderhoud vaker nodig is of het haar niet herbruikbaar is.</p></div>
+      <div><h3>Let op bij heel lage prijzen</h3><p>Vraag wat er wel en niet inbegrepen is: het haar zelf, knippen en blenden, kleur matchen, onderhoud en verwijderen. Goedkoop haar verliest sneller glans en klit eerder, en dan betaal je twee keer.</p></div>
+    </div>
+    <div class="note">Op {host}/prijzen vind je de actuele prijzen van By Lado en een rekenhulp voor je jaarprijs. In het consult krijg je altijd een prijs op maat, vóórdat er iets geplaatst wordt.</div>
+  </section>
+
+  <section class="page">
+    <p class="eyebrow">03 · Nazorg</p>
+    <h2>Zo blijven ze <em>mooi</em></h2>
+    <div class="grid2">
+      {AFTERCARE.map(([, t, d]) => <div class="care"><h3>{t}</h3><p>{d}</p></div>)}
+    </div>
+    <h3 style="margin-top:6mm;font-size:15pt">Per methode</h3>
+    <div class="grid2">
+      {methods.map((m) => { const t = confirmedOnly(COPY[m.key]?.care ?? ''); return t && <div class="care"><h3>{m.name}</h3><p>{t}</p></div>; })}
+    </div>
+  </section>
+
+  <section class="page">
+    <p class="eyebrow">04 · Consult</p>
+    <h2>Vragen voor <em>je consult</em></h2>
+    <p>Neem deze lijst mee, of stuur hem vooraf. Een goede specialist beantwoordt ze zonder omwegen, en zegt eerlijk “nee” of “nog niet” als iets niet bij je haar past.</p>
+    <ul class="check">{questions.map((q) => <li>{q}</li>)}</ul>
+    <div class="note"><strong>Tip:</strong> kom naar het consult met je haar zoals je het normaal draagt, zonder extra product, en neem foto’s mee van het resultaat dat je mooi vindt. Bij daglicht is de kleur het beste te matchen.</div>
+  </section>
+
+  <section class="page">
+    <p class="eyebrow">05 · Over By Lado</p>
+    <h2>Hoi, ik ben <em>Quinty</em></h2>
+    <p>Haar is mijn vak. Ik heb de kappersopleiding gedaan en daarna jarenlang als kapster gewerkt. Voor extensions heb ik de opleiding gevolgd bij {SITE.training.extensionsAcademy}. Die combinatie, het vakmanschap van een kapster en de techniek van extensions, is de basis van By Lado.</p>
+    <p>Ik plaats in kleine, nette secties, match de kleur tot op de streng en knip de extensions in je eigen haar tot het één geheel is. En ik begin altijd bij jouw eigen haar: wat kan het dragen, en welke methode past erbij?</p>
+    <div class="end" style="margin-top:12mm">
+      <p class="eyebrow" style="color:#E6DACB">Klaar voor de volgende stap?</p>
+      <h2>Plan je <em>consult</em></h2>
+      <p>In een consult kijk ik naar je haar, bespreken we wat je wilt en krijg je een eerlijk advies en een prijs op maat.</p>
+      <p><a href={`${SITE.url}/consult`}>{host}/consult</a>{SITE.email && <> · <a href={`mailto:${SITE.email}`}>{SITE.email}</a></>}{SITE.instagram && <> · Instagram</>}</p>
+      <p class="small" style="margin-top:6mm">© {year} By Lado · Quinty Kant · Leeuwarden. Deze gids is algemene informatie en geen vervanging voor persoonlijk advies.</p>
+    </div>
+  </section>
+</body>
+</html>

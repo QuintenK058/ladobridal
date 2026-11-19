@@ -13,6 +13,7 @@ import CookieBanner from '../components/CookieBanner.astro';
 import Quiz from '../components/Quiz.astro';
 import Icon from '../components/Icon.astro';
 import { SITE, waLink, hasWa } from '../data/site';
+import { GUIDE_PDF } from '../data/aftercare';
 import { counterpart, langOf } from '../data/i18n';
 import { businessSchema, personSchema, BUSINESS_ID } from '../data/schema';
 interface Props {
@@ -86,7 +87,7 @@ const abs = (p: string) => `${SITE.url}${p === '/' ? '' : p}`;
         <div class="field"><label for="offer-email">E-mailadres</label><input id="offer-email" type="email" name="email" autocomplete="email" required /><p class="field__error" hidden></p></div>
         <div class="hp" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off" /></div>
         <button type="submit" class="btn btn--light btn--block">Stuur me de gids</button>
-        <p class="small mt-1" data-guide-done hidden style="color:#E6DACB">Dank je! De gids komt naar je inbox. <span class="ph">[PDF NOG TE MAKEN]</span></p>
+        <p class="small mt-1" data-guide-done hidden style="color:#E6DACB">Dank je! De gids komt naar je inbox. Je kunt hem ook <a href={GUIDE_PDF} download style="color:inherit">direct downloaden</a>.</p>
       </form>
     </aside>
   )}

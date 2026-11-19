@@ -2,6 +2,7 @@
  * DRAFT copy for the guides — to be approved by Quinty. Pages stay noindex until `ready: true` in guides.ts.
  * Rules followed: no invented numbers (placeholders), no medical claims, no guarantees.
  */
+import { confirmed, val } from './methods';
 const P = (s: string) => `<span class="ph">[${s}]</span>`;
 
 export const DRAFTS: Record<string, Record<string, string>> = {
@@ -28,7 +29,7 @@ export const DRAFTS: Record<string, Record<string, string>> = {
     uitval: `<p>Merk je dat je veel meer haar verliest dan normaal, of krijg je kale plekken? Ga dan eerst naar je huisarts of een dermatoloog. Er kan een medische oorzaak zijn, en die hoort eerst bekeken te worden. Extensions zijn geen behandeling voor haaruitval.</p>`,
   },
   'hoe-lang-gaan-hair-extensions-mee': {
-    'per-methode': `<p>Hoe lang extensions meegaan, verschilt per methode, per haarkwaliteit en per verzorging. Hieronder staan mijn eigen richtlijnen, niet de gemiddelden die je online vindt.</p><p>${P('TABEL per methode: gaat mee · onderhoud elke · herbruikbaar — cijfers van Quinty')}</p>`,
+    'per-methode': `<p>Hoe lang extensions meegaan, verschilt per methode, per haarkwaliteit en per verzorging. Hieronder staan mijn eigen richtlijnen, niet de gemiddelden die je online vindt.</p><div class="compare-wrap"><table class="compare"><thead><tr><th scope="col">Methode</th><th scope="col">Gaat mee</th><th scope="col">Onderhoud elke</th><th scope="col">Herbruikbaar</th></tr></thead><tbody>${confirmed().map((m) => `<tr><th scope="row"><a href="${m.slug}">${m.name}</a></th><td>${val(m.lasts)}</td><td>${val(m.maintenanceEvery)}</td><td>${val(m.reusable)}</td></tr>`).join('')}</tbody></table></div>`,
     factoren: `<ul><li><strong>Kwaliteit van het haar</strong>: goed haar blijft langer zacht en glanzend.</li><li><strong>Verzorging</strong>: wassen, föhnen en slapen maken veel uit.</li><li><strong>Hitte en zon</strong>: veel stylen met hitte en zon drogen het haar uit.</li><li><strong>Chloor en zout</strong>: altijd goed uitspoelen.</li><li><strong>Onderhoud</strong>: op tijd komen houdt de set in goede conditie.</li></ul>`,
     onderhoud: `<p>Omdat je eigen haar doorgroeit, schuiven extensions mee naar beneden. Bij onderhoud worden ze hoger gezet. Hoe vaak dat nodig is, hangt af van de methode en hoe snel je haar groeit. Plan je volgende afspraak het liefst meteen na je onderhoud. Zie <a href="/extensions-onderhoud">onderhoud</a>.</p>`,
     vervangen: `<p>Haar dat droog aanvoelt, snel klit of zijn glans verliest, is toe aan vervanging. In het onderhoud kijk ik met je mee of de set nog goed is, of dat (een deel van) het haar vervangen moet worden.</p>`,

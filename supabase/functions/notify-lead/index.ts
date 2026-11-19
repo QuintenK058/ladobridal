@@ -27,6 +27,9 @@ Deno.serve(async (req) => {
     const html = nl ? `<p>Hoi ${first},</p><p>Dank je wel voor je aanvraag. Ik bekijk hem persoonlijk en neem snel contact met je op.</p><p>Liefs,<br>Quinty · By Lado</p>` : `<p>Hi ${first},</p><p>Thank you for your request. I’ll look at it personally and get back to you soon.</p><p>Love,<br>Quinty · By Lado</p>`;
     await send(r.email, nl ? 'Je aanvraag bij By Lado' : 'Your request at By Lado', `<div style="max-width:520px;margin:0 auto;padding:32px;background:#F7F2EB;color:#1F1814;font-family:Arial,sans-serif;font-size:15px;line-height:1.6"><p style="letter-spacing:.42em;font-weight:600">BY LADO</p>${html}</div>`);
   }
-  // TODO guide: send the PDF link once the guide exists.
+  if (r.kind === 'guide') {
+    const site = Deno.env.get('SITE_URL') ?? 'https://bylado.nl';
+    await send(r.email, 'Je Extensions-gids van By Lado', `<div style="max-width:520px;margin:0 auto;padding:32px;background:#F7F2EB;color:#1F1814;font-family:Arial,sans-serif;font-size:15px;line-height:1.6"><p style="letter-spacing:.42em;font-weight:600">BY LADO</p><p>Hoi,</p><p>Dank je wel! Hier is je gids: welke methode bij je haar past, hoe je de kosten per jaar vergelijkt, nazorg en de vragen voor je consult.</p><p><a href="${site}/downloads/by-lado-extensions-gids.pdf" style="display:inline-block;background:#1F1814;color:#F7F2EB;padding:12px 22px;text-decoration:none">Download de gids (pdf)</a></p><p>Vragen? Antwoord gerust op deze mail.</p><p>Liefs,<br>Quinty · By Lado</p></div>`);
+  }
   return new Response('ok');
 });
