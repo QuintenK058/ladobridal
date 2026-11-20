@@ -1,0 +1,25 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+import Section from '../components/Section.astro';
+import Reviews from '../components/Reviews.astro';
+---
+<ServicePage title="Extensions elders laten zetten en niet tevreden? | By Lado" description="Extensions ergens anders laten zetten en niet tevreden? In Leeuwarden kijk ik eerlijk wat er hersteld kan worden: kleur, plaatsing, blending of gezond verwijderen."
+  path="/extensions-herstellen" crumb="Herstellen" eyebrow="Correctie" h1="Extensions elders laten zetten <em>en niet tevreden?</em>" shot="correctie: zichtbare aanzet voor herstel"
+  noindex notice="[CHECK · biedt Quinty correcties/herstel van extensions van elders aan? Zo nee: pagina verwijderen. Zo ja: noindex weghalen in src/pages/extensions-herstellen.astro.]"
+  lead="Zichtbare banen, een kleur die net niet klopt, een set die te zwaar voelt of een harde overgang. Het komt vaker voor dan je denkt. Ik kijk eerlijk wat er beter kan."
+  faq={[
+    { q: 'Kun je mijn bestaande extensions hergebruiken?', a: '<p>Soms wel, als het haar nog goed is. In het consult bekijken we de kwaliteit.</p>' },
+    { q: 'Wat kost een correctie?', a: '<p><span class="ph">[CHECK: prijs correctie / op maat na consult]</span></p>' },
+  ]}
+  related={[{ href: '/extensions-verwijderen', label: 'Extensions verwijderen' }, { href: '/consult', label: 'Plan je consult' }]}>
+  <Section eyebrow="Wat ik vaak zie" title="Wat er <em>mis</em> kan gaan">
+    <ul>
+      <li><strong>Kleur die niet klopt.</strong> Eén tint, terwijl je eigen haar uit meerdere tinten bestaat.</li>
+      <li><strong>Zichtbare aanzet.</strong> Te dicht bij de scheiding, te dicht bij je oren of te groot voor het haar eronder.</li>
+      <li><strong>Te veel gewicht.</strong> Meer haar dan je eigen haar kan dragen, met pijn of trekken als gevolg.</li>
+      <li><strong>Harde overgang.</strong> Niet ingeknipt, waardoor je ziet waar je eigen haar stopt.</li>
+    </ul>
+    <p>Afhankelijk van wat er speelt, kunnen we de kleur aanvullen met extra tinten, extensions opnieuw plaatsen, de set lichter maken of alles gezond verwijderen en opnieuw beginnen.</p>
+  </Section>
+  <section class="section"><div class="container"><Reviews variant="pair" /></div></section>
+</ServicePage>

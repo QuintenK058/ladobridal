@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import Cta from '../components/Cta.astro';
+import { SITE } from '../data/site';
+import { REVIEWS, METHOD_LABEL } from '../data/content';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Reviews', href: '/reviews' }];
+const fmt = (d: string) => new Intl.DateTimeFormat('nl-NL', { month: 'long', year: 'numeric' }).format(new Date(d));
+---
+<Base title="Reviews hair extensions | Ervaringen By Lado Leeuwarden" description="Lees echte ervaringen met hair extensions bij By Lado in Leeuwarden: per methode, met naam en datum. Alleen reviews over extensions." breadcrumbs={crumbs}>
+  <PageHero crumbs={crumbs} eyebrow="Reviews" h1="Ervaringen met hair extensions bij <em>By Lado</em>" cta={false}
+    lead="Alleen echte reviews, en alleen over extensions.">
+    <div class="cluster mt-3" style="--gap:1rem">
+      {SITE.rating ? <p class="h2">{SITE.rating.value.toFixed(1).replace('.', ',')} <span class="small muted">op {SITE.rating.source} · {SITE.rating.count} reviews</span></p> : <span class="ph">[SCORE + BRON + AANTAL]</span>}
+      {SITE.reviewProfileUrl ? <a class="btn btn--outline" href={SITE.reviewProfileUrl} target="_blank" rel="noopener" data-track="review_click">Bekijk alle reviews ↗</a> : <span class="ph">[LINK REVIEWPROFIEL]</span>}
+      {SITE.reviewWriteUrl && <a class="btn btn--outline" href={SITE.reviewWriteUrl} target="_blank" rel="noopener">Schrijf een review</a>}
+    </div>
+  </PageHero>
+  <section class="section--tight" style="padding-top:0"><div class="container">
+    {REVIEWS.length >= 8 && <div class="filter-chips" role="group" aria-label="Filter per methode">{['Alle', ...Object.values(METHOD_LABEL)].map((l, i) => <button type="button" class="chip" aria-pressed={i === 0 ? 'true' : 'false'}>{l}</button>)}</div>}
+    <div class="review-wall">
+      {REVIEWS.map((r) => <article class="review-card"><span class="stars" aria-hidden="true">{[1,2,3,4,5].map(() => <Icon name="star" size={13} />)}</span><blockquote class="mt-1"><p>{r.text}</p></blockquote><footer><strong>{r.name}</strong>{r.method && ` · ${METHOD_LABEL[r.method]}`} · {fmt(r.date)}</footer></article>)}
+      {!REVIEWS.length && [1, 2, 3, 4, 5, 6].map((n) => <article class="review-card"><div class="ph-block">[REVIEW {n} · echte tekst · naam · methode · maand jaar · optioneel resultaatfoto met toestemming] — in src/data/content.ts</div></article>)}
+    </div>
+  </div></section>
+  {[['Van fijn haar naar volume', 'fijn haar, voor/na'], ['Extensions van elders, hersteld', 'correctie, voor/na']].map(([t, s], i) => (
+    <section class:list={['section', i === 0 && 'section--bone']}><div class="container grid align-center">
+      <div class={i ? 'col-media' : 'col-media--left'} style={i ? 'order:2' : undefined}><div class="result__pair"><div class="media ratio-3x4"><div class="ph-img ph-img--dark"><span class="ph-img__label">Foto · voor · {s}</span></div></div><div class="media ratio-3x4"><div class="ph-img"><span class="ph-img__label">Foto · na · {s}</span></div></div></div></div>
+      <div class={i ? 'col-text' : 'col-text--right'}><p class="eyebrow">Uitgelicht</p><h2 class="mt-1">{t}</h2><p class="mt-2 ph-block">[ALLEEN ECHT · quote van de klant + korte notitie van Quinty over de aanpak]</p></div>
+    </div></section>
+  ))}
+  <Cta />
+</Base>

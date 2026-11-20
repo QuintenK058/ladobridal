@@ -1,0 +1,9 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Voorwaarden', href: '/voorwaarden' }];
+---
+<Base title="Algemene voorwaarden | By Lado" description="De algemene voorwaarden van By Lado hair extensions: afspraken, annuleren, betaling en garantie." breadcrumbs={crumbs}>
+  <PageHero crumbs={crumbs} eyebrow="Voorwaarden" h1="Algemene voorwaarden" cta={false} />
+  <section class="section--tight" style="padding-top:0"><div class="container"><p class="ph-block">[BESTAANDE VOORWAARDEN BY LADO PLAKKEN — niet laten genereren. Onderwerpen: annuleren, aanbetaling, betaling, haar bestellen op maat, nazorg en garantie.]</p></div></section>
+</Base>

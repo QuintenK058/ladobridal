@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { confirmed } from '../data/methods';
+---
+<Base title="Pagina niet gevonden | By Lado" description="Deze pagina bestaat niet (meer)." noindex>
+  <section class="page-hero"><div class="container">
+    <p class="eyebrow">404</p><h1 class="mt-1">Deze pagina is <em>niet gevonden</em></h1>
+    <div class="grid mt-3">
+      <div class="col-third"><h2 class="h3">Methodes</h2><ul class="stack mt-1" role="list" style="--stack:.5rem">{confirmed().map((m) => <li><a class="link" href={m.slug}>{m.name}</a></li>)}</ul></div>
+      <div class="col-third"><h2 class="h3">Verder</h2><ul class="stack mt-1" role="list" style="--stack:.5rem"><li><a class="link" href="/prijzen">Prijzen</a></li><li><a class="link" href="/resultaten">Resultaten</a></li><li><a class="link" href="/extension-check">Extension-check</a></li></ul></div>
+      <div class="col-third"><h2 class="h3">Afspraak</h2><p class="mt-1"><a class="btn" href="/consult">Plan je consult</a></p></div>
+    </div>
+  </div></section>
+</Base>

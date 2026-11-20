@@ -1,0 +1,8 @@
+---
+/** Thin caramel "strand of hair" line that draws along the scroll on desktop. Decorative. */
+interface Props { d?: string; flip?: boolean }
+const { d = 'M 40 0 C 260 140, -40 340, 180 520 S 420 820, 120 1000', flip } = Astro.props;
+---
+<svg class="strand" viewBox="0 0 400 1000" preserveAspectRatio="none" aria-hidden="true" data-strand style={flip ? 'transform:scaleX(-1)' : undefined}>
+  <path d={d} vector-effect="non-scaling-stroke" />
+</svg>

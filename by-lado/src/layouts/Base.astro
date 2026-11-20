@@ -1,0 +1,98 @@
+---
+import '@fontsource-variable/fraunces/opsz.css';
+import '@fontsource-variable/fraunces/opsz-italic.css';
+import '@fontsource/manrope/latin-400.css';
+import '@fontsource/manrope/latin-500.css';
+import '@fontsource/manrope/latin-600.css';
+import displayFont from '@fontsource-variable/fraunces/files/fraunces-latin-opsz-normal.woff2?url';
+import displayItalic from '@fontsource-variable/fraunces/files/fraunces-latin-opsz-italic.woff2?url';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+import Quiz from '../components/Quiz.astro';
+import Icon from '../components/Icon.astro';
+import { SITE, waLink, hasWa } from '../data/site';
+import { GUIDE_PDF } from '../data/aftercare';
+import { counterpart, langOf } from '../data/i18n';
+import { businessSchema, personSchema, BUSINESS_ID } from '../data/schema';
+interface Props {
+  title: string; description: string; ogTitle?: string; ogDescription?: string; ogType?: 'website' | 'article';
+  noindex?: boolean; breadcrumbs?: { name: string; href: string }[]; schema?: Record<string, unknown>[];
+  hasForm?: boolean; hasQuizPage?: boolean;
+}
+const { title, description, ogType = 'website', noindex = false, breadcrumbs, schema = [], hasForm = false, hasQuizPage = false } = Astro.props;
+const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/(.)\/$/, '$1') || '/';
+const lang = langOf(path); const nl = lang === 'nl';
+const canonical = `${SITE.url}${path === '/' ? '' : path}`;
+const other = counterpart(path); const nlPath = nl ? path : other; const enPath = nl ? other : path;
+const ogSlug = path === '/' ? 'home' : path.slice(1).replace(/\//g, '--');
+const ogImage = `${SITE.url}/og/${ogSlug}.png`;
+const ogTitle = Astro.props.ogTitle ?? title.replace(/\s*\|\s*By Lado$/, '');
+const ogDescription = Astro.props.ogDescription ?? description;
+const graph = [businessSchema(), personSchema(),
+  { '@type': 'WebSite', '@id': `${SITE.url}/#website`, url: SITE.url, name: 'By Lado', publisher: { '@id': BUSINESS_ID } },
+  { '@type': 'WebPage', '@id': `${canonical}#webpage`, url: canonical, name: title, description, inLanguage: nl ? 'nl-NL' : 'en', isPartOf: { '@id': `${SITE.url}/#website` } },
+  ...(breadcrumbs?.length ? [{ '@type': 'BreadcrumbList', itemListElement: breadcrumbs.map((b, i) => ({ '@type': 'ListItem', position: i + 1, name: b.name, item: `${SITE.url}${b.href === '/' ? '' : b.href}` })) }] : []),
+  ...schema];
+const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }).replace(/</g, '\\u003c');
+const abs = (p: string) => `${SITE.url}${p === '/' ? '' : p}`;
+---
+<!doctype html>
+<html lang={nl ? 'nl-NL' : 'en'} class="no-js">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex, follow" />}
+  {!noindex && !SITE.launched && <meta name="robots" content="nofollow, noindex" data-prelaunch />}
+  {!noindex && nlPath && <link rel="alternate" hreflang="nl-NL" href={abs(nlPath)} />}
+  {!noindex && enPath && <link rel="alternate" hreflang="en" href={abs(enPath)} />}
+  {!noindex && nlPath && <link rel="alternate" hreflang="x-default" href={abs(nlPath)} />}
+  <meta name="geo.region" content="NL-FR" /><meta name="geo.placename" content="Leeuwarden" />
+  <meta property="og:type" content={ogType} /><meta property="og:site_name" content="By Lado" /><meta property="og:locale" content={nl ? 'nl_NL' : 'en_GB'} />
+  <meta property="og:url" content={canonical} /><meta property="og:title" content={ogTitle} /><meta property="og:description" content={ogDescription} />
+  <meta property="og:image" content={ogImage} /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" /><meta name="twitter:title" content={ogTitle} /><meta name="twitter:description" content={ogDescription} /><meta name="twitter:image" content={ogImage} />
+  <meta name="theme-color" content="#F7F2EB" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="preload" href={displayFont} as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href={displayItalic} as="font" type="font/woff2" crossorigin />
+  <script is:inline>
+    document.documentElement.classList.replace('no-js', 'js');
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('reduced');
+    window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} window.gtag = gtag;
+    gtag('consent', 'default', { ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', analytics_storage: 'denied', wait_for_update: 500 });
+  </script>
+  <script type="application/ld+json" set:html={jsonld} />
+</head>
+<body data-lang={lang}>
+  <a class="skip-link" href="#main">{nl ? 'Naar de inhoud' : 'Skip to content'}</a>
+  <Header lang={lang} path={path} />
+  <main id="main"><slot /></main>
+  <Footer lang={lang} />
+  <div class="mobile-bar" data-mobile-bar>
+    <a class="btn" href={nl ? '/consult' : '/en/consult'} data-track="consult_cta">{nl ? 'Plan je consult' : 'Book a consultation'}</a>
+    {hasWa() && <a class="icon-btn" href={waLink(nl ? 'Hoi Quinty! ' : 'Hi Quinty! ')} target="_blank" rel="noopener" aria-label="WhatsApp" data-track="whatsapp_click"><Icon name="whatsapp" /></a>}
+  </div>
+  {!hasQuizPage && <Quiz mode="overlay" lang={lang} />}
+  {nl && (
+    <aside class="offer" data-offer aria-labelledby="offer-title" hidden>
+      <button type="button" class="offer__close" data-offer-close aria-label="Sluiten">×</button>
+      <p class="eyebrow">Gratis gids</p>
+      <h2 id="offer-title" class="mt-1">Alles wat je moet weten <em>vóór je eerste set</em></h2>
+      <p class="small mt-1" style="color:#E6DACB">De Extensions-gids als pdf: methodes, kosten per jaar, nazorg en de vragen die je in een consult stelt.</p>
+      <form class="mt-2" data-guide-form novalidate>
+        <div class="field"><label for="offer-email">E-mailadres</label><input id="offer-email" type="email" name="email" autocomplete="email" required /><p class="field__error" hidden></p></div>
+        <div class="hp" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off" /></div>
+        <button type="submit" class="btn btn--light btn--block">Stuur me de gids</button>
+        <p class="small mt-1" data-guide-done hidden style="color:#E6DACB">Dank je! De gids komt naar je inbox. Je kunt hem ook <a href={GUIDE_PDF} download style="color:inherit">direct downloaden</a>.</p>
+      </form>
+    </aside>
+  )}
+  <CookieBanner lang={lang} />
+  <div class="cursor" data-cursor aria-hidden="true"><span>{nl ? 'Bekijk' : 'View'}</span></div>
+  <script>import '../scripts/main';</script>
+</body>
+</html>

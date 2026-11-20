@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Cta from '../../components/Cta.astro';
+import { GUIDES } from '../../data/guides';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Gidsen', href: '/gidsen' }];
+---
+<Base title="Gidsen over hair extensions | Kosten, methodes, nazorg | By Lado" description="Eerlijke gidsen over hair extensions: wat ze kosten, welke methode bij je haar past, hoe lang ze meegaan en of ze slecht zijn voor je haar." breadcrumbs={crumbs}>
+  <PageHero crumbs={crumbs} eyebrow="Gidsen" h1="Gidsen over hair <em>extensions</em>" cta={false} lead="Eerlijke antwoorden op de vragen die ik het vaakst krijg, voordat je beslist." />
+  <section class="section--tight" style="padding-top:0"><div class="container">
+    <ul class="region-list" role="list">{GUIDES.filter((g) => g.ready).map((g) => <li><a href={`/gidsen/${g.slug}`}>{g.title}<small>Gids</small></a></li>)}</ul>
+    <p class="small muted mt-3">Binnenkort: {GUIDES.filter((g) => !g.ready).map((g) => g.title).join(' · ')}.</p>
+  </div></section>
+  <Cta light />
+</Base>

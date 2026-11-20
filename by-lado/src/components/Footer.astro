@@ -1,0 +1,57 @@
+---
+import { SITE } from '../data/site';
+import { METHODS } from '../data/methods';
+import Icon from './Icon.astro';
+interface Props { lang: 'nl' | 'en' }
+const nl = Astro.props.lang === 'nl';
+const info = nl
+  ? [['/prijzen', 'Prijzen'], ['/resultaten', 'Resultaten'], ['/reviews', 'Reviews'], ['/nazorg', 'Nazorg'], ['/extensions-onderhoud', 'Onderhoud'], ['/hair-extensions-friesland', 'Hair extensions Friesland'], ['/gidsen', 'Gidsen'], ['/over-quinty', 'Over Quinty']]
+  : [['/en/prices', 'Prices'], ['/en/results', 'Results'], ['/en/reviews', 'Reviews'], ['/en/aftercare', 'Aftercare'], ['/en/about-quinty', 'About Quinty']];
+---
+<footer class="site-footer on-dark" data-footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href={nl ? '/' : '/en'} class="wordmark">BY LADO</a>
+        <p class="footer-bio">{nl ? 'Hair extensions in Leeuwarden door Quinty Kant. Persoonlijk consult, kleur op maat en jouw eigen haar eerst.' : 'Hair extensions in Leeuwarden by Quinty Kant. Personal consultation, colour matched, your own hair first.'}</p>
+        <address class="nap">
+          <span>By Lado · {SITE.owner}</span>
+          <span>{SITE.streetAddress ? `${SITE.streetAddress}, ${SITE.postalCode} ` : ''}{SITE.city}{!SITE.streetAddress && (nl ? ' · studio op afspraak' : ' · studio by appointment')}</span>
+          {SITE.phone ? <a href={`tel:${SITE.phone.replace(/\s/g, '')}`} data-track="phone_click">{SITE.phoneDisplay || SITE.phone}</a> : <span class="ph">[TELEFOON]</span>}
+          {SITE.email ? <a href={`mailto:${SITE.email}`} data-track="email_click">{SITE.email}</a> : <span class="ph">[E-MAIL]</span>}
+          {SITE.openingHours && <span>{SITE.openingHours}</span>}
+        </address>
+        <div class="cluster mt-2" style="--gap:.5rem">
+          {SITE.instagram && <a class="icon-btn" href={SITE.instagram} target="_blank" rel="noopener" aria-label="Instagram" style="width:44px;height:44px"><Icon name="instagram" /></a>}
+          {SITE.tiktok && <a class="icon-btn" href={SITE.tiktok} target="_blank" rel="noopener" aria-label="TikTok" style="width:44px;height:44px;font-size:.7rem;font-weight:600">TT</a>}
+          {SITE.whatsapp && <a class="icon-btn" href={`https://wa.me/${SITE.whatsapp}`} target="_blank" rel="noopener" aria-label="WhatsApp" data-track="whatsapp_click" style="width:44px;height:44px"><Icon name="whatsapp" /></a>}
+        </div>
+      </div>
+      <div>
+        <h2 class="footer-title">Extensions</h2>
+        <ul>{METHODS.filter((m) => m.offered !== false).map((m) => <li><a href={nl ? m.slug : '/en/extensions'}>{m.name}</a></li>)}<li><a href={nl ? '/extensions' : '/en/extensions'}>{nl ? 'Alle methodes vergeleken' : 'All methods compared'}</a></li></ul>
+      </div>
+      <div>
+        <h2 class="footer-title">Info</h2>
+        <ul>{info.map(([h, n]) => <li><a href={h}>{n}</a></li>)}</ul>
+      </div>
+      <div>
+        <h2 class="footer-title">{nl ? 'Afspraak' : 'Booking'}</h2>
+        <ul>
+          <li><a href={nl ? '/consult' : '/en/consult'}>{nl ? 'Plan je consult' : 'Book a consultation'}</a></li>
+          <li><a href={nl ? '/extension-check' : '/en/extension-check'} data-open-quiz>{nl ? 'Extension-check' : 'Extension check'}</a></li>
+          <li><a href={nl ? '/contact' : '/en/contact'}>Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-legal">
+      <ul>
+        <li><a href={nl ? '/privacy' : '/en/privacy'}>Privacy</a></li>
+        <li><a href="/voorwaarden">{nl ? 'Voorwaarden' : 'Terms (Dutch)'}</a></li>
+        <li><button type="button" data-cookie-settings style="text-decoration:underline">{nl ? 'Cookie-instellingen' : 'Cookie settings'}</button></li>
+        <li>KVK {SITE.kvk || <span class="ph">[KVK]</span>}</li>
+      </ul>
+      <span>© {new Date().getFullYear()} By Lado</span>
+    </div>
+  </div>
+</footer>

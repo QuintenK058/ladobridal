@@ -1,0 +1,68 @@
+---
+import Reviews from './Reviews.astro';
+import { SITE } from '../data/site';
+interface Props { lang?: 'nl' | 'en'; quick?: 'onderhoud' }
+const { lang = 'nl', quick } = Astro.props;
+const nl = lang === 'nl';
+const types = nl
+  ? [['consult', 'Consult', 'Eerste kennismaking: haaranalyse, kleur en advies'], ['plaatsen', 'Plaatsen', 'Na een consult, als je methode en kleur al vastliggen'], ['onderhoud', 'Onderhoud', 'Voor bestaande klanten: verplaatsen / bijwerken'], ['verwijderen', 'Verwijderen', 'Extensions er gezond uit laten halen'], ['correctie', 'Correctie', 'Extensions van elders laten bekijken']]
+  : [['consult', 'Consultation', 'Hair analysis, colour and advice'], ['plaatsen', 'Placement', 'After a consultation'], ['onderhoud', 'Maintenance', 'For existing clients'], ['verwijderen', 'Removal', 'Healthy removal'], ['correctie', 'Correction', 'Extensions placed elsewhere']];
+const days = nl ? ['ma', 'di', 'wo', 'do', 'vr', 'za'] : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const parts = nl ? [['ochtend', 'Ochtend'], ['middag', 'Middag'], ['avond', 'Avond']] : [['ochtend', 'Morning'], ['middag', 'Afternoon'], ['avond', 'Evening']];
+---
+{SITE.bookingUrl ? (
+  <div class="price-box">
+    <p class="h3">{nl ? 'Kies direct een moment' : 'Pick a time directly'}</p>
+    <p class="small muted">{nl ? 'Je boekt in mijn agenda; je komt daarna weer terug op deze site.' : 'You book in my calendar and then return here.'}</p>
+    <a class="btn btn--block" href={SITE.bookingUrl} target="_blank" rel="noopener" data-track="booking_click">{nl ? 'Open de agenda' : 'Open the calendar'} ↗</a>
+  </div>
+) : (
+<form class="lead-form" data-steps data-kind="consult" data-lang={lang} data-thanks={nl ? '/bedankt' : '/en/thank-you'} novalidate>
+  <Reviews variant="snippet" lang={lang} />
+  <p class="lead-form__stepcount" aria-live="polite"><span data-step-label>{nl ? 'Stap 1 van 3' : 'Step 1 of 3'}</span></p>
+  <div class="lead-form__progress mt-1" aria-hidden="true"><span data-progress></span></div>
+  <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+  <input type="hidden" name="calc" value="" /><input type="hidden" name="quiz" value="" />
+
+  <section class="lead-step is-active" data-step="1">
+    <fieldset><legend class="h3">{nl ? 'Waarvoor wil je komen?' : 'What would you like to book?'}</legend>
+      <div class="choice-grid">
+        {types.map(([v, l, s]) => <label class="choice"><input type="radio" name="type" value={v} required checked={quick === v} /><span>{l}<small>{s}</small></span></label>)}
+      </div>
+      <p class="field__error" data-error-for="type" hidden></p>
+    </fieldset>
+  </section>
+
+  <section class="lead-step" data-step="2">
+    <fieldset><legend class="h3">{nl ? 'Wanneer komt het je goed uit?' : 'When suits you?'}</legend>
+      <p class="small muted" style="margin-bottom:1rem">{nl ? 'Kies alle dagdelen die passen. Ik stuur je een voorstel.' : 'Pick every slot that works. I’ll send you a proposal.'}</p>
+      <div class="table-wrap"><table class="compare" style="min-width:0">
+        <thead><tr><th scope="col"><span class="sr-only">{nl ? 'Dagdeel' : 'Part of day'}</span></th>{days.map((d) => <th scope="col" style="font-family:var(--sans);font-size:.8rem;text-align:center">{d}</th>)}</tr></thead>
+        <tbody>{parts.map(([pv, pl]) => (
+          <tr><th scope="row">{pl}</th>{days.map((d) => <td style="text-align:center"><input type="checkbox" name="slots" value={`${d}-${pv}`} aria-label={`${d} ${pl}`} style="width:22px;height:22px;accent-color:var(--ink)" /></td>)}</tr>
+        ))}</tbody>
+      </table></div>
+      <p class="field__error" data-error-for="slots" hidden></p>
+    </fieldset>
+  </section>
+
+  <section class="lead-step" data-step="3">
+    <fieldset><legend class="h3">{nl ? 'Je gegevens' : 'Your details'}</legend>
+      <div class="field"><label for="cf-name">{nl ? 'Naam' : 'Name'}</label><input id="cf-name" name="name" autocomplete="name" required data-min="2" /><p class="field__error" hidden></p></div>
+      <div class="field"><label for="cf-email">{nl ? 'E-mail' : 'Email'}</label><input id="cf-email" type="email" name="email" autocomplete="email" inputmode="email" required /><p class="field__error" hidden></p></div>
+      <div class="field"><label for="cf-phone">{nl ? 'Telefoon' : 'Phone'}</label><input id="cf-phone" type="tel" name="phone" autocomplete="tel" inputmode="tel" required /><p class="field__error" hidden></p></div>
+      <label class="row-between" style="border:0"><span>{nl ? 'Contact via WhatsApp is prima' : 'WhatsApp contact is fine'}</span><span class="toggle"><input type="checkbox" name="whatsapp_ok" /><span></span></span></label>
+      <div class="field"><label for="cf-files">{nl ? 'Foto van je haar (optioneel, voor- en achterkant, daglicht)' : 'Photo of your hair (optional, front and back, daylight)'}</label><input id="cf-files" type="file" name="files" accept="image/*" multiple /><p class="field__error" hidden></p></div>
+      <div class="field"><label for="cf-msg">{nl ? 'Bericht (optioneel)' : 'Message (optional)'}</label><textarea id="cf-msg" name="message"></textarea></div>
+      <p class="privacy-note">{nl ? 'Ik gebruik je gegevens alleen om je afspraak te plannen.' : 'I only use your details to plan your appointment.'} <a href={nl ? '/privacy' : '/en/privacy'}>{nl ? 'Privacyverklaring' : 'Privacy statement'}</a>.</p>
+      <p class="field__error" data-submit-error hidden role="alert"></p>
+    </fieldset>
+  </section>
+
+  <div class="lead-form__nav">
+    <button type="button" class="btn btn--outline btn--sm" data-back hidden>← {nl ? 'Terug' : 'Back'}</button>
+    <button type="button" class="btn" data-next style="margin-left:auto">{nl ? 'Volgende' : 'Next'} <span class="arrow" aria-hidden="true">→</span></button>
+    <button type="submit" class="btn" data-submit hidden style="margin-left:auto">{nl ? 'Verstuur aanvraag' : 'Send request'}</button>
+  </div>
+</form>
+)}

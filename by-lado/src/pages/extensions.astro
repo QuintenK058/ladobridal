@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import MethodCard from '../components/MethodCard.astro';
+import Cta from '../components/Cta.astro';
+import { METHODS, val, confirmed } from '../data/methods';
+import { priceOr } from '../data/site';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Extensions', href: '/extensions' }];
+const ms = confirmed();
+const rows: [string, (m: (typeof METHODS)[number]) => string][] = [
+  ['Ideaal voor', (m) => m.idealFor], ['Haartype', (m) => m.hairTypes], ['Plaatsingstijd', (m) => val(m.placingTime)], ['Gaat mee', (m) => val(m.lasts)],
+  ['Onderhoud elke', (m) => val(m.maintenanceEvery)], ['Herbruikbaar', (m) => val(m.reusable)], ['Zichtbaarheid', (m) => val(m.visibility)], ['Vanaf', (m) => priceOr(m.fromPrice)],
+];
+---
+<Base title="Hair extensions: alle methodes vergeleken | By Lado" description="Tape, keratine, weft, microring of clip-in? Vergelijk alle methodes voor hair extensions op haartype, onderhoud, levensduur en prijs. In Leeuwarden." breadcrumbs={crumbs}>
+  <PageHero crumbs={crumbs} eyebrow="Extensions" h1="Hair extensions: alle methodes <em>vergeleken</em>" secondary={{ href: '/extension-check', label: 'Doe de extension-check' }}
+    lead="Er is geen beste methode, alleen een methode die het beste bij jou past. Die keuze hangt af van je eigen haar, hoe je leeft, wat je wilt besteden en hoeveel onderhoud je prettig vindt." />
+  <Section eyebrow="Kiezen" title="Vier vragen die <em>de keuze</em> maken">
+    <p><strong>Wat kan je eigen haar dragen?</strong> Fijn haar heeft baat bij methodes die het gewicht over veel kleine punten of een brede strook verdelen. Dik haar kan meer gewicht per punt hebben.</p>
+    <p><strong>Hoe draag je je haar?</strong> Steek je het vaak hoog op, dan wil je een methode die daarbij niet zichtbaar wordt.</p>
+    <p><strong>Hoe ziet je week eruit?</strong> Veel sporten, zwemmen of weinig tijd om te stylen: dat bepaalt mee welke methode prettig is.</p>
+    <p><strong>Wat wil je per jaar kwijt zijn?</strong> Kijk niet alleen naar de prijs van plaatsen, maar ook naar onderhoud en nieuw haar. Op <a href="/prijzen">prijzen</a> zie je het per jaar.</p>
+  </Section>
+  <section class="section section--bone" id="vergelijking">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Vergelijking</p><h2>Alle methodes <em>naast elkaar</em></h2><p class="small muted">Waarden voor tijd, levensduur, onderhoud en prijs zijn mijn eigen richtlijnen per methode.</p></div>
+      <div class="compare-wrap">
+        <table class="compare">
+          <caption class="sr-only">Vergelijking van extension-methodes</caption>
+          <thead><tr><th scope="col"><span class="sr-only">Eigenschap</span></th>{ms.map((m) => <th scope="col"><a href={m.slug}>{m.name}</a></th>)}</tr></thead>
+          <tbody>{rows.map(([label, f]) => <tr><th scope="row">{label}</th>{ms.map((m) => <td set:html={f(m)} />)}</tr>)}</tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Per methode</p><h2>Lees meer <em>per methode</em></h2></div>
+      <div class="method-row" tabindex="0" aria-label="Methodes">{ms.map((m, i) => <MethodCard m={m} i={i} />)}</div>
+    </div>
+  </section>
+  <section class="section--tight section--bone"><div class="container cluster" style="justify-content:space-between"><p class="h2" style="max-width:20ch">Nog twijfels? <em>Eén minuut.</em></p><a class="btn" href="/extension-check" data-open-quiz>Doe de extension-check</a></div></section>
+  <Cta />
+</Base>

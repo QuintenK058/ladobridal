@@ -1,0 +1,17 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Cta from '../../components/Cta.astro';
+import { confirmed, val } from '../../data/methods';
+import { priceOr } from '../../data/site';
+const crumbs = [{ name: 'Home', href: '/en' }, { name: 'Extensions', href: '/en/extensions' }];
+const en: Record<string, string> = { tape: 'Thin, flat wefts sandwiched around a small section of your own hair. Lies flat; often good for fine hair.', keratine: 'Individual strands with a keratin bond, placed one by one. Lots of freedom to wear your hair up.', weft: 'A row of hair on a thin weft, attached to a base of your own hair. Lots of volume at once.', microring: 'Strands clamped with a tiny ring — no glue, no heat. Often reusable.', clipin: 'Clip-in wefts you put in and take out yourself — for a day, an event or a shoot.' };
+---
+<Base title="Hair extensions: all methods compared | By Lado" description="Tape, keratin, weft, micro ring or clip-in? Compare hair extension methods by hair type, maintenance, lifespan and price. Leeuwarden, Netherlands." breadcrumbs={crumbs}>
+  <PageHero lang="en" crumbs={crumbs} eyebrow="Extensions" h1="Hair extensions: all methods <em>compared</em>" lead="There’s no best method — only the method that suits you best. Detailed pages per method are available in Dutch." />
+  <section class="section--tight" style="padding-top:0"><div class="container"><div class="compare-wrap"><table class="compare">
+    <thead><tr><th scope="col">Method</th><th scope="col">What it is</th><th scope="col">Lasts</th><th scope="col">Maintenance every</th><th scope="col">From</th></tr></thead>
+    <tbody>{confirmed().map((m) => <tr><th scope="row"><a href={m.slug} hreflang="nl">{m.name}</a></th><td>{en[m.key]}</td><td set:html={val(m.lasts)} /><td set:html={val(m.maintenanceEvery)} /><td set:html={priceOr(m.fromPrice)} /></tr>)}</tbody>
+  </table></div></div></section>
+  <Cta lang="en" />
+</Base>

@@ -1,0 +1,244 @@
+---
+import Base from '../layouts/Base.astro';
+import Img from '../components/Img.astro';
+import { PHOTO } from '../data/photos';
+import HairVideo from '../components/HairVideo.astro';
+import BeforeAfter from '../components/BeforeAfter.astro';
+import MethodCard from '../components/MethodCard.astro';
+import Strand from '../components/Strand.astro';
+import Timeline from '../components/Timeline.astro';
+import Reviews from '../components/Reviews.astro';
+import Faq from '../components/Faq.astro';
+import Cta from '../components/Cta.astro';
+import { SITE, PRICES, priceOr, waLink, hasWa } from '../data/site';
+import { METHODS, confirmed } from '../data/methods';
+import { RESULT_SLOTS, METHOD_LABEL } from '../data/content';
+import { faqSchema } from '../data/schema';
+
+const methods = confirmed();
+const minFrom = METHODS.map((m) => m.fromPrice).filter((p): p is number => typeof p === 'number');
+const faq = [
+  { q: 'Beschadigen extensions mijn eigen haar?', a: '<p>Goed geplaatste en goed onderhouden extensions horen je haar niet te beschadigen. Het risico zit vooral in te veel gewicht op te weinig haar, te strak plaatsen en onderhoud overslaan. Daarom begin ik altijd bij jouw eigen haar en zeg ik eerlijk als iets (nog) niet verstandig is. Lees ook <a href="/gidsen/zijn-extensions-slecht-voor-je-haar">zijn extensions slecht voor je haar?</a></p>' },
+  { q: 'Hoe lang gaan extensions mee?', a: '<p>Dat verschilt per methode, per haarkwaliteit en per verzorging. Per methode vind je mijn eigen richtlijnen in de <a href="/extensions">vergelijking van alle methodes</a>.</p>' },
+  { q: 'Zie je de aanzet?', a: '<p>Niet als de methode bij je haar past, de kleur goed gematcht is en alles netjes wordt geknipt en geblend. Bij hele fijne plekken, zoals rond je oren, plaats ik extra voorzichtig.</p>' },
+  { q: 'Kan ik sporten en zwemmen met extensions?', a: '<p>Ja, met de juiste methode en verzorging. Vertel in het consult hoe je week eruitziet, dan kies ik een methode die daarbij past. Zie de <a href="/nazorg">nazorg per methode</a>.</p>' },
+  { q: 'Wat kost het, inclusief onderhoud?', a: '<p>Je betaalt voor het haar, het plaatsen en daarna het onderhoud. Op de pagina <a href="/prijzen">prijzen</a> zie je ook wat het per jaar kost, zodat je niet verrast wordt.</p>' },
+  { q: 'Is mijn haar geschikt voor extensions?', a: '<p>Meestal wel, maar niet altijd meteen. Bij heel kort, beschadigd of erg dun haar adviseer ik soms om te wachten of een andere oplossing te kiezen. Bij haaruitval verwijs ik je eerst naar je huisarts of dermatoloog. Doe de <a href="/extension-check">extension-check</a> voor een eerste indruk.</p>' },
+];
+const swatches = [['#E9D6B4', 'Licht asblond'], ['#D2B080', 'Honingblond'], ['#B58A5E', 'Karamel'], ['#8A6040', 'Lichtbruin'], ['#5C3E2C', 'Chocolade'], ['#2E211B', 'Espresso'], ['#8E4A2E', 'Koperrood']];
+---
+<Base title="Hair extensions Leeuwarden | Natuurlijke haarverlenging | By Lado"
+  description="Hair extensions in Leeuwarden door Quinty Kant. Persoonlijk consult, kleur op maat en extensions die niemand ziet. Plan je consult."
+  ogTitle="By Lado · Hair extensions in Leeuwarden" ogDescription="Extensions die niemand ziet — alleen jij. Persoonlijk consult, kleur op maat, jouw eigen haar eerst."
+  schema={[faqSchema(faq)]}>
+
+  <!-- 1 HERO -->
+  <section class="bl-hero" data-hero>
+    <div class="container bl-hero__grid">
+      <div>
+        <p class="eyebrow">By Lado · Leeuwarden</p>
+        <p class="display hero-words mt-2" data-split>Meer haar. <em>Jouw</em> haar.</p>
+        <h1>Hair extensions in Leeuwarden, natuurlijk en op maat</h1>
+        <div class="hero__actions">
+          <a class="btn" href="/consult" data-track="consult_cta">Plan je consult <span class="arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn--outline" href="/extension-check" data-open-quiz>Doe de extension-check</a>
+        </div>
+        <p class="trust-line">
+          {SITE.clients ? `${SITE.clients}+ klanten · ` : ''}{SITE.rating ? `${SITE.rating.value.toFixed(1).replace('.', ',')} op ${SITE.rating.source} · ` : ''}Studio in Leeuwarden
+          {!SITE.clients && !SITE.rating && <span class="ph">[AANTAL KLANTEN · SCORE — alleen echte cijfers]</span>}
+        </p>
+      </div>
+      <div class="bl-hero__media">
+        <HairVideo shot="haar in beweging" art="hero" label="Extensions · zonder filter" />
+        <button type="button" class="bl-hero__thumb" data-open-ba aria-label="Voor / na: bekijk het resultaat">
+          <Img ratio="1x1" shot="voor/na thumbnail" reveal={false} /><span>Voor / na</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 MARQUEE -->
+  <div class="marquee" aria-hidden="true"><div class="marquee__track">
+    {[0, 1].map(() => [...methods.map((m) => m.name.replace(' extensions', '')), 'Kleur op maat', 'Onderhoud'].map((w) => <span>{w} ·</span>))}
+  </div></div>
+
+  <!-- 3 PROMISE -->
+  <section class="section strand-host">
+    <Strand />
+    <div class="container promise">
+      {[
+        ['01', 'Niemand ziet <em>het verschil.</em>', 'Kleur gematcht tot op de streng, vaak met meerdere tinten gemengd, en daarna geknipt en geblend in jouw eigen haar. Dat is waar extensions verdwijnen.', 'kleurmatch'],
+        ['02', 'Jouw eigen haar <em>eerst.</em>', 'Ik kijk eerst naar wat je haar kan dragen. Soms is mijn advies minder gewicht, een andere methode, of: nog even wachten. Liever eerlijk dan een set die je haar schaadt.', 'eigen-haar'],
+        ['03', 'Eerlijke prijzen, <em>ook voor onderhoud.</em>', 'Je ziet vooraf wat plaatsen kost én wat onderhoud en nieuw haar per jaar kosten. Geen verrassingen na de eerste afspraak.', 'eerlijk'],
+      ].map(([n, t, d, shot], i) => (
+        <div class="promise__item reveal">
+          <div><span class="promise__num">{n}</span><p class="h2 mt-1" set:html={t} /><p class="muted">{d}</p></div>
+          <div class="promise__img"><Img ratio="3x4" shot={shot} art={shot} delay={i * 0.06} /></div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- 4 BEFORE / AFTER (mocha) -->
+  <section class="section section--dark on-dark" id="resultaten">
+    <div class="container grid align-center">
+      <div class="col-media--left">
+        <div id="ba-main"><BeforeAfter caption="Tape extensions · 50 cm · [GRAM] · fijn haar" /></div>
+        <div class="ba-thumbs" data-ba-thumbs="#ba-main" role="group" aria-label="Kies een resultaat">
+          {RESULT_SLOTS.map((r, i) => {
+            const cap = `${METHOD_LABEL[r.method]} · ${r.length} cm · ${r.goal} · ${r.hairType} haar`;
+            return <button type="button" aria-pressed={i === 0 ? 'true' : 'false'} data-caption={cap}><Img ratio="1x1" shot={`${r.colour}`} reveal={false} dark /><span>{cap}</span></button>;
+          })}
+        </div>
+      </div>
+      <div class="col-text--right">
+        <p class="eyebrow">Resultaten</p>
+        <h2 class="mt-1 reveal-text" data-split>Resultaten die <em>voor zich spreken</em></h2>
+        <p class="mt-2" style="color:#E6DACB">Elk resultaat in hetzelfde licht en vanuit dezelfde hoek, zonder filter. Met erbij: de methode, de lengte en hoeveel haar er is gebruikt.</p>
+        <a class="btn btn--light mt-3" href="/resultaten">Bekijk alle resultaten</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 METHODS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Methodes</p><h2 class="reveal-text" data-split>Welke extensions <em>passen bij jou?</em></h2></div>
+      <div class="method-row" tabindex="0" aria-label="Methodes, scroll horizontaal">
+        {methods.map((m, i) => <MethodCard m={m} i={i} />)}
+      </div>
+      <a class="text-link mt-3" href="/extensions">Vergelijk alle methodes naast elkaar <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <!-- 6 EXTENSION-CHECK TEASER -->
+  <section class="section--tight section--bone">
+    <div class="container grid align-center">
+      <div class="col-half"><p class="eyebrow">Extension-check</p><h2 class="mt-1">Niet zeker welke methode? <em>Eén minuut.</em></h2><p class="mt-2 muted">Zes vragen over je haar en je wensen, en je krijgt een eerste advies. Quinty bevestigt het in je consult.</p></div>
+      <div class="col-half">
+        <p class="h3">Wat wil je vooral?</p>
+        <div class="cluster mt-2" style="--gap:.5rem">
+          {[['lengte', 'Meer lengte'], ['volume', 'Meer volume'], ['beide', 'Allebei'], ['tijdelijk', 'Iets tijdelijks']].map(([v, l]) => <a class="chip" href="/extension-check" data-open-quiz data-quiz-prefill={`goal=${v}`} style="display:inline-flex;align-items:center">{l}</a>)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 LENGTH REVEAL -->
+  <section class="section length-reveal" data-length-reveal>
+    <div class="container length-reveal__stage">
+      <div>
+        <p class="eyebrow">Lengte &amp; volume</p>
+        <h2 class="mt-1">Lengte kiezen <em>in verhouding</em></h2>
+        <div class="prose mt-2">
+          <p>Hoe lang kan het? Dat hangt af van je eigen lengte en hoeveel haar je hebt. Een lange set op fijn, kort haar valt op; dezelfde lengte op dik haar kan juist mooi doorlopen.</p>
+          <p>Volume zit in het aantal grammen of banen. Meer is niet altijd beter: te veel gewicht op te weinig eigen haar is precies wat je wilt voorkomen. In het consult kiezen we een lengte en hoeveelheid die bij jou past.</p>
+        </div>
+        <a class="text-link mt-2" href="/prijzen#calculator">Bereken je prijs per lengte <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+      <div class="length-reveal__wrap">
+        <div class="length-reveal__hair">
+          <div class="length-reveal__mask"><Img ratio="9x16" shot="lengte" art="lengte" reveal={false} /></div>
+          <ol class="length-reveal__marks" aria-label="Lengtes">
+            {[30, 40, 50, 60].map((cm, i) => <li data-at={(0.25 + i * 0.25).toFixed(2)} style={`top:${25 + i * 25 - 3}%`}>{cm} cm</li>)}
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 COLOUR MATCHING -->
+  <section class="section section--bone">
+    <div class="container grid align-center">
+      <div class="col-media--left"><div class="swatch-stage" id="swatch-stage" role="img" aria-label="Kleurvoorbeeld van de gekozen tint"></div></div>
+      <div class="col-text--right">
+        <p class="eyebrow">Kleur op maat</p>
+        <h2 class="mt-1">Kleur tot op het haar <em>nauwkeurig</em></h2>
+        <p class="mt-2">Bijna niemand heeft één egale haarkleur. Lengtes zijn vaak lichter dan de uitgroei, en er lopen warme en koele tinten door elkaar. Daarom match ik de kleur op jouw lengtes en meng ik waar nodig meerdere tinten, zodat de overgang verdwijnt. <span class="ph">[CHECK: kleurt/tont Quinty zelf?]</span></p>
+        <ul class="swatches" data-swatches="#swatch-stage" data-name="#swatch-name" aria-label="Voorbeeldtinten">
+          {swatches.map(([c, l], i) => <li><button type="button" class="swatch" style={`background:${c}`} data-color={c} data-label={l} aria-label={l} aria-pressed={i === 2 ? 'true' : 'false'}></button></li>)}
+        </ul>
+        <p class="swatch-name" id="swatch-name" aria-live="polite">Karamel</p>
+        <p class="small muted">Voorbeeldtinten; je echte kleur bepalen we bij daglicht in de studio.</p>
+        {hasWa() && <a class="btn btn--outline mt-2" href={waLink('Hoi Quinty! Ik ben benieuwd welke kleur extensions bij mijn haar past. Hierbij een foto in daglicht.')} target="_blank" rel="noopener" data-track="whatsapp_click">Stuur een foto van je haar</a>}
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 PROCESS -->
+  <section class="section strand-host">
+    <Strand flip d="M 360 0 C 120 160, 420 360, 200 560 S -20 840, 240 1000" />
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Zo werkt het</p><h2>Van consult <em>tot onderhoud</em></h2></div>
+      <Timeline horizontal steps={[
+        { title: 'Consult', text: 'Haaranalyse, je wensen, eerlijk advies en het bepalen van je kleur.' },
+        { title: 'Haar bestellen', text: 'Je haar wordt besteld in jouw kleur(en). <span class="ph">[CHECK: doorlooptijd · kleurt Quinty zelf?]</span>' },
+        { title: 'Plaatsen', text: 'Plaatsen, daarna knippen en blenden in je eigen haar, zodat niemand het verschil ziet.' },
+        { title: 'Nazorg & onderhoud', text: 'Je krijgt nazorg-advies mee en komt terug voor onderhoud elke <span class="ph">[X]</span> weken.' },
+      ]} />
+    </div>
+  </section>
+
+  <!-- 10 ABOUT -->
+  <section class="section section--bone">
+    <div class="container grid align-center">
+      <div class="col-media--left rel"><span class="v-label">Quinty Kant · Leeuwarden</span><Img ratio="4x5" arch shot="portret Quinty" src={PHOTO.quinty.src} alt={PHOTO.quinty.alt} /></div>
+      <div class="col-text--right">
+        <p class="eyebrow">Over Quinty</p>
+        <h2 class="mt-1">Kapster van beroep, <em>extensions als specialisme</em></h2>
+        <p class="mt-2">Ik ben Quinty Kant. Ik heb de kappersopleiding gedaan en jarenlang als kapster gewerkt, en voor extensions ben ik opgeleid bij Beauty of Rose. Daardoor kijk ik niet alleen naar de extensions, maar vooral naar jouw eigen haar: wat kan het dragen, welke kleur past erbij en hoe knip je het zo dat niemand de overgang ziet?</p>
+        <a class="text-link mt-2" href="/over-quinty">Meer over Quinty <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 REVIEWS -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><p class="eyebrow">Reviews</p><h2>Wat klanten <em>zeggen</em></h2></div>
+      <Reviews variant="carousel" />
+      <div class="cluster mt-3"><a class="text-link" href="/reviews">Alle reviews <span class="arrow" aria-hidden="true">→</span></a><a class="text-link" href="/resultaten">Alle resultaten <span class="arrow" aria-hidden="true">→</span></a></div>
+    </div>
+  </section>
+
+  <!-- 12 PRICES -->
+  <section class="section section--bone">
+    <div class="container grid">
+      <div class="col-half">
+        <p class="eyebrow">Prijzen</p>
+        <h2 class="mt-1">Extensions vanaf <Fragment set:html={minFrom.length ? `€${Math.min(...minFrom)}` : '<span class="ph">[PRIJS]</span>'} /></h2>
+        <p class="mt-2 muted">Transparant, inclusief btw, en met wat onderhoud per jaar kost.</p>
+        <div class="cluster mt-3"><a class="btn" href="/prijzen">Bekijk prijzen</a><a class="btn btn--outline" href="/prijzen#calculator">Naar de calculator</a></div>
+      </div>
+      <div class="col-half">
+        <table class="price-table">
+          <caption class="sr-only">Belangrijkste prijzen</caption>
+          <tbody>
+            <tr><th scope="row">Consult</th><td set:html={PRICES.consult === 0 ? 'gratis' : priceOr(PRICES.consult)} /></tr>
+            <tr><th scope="row">Plaatsen (vanaf)</th><td set:html={minFrom.length ? `€${Math.min(...minFrom)}` : '<span class="ph">[PRIJS]</span>'} /></tr>
+            <tr><th scope="row">Onderhoud</th><td set:html={priceOr(PRICES.maintenance)} /></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 EVENTS -->
+  <section class="section--tight">
+    <div class="container crossbrand">
+      <div><p class="eyebrow">Event of bruiloft</p><p class="h2 mt-1">Extra volume <em>voor één dag?</em></p><p class="muted mt-1">Clip-ins of een vaste set rond je bruiloft of event: zo plan je de timing.</p></div>
+      <div class="cluster"><a class="btn btn--outline" href="/extensions-bruiloft">Extensions voor je bruiloft</a><a class="text-link" href="/clip-in-extensions">Clip-in extensions <span class="arrow" aria-hidden="true">→</span></a></div>
+    </div>
+  </section>
+
+  <!-- 14 FAQ -->
+  <section class="section section--bone">
+    <div class="container grid">
+      <div class="col-quarter"><p class="eyebrow">FAQ</p><h2 class="mt-1">Wat je <em>wilt weten</em></h2></div>
+      <div class="col-rest"><Faq items={faq} id="home-faq" /></div>
+    </div>
+  </section>
+
+  <!-- 15 CTA -->
+  <Cta />
+</Base>

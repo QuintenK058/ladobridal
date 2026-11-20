@@ -1,0 +1,23 @@
+---
+import { waLink, hasWa, SITE } from '../data/site';
+import Icon from './Icon.astro';
+interface Props { lang?: 'nl' | 'en'; title?: string; sub?: string; light?: boolean }
+const { lang = 'nl', light } = Astro.props;
+const nl = lang === 'nl';
+const title = Astro.props.title ?? (nl ? 'Klaar voor <em>meer haar?</em>' : 'Ready for <em>more hair?</em>');
+const sub = Astro.props.sub ?? (nl ? 'In het consult bekijk ik je haar, bepalen we samen de kleur en hoor je eerlijk wat wel en niet kan. Pas daarna beslis je.' : 'In the consultation I look at your hair, we match the colour together and you hear honestly what is and isn’t possible. Only then do you decide.');
+---
+<section class:list={['section cta-block', light ? 'section--bone' : 'section--dark on-dark']}>
+  <div class="container">
+    <p class="eyebrow">{nl ? 'Consult' : 'Consultation'}</p>
+    <h2 class="display mt-2 reveal-text" data-split set:html={title} />
+    <p class="lead mt-2 reveal">{sub}</p>
+    {SITE.nextSlot && <p class="mt-1 small">{nl ? 'Eerstvolgende plek voor plaatsen' : 'Next available placement'}: <strong>{SITE.nextSlot}</strong></p>}
+    <div class="cta-block__row reveal">
+      <a class:list={['btn', !light && 'btn--light']} href={nl ? '/consult' : '/en/consult'} data-track="consult_cta">{nl ? 'Plan je consult' : 'Book your consultation'} <span class="arrow" aria-hidden="true">→</span></a>
+      {hasWa() && <a class:list={['btn', light ? 'btn--outline' : 'btn--ghost-light']} href={waLink(nl ? 'Hoi Quinty! Ik ben benieuwd welke extensions bij mijn haar passen. Hierbij een foto.' : 'Hi Quinty! I’d love to know which extensions suit my hair. Here’s a photo.')} target="_blank" rel="noopener" data-track="whatsapp_click"><Icon name="whatsapp" size={18} /> WhatsApp</a>}
+      <a class="text-link" href={nl ? '/extension-check' : '/en/extension-check'} data-open-quiz>{nl ? 'of doe eerst de extension-check' : 'or take the extension check first'} <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+    <p class="reassure">{nl ? 'Vrijblijvend advies · Eerlijk over wat wel en niet kan' : 'No-obligation advice · Honest about what is and isn’t possible'}</p>
+  </div>
+</section>

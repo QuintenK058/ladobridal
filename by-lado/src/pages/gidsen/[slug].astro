@@ -1,0 +1,12 @@
+---
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { GUIDES, type Guide } from '../../data/guides';
+import { DRAFTS } from '../../data/guideDrafts';
+export function getStaticPaths() { return GUIDES.filter((g) => g.slug !== 'wat-kosten-hair-extensions').map((g) => ({ params: { slug: g.slug }, props: { g } })); }
+const { g } = Astro.props as { g: Guide };
+const d = DRAFTS[g.slug] ?? {};
+---
+<ArticleLayout title={`${g.title} | By Lado`} description={g.lead} path={`/gidsen/${g.slug}`} crumb={g.title} h1={g.title} lead={g.lead} noindex={!g.ready} toc={g.toc.map(([id, label]) => ({ id, label }))}>
+  {!g.ready && <div class="ph-block"><strong>CONCEPT — door Quinty goed te keuren (pagina staat op noindex).</strong> Zet <code>ready: true</code> in src/data/guides.ts na akkoord. Brief: {g.brief}</div>}
+  {g.toc.map(([id, label]) => (<><h2 id={id}>{label}</h2>{d[id] ? <Fragment set:html={d[id]} /> : <p class="ph-block">[TEKST · {label}]</p>}</>))}
+</ArticleLayout>

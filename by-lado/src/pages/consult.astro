@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import ConsultForm from '../components/ConsultForm.astro';
+import Timeline from '../components/Timeline.astro';
+import Icon from '../components/Icon.astro';
+import { SITE, waLink, hasWa, ph } from '../data/site';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Consult', href: '/consult' }];
+const quick = Astro.url.searchParams?.get?.('type') === 'onderhoud' ? 'onderhoud' : undefined;
+---
+<Base title="Plan je extensions consult in Leeuwarden | By Lado" description="Plan je consult voor hair extensions in Leeuwarden: haaranalyse, kleur bepalen, eerlijk advies en een prijs op maat. Of stuur eerst een foto via WhatsApp." breadcrumbs={crumbs} hasForm>
+  <section class="page-hero"><div class="container">
+    <Breadcrumbs items={crumbs} />
+    <div class="grid mt-3">
+      <div class="col-text" style="align-self:start">
+        <p class="eyebrow">Consult</p>
+        <h1 class="mt-1">Plan je extensions <em>consult</em></h1>
+        <p class="lead">In het consult kijken we samen naar je haar en je wensen. Je gaat naar huis met een eerlijk advies, je kleur en een prijs op maat. Pas daarna beslis je.</p>
+        <ul class="checklist mt-3" role="list">
+          <li>Haaranalyse: dikte, sterkte, lengte en conditie</li><li>Kleur bepalen bij daglicht, eventueel gemengd</li><li>Advies over methode, lengte en hoeveelheid</li><li>Prijs op maat, inclusief onderhoud</li>
+        </ul>
+        <p class="mt-2 small muted">Duur: <Fragment set:html={SITE.consultMinutes ? `${SITE.consultMinutes} minuten` : ph('X MIN')} /> · Kosten: <Fragment set:html={SITE.consultPrice === 0 ? 'gratis' : SITE.consultPrice ? `€${SITE.consultPrice}` : ph('GRATIS / €X, VERREKEND?')} /></p>
+        {SITE.nextSlot && <p class="mt-1 small">Eerstvolgende plek voor plaatsen: <strong>{SITE.nextSlot}</strong></p>}
+        <div class="price-box mt-3">
+          <p class="h3">Eerst een foto sturen?</p>
+          <p class="small muted">Stuur een foto van je haar (voor- en achterkant, daglicht). Dan kan ik vooraf al iets zeggen over methode en kleur.</p>
+          {hasWa() ? <a class="btn btn--outline" href={waLink('Hoi Quinty! Ik ben benieuwd welke extensions bij mijn haar passen. Hierbij een foto 📸')} target="_blank" rel="noopener" data-track="whatsapp_click"><Icon name="whatsapp" size={18} /> Stuur een foto via WhatsApp</a> : <span class="ph">[WHATSAPP-NUMMER By Lado]</span>}
+        </div>
+        <p class="mt-3 small"><strong>Bestaande klant?</strong> <a class="link" href="/extensions-onderhoud">Plan direct je onderhoud</a>.</p>
+      </div>
+      <div class="col-media" style="background:var(--bone);padding:clamp(1.5rem,4vw,3rem)" id="formulier"><ConsultForm quick={quick} /></div>
+    </div>
+  </div></section>
+  <section class="section section--bone"><div class="container">
+    <div class="section-head"><h2>Na je <em>aanvraag</em></h2></div>
+    <Timeline horizontal steps={[{ title: 'Bevestiging', text: 'Ik stuur je een voorstel voor een moment.' }, { title: 'Voorbereiden', text: 'Kom met schoon, droog haar zonder producten. <span class="ph">[CHECK]</span>' }, { title: 'Consult', text: 'Haaranalyse, kleur en advies.' }, { title: 'Plaatsen', text: 'Als je wilt, plannen we direct het plaatsen.' }]} />
+  </div></section>
+</Base>

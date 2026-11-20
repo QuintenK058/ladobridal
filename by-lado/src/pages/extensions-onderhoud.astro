@@ -1,0 +1,30 @@
+---
+import ServicePage from '../layouts/ServicePage.astro';
+import Section from '../components/Section.astro';
+import { METHODS, val, confirmed } from '../data/methods';
+import { PRICES, priceOr, SITE } from '../data/site';
+---
+<ServicePage title="Extensions onderhoud Leeuwarden | Verplaatsen | By Lado" description="Onderhoud van hair extensions in Leeuwarden: waarom het nodig is, hoe vaak per methode, wat er gebeurt en wat het kost. Bestaande klanten plannen direct."
+  path="/extensions-onderhoud" crumb="Onderhoud" eyebrow="Onderhoud" h1="Onderhoud van je <em>extensions</em>" shot="onderhoud" art="normaal" price={PRICES.maintenance}
+  lead="Je eigen haar groeit door, dus je extensions zakken mee. Met op tijd onderhoud blijven ze onzichtbaar, comfortabel en goed voor je eigen haar."
+  faq={[
+    { q: 'Wat gebeurt er als ik onderhoud overslaan?', a: '<p>De aanzet zakt verder naar beneden, je eigen haar kan rond de bevestigingspunten gaan klitten en de extensions worden zichtbaarder. Uitstellen maakt het onderhoud vaak langer en lastiger.</p>' },
+    { q: 'Doe je ook onderhoud aan extensions die ergens anders zijn geplaatst?', a: '<p><span class="ph">[CHECK: onderhoud aan extensions van elders ja/nee + voorwaarden]</span></p>' },
+    { q: 'Hoe lang duurt een onderhoudsafspraak?', a: '<p><span class="ph">[CHECK: duur per methode]</span></p>' },
+  ]}
+  related={[{ href: '/nazorg', label: 'Nazorg per methode' }, { href: '/extensions-verwijderen', label: 'Extensions verwijderen' }, { href: '/prijzen', label: 'Wat kost onderhoud per jaar?' }]}>
+  <Section eyebrow="Waarom" title="Waarom onderhoud <em>nodig</em> is">
+    <p>Je haar groeit gemiddeld ongeveer een centimeter per maand. De bevestigingspunten van je extensions groeien mee en komen dus steeds verder van je hoofdhuid te zitten. Daardoor gaan ze bewegen, kan je eigen haar bij de aanzet gaan klitten en worden ze beter zichtbaar.</p>
+    <p>Bij onderhoud worden de extensions losgemaakt, je eigen haar bij de aanzet wordt uitgekamd en de extensions worden weer op de juiste hoogte gezet. Waar nodig wordt er haar bijgezet of vervangen.</p>
+  </Section>
+  <section class="section section--bone"><div class="container">
+    <div class="section-head"><p class="eyebrow">Per methode</p><h2>Hoe vaak <em>onderhoud?</em></h2></div>
+    <div class="compare-wrap"><table class="compare"><thead><tr><th scope="col">Methode</th><th scope="col">Onderhoud elke</th><th scope="col">Gaat mee</th></tr></thead>
+    <tbody>{confirmed().map((m) => <tr><th scope="row"><a class="link" href={m.slug}>{m.name}</a></th><td set:html={m.key === 'clipin' ? 'geen onderhoud' : val(m.maintenanceEvery)} /><td set:html={val(m.lasts)} /></tr>)}</tbody></table></div>
+    <p class="mt-2">Onderhoud kost <Fragment set:html={priceOr(PRICES.maintenance)} />.</p>
+  </div></section>
+  <section class="section"><div class="container grid align-center">
+    <div class="col-half"><p class="eyebrow">Bestaande klant?</p><h2 class="mt-1">Plan direct je <em>onderhoud</em></h2><p class="mt-2 muted">Je hoeft geen nieuw consult te doen. Kies een moment en ik plan je in.</p></div>
+    <div class="col-half cluster">{SITE.bookingUrl ? <a class="btn" href={SITE.bookingUrl} target="_blank" rel="noopener" data-track="booking_click">Onderhoud plannen ↗</a> : <a class="btn" href="/consult?type=onderhoud">Onderhoud plannen</a>}</div>
+  </div></section>
+</ServicePage>

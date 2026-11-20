@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import Reviews from '../components/Reviews.astro';
+import Faq from '../components/Faq.astro';
+import Related from '../components/Related.astro';
+import Cta from '../components/Cta.astro';
+import { faqSchema, serviceSchema } from '../data/schema';
+const crumbs = [{ name: 'Home', href: '/' }, { name: 'Hair extensions Friesland', href: '/hair-extensions-friesland' }];
+const towns: [string, string][] = [['Sneek', 'ca. 25 min'], ['Heerenveen', 'ca. 30 min'], ['Drachten', 'ca. 30 min'], ['Dokkum', 'ca. 25 min'], ['Harlingen', 'ca. 25 min'], ['Franeker', 'ca. 20 min'], ['Bolsward', 'ca. 25 min'], ['Joure', 'ca. 30 min'], ['Burgum', 'ca. 15 min']];
+const faq = [
+  { q: 'Kan ik consult en plaatsen op één dag combineren?', a: '<p><span class="ph">[CHECK: kan dat, en hoe? Bijv. alleen als kleur op voorraad is]</span> Woon je verder weg, dan kunnen we het consult ook voorbereiden met foto’s via WhatsApp, zodat je minder vaak hoeft te rijden.</p>' },
+  { q: 'Hoe plan ik onderhoud als ik verder weg woon?', a: '<p>Plan je volgende onderhoudsafspraak meteen na het plaatsen, op een moment dat je toch al in Leeuwarden bent. Zo zit je op tijd en hoef je niet te zoeken naar een plek.</p>' },
+  { q: 'Is er parkeergelegenheid bij de studio?', a: '<p><span class="ph">[CHECK: parkeren en route]</span></p>' },
+  { q: 'Kom je ook aan huis?', a: '<p><span class="ph">[CHECK: alleen studio, of ook op locatie voor bv. clip-ins/bruiloft?]</span></p>' },
+];
+---
+<Base title="Hair extensions Friesland | Studio in Leeuwarden | By Lado" description="Hair extensions in Friesland: vanuit Sneek, Heerenveen, Drachten of Dokkum binnen een half uur in de studio in Leeuwarden. Slim gepland."
+  breadcrumbs={crumbs} schema={[serviceSchema({ name: 'Hair extensions Friesland', path: '/hair-extensions-friesland', description: 'Hair extensions voor klanten uit heel Friesland, in de studio in Leeuwarden.' }), faqSchema(faq)]}>
+  <PageHero crumbs={crumbs} eyebrow="Friesland" h1="Hair extensions in <em>Friesland</em>" shot="klant in de studio, Leeuwarden"
+    lead="Mijn studio is in Leeuwarden, maar klanten komen uit heel Friesland. Vanuit Sneek, Heerenveen, Drachten of Dokkum ben je er meestal binnen een half uur, en met een goede planning hoef je niet vaker te rijden dan nodig." />
+  <Section eyebrow="Reistijd" title="Naar de studio in <em>Leeuwarden</em>">
+    <p>Leeuwarden ligt midden in Friesland. Vanuit de meeste Friese plaatsen ben je er met de auto snel; de reistijden hieronder zijn een indicatie.</p>
+    <ul>{towns.map(([t, d]) => <li><strong>{t}</strong>: {d}</li>)}</ul>
+    <p class="small"><span class="ph">[CHECK: uit welke plaatsen komen klanten echt? Lijst aanpassen.]</span></p>
+  </Section>
+  <Section eyebrow="Plannen" title="Minder vaak rijden, <em>slim plannen</em>" bone>
+    <p>Woon je verder weg, dan wil je zo min mogelijk losse ritjes. Daarom kun je het consult voorbereiden met foto’s van je haar via WhatsApp. Dan weet ik vooraf al iets over je haartype en kleur, en kunnen we in het consult direct de details doornemen.</p>
+    <p>Na het plaatsen plannen we je eerste onderhoud meteen in. Combineer het met iets wat je toch al in Leeuwarden doet, dan voelt het niet als een extra rit.</p>
+    <p>Twijfel je welke methode bij je past? Doe eerst de <a href="/extension-check">extension-check</a>; die kun je overal invullen.</p>
+  </Section>
+  <section class="section"><div class="container"><div class="section-head"><p class="eyebrow">Reviews</p><h2>Klanten van buiten <em>Leeuwarden</em></h2></div><Reviews variant="pair" /></div></section>
+  <section class="section section--bone"><div class="container grid"><div class="col-quarter"><p class="eyebrow">FAQ</p><h2 class="mt-1">Vragen uit <em>Friesland</em></h2></div><div class="col-rest"><Faq items={faq} /></div></div></section>
+  <Related links={[{ href: '/extensions', label: 'Alle methodes vergeleken' }, { href: '/prijzen', label: 'Prijzen hair extensions' }, { href: '/resultaten', label: 'Resultaten voor en na' }]} />
+  <Cta />
+</Base>

@@ -1,0 +1,111 @@
+---
+import Img from './Img.astro';
+import Icon from './Icon.astro';
+import { METHODS } from '../data/methods';
+import { RESULTS } from '../data/content';
+import { hasWa } from '../data/site';
+interface Props { mode?: 'overlay' | 'page'; lang?: 'nl' | 'en' }
+const { mode = 'overlay', lang = 'nl' } = Astro.props;
+const nl = lang === 'nl';
+const p = mode === 'overlay' ? 'qo' : 'qp';
+type Q = { name: string; q: string; cols: 3 | 4; opts: [string, string, string?][] };
+const Qs: Q[] = nl ? [
+  { name: 'goal', q: 'Wat wil je <em>vooral?</em>', cols: 4, opts: [['lengte', 'Meer lengte'], ['volume', 'Meer volume'], ['beide', 'Allebei'], ['tijdelijk', 'Iets tijdelijks', 'voor een event']] },
+  { name: 'hair', q: 'Hoe is je <em>eigen haar?</em>', cols: 3, opts: [['fijn', 'Fijn & dun'], ['normaal', 'Normaal'], ['dik', 'Dik & zwaar']] },
+  { name: 'current', q: 'Hoe lang is je <em>haar nu?</em>', cols: 3, opts: [['kort', 'Kort', 'boven de schouders'], ['schouder', 'Schouderlengte'], ['lang', 'Lang']] },
+  { name: 'length', q: 'Welke lengte <em>wil je?</em>', cols: 4, opts: [['30', '30 cm'], ['40', '40 cm'], ['50', '50 cm'], ['60', '60 cm']] },
+  { name: 'life', q: 'Hoe ziet je <em>week</em> eruit?', cols: 3, opts: [['sport', 'Veel sporten / zwemmen'], ['weinig-tijd', 'Weinig tijd voor styling'], ['zelf-stylen', 'Ik style graag zelf']] },
+  { name: 'before', q: 'Al eerder <em>extensions</em> gehad?', cols: 3, opts: [['nee', 'Nee'], ['tevreden', 'Ja, tevreden'], ['niet-tevreden', 'Ja, niet tevreden']] },
+] : [
+  { name: 'goal', q: 'What do you <em>want most?</em>', cols: 4, opts: [['lengte', 'More length'], ['volume', 'More volume'], ['beide', 'Both'], ['tijdelijk', 'Something temporary', 'for an event']] },
+  { name: 'hair', q: 'What is your <em>own hair</em> like?', cols: 3, opts: [['fijn', 'Fine & thin'], ['normaal', 'Normal'], ['dik', 'Thick & heavy']] },
+  { name: 'current', q: 'How long is your <em>hair now?</em>', cols: 3, opts: [['kort', 'Short', 'above the shoulders'], ['schouder', 'Shoulder length'], ['lang', 'Long']] },
+  { name: 'length', q: 'What length <em>would you like?</em>', cols: 4, opts: [['30', '30 cm'], ['40', '40 cm'], ['50', '50 cm'], ['60', '60 cm']] },
+  { name: 'life', q: 'What does your <em>week</em> look like?', cols: 3, opts: [['sport', 'Lots of sport / swimming'], ['weinig-tijd', 'Little time for styling'], ['zelf-stylen', 'I love styling myself']] },
+  { name: 'before', q: 'Had <em>extensions</em> before?', cols: 3, opts: [['nee', 'No'], ['tevreden', 'Yes, happy'], ['niet-tevreden', 'Yes, not happy']] },
+];
+const methodsJson = JSON.stringify(METHODS.map((m) => ({ key: m.key, name: m.name, slug: m.slug, short: m.short, idealFor: m.idealFor, fromPrice: m.fromPrice })));
+const total = Qs.length + 2;
+---
+<div class:list={['quiz', mode === 'page' && 'quiz--page']} data-quiz={mode} id={mode === 'overlay' ? 'quiz-overlay' : undefined} role={mode === 'overlay' ? 'dialog' : undefined} aria-modal={mode === 'overlay' ? 'true' : undefined} aria-label="Extension-check" data-methods={methodsJson} data-has-results={RESULTS.length ? '1' : ''}>
+  <div class="quiz__inner">
+    {mode === 'overlay' && (
+      <div class="quiz__top"><span class="wordmark">BY LADO</span><button type="button" class="drawer__close" data-quiz-close aria-label={nl ? 'Sluiten' : 'Close'}><Icon name="close" size={24} /></button></div>
+    )}
+    <form data-steps data-kind="quiz" data-lang={lang} data-thanks="" novalidate>
+      <p class="lead-form__stepcount" aria-live="polite"><span data-step-label>{nl ? `Vraag 1 van ${total}` : `Question 1 of ${total}`}</span></p>
+      <div class="lead-form__progress mt-1" aria-hidden="true"><span data-progress></span></div>
+      <div class="hp" aria-hidden="true"><label>Website <input type="text" name="website" tabindex="-1" autocomplete="off" /></label></div>
+
+      {Qs.map((q, i) => (
+        <section class:list={['lead-step quiz__step', i === 0 && 'is-active']} data-step={i + 1}>
+          <fieldset>
+            <legend class="quiz__q" set:html={q.q} />
+            <div class:list={['tiles', q.name === 'length' ? 'length-scale' : `tiles--${q.cols}`]}>
+              {q.opts.map(([v, l, sub], j) => (
+                <label class="tile">
+                  <input type="radio" name={q.name} value={v} required />
+                  <span class="tile__media" style={q.name === 'length' ? `height:${40 + j * 20}%` : undefined}>
+                    {q.name !== 'length' && <Img ratio="4x5" shot={`${l}${sub ? ' ' + sub : ''}`} art={v} reveal={false} />}
+                  </span>
+                  <span class="tile__label">{l}</span>{sub && <span class="tile__sub">{sub}</span>}
+                </label>
+              ))}
+            </div>
+            <p class="field__error" data-error-for={q.name} hidden></p>
+          </fieldset>
+        </section>
+      ))}
+
+      <section class="lead-step quiz__step" data-step={Qs.length + 1}>
+        <fieldset>
+          <legend class="quiz__q">{nl ? <>Upload een foto <em>van je haar</em></> : <>Upload a photo <em>of your hair</em></>}</legend>
+          <p class="muted">{nl ? 'Optioneel. Voor- en achterkant, in daglicht, zonder filter. Dan kan ik je ook kleuradvies geven.' : 'Optional. Front and back, daylight, no filter — so I can advise on colour too.'}</p>
+          <div class="field mt-2"><label for={`${p}-files`}>{nl ? 'Foto’s (max. 4)' : 'Photos (max. 4)'}</label><input id={`${p}-files`} type="file" name="files" accept="image/*" multiple /><p class="field__error" hidden></p></div>
+        </fieldset>
+      </section>
+
+      <section class="lead-step quiz__step" data-step={Qs.length + 2}>
+        <fieldset>
+          <legend class="quiz__q">{nl ? <>Waar mag ik je <em>advies</em> naartoe sturen?</> : <>Where shall I send your <em>advice?</em></>}</legend>
+          <div class="field"><label for={`${p}-name`}>{nl ? 'Naam' : 'Name'}</label><input id={`${p}-name`} name="name" autocomplete="name" required data-min="2" /><p class="field__error" hidden></p></div>
+          <div class="field"><label for={`${p}-email`}>{nl ? 'E-mail' : 'Email'}</label><input id={`${p}-email`} type="email" name="email" autocomplete="email" required /><p class="field__error" hidden></p></div>
+          <div class="field"><label for={`${p}-phone`}>{nl ? 'Telefoon' : 'Phone'}</label><input id={`${p}-phone`} type="tel" name="phone" autocomplete="tel" required /><p class="field__error" hidden></p></div>
+          <label class="row-between" style="border:0"><span>{nl ? 'WhatsApp is prima' : 'WhatsApp is fine'}</span><span class="toggle"><input type="checkbox" name="whatsapp_ok" /><span></span></span></label>
+          <label class="cluster mt-1" style="--gap:.75rem;align-items:flex-start;font-size:var(--fs-small)"><input type="checkbox" name="consent" required style="width:20px;height:20px;margin-top:2px;accent-color:var(--ink)" /><span>{nl ? 'Ik ga akkoord dat By Lado mijn antwoorden en foto’s gebruikt om mij te adviseren.' : 'I agree that By Lado uses my answers and photos to advise me.'} <a class="link" href={nl ? '/privacy' : '/en/privacy'}>{nl ? 'Privacy' : 'Privacy'}</a></span></label>
+          <p class="field__error" data-error-for="consent" hidden></p>
+          <p class="field__error" data-submit-error hidden role="alert"></p>
+        </fieldset>
+      </section>
+
+      <div class="lead-form__nav">
+        <button type="button" class="btn btn--outline btn--sm" data-back hidden>← {nl ? 'Terug' : 'Back'}</button>
+        <button type="button" class="btn" data-next style="margin-left:auto">{nl ? 'Volgende' : 'Next'} <span class="arrow" aria-hidden="true">→</span></button>
+        <button type="submit" class="btn" data-submit hidden style="margin-left:auto">{nl ? 'Toon mijn advies' : 'Show my advice'}</button>
+      </div>
+    </form>
+
+    <section class="quiz__resultwrap" data-quiz-result hidden tabindex="-1" aria-live="polite">
+      <p class="eyebrow">{nl ? 'Jouw advies' : 'Your advice'}</p>
+      <h2 class="quiz__q" data-result-title>—</h2>
+      <div class="quiz__result">
+        <div data-result-methods class="stack"></div>
+        <aside class="result-card">
+          <p class="small muted">{nl ? 'Prijsindicatie' : 'Price indication'}</p>
+          <p class="h3 mt-1" data-result-price>—</p>
+          <p class="small mt-2"><strong>{nl ? 'Quinty bevestigt dit in je consult.' : 'Quinty confirms this in your consultation.'}</strong> {nl ? 'Dit advies is een eerste richting op basis van je antwoorden.' : 'This is a first direction based on your answers.'}</p>
+          <div class="stack mt-2" style="--stack:.6rem">
+            <a class="btn btn--block" href={nl ? '/consult' : '/en/consult'} data-result-consult data-track="consult_cta">{nl ? 'Plan je consult' : 'Book your consultation'}</a>
+            {hasWa() && <a class="btn btn--outline btn--block" data-result-wa href="#" target="_blank" rel="noopener" data-track="whatsapp_click">WhatsApp</a>}
+          </div>
+        </aside>
+      </div>
+      <div class="mt-3">
+        <p class="eyebrow eyebrow--plain">{nl ? 'Resultaten op vergelijkbaar haar' : 'Results on similar hair'}</p>
+        <div class="results-grid mt-2" data-result-examples>
+          {[1, 2, 3].map((n) => <div class="result"><div class="result__pair"><Img ratio="3x4" shot={`voor ${n}`} reveal={false} dark /><Img ratio="3x4" shot={`na ${n}`} reveal={false} /></div><p class="result__cap small"><span class="ph">[ECHT VOOR/NA · zelfde methode]</span></p></div>)}
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Img from '../../components/Img.astro';
+import Cta from '../../components/Cta.astro';
+import { RESULT_SLOTS, METHOD_LABEL } from '../../data/content';
+const crumbs = [{ name: 'Home', href: '/en' }, { name: 'Results', href: '/en/results' }];
+---
+<Base title="Hair extensions before and after | By Lado" description="Real hair extension results before and after: same light, same angle, no filter — with method, length and amount of hair." breadcrumbs={crumbs}>
+  <PageHero lang="en" crumbs={crumbs} eyebrow="Results" h1="Hair extensions <em>before and after</em>" lead="Same light, same angle, no filter. The filterable gallery is on the Dutch results page." secondary={{ href: '/resultaten', label: 'Filterable gallery (Dutch)' }} />
+  <section class="section--tight" style="padding-top:0"><div class="container"><div class="results-grid">
+    {RESULT_SLOTS.map((r) => <figure class="result" style="margin:0"><div class="result__pair"><Img ratio="3x4" shot="before" dark /><Img ratio="3x4" shot={`after · ${METHOD_LABEL[r.method]}`} /></div><figcaption class="result__cap"><strong>{METHOD_LABEL[r.method]} · {r.length} cm</strong><span class="ph">[REAL RESULT]</span></figcaption></figure>)}
+  </div></div></section>
+  <Cta lang="en" />
+</Base>

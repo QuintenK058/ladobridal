@@ -1,0 +1,16 @@
+---
+interface Props { caption: string; before?: string; after?: string; id?: string; dark?: boolean; lang?: 'nl' | 'en' }
+const { caption, before, after, lang = 'nl' } = Astro.props;
+const nl = lang === 'nl';
+---
+<figure style="margin:0" data-cursor-label={nl ? 'Sleep' : 'Drag'}>
+  <div class="ba" data-ba data-cursor-view>
+    <div class="ba__layer">{before ? <img src={before} alt={`${nl ? 'Voor' : 'Before'}: ${caption}`} loading="lazy" width="800" height="1000" style="width:100%;height:100%;object-fit:cover" /> : <div class="ph-img ph-img--dark" role="img" aria-label={`${nl ? 'Voor' : 'Before'}: ${caption}`}><span class="ph-img__label">Foto · {nl ? 'voor' : 'before'} · {caption} · zelfde licht en hoek</span></div>}</div>
+    <div class="ba__layer ba__after">{after ? <img src={after} alt={`${nl ? 'Na' : 'After'}: ${caption}`} loading="lazy" width="800" height="1000" style="width:100%;height:100%;object-fit:cover" /> : <div class="ph-img" role="img" aria-label={`${nl ? 'Na' : 'After'}: ${caption}`}><span class="ph-img__label">Foto · {nl ? 'na' : 'after'} · {caption} · geen filter</span></div>}</div>
+    <span class="ba__tag" style="left:1rem">{nl ? 'Voor' : 'Before'}</span><span class="ba__tag" style="right:1rem">{nl ? 'Na' : 'After'}</span>
+    <input type="range" min="0" max="100" value="50" aria-label={nl ? `Vergelijk voor en na: ${caption}` : `Compare before and after: ${caption}`} />
+    <span class="ba__handle" aria-hidden="true"></span>
+    <button type="button" class="ba__toggle" data-ba-toggle>{nl ? 'Tik: voor / na' : 'Tap: before / after'}</button>
+  </div>
+  <figcaption class="ba-caption" data-ba-caption>{caption}</figcaption>
+</figure>
